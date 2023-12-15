@@ -1,5 +1,5 @@
 //! Imported Libraries -------------------------
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //! --------------------------------------------
 
 //! Imported Components ------------------------
@@ -7,6 +7,7 @@ import Logo from "../Logo";
 import Navigation from "./Navigation";
 //! --------------------------------------------
 export default function Header() {
+
   //TODO ---- Evaluation where we want to redirect endUser when
   //TODO ---- clicking on siteName OR <Logo />
   
@@ -16,10 +17,12 @@ export default function Header() {
         <Logo />
       </div>
       <div className="siteName">
-        <h1 className="siteNameText">JavaJunction</h1>
-        <h1 className="siteNameText">QuantumShop</h1>
-        <h1 className="siteNameText">BinaryBizaar</h1>
-        <h1 className="siteNameText">CartHub</h1>
+        <Link to='/'>
+            {/* <h1 className="siteNameText">JavaJunction</h1>
+            <h1 className="siteNameText">QuantumShop</h1>
+            <h1 className="siteNameText">BinaryBizaar</h1> */}
+            <h1 className="siteNameText">CartHub</h1>
+        </Link>
       </div>
       <div className="navBar">
         <Navigation />

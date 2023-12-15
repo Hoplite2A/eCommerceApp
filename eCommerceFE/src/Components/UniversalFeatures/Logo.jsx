@@ -3,6 +3,7 @@ import { Link } from 'react=router-dom';
 //! --------------------------------------------
 
 //! Imported Components ------------------------
+// None to add as this is a simple logo component.
 //! --------------------------------------------
 
 export default function Logo() {
