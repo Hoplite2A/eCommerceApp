@@ -1,7 +1,6 @@
 //! Imported Libraries -------------------------
 import { Routes, Route } from "react-router-dom";
 import { signal } from "@preact/signals-react";
-import { useState } from "react";
 //! --------------------------------------------
 
 //! Imported Components ------------------------
@@ -18,6 +17,9 @@ export default function App() {
   //! UPDATED Signal based JWT token to reduce prop drilling requirement.
   const token = signal(null);
 
+  //*For Testing Purposes this is how to change a signal value:
+  token.value = "89789yiuhUJHIYIUY899879hiuhkjhoiyiuHKJGHKjg987897yhjk";
+  
   //*Route template syntax utilizing SignalState for passing JWT Token to components:
   // <Route path='pathway' element={<Component />} />
   //*Import on each component where JWT is relevant as so (no need for props):

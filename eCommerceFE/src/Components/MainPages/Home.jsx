@@ -1,5 +1,5 @@
 //! Imported Libraries -------------------------
-// NONE AT THIS TIME!
+// None to add at this time.
 //! --------------------------------------------
 
 //! Imported Components ------------------------
