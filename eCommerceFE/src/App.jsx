@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries -------------------------
 import { Routes, Route } from "react-router-dom";
-import { signal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components ------------------------
@@ -14,7 +13,6 @@ import "./App.css";
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 export const userDetails = signal([]);
 
-export const token = signal(null);
 console.log(token.value);
 
 //*For Testing Purposes this is how to change a signal value:
@@ -35,7 +33,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path='/accountDetails' element={<AccountDetails />} /> */}
+      <Route path='/accountDetails' element={<AccountDetails />} />
       {/* <Route path='/about' element={<About />} /> */}
       {/* <Route path='/careers' element={<Careers />} /> */}
       {/* <Route path='/contactUs' element={<ContactUs />} /> */}

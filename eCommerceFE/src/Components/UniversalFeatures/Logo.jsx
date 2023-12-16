@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 
 //? The AI Generated CSS Code for dynamic Logo:
 // .body {
-//     background-color: #1a1a1a; 
-//     display: flex; 
-//     justify-content: center; 
-//     align-items: center; 
+//     background-color: #1a1a1a;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
 //     height: 100vh;
 //     margin: 0;
 //   }
@@ -47,6 +47,12 @@ import { Link } from 'react-router-dom';
 //     to {transform: rotate(360deg);}
 //   }
 
+const companyName = 'QuantumShop';
+// const companyName = 'JavaJunction';
+// const companyName = 'BinaryBizaar';
+// const companyName = 'CartHub';
+
+
 export default function Logo() {
     
     return (<>
@@ -56,10 +62,7 @@ export default function Logo() {
                     <div className="ring"></div>
                     <div className="coffee-cup"></div>
                 </div>
-                {/* <h1 className="siteNameText">JavaJunction</h1> */}
-                <h1 className="siteNameText">QuantumShop</h1>
-                {/* <h1 className="siteNameText">BinaryBizaar</h1> */}
-                {/* <h1 className="siteNameText">CartHub</h1> */}
+                <h1 className="siteNameText">{companyName}</h1>
             </Link>
         </div>    
     </>)
