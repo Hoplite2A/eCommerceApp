@@ -30,10 +30,10 @@ export default function Navigation() {
     <div className="navBar">
       <Link to="/"><p className='navBarLabels'>Home</p></Link>
       {token.value !== null ? (<>
-        <Link to="/AddItem"><p className='navBarLabels'>Sell Items</p></Link>
-        <Link to="/AccountDetails"><p className='navBarLabels'>Account Details</p></Link>
+        <Link to="/addItem"><p className='navBarLabels'>Sell Items</p></Link>
+        <Link to="/accountDetails"><p className='navBarLabels'>Account Details</p></Link>
       </>) : (
-        <Link to="/Login"><p className='navBarLabels'>Login</p></Link>
+        <Link to="/login"><p className='navBarLabels'>Login</p></Link>
       )}
     </div>
   );
