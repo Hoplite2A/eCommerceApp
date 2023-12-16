@@ -22,7 +22,7 @@
 //             <h3
 //                 onMouseEnter={() => setIsHover(true)}
 //                 onMouseLeave={() => setIsHover(false)}
-//             >{isHover === false ? <Link to='/AccountDetials'>Account Details</Link> :
+//             >{isHover === false ? <Link to='/accountDetails'>Account Details</Link> :
 //                 token.value !== null ? 
                 
 //                 < Link to='/Login'>Login</Link>}
