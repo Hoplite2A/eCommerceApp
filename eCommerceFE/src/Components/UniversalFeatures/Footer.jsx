@@ -44,14 +44,20 @@ export default function Footer() {
                 <Link to='/reloadGiftCard'>
                     <h5 className="footerLinks">Reload Gift Card</h5>
                 </Link>
-                <Link to=''>
-                    <h5 className="footerLinks"></h5>
+            </div>
+            <div className="manageAccount">
+                <h4 className="linksTitle">Manage Account</h4>
+                <Link to='/accountDetails'>
+                    <h5 className="footerLinks">Your Account</h5>
                 </Link>
-                <Link to=''>
-                    <h5 className="footerLinks"></h5>
+                <Link to='/orderHistory'>
+                    <h5 className="footerLinks">Your Orders</h5>
                 </Link>
-                <Link to=''>
-                    <h5 className="footerLinks"></h5>
+                <Link to='/returnItems'>
+                    <h5 className="footerLinks">Returns</h5>
+                </Link>
+                <Link to='/warranty'>
+                    <h5 className="footerLinks">Warranty Policy</h5>
                 </Link>
             </div>
         </div>
