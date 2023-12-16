@@ -22,17 +22,42 @@ async function createUser({ username, password, name }) {
   }
 }
 
+async function getUserByUsername(userName) {
+  // Get user
+  try {
+    // Try to get username directly first, if doesnt work go to the delete password method
+    const { rows } = await client.query(
+      `
+    SELECT username
+    FROM users
+    WHERE username = $1;
+    `,
+      [userName]
+    );
+    // If it doesnt exist return null
+    if (!rows || !rows.length) return null;
+    // if it exists, delete password from return object
+    // delete user.password
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getAllUsers() {
   try {
-    const {rows} = await client.query(`
-    SELECT *
+    const { rows } = await client.query(`
+    SELECT * 
     FROM users;
     `);
-    return rows
+    return rows;
+  } catch (error) {
+    throw error;
   }
 }
 
 module.exports = {
   createUser,
-  getAllUsers
+  getAllUsers,
+  getUserByUsername,
 };
