@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 //! --------------------------------------------
 
 //! Imported Components ------------------------
-
+import { companyName } from '../UniversalFeatures/Logo';
 //! --------------------------------------------
 
 export const token = signal(null);
