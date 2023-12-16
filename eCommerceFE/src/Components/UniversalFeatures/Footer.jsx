@@ -21,7 +21,7 @@ export default function Footer() {
                     <h5 className='footerLinks'>Contact Us</h5>
                 </Link>
                 <Link to='/csrStatement'>
-                    <h5 className='footerLinks'>CSR Statement</h5>
+                    <h5 className='footgit push erLinks'>CSR Statement</h5>
                 </Link>
                 <Link to='/greenInitiativeStatement'>
                     <h5 className='footerLinks'>Green Initiative Statement</h5>
