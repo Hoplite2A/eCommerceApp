@@ -56,6 +56,10 @@ export default function Logo() {
                     <div className="ring"></div>
                     <div className="coffee-cup"></div>
                 </div>
+                {/* <h1 className="siteNameText">JavaJunction</h1> */}
+                <h1 className="siteNameText">QuantumShop</h1>
+                {/* <h1 className="siteNameText">BinaryBizaar</h1> */}
+                {/* <h1 className="siteNameText">CartHub</h1> */}
             </Link>
         </div>    
     </>)
