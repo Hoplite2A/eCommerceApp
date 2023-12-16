@@ -18,10 +18,10 @@ export default function Header() {
       </div>
       <div className="siteName">
         <Link to='/'>
-            {/* <h1 className="siteNameText">JavaJunction</h1>
+            {/* <h1 className="siteNameText">JavaJunction</h1> */}
             <h1 className="siteNameText">QuantumShop</h1>
-            <h1 className="siteNameText">BinaryBizaar</h1> */}
-            <h1 className="siteNameText">CartHub</h1>
+            {/* <h1 className="siteNameText">BinaryBizaar</h1>
+            <h1 className="siteNameText">CartHub</h1> */}
         </Link>
       </div>
       <div className="navBar">
