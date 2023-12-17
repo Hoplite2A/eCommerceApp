@@ -15,34 +15,63 @@ async function createUser({
   zip,
   phone,
   email,
+  admin,
 }) {
   // use bcrypt to "hash" a function by SALT_COUNT to create unique hashedPassword that is more secure
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
-    const {
-      rows: [user],
-    } = await client.query(
-      `
+    if (admin) {
+      const {
+        rows: [user],
+      } = await client.query(
+        `
+      INSERT INTO users(username, password, first_name, last_name, pname, address, apartment, city, state, zip, phone, email, admin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+      ON CONFLICT (username) DO NOTHING 
+      RETURNING *
+    `,
+        [
+          username,
+          hashedPassword,
+          fName,
+          lName,
+          pName,
+          streetAddress,
+          apt,
+          city,
+          state,
+          zip,
+          phone,
+          email,
+          admin,
+        ]
+      );
+      return user;
+    } else {
+      const {
+        rows: [user],
+      } = await client.query(
+        `
       INSERT INTO users(username, password, first_name, last_name, pname, address, apartment, city, state, zip, phone, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       ON CONFLICT (username) DO NOTHING 
       RETURNING *
     `,
-      [
-        username,
-        hashedPassword,
-        fName,
-        lName,
-        pName,
-        streetAddress,
-        apt,
-        city,
-        state,
-        zip,
-        phone,
-        email,
-      ]
-    );
-    return user;
+        [
+          username,
+          hashedPassword,
+          fName,
+          lName,
+          pName,
+          streetAddress,
+          apt,
+          city,
+          state,
+          zip,
+          phone,
+          email,
+        ]
+      );
+      return user;
+    }
   } catch (error) {
     throw error;
   }
@@ -62,9 +91,9 @@ async function getUserByUsername(userName) {
     );
     // If it doesnt exist return null
     if (!rows || !rows.length) return null;
-    // if it exists, delete password from return object
-    // delete user.password
     const [user] = rows;
+    // if it exists, delete password from return object
+    // delete user.password;
     return user;
   } catch (error) {
     console.log(error);
@@ -91,7 +120,6 @@ async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
     if (!user) return;
-    console.log(user);
     const hashedPassword = user.password;
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
     if (!passwordsMatch) return;
@@ -114,12 +142,8 @@ async function getUserById(userId) {
       `,
       [userId]
     );
-    if (!user)
-      throw {
-        name: "UserNotFoundError",
-        message: "A username with that id does not exist",
-      };
-    delete user.password;
+    if (!user) return null;
+    // delete user.password;
     return user;
   } catch (error) {
     throw error;
@@ -153,6 +177,24 @@ async function updateUser(id, fields = {}) {
   }
 }
 
+async function deleteUser(userId) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      DELETE FROM users
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [userId]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -160,4 +202,5 @@ module.exports = {
   getUser,
   getUserById,
   updateUser,
+  deleteUser,
 };

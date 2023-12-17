@@ -36,7 +36,8 @@ async function createTables() {
       state VARCHAR(255) NOT NULL,
       zip BIGINT NOT NULL,
       phone BIGINT NOT NULL,
-      email VARCHAR(255) NOT NULL
+      email VARCHAR(255) NOT NULL,
+      admin BOOLEAN NOT NULL DEFAULT false
     );
       `);
 
@@ -376,6 +377,7 @@ async function createInitialUsers() {
         zip: 23112,
         phone: 8045551234,
         email: "email@email.com",
+        admin: true,
       },
       {
         username: "brock",

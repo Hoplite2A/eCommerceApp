@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = "asugertiughfhsvduhsv" } = process.env;
 const { requireUser } = require("./utils");
 const {
   createUser,
@@ -11,7 +11,9 @@ const {
   getUser,
   getUserById,
   updateUser,
+  deleteUser,
 } = require("../db/users");
+const e = require("express");
 
 // Get /api/users
 usersRouter.get("/", async (req, res, next) => {
@@ -25,21 +27,22 @@ usersRouter.get("/", async (req, res, next) => {
 
 // POST /api/users/register
 usersRouter.post("/register", async (req, res, next) => {
+  const {
+    username,
+    password,
+    fName,
+    lName,
+    pName,
+    streetAddress,
+    apt,
+    city,
+    state,
+    zip,
+    phone,
+    email,
+    admin,
+  } = req.body;
   try {
-    const {
-      username,
-      password,
-      fName,
-      lName,
-      pName,
-      streetAddress,
-      apt,
-      city,
-      state,
-      zip,
-      phone,
-      email,
-    } = req.body;
     const queriedUser = await getUserByUsername(username);
     if (queriedUser) {
       res.status(401);
@@ -51,7 +54,7 @@ usersRouter.post("/register", async (req, res, next) => {
       res.status(401);
       next({
         name: "PasswordLengthError",
-        message: "A user by that username already exists",
+        message: "Password must be at least 8 characters",
       });
     } else {
       const user = await createUser({
@@ -67,6 +70,7 @@ usersRouter.post("/register", async (req, res, next) => {
         zip,
         phone,
         email,
+        admin,
       });
       if (!user) {
         next({
@@ -90,16 +94,15 @@ usersRouter.post("/register", async (req, res, next) => {
 // POST /api/users/login
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-
-  // request must have both
-  if (!username || !password) {
-    next({
-      name: "MissingCredentialsError",
-      message: "Please supply both a username and password",
-    });
-  }
-
   try {
+    // request must have both
+    if (!username || !password) {
+      next({
+        name: "MissingCredentialsError",
+        message: "Please supply both a username and password",
+      });
+    }
+
     const user = await getUser({ username, password });
     if (!user) {
       next({
@@ -119,53 +122,76 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.patch("/:userId", async (req, res, next) => {
+// update user
+// Admin can edit all users
+// Logged in users can edit only their own information
+// Should add password confirmation to change password?
+// Only admin can give other user admin
+usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
   const { userId } = req.params;
-  console.log("userId");
-  console.log(userId);
-  const { username, password, name } = req.body;
-  console.log("req.body");
-  console.log([req.body]);
-  const body = Object.entries(req.body);
+  const updateData = req.body;
+  const userToEdit = await getUserById(userId);
+  if (!userToEdit) {
+    next({
+      name: "NotFound",
+      message: "The user you are trying to edit does not exist.",
+    });
+  }
 
-  const updateFields = {};
+  try {
+    if (userId == req.user.id || req.user.admin) {
+      const updateFields = {};
+      for (const key in updateData) {
+        if (key === "admin" && !req.user.admin) {
+          next({
+            name: "UnauthorizedUserError",
+            message: "Only an admin can grant other users admin privileges",
+          });
+        }
+        if (updateData.hasOwnProperty(key)) {
+          if (req.user.hasOwnProperty(key)) {
+            updateFields[key] = updateData[key];
+          }
+        }
+      }
+      const updatedUser = await updateUser(userId, updateFields);
+      res.send({ user: updatedUser });
+    } else {
+      next({
+        name: "UnauthorizedUserError",
+        message: "You cannot update a post that is not yours",
+      });
+    }
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
-  body.forEach((element) => {
-    console.log(typeof element[0]);
-    const fieldName = element[0];
-    console.log(fieldName);
-    updateFields.fieldName = element[1];
-    console.log(updateFields);
-  });
-
-  // if (name) {
-  //   updateFields.name = name;
-  // }
-
-  // if (password) {
-  //   updateFields.name = name;
-  // }
-
-  // if (username) {
-  //   updateFields.name = name;
-  // }
-
-  // try {
-  //   const originalUser = await getUserById(userId);
-  //   if (originalUser.user.id === req.user.id) {
-  //     const updatedUser = await updateUser(userId, updateFields);
-  //     res.send({ user: updatedUser });
-  //   } else {
-  //     next({
-  //       name: "UnauthorizedUserError",
-  //       message: "You cannot update another user.",
-  //     });
-  //   }
-  // } catch ({ name, message }) {
-  //   next({ name, message });
-  // }
-  res.send(updateFields);
-  // res.send("PATCH EDIT USER END");
+// Delete user
+// Can delete your own account,
+// TODO: should have to enter password to confirm?
+// Admin can delete accounts
+usersRouter.delete("/:userId", requireUser, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const userToDelete = await getUserById(userId);
+    if (!userToDelete) {
+      next({
+        name: "NotFound",
+        message: "The user you are trying to find does not exist.",
+      });
+    } else if (req.user.id !== parseInt(userId) && !req.user.admin) {
+      next({
+        name: "WrongUserError",
+        message: "Only an admin can delete another user's profile",
+      });
+    } else {
+      const deletedUser = await deleteUser(userId);
+      res.send({ success: true, ...deletedUser });
+    }
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = usersRouter;

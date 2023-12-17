@@ -54,36 +54,22 @@ productsRouter.get("/:id", async (req, res, next) => {
 //* ---------------GET SINGLE API----------------
 
 //* -------------CREATE PRODUCT API--------------
-productsRouter.post('/', requireUser, async (req, res, next) => {
-//TODO ---- requireUser in async params???????????
-    const { title, price, description, category, image , sellerId} = req.body;
-    try {
-        const newProduct = await verifyProduct(title, description, category, sellerId);
-        
-        if (newProduct) {
-            next({
-              name: 'DuplicateItemDetected',
-              message: `${newItem.title} already exists. Please update the existing product. Find item by ID: ${newItem.id}`
-            })
-        }
+// Need to add require user back here once I get it running
+productsRouter.post("/", async (req, res, next) => {
+  const { title, price, description, category, image, sellerId } = req.body;
+  try {
+    const newProduct = await verifyProduct(
+      title,
+      description,
+      category,
+      sellerId
+    );
 
-        const addedProduct = await createProduct({
-            title, 
-            price, 
-            description, 
-            category, 
-            image,
-            sellerId
-        })
-        res.send({
-            message: `${title} has been added to the catalog, to edit/update this item. Go to your account details and access your added items there.`
-        })
-    } catch (err) {
-        console.log(`An Error ocurred in the productsRouter.post('/'), ${err}`);
-        next({
-            error: err,
-            message: `Failed to create new item. Please reattempt or contact support via the Contact Us page.`
-        });
+    if (newProduct) {
+      next({
+        name: "DuplicateItemDetected",
+        message: `${newItem.title} already exists. Please update the existing product. Find item by ID: ${newItem.id}`,
+      });
     }
 
     const addedProduct = await createProduct({
@@ -138,7 +124,6 @@ productsRouter.patch("/:id", async (req, res, next) => {
   if (image && image.length > 0) {
     updateFields.image = image;
   }
-
 
   try {
     const originalProductDetails = await getSingleProduct(id);
