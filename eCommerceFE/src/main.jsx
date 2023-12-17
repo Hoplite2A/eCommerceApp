@@ -1,10 +1,10 @@
-//! Imported Libraries -------------------------
+//! Imported Libraries --------------------------
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import React from "react";
 //! ---------------------------------------------
 
-//! Imported Components ------------------------
+//! Imported Components/Variables----------------
 import App from "./App.jsx";
 // import "./index.css";
 //! ---------------------------------------------

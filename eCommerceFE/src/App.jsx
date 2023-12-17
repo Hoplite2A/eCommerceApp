@@ -1,15 +1,19 @@
 /* eslint-disable react-refresh/only-export-components */
-//! Imported Libraries -------------------------
+//! Imported Libraries --------------------------
 import { Routes, Route } from "react-router-dom";
 import { signal } from '@preact/signals-react';
-//! --------------------------------------------
+//! ---------------------------------------------
 
-//! Imported Components ------------------------
+//! Imported Components/Variables----------------
 import Home from "./Components/MainPages/Home";
 import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 
 import "./App.css";
-//! --------------------------------------------
+//! ---------------------------------------------
+
+//! Universal Variables -------------------------
+export const BASE_URL = 'https://www.makeupSite.com/'
+//! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 export const userDetails = signal([]);

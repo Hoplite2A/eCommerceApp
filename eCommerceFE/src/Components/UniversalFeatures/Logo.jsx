@@ -1,10 +1,10 @@
-//! Imported Libraries -------------------------
+//! Imported Libraries --------------------------
 import { Link } from 'react-router-dom';
 //! --------------------------------------------
 
-//! Imported Components ------------------------
+//! Imported Components/Variables---------------
 // None to add as this is a simple logo component.
-//! --------------------------------------------
+//! ---------------------------------------------
 
 //? The AI Generated CSS Code for dynamic Logo:
 // .body {
