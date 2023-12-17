@@ -1,7 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries -------------------------
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signal } from "@preact/signals-react";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 //! --------------------------------------------
 
 //! Imported Components ------------------------
@@ -16,8 +17,10 @@ export default function Login() {
     const [user,setUser] = useState(null);
     const [pass,setPass] = useState(null);
 
-    const handleLogin = async (e) => {
+    const navigate = useNavigate();
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
             const res = await fetch('', {
                 method: 'POST',
@@ -28,26 +31,33 @@ export default function Login() {
                 })
             })
             const json = res.json();
-            token.value = json.token;
+            const authToken = json.token;
+            token.value = authToken;
         } catch (err) {
-            console.log(`Login funciton error durring handleLogin`, err);
+            console.log(`Login funciton error durring handleSubmit`, err);
             alert(err);
         }
+
+        if (token.value !== null) {
+            navigate('/')
+        } else { 
+            navigate('/login')
+        }
     }
-    
+
     console.log(`Token Value after Login: ${token.value}`);
 
     return (<>
-        <form action="" className="loginForm">
+        <form className="loginForm" onSubmit={handleSubmit}>
             <h2 className="loginMessage">Login Here!</h2>
             <div className="formFields">
-                <label htmlFor="user">
-                    <input type="text" id='user' name='user' placeholder='User Name' onClick={() => {
+                <label className='loginLabels'>
+                    <input className='loginInputs' type="text" id='user' name='user' placeholder='User Name' onChange={(e) => {
                         setUser(e.target.value);
                     }} />
                 </label>
-                <label htmlFor="pass">
-                    <input type="text" id='pass' name='pass' placeholder='Password' onClick={() => {
+                <label className='loginLabels'>
+                    <input className='loginInputs' type="text" id='pass' name='pass' placeholder='Password' onChange={(e) => {
                         setPass(e.target.value);
                     }} />
                 </label>

@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries -------------------------
 import { Routes, Route } from "react-router-dom";
+import { signal } from '@preact/signals-react';
 //! --------------------------------------------
 
 //! Imported Components ------------------------
@@ -13,12 +14,6 @@ import "./App.css";
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 export const userDetails = signal([]);
 
-console.log(token.value);
-
-//*For Testing Purposes this is how to change a signal value:
-token.value = "89789yiuhUJHIYIUY899879hiuhkjhoiyiuHKJGHKjg987897yhjk";
-
-console.log(token.value);
 export default function App() {
   //*Added State variable to App.jsx for propdrilling of JWT Token
   // const [token, setToken] = useState(null)
