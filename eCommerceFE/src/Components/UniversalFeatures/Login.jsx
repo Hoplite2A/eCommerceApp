@@ -1,21 +1,21 @@
 /* eslint-disable react-refresh/only-export-components */
-//! Imported Libraries -------------------------
+//! Imported Libraries --------------------------
 import { Link, useNavigate } from 'react-router-dom';
 import { signal } from "@preact/signals-react";
 import { useState } from 'react';
-//! --------------------------------------------
+//! ---------------------------------------------
 
-//! Imported Components ------------------------
+//! Imported Components/Variables----------------
 import { companyName } from '../UniversalFeatures/Logo';
-//! --------------------------------------------
+//! ---------------------------------------------
 
 export const token = signal(null);
 console.log(`Token Value Prior to Login: ${token.value}`);
 
 export default function Login() {
     
-    const [user,setUser] = useState(null);
-    const [pass,setPass] = useState(null);
+    const [userName,setUserName] = useState(null);
+    const [password,setPassword] = useState(null);
 
     const navigate = useNavigate();
 
@@ -26,15 +26,16 @@ export default function Login() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    userName: user,
-                    passworkd: pass,
+                    user: userName,
+                    pass: password,
                 })
             })
             const json = res.json();
             const authToken = json.token;
+            console.log(authToken);
             token.value = authToken;
         } catch (err) {
-            console.log(`Login funciton error durring handleSubmit`, err);
+            console.log(`Login funciton error durring handleSubmit, ${err}`);
             alert(err);
         }
 
@@ -53,12 +54,12 @@ export default function Login() {
             <div className="formFields">
                 <label className='loginLabels'>
                     <input className='loginInputs' type="text" id='user' name='user' placeholder='User Name' onChange={(e) => {
-                        setUser(e.target.value);
+                        setUserName(e.target.value);
                     }} />
                 </label>
                 <label className='loginLabels'>
                     <input className='loginInputs' type="text" id='pass' name='pass' placeholder='Password' onChange={(e) => {
-                        setPass(e.target.value);
+                        setPassword(e.target.value);
                     }} />
                 </label>
             </div>
