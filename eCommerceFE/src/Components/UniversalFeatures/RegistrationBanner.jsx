@@ -14,7 +14,8 @@ export default function RegistrationBanner() {
 
   return (
     <>
-      {visible && (<div className="regBanner">
+      {visible && (
+        <div className="regBanner">
           <div className="regBannerMessageAndButton">
             <div className="message">
               <p className="regBannerText">
@@ -35,8 +36,8 @@ export default function RegistrationBanner() {
               />
             </button>
           </div>
-        </div>)
-      }
+        </div>
+      )}
     </>
   );
 }
