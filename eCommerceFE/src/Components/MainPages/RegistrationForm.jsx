@@ -36,7 +36,7 @@ export default function RegistrationBanner() {
     //! if else OR Switch Statement
     //! return setValid(true);
 
-    if (valid) {
+    // if (valid) {
       try {
         const res = await fetch(`${BASE_URL}registration`, {
           method: "POST",
@@ -73,15 +73,10 @@ export default function RegistrationBanner() {
         //TODO ----- Enter in code that will pull error messages from BE on whether it is a dataType error or
         //TODO ----- if it is an user already has those credentials.
         alert(
-          "Either a user with these credentials exist, or you entered in an invalid value. Please reattempt"
+          "Either a user with these credentials exist, or you entered in an invalid value. Please reattempt."
         );
       }
-    } else {
-      alert(
-        "You must have a Username and Password Entered. Please go back and "
-      );
     }
-  };
 
   return (
     <>

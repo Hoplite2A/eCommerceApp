@@ -9,10 +9,16 @@ import { BASE_URL } from '../../App';
 
 export default function AccountDetails() {
 
+    //Used for making certain data visible as a security precaution:
     const [visible, setVisible] = useState(false);
-    const [details, setDetails] = useState('');
 
-    //
+    //Used for defining data from GET API upon initial page landing:    
+    const [details, setDetails] = useState('');
+    //Deconstructed State Variable pulled from GET API and utilized for current (non-edit) data view:
+    //? pass was left out for the time being until method of toggling visibility of data is created. 
+    const { firstName, preferredName, lastName, street, apartment, city, state, zip, phoneType, phoneNumber, emailAddress, user } = details;
+
+    //Used for pulling changed values from 
     const [fName, setFName] = useState("");
     const [pName, setPName] = useState("");
     const [lName, setLName] = useState("");
@@ -27,7 +33,6 @@ export default function AccountDetails() {
     const [userName, setUserName] = useState("");
     // const [password, setPassword] = useState("");
 
-    const { firstName, preferredName, lastName, street, apartment, city, state, zip, phoneType, phoneNumber, emailAddress, user } = details;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
