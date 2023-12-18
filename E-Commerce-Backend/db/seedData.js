@@ -46,7 +46,7 @@ async function createTables() {
     CREATE TABLE products(
       id SERIAL PRIMARY KEY,
       title VARCHAR(255) UNIQUE NOT NULL,
-      price MONEY NOT NULL,
+      price DECIMAL(8, 2) NOT NULL,
       description VARCHAR NOT NULL,
       category VARCHAR(255) NOT NULL,
       image VARCHAR(255),
@@ -67,8 +67,10 @@ async function createTables() {
     CREATE TABLE carts(
       "user_id" INTEGER REFERENCES users(id),
       "product_id" INTEGER REFERENCES products(id),
-      price MONEY NOT NULL,
+      title VARCHAR(255) NOT NULL,
+      price DECIMAL(8, 2) NOT NULL,
       quantity INTEGER NOT NULL,
+      image VARCHAR(255),
       PRIMARY KEY (user_id, product_id)
     );
     `);
@@ -404,6 +406,7 @@ async function createInitialUsers() {
         phone: 8045551234,
         email: "email@email.com",
       },
+
       {
         username: "dave",
         password: "dave123",
@@ -435,22 +438,22 @@ async function createInitialCarts() {
 
     const cartsToCreate = [
       {
-        userId: 1,
+        userId: 2,
         productId: 1,
         quantity: 2,
       },
       {
-        userId: 1,
+        userId: 2,
         productId: 4,
         quantity: 1,
       },
       {
-        userId: 1,
+        userId: 2,
         productId: 5,
         quantity: 1,
       },
       {
-        userId: 1,
+        userId: 2,
         productId: 18,
         quantity: 20,
       },
@@ -458,16 +461,11 @@ async function createInitialCarts() {
     const carts = await Promise.all(
       cartsToCreate.map(async (cartItem) => {
         const { userId, productId, quantity } = cartItem;
-        console.log({ userId });
-        console.log({ productId });
-        console.log({ quantity });
-
         const addedCart = await addToCart(productId, userId, quantity);
-        console.log({ addedCart });
+        console.log(`Cart Created: `);
+        console.log(addedCart);
       })
     );
-    console.log("Carts Created:");
-    console.log(carts);
     console.log("Finished creating carts");
   } catch (error) {
     throw error;

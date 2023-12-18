@@ -2,6 +2,7 @@ const client = require("./client");
 const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
+// Create new user
 async function createUser({
   username,
   password,
@@ -77,11 +78,12 @@ async function createUser({
   }
 }
 
+// Get user by username, made to see if user exists?
 async function getUserByUsername(userName) {
-  // Get user
   try {
-    // Try to get username directly first, if doesnt work go to the delete password method
-    const { rows } = await client.query(
+    const {
+      rows: [user],
+    } = await client.query(
       `
     SELECT username, password, id
     FROM users
@@ -89,14 +91,11 @@ async function getUserByUsername(userName) {
     `,
       [userName]
     );
-    // If it doesnt exist return null
-    if (!rows || !rows.length) return null;
-    const [user] = rows;
-    // if it exists, delete password from return object
-    // delete user.password;
+    if (!user || !Object.keys(user).length) return null;
     return user;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
