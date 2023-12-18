@@ -83,7 +83,7 @@ export default function Login() {
         <p className="newUserMessage">
           New to {companyName}? Sign up and start exploring all the benefits!
         </p>
-        <Link to="/SignUp">
+        <Link to="/register">
           <button>Sign Up</button>
         </Link>
       </div>

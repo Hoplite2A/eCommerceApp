@@ -45,7 +45,7 @@ export default function App() {
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
       {/* <Route path='/returns' element={<Return />} /> */}
       {/* <Route path='/warranty' element={<Warranty />} /> */}
-      {/* <Route path='/' element={< />} /> */}
+      {/* <Route path='/register' element={< />} /> */}
     </Routes>
   );
 }
