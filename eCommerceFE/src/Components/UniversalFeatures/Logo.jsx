@@ -47,10 +47,10 @@ import { Link } from 'react-router-dom';
 //     to {transform: rotate(360deg);}
 //   }
 
-const companyName = 'QuantumShop';
-// const companyName = 'JavaJunction';
-// const companyName = 'BinaryBizaar';
-// const companyName = 'CartHub';
+export const companyName = 'QuantumShop';
+// export const companyName = 'JavaJunction';
+// export const companyName = 'BinaryBizaar';
+// export const companyName = 'CartHub';
 
 
 export default function Logo() {
