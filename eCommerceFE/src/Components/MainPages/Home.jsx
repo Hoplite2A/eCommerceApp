@@ -5,7 +5,7 @@
 import Header from "../UniversalFeatures/Navigation/Header";
 // import SearchBar from "../UniversalFeatures/SearchFilters/SearchBar";
 // import AllItems from "../MainPages/AllItems";
-// import Footer from "../UniversalFeatures/Footer";
+import Footer from "../UniversalFeatures/Footer";
 //! ---------------------------------------------
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <Header />
       {/* <SearchBar /> */}
       {/* <AllItems /> */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
