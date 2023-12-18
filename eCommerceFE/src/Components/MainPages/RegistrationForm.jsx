@@ -9,21 +9,34 @@ import { token } from "../UniversalFeatures/Login";
 //! ---------------------------------------------
 
 export default function RegistrationBanner() {
+
   const [fName, setFName] = useState("");
   const [pName, setPName] = useState("");
   const [lName, setLName] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
+  const [aApt, setAApt] = useState("");
+  const [aCity, setACity] = useState("");
+  const [aState, setAState] = useState("");
+  const [aZip, setAZip] = useState("");
   const [cType, setCType] = useState("");
   const [cNumber, setCNumber] = "";
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  //TODO -------------- Part of Validation Attempt
+  //! const [valid, setValid] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (userName && password) {
+    //TODO ------------ Add validation of register fields and return a setvalid(true) prior to POST API Call
+    //! if else OR Switch Statement
+    //! return setValid(true);
+
+    if (valid) {
       try {
         const res = await fetch(`${BASE_URL}registration`, {
           method: "POST",
@@ -35,6 +48,10 @@ export default function RegistrationBanner() {
             preferredName: pName,
             lastName: lName,
             street: streetAddress,
+            apartment: aApt,
+            city: aCity,
+            state: aState,
+            zip: aZip,
             phoneType: cType,
             phoneNumber: cNumber,
             emailAddress: email,
@@ -79,8 +96,9 @@ export default function RegistrationBanner() {
               name="firstName"
               placeholder="First Name"
               onChange={(e) => {
-                setFName(e.target.value);
-              }}
+                  setFName(e.target.value);
+                } 
+              }
             />
           </label>
           <label className="regLabels">
@@ -91,8 +109,9 @@ export default function RegistrationBanner() {
               name="preferredName"
               placeholder="Preferred Name"
               onChange={(e) => {
-                setPName(e.target.value);
-              }}
+                  setPName(e.target.value);
+                } 
+              }
             />
           </label>
           <label className="regLabels">
@@ -103,13 +122,14 @@ export default function RegistrationBanner() {
               name="lastName"
               placeholder="Last Name"
               onChange={(e) => {
-                setLName(e.target.value);
-              }}
+                  setLName(e.target.value);
+                } 
+              }
             />
           </label>
         </div>
         <div className="contactInfo">
-          <div className="streetAddress">
+          <div className="streetAddress1">
             <label className="regLabel">
               <input
                 className="streetAddressInput"
@@ -118,8 +138,64 @@ export default function RegistrationBanner() {
                 name="street"
                 placeholder="Street Address"
                 onChange={(e) => {
-                  setStreetAddress(e.target.value);
-                }}
+                    setStreetAddress(e.target.value);
+                  } 
+                }
+              />
+            </label>
+            <label className="regLabel">
+              <input
+                className="apartmentAddressInput"
+                type="text"
+                id="apartment"
+                name="apartment"
+                placeholder="APT/UNIT"
+                value={''}
+                onChange={(e) => {
+                  setAApt(e.target.value);
+                  }
+                }
+              />
+            </label>
+          </div>
+          <div className="streetAddress2">
+            <label className="regLabel">
+              <input
+                className="cityAddressInput"
+                type="text"
+                id="city"
+                name="city"
+                placeholder="City"
+                onChange={(e) => {
+                  setACity(e.target.value);
+                  }
+                }
+              />
+            </label>
+            <label className="regLabel">
+              <input
+                className="cityAddressInput"
+                type="text"
+                id="state"
+                name="state"
+                placeholder="State"
+                onChange={(e) => {
+                  setAState(e.target.value);
+                  }
+                }
+              />
+            </label>
+            <label className="regLabel">
+              <input
+                className="cityAddressInput"
+                type="text"
+                id="zip"
+                name="zip"
+                placeholder="ZIP Code"
+                onChange={(e) => {
+                  setAZip(e.target.value);
+                  }
+                }
               />
             </label>
           </div>
@@ -133,7 +209,8 @@ export default function RegistrationBanner() {
                 placeholder="Phone Type"
                 onChange={(e) => {
                   setCType(e.target.value);
-                }}
+                  }
+                }
               />
             </label>
             <label className="regLabels">
@@ -145,7 +222,8 @@ export default function RegistrationBanner() {
                 placeholder="Phone Number"
                 onChange={(e) => {
                   setCNumber(e.target.value);
-                }}
+                  }
+                }
               />
             </label>
             <label className="regLabels">
@@ -154,7 +232,7 @@ export default function RegistrationBanner() {
                 type="text"
                 id="emailAddress"
                 name="emailAddress"
-                placeholder="eMail Address"
+                placeholder="Email Address"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
