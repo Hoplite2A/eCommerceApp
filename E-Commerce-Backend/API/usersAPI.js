@@ -3,7 +3,7 @@ const express = require("express");
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET = "asugertiughfhsvduhsv" } = process.env;
-const { requireUser } = require("./utils");
+const { requireUser, requireAdmin } = require("./utils");
 const {
   createUser,
   getUserByUsername,
@@ -12,8 +12,7 @@ const {
   getUserById,
   updateUser,
   deleteUser,
-} = require("../db/users");
-const e = require("express");
+} = require("../db/usersDB");
 
 // Get /api/users
 usersRouter.get("/", async (req, res, next) => {

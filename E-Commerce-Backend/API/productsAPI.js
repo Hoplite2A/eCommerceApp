@@ -12,7 +12,9 @@ const {
   verifyProduct,
   updateProduct,
   deleteProduct,
-} = require("../db/products");
+  getProductByTitle,
+} = require("../db/productsDB");
+const { requireUser } = require("./utils");
 //! ---------------------------------------------
 
 //* -----------------GET ALL API-----------------
@@ -57,18 +59,20 @@ productsRouter.get("/:id", async (req, res, next) => {
 // Need to add require user back here once I get it running
 productsRouter.post("/", async (req, res, next) => {
   const { title, price, description, category, image, sellerId } = req.body;
+  if (!req.user.admin) {
+    res.send({
+      name: "Member Feature",
+      message: "Must be a member to add new items to our catalog.",
+    });
+    return;
+  }
   try {
-    const newProduct = await verifyProduct(
-      title,
-      description,
-      category,
-      sellerId
-    );
+    const newProduct = await getProductByTitle(title);
 
     if (newProduct) {
       next({
-        name: "DuplicateItemDetected",
-        message: `${newItem.title} already exists. Please update the existing product. Find item by ID: ${newItem.id}`,
+        name: "DuplicateProductDetected",
+        message: `${newProduct.title} already exists. Please update the existing product. Find item by ID: ${newProduct.id}`,
       });
     }
 
@@ -150,15 +154,17 @@ productsRouter.patch("/:id", async (req, res, next) => {
 
 //* -------------DELETE PRODUCT API--------------
 // Add back requireUser
-productsRouter.delete("/:id", async (req, res, next) => {
+productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
   //TODO ---- requireUser in async params???????????
   const { productId } = req.params;
-  const { userId, sellerId } = req.body;
+  const productToDelete = await getSingleProduct(productId);
+  const { title, sellerid } = productToDelete;
 
   try {
     //Validation that the user deleting this item is the original seller
-    if (userId === sellerId) {
+    if (req.user.id === sellerid || req.user.admin) {
       const deletedProduct = await deleteProduct(productId);
+      res.send({ success: true, ...deletedProduct });
     } else {
       next({
         name: "NotAuthorizedSeller",

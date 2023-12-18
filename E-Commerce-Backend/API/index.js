@@ -2,7 +2,7 @@ const express = require("express");
 const apiRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
-const { getUserById, getUserByUsername } = require("../db/users");
+const { getUserById, getUserByUsername } = require("../db/usersDB");
 const client = require("../db/client");
 const { JWT_SECRET = "asugertiughfhsvduhsv" } = process.env;
 
@@ -52,6 +52,9 @@ apiRouter.use("/users", usersRouter);
 
 const productsRouter = require("./productsAPI");
 apiRouter.use("/products", productsRouter);
+
+const cartsRouter = require("./cartsAPI");
+apiRouter.use("/cart", cartsRouter);
 
 // const reviewsRouter = require("./reviews");
 // apiRouter.use("/reviews", reviewsRouter);
