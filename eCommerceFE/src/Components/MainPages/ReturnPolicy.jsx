@@ -10,8 +10,7 @@ export default function ReturnPolicy() {
     
     const numOfDays = 30;
     
-  return (
-    <>
+  return (<>
       <div className="ReturnPolicyArticle">
         <article>
           <h2 className="ReturnPolicyTitle">{CompanyName} Return Policy</h2>
@@ -97,6 +96,5 @@ export default function ReturnPolicy() {
           <button className="returnToHome">Return to Home</button>
         </Link>
       </div>
-    </>
-  );
+    </>);
 }
