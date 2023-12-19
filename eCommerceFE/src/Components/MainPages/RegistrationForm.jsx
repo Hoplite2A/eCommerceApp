@@ -8,7 +8,7 @@ import { BASE_URL } from "../../App";
 import { token } from "../UniversalFeatures/Login";
 //! ---------------------------------------------
 
-export default function RegistrationBanner() {
+export default function RegisterForm() {
 
   const [fName, setFName] = useState("");
   const [pName, setPName] = useState("");
@@ -64,7 +64,7 @@ export default function RegistrationBanner() {
         console.log(authToken);
         token.value = authToken;
       } catch (err) {
-        console.log(`Error occurred in RegistrationBanner function, ${err}`);
+        console.log(`Error occurred in RegisterForm function, ${err}`);
         alert(err);
       }
       if (token.value !== null) {

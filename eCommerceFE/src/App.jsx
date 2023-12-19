@@ -7,7 +7,12 @@ import { signal } from '@preact/signals-react';
 //! Imported Components/Variables----------------
 import Home from "./Components/MainPages/Home";
 import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
-
+import CSRStatement from "./Components/MainPages/CSR";
+import GreenInitiativeStatement from "./Components/MainPages/GreenInitiative";
+import ReturnPolicy from "./Components/MainPages/ReturnPolicy";
+import WarrantyPolicy from "./Components/MainPages/WarrantyPolicy";
+import RegisterForm from "./Components/MainPages/RegistrationForm";
+import RegistrationBanner from "./Components/UniversalFeatures/RegistrationBanner";
 import "./App.css";
 //! ---------------------------------------------
 
@@ -36,16 +41,18 @@ export default function App() {
       {/* <Route path='/about' element={<About />} /> */}
       {/* <Route path='/careers' element={<Careers />} /> */}
       {/* <Route path='/contactUs' element={<ContactUs />} /> */}
-      <Route path='/csrStatement' element={<CSR />} />
-      <Route path='/greenInitiativeStatement' element={<Green />} />
+      <Route path='/csrStatement' element={<CSRStatement />} />
+      <Route path='/greenInitiativeStatement' element={<GreenInitiativeStatement />} />
       {/* <Route path='/membershipInfo' element={<MembershipInfo />} /> */}
       {/* <Route path='/sellingInfo' element={<SellingInfo />} /> */}
       {/* <Route path='/giftCards' element={<GiftCard />} /> */}
       {/* <Route path='/reloadGiftCard' element={<Reload />} /> */}
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
-      {/* <Route path='/returns' element={<Return />} /> */}
+      <Route path='/returns' element={<ReturnPolicy />} />
       <Route path='/warranty' element={<WarrantyPolicy />} />
-      {/* <Route path='/register' element={< />} /> */}
+      <Route path='/register' element={<RegisterForm />} />
+      <Route path='/registerBanner' element={<RegistrationBanner />} />
+
     </Routes>
   );
 }

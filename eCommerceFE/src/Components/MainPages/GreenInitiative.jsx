@@ -13,6 +13,11 @@ export default function GreenInitiativeStatement() {
             <article>
                 <h2 className="GreenInitiativeStatementTitle">Green Initiative Statement</h2>
                 <p className="GreenInitiativeStatementBody">
+                    {/* Use the following CSS to indent the start of this 
+                    paragraph:
+                    .GreenInitiativeStatementBody {
+                    test-indent:30px;
+                    } */}
                     At {CompanyName}, we are embarking on a transformative 
                     journey toward carbon neutrality, inspired by the 
                     pioneering efforts of major corporations in the USA and 
