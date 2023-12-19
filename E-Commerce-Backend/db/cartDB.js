@@ -47,54 +47,42 @@ async function getCart(userId) {
 }
 
 async function addToCart(productId, userId, quantity) {
-  // TODO Enable front end to add image, title and all that to avoid making api call to get product info
-  // TODO Get title and image too !!!!!
   const product = await getSingleProduct(productId);
-  console.log("QUANTITY AT FIRST: ");
-  console.log(quantity);
-  console.log({ product });
-  if (product) {
-    try {
-      const { price, title, image } = product;
-      const existingCartCheck = await client.query(
-        `
+  try {
+    const { price, title, image } = product;
+    const existingCartCheck = await client.query(
+      `
       SELECT * FROM carts WHERE product_id=$1 and user_id=$2`,
-        [productId, userId]
-      );
-
-      if (existingCartCheck.rows.length > 0) {
-        const existingProductCount = existingCartCheck.rows[0].quantity;
-        console.log({ existingProductCount });
-        console.log(typeof existingProductCount);
-        console.log({ quantity });
-        console.log(typeof quantity);
-        const {
-          rows: [cartEntry],
-        } = await client.query(
-          `
+      [productId, userId]
+    );
+    if (!existingCartCheck) {
+      console.log("No Product found");
+      return;
+    } else if (existingCartCheck.rows.length > 0) {
+      const existingProductCount = existingCartCheck.rows[0].quantity;
+      const {
+        rows: [cartEntry],
+      } = await client.query(
+        `
           UPDATE carts SET quantity = $1 WHERE product_id=$2 AND user_id=$3 RETURNING *`,
-          [existingProductCount + quantity, productId, userId]
-        );
-        return cartEntry;
-      } else {
-        const {
-          rows: [cartEntry],
-        } = await client.query(
-          `
+        [existingProductCount + quantity, productId, userId]
+      );
+      return cartEntry;
+    } else {
+      const {
+        rows: [cartEntry],
+      } = await client.query(
+        `
       INSERT INTO carts(product_id, user_Id, title, image, price, quantity) VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (user_id, product_id) DO NOTHING
       RETURNING *
       `,
-          [productId, userId, title, image, price, quantity]
-        );
-        return cartEntry;
-      }
-    } catch (error) {
-      throw error;
+        [productId, userId, title, image, price, quantity]
+      );
+      return cartEntry;
     }
-  } else {
-    console.log("No Product found");
-    return;
+  } catch (error) {
+    throw error;
   }
 }
 
