@@ -36,15 +36,15 @@ export default function App() {
       {/* <Route path='/about' element={<About />} /> */}
       {/* <Route path='/careers' element={<Careers />} /> */}
       {/* <Route path='/contactUs' element={<ContactUs />} /> */}
-      {/* <Route path='/csrStatement' element={<CSR />} /> */}
-      {/* <Route path='/greenInitiativeStatement' element={<Green />} /> */}
+      <Route path='/csrStatement' element={<CSR />} />
+      <Route path='/greenInitiativeStatement' element={<Green />} />
       {/* <Route path='/membershipInfo' element={<MembershipInfo />} /> */}
       {/* <Route path='/sellingInfo' element={<SellingInfo />} /> */}
       {/* <Route path='/giftCards' element={<GiftCard />} /> */}
       {/* <Route path='/reloadGiftCard' element={<Reload />} /> */}
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
       {/* <Route path='/returns' element={<Return />} /> */}
-      {/* <Route path='/warranty' element={<Warranty />} /> */}
+      <Route path='/warranty' element={<WarrantyPolicy />} />
       {/* <Route path='/register' element={< />} /> */}
     </Routes>
   );

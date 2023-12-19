@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import { CompanyName } from "../UniversalFeatures/Logo";
 //! ---------------------------------------------
 
-export default function GreenInitiativeStatement() {
+export default function WarrantyPolicy() {
   return (
     <>
-      <div className="GreenInitiativeArticle">
+      <div className="WarrantyPolicyArticle">
         <article>
-          <h2 className="GreenInitiativeStatementTitle">{CompanyName} Warranty Policy</h2>
-          <p className="GreenInitiativeStatementBody">
+          <h2 className="WarrantyPolicyTitle">{CompanyName} Warranty Policy</h2>
+          <p className="WarrantyPolicyBody">
             <h3>Coverage Period</h3> <br></br>Our products are covered by a limited warranty
             for a specified period from the date of purchase. Details of the
             coverage duration are provided in the product documentation.
