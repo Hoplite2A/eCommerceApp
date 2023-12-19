@@ -55,8 +55,3 @@ pastPurchasesRouter.post("/", requireUser, async (req, res, next) => {
 });
 
 module.exports = pastPurchasesRouter;
-
-// console.log(purchase.id);
-// console.log(typeof purchase.id);
-// console.log(Number(purchaseId));
-// console.log(typeof Number(purchaseId));
