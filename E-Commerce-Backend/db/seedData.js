@@ -1,15 +1,16 @@
 const client = require("./client");
 const { createProduct } = require("./productsDB");
-const { createReview } = require("./reviews");
 const { createUser } = require("./usersDB");
 const { addToCart, getCart } = require("./cartDB");
 const { createPastPurchase, getPastPurchases } = require("./pastPurchasesDB");
+const { addToWishlist } = require("./wishlistDB");
 
 async function dropTables() {
   console.log("Dropping all tables");
   // Drop all tables in the correct order
   try {
     await client.query(`
+    DROP TABLE IF EXISTS wishlists;
     DROP TABLE IF EXISTS past_purchases_items;
     DROP TABLE IF EXISTS past_purchases;
     DROP TABLE IF EXISTS carts;
@@ -59,15 +60,6 @@ async function createTables() {
     );
     `);
 
-    // await client.query(`
-    // CREATE TABLE reviews(
-    //   id SERIAL PRIMARY KEY,
-    //   "creatorId" INTEGER REFERENCES users(id),
-    //   "productId" INTEGER REFERENCES products(id),
-    //   title VARCHAR(255) NOT NULL,
-    //   comment TEXT NOT NULL
-    // )`);
-
     await client.query(`
     CREATE TABLE carts(
       "user_id" INTEGER REFERENCES users(id),
@@ -79,17 +71,6 @@ async function createTables() {
       PRIMARY KEY (user_id, product_id)
     );
     `);
-
-    // Create a table for each users past purchases
-    // id, user_id, but basically I'm just making this, to make a unique key, to pass into the past_purchases items database, which will then have to go through and retrive all that information based on that unique id anyway? Plust wont it still have to go through the same amount of objects in the database anyway? Only it will have to get data from another table to do it?
-    // For EACH past_purchase, create a row with unique id, the user_id, order total and date
-    // This will link the user to the specific purchase
-    // In past_purchases items
-    // "purchase_id" REFERENCES past_purchases, product_id, title, quantity, image, price, PRIMARY KEY(pruchase_id, product_id)
-    // Functions, ill only need a create past_purchase, get past_purchase, do we need an edit?
-    // For create:
-    // Create unique past_purchase row,
-    // Feed in product infos with unique purchase_id
 
     await client.query(`
     CREATE TABLE past_purchases(
@@ -108,6 +89,17 @@ async function createTables() {
       quantity INTEGER NOT NULL,
       image VARCHAR(255),
       PRIMARY KEY (purchase_id, product_id)
+    )`);
+
+    await client.query(`
+    CREATE TABLE wishlists(
+      id SERIAL PRIMARY KEY,
+      "user_id" INTEGER REFERENCES users(id),
+      "product_id" INTEGER REFERENCES products(id),
+      title VARCHAR(255) NOT NULL,
+      price DECIMAL(8, 2) NOT NULL,
+      image VARCHAR(255),
+      CONSTRAINT user_product_combination UNIQUE (product_id, user_id)
     )`);
 
     console.log("Finished building tables");
@@ -440,21 +432,22 @@ async function createInitialUsers() {
         zip: 168013,
         phone: 8045551234,
         email: "email@email.com",
+        admin: true,
       },
 
-      {
-        username: "dave",
-        password: "dave123",
-        fName: "David",
-        lName: "Crocket",
-        pName: "Davey",
-        streetAddress: "789 Fake Street",
-        city: "Lakeland",
-        state: "Florida",
-        zip: 344567,
-        phone: 8045551234,
-        email: "email@email.com",
-      },
+      // {
+      //   username: "dave",
+      //   password: "dave123",
+      //   fName: "David",
+      //   lName: "Crocket",
+      //   pName: "Davey",
+      //   streetAddress: "789 Fake Street",
+      //   city: "Lakeland",
+      //   state: "Florida",
+      //   zip: 344567,
+      //   phone: 8045551234,
+      //   email: "email@email.com",
+      // },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -473,22 +466,22 @@ async function createInitialCarts() {
 
     const cartsToCreate = [
       {
-        userId: 2,
+        userId: 1,
         productId: 1,
         quantity: 2,
       },
       {
-        userId: 2,
+        userId: 1,
         productId: 4,
         quantity: 1,
       },
       {
-        userId: 2,
+        userId: 1,
         productId: 5,
         quantity: 1,
       },
       {
-        userId: 2,
+        userId: 1,
         productId: 18,
         quantity: 20,
       },
@@ -516,11 +509,42 @@ async function createInitialPurchases() {
     console.log(initialPurchase.purchase);
     console.log("Initial Purchase Items: ");
     console.log(initialPurchase.purchaseItems);
-
-    // for (item of initialPurchase[1]) {
-    //   console.log(item);
-    // }
     console.log("FINISHED CREATING PURCHASES");
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function createInitialWishlists() {
+  try {
+    console.log("starting to create wishlists");
+
+    const wishlistsToCreate = [
+      {
+        userId: 1,
+        productId: 1,
+      },
+      {
+        userId: 1,
+        productId: 5,
+      },
+      {
+        userId: 1,
+        productId: 10,
+      },
+      {
+        userId: 1,
+        productId: 15,
+      },
+    ];
+    const wishlists = await Promise.all(
+      wishlistsToCreate.map(async (wishlistItem) => {
+        const { userId, productId } = wishlistItem;
+        const addedWishlist = await addToWishlist(productId, userId);
+        console.log("Wishlist Created: ", addedWishlist);
+      })
+    );
+    console.log("Finished creating wishlists");
   } catch (error) {
     throw error;
   }
@@ -536,7 +560,7 @@ async function rebuildDB() {
     await createInitialCarts();
     await createInitialPurchases();
     await getPastPurchases(2);
-    // await createInitialReviews();
+    await createInitialWishlists();
   } catch (error) {
     console.log("Error during rebuildDB");
     throw error;
