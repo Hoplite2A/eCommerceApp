@@ -6,13 +6,17 @@ import { signals } from '@preact/signals-react';
 
 //! ---------------------------------------------
 
-// eslint-disable-next-line react-refresh/only-export-components
+// Exporting for TotalCartPrice
 export const cartPriceList = signals([]);
+
+// Exporting array to AllItems && SingleItems to add to via onClick of item add button
+export const addToCart = signals([]);
 
 export default function Cart() {
     
 
-    return (<>
 
+    return (<>
+        {}
     </>)   
 }
