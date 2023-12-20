@@ -1,7 +1,13 @@
+//! Imported Libraries --------------------------
 const client = require("./client");
 // const util = require("./util")
+//! ---------------------------------------------
 
-//* -----------------GET ALL API-----------------
+//! Imported Components/Variables----------------
+import { token } from '../../eCommerceFE/src/Components/UniversalFeatures/Login';
+//! ---------------------------------------------
+
+//* -----------------GET ALL Db-----------------
 async function getAllProducts() {
   try {
     const { rows } = await client.query(`
@@ -14,10 +20,10 @@ async function getAllProducts() {
     throw err;
   }
 }
-//* -----------------GET ALL API-----------------
+//* -----------------GET ALL Db-----------------
 
-//* ----------------GET SINGLE API---------------
-async function getSingleProduct() {
+//* ----------------GET SINGLE Db---------------
+async function getSingleProduct(id) {
   try {
     const { rows } = await client.query(`
     SELECT *
@@ -26,31 +32,32 @@ async function getSingleProduct() {
     `);
     return rows;
   } catch (err) {
-    console.log(`Error occurred in the getSingleProduct API Call, ${err}`);
+    console.log(`Error occurred in the getSingleProduct Db Call, ${err}`);
     throw err;
   }
 }
-//* ----------------GET SINGLE API---------------
+//* ----------------GET SINGLE Db---------------
 
-//TODO ---------GET BY FILTER PRODUCTS API----------
-// async function filterProducts({ id, name, price, description, category }) {
-//   try {
-//     const { rows: [products] } = await client.query(`
+//! ---------GET BY FILTER PRODUCTS Db----------
+//! ----- Not sure we should do this rather perform a getAllProducts
+//! ----- and filter on the front end only.
+//! ---------GET BY FILTER PRODUCTS Db----------
 
-//     `)
-//   }
-// }
-
-//TODO ---------GET BY FILTER PRODUCTS API----------
-
-//* --------------CREATE PRODUCT API-------------
+//* --------------CREATE PRODUCT Db-------------
 async function createProduct({ name, price, description, category, image }) {
+
+  if (!token) {
+    name: "Member Feature",
+      message: "Must be a member to add new items to our catalog."
+  }
+
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-      INSERT INTO products(title, price, description, category, image) VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO products(title, price, description, category, image)
+      VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT (name) DO NOTHING 
       RETURNING *;
       `,
@@ -58,13 +65,31 @@ async function createProduct({ name, price, description, category, image }) {
     );
     return product;
   } catch (err) {
-    console.log(`Error occurred in the createProduct API Call, ${err}`);
+    console.log(`Error occurred in the createProduct Db Call, ${err}`);
     throw err;
   }
 }
-//* --------------CREATE PRODUCT API-------------
+//* --------------CREATE PRODUCT Db-------------
 
-//* --------------UPDATE PRODUCT API-------------
+//* -------------VERIFY !DUPLICATE--------------
+async function verifyProduct(title, description, category) {
+  try {
+    const {
+      rows: [newProduct],
+    } = await client.query(`
+      SELECT * FROM products
+      WHERE title=${title} AND 
+      description=${description} AND
+      category=${category};
+    `, [newProduct]);
+  } catch (err) {
+    console.log(`An error has ocurred in verifyProduct() (db), ${err}`);
+    throw err;
+  }
+}
+//* -------------VERIFY !DUPLICATE-------------- 
+
+//* --------------UPDATE PRODUCT Db-------------
 async function updateProduct(id, fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${keys}"=$${index + 1}`)
@@ -80,7 +105,7 @@ async function updateProduct(id, fields = {}) {
       rows: [updatedProduct],
     } = await client.query(
       `
-    UPDAE products
+    UPDATE products
     SET ${setString}
     WHERE id=${id}
     RETURNING *;
@@ -90,17 +115,17 @@ async function updateProduct(id, fields = {}) {
     return updatedProduct;
   } catch (err) {
     console.log(
-      `Error ocurred in updateProduct API Call, ${err} for item: ${id}`
+      `Error ocurred in updateProduct Db Call, ${err} for item: ${id}`
     );
     throw err;
   }
 }
-
-//* --------------UPDATE PRODUCT API-------------
+//* --------------UPDATE PRODUCT Db-------------
 
 module.exports = {
   getAllProducts,
   getSingleProduct,
   createProduct,
+  verifyProduct,
   updateProduct,
 };

@@ -1,3 +1,4 @@
+const exampleData =
 {
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -9,4 +10,4 @@
         "rate": 3.9,
         "count": 120
     }
-},
+};
