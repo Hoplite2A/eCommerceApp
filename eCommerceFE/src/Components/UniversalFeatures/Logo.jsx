@@ -57,16 +57,8 @@ export default function Logo() {
   return (
     <>
       <div className="logo">
-        <div className="logoBody">
-            <Link to='/'>
-              <div className="logo">
-                <div className="ring"></div>
-                <div className="coffee-cup"></div>
-              </div>
-            </Link>
-        </div>
         <Link to="/">
-          <h1 className="siteNameText">{companyName}</h1>
+          <p className="siteNameText">{companyName}</p>
         </Link>
       </div>
     </>

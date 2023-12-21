@@ -12,7 +12,7 @@ export default function Header() {
   //TODO ---- clicking on siteName OR <Logo />
 
   return (
-    <div className="Header">
+    <div className="header">
         <Logo />
         {/* <SearchBar /> */}
         <Navigation />

@@ -25,24 +25,26 @@ export default function Navigation() {
   // }
 
   return (
-    <div className="navBar">
-      <Link to="/">
-        <p className="navBarLabels">Home</p>
-      </Link>
-      {token.value !== null ? (
-        <>
-          <Link to="/addItem">
-            <p className="navBarLabels">Sell Items</p>
-          </Link>
-          <Link to="/accountDetails">
-            <p className="navBarLabels">Account Details</p>
-          </Link>
-        </>
-      ) : (
-        <Link to="/login">
-          <p className="navBarLabels">Login</p>
+    <div className="navBarMaster">
+      <div className="navBar">
+        <Link to="/">
+          <p className="navBarLabels">Home</p>
         </Link>
-      )}
+        {token.value !== null ? (
+          <>
+            <Link to="/addItem">
+              <p className="navBarLabels">Sell Items</p>
+            </Link>
+            <Link to="/accountDetails">
+              <p className="navBarLabels">Account Details</p>
+            </Link>
+          </>
+        ) : (
+          <Link to="/login">
+            <p className="navBarLabels">Login</p>
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
