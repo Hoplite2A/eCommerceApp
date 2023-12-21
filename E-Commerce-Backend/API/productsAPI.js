@@ -97,10 +97,8 @@ productsRouter.patch('/:id', (req, res, next) => {
 
     try {
         const originalProductDetails = await getSingleProduct(id);
-        //! ----------------------------------------------------
-        //! ----------------------------------------------------WORKING HERE!
-        //! ----------------------------------------------------WORKING HERE!
-        //! ----------------------------------------------------
+
+        if(originalProductDetails.owner.id === req.user.id)
 
     } catch (err) {
         console.log(`An Error ocurred in productsRouter.patch('/') (API), ${err}`);
