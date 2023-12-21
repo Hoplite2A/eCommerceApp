@@ -32,7 +32,8 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //TODO ------------ Add validation of register fields and return a setvalid(true) prior to POST API Call
+    //TODO ---- Add validation of register fields and return
+    //TODOD ----a setvalid(true) prior to POST API Call
     //! if else OR Switch Statement
     //! return setValid(true);
 
@@ -66,7 +67,9 @@ export default function RegisterForm() {
       } catch (err) {
         console.log(`Error occurred in RegisterForm function, ${err}`);
         alert(err);
-      }
+    }
+    
+    //! -----------------------------------Redirect if registration/api fails-----------
       if (token.value !== null) {
         navigate("/");
       } else {

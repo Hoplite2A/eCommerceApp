@@ -29,6 +29,8 @@ export default function Login() {
           pass: password,
         }),
       });
+      //! ---------------- Add response if no user found button - reattempt and go to login or
+      //! ---------------- button link to registration form
       const json = res.json();
       const authToken = json.token;
       console.log(authToken);

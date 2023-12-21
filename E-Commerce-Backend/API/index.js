@@ -5,8 +5,8 @@ const apiRouter = express.Router();
 const usersRouter = require("./usersAPI");
 apiRouter.use("/users", usersRouter);
 
-// const productsRouter = require("./products");
-// apiRouter.use("/products", productsRouter);
+const productsRouter = require("./products");
+apiRouter.use("/products", productsRouter);
 
 // const reviewsRouter = require("./reviews");
 // apiRouter.use("/reviews", reviewsRouter);
