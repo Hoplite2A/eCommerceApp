@@ -78,7 +78,7 @@ async function createUser({
   }
 }
 
-// Get user by username, made to see if user exists?
+// Get user by username, made to see if user exists
 async function getUserByUsername(userName) {
   try {
     const {
@@ -114,6 +114,7 @@ async function getAllUsers() {
 
 async function getUser({ username, password }) {
   if (!username || !password) {
+    console.log("No username or password");
     return;
   }
   try {
