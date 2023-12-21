@@ -47,9 +47,9 @@ async function getSingleProduct(id) {
 async function createProduct({ name, price, description, category, image }) {
 
   if (!token) {
-    {
+    throw {
       name: "Member Feature",
-        message: "Must be a member to add new items to our catalog."
+      message: "Must be a member to add new items to our catalog."
     }
   }
 
@@ -58,12 +58,12 @@ async function createProduct({ name, price, description, category, image }) {
       rows: [product],
     } = await client.query(
       `
-      INSERT INTO products(title, price, description, category, image)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO products(title, price, description, category, image, sellerId)
+      VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (name) DO NOTHING 
       RETURNING *;
       `,
-      [name, price, description, category, image]
+      [name, price, description, category, image, sellerId]
     );
     return product;
   } catch (err) {
@@ -74,7 +74,7 @@ async function createProduct({ name, price, description, category, image }) {
 //* --------------CREATE PRODUCT Db-------------
 
 //* -------------VERIFY !DUPLICATE--------------
-async function verifyProduct(title, description, category) {
+async function verifyProduct(title, description, category, sellerId) {
   try {
     const {
       rows: [newProduct],
@@ -82,7 +82,8 @@ async function verifyProduct(title, description, category) {
       SELECT * FROM products
       WHERE title=${title} AND 
       description=${description} AND
-      category=${category};
+      category=${category} AND
+      sellerId=${sellerId};
     `, [newProduct]);
   } catch (err) {
     console.log(`An error has ocurred in verifyProduct() (db), ${err}`);
@@ -105,8 +106,7 @@ async function updateProduct(id, fields = {}) {
   try {
     const {
       rows: [updatedProduct],
-    } = await client.query(
-      `
+    } = await client.query(`
     UPDATE products
     SET ${setString}
     WHERE id=${id}
@@ -124,10 +124,32 @@ async function updateProduct(id, fields = {}) {
 }
 //* --------------UPDATE PRODUCT Db-------------
 
+//* --------------DELETE PRODUCT Db-------------
+async function deleteProduct(productId) {
+  
+  try {
+    const { rows: [deletedProduct], } =
+      await client.query(`
+      DELETE * FROM products
+      WHERE id=${id};
+      `,
+        [deletedProduct]);
+  } catch (err) {
+    console.log(
+      `Error ocurred in deleteProduct Db, ${err} for item: ${id}`
+    );
+    throw err;
+  }
+}
+
+//* --------------DELETE PRODUCT Db-------------
+
+
 module.exports = {
   getAllProducts,
   getSingleProduct,
   createProduct,
   verifyProduct,
   updateProduct,
+  deleteProduct
 };
