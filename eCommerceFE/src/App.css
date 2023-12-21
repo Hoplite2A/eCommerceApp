@@ -1,3 +1,6 @@
+body{
+  background-color: rgb(37, 41, 44);
+}
 div {
   border-color: black;
   border-style: solid;
@@ -18,10 +21,10 @@ div {
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #76ff64aa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #61fb94aa);
 }
 
 @keyframes logo-spin {
@@ -46,26 +49,26 @@ div {
 .read-the-docs {
   color: #888;
 }
-.body {
-  background-color: #1a1a1a; 
+.logoBody {
+  background-color: #00000000; 
   display: flex; 
   justify-content: center; 
   align-items: center; 
-  height: 100vh;
+  height: 30vh;
   margin: 0;
 }
 .logo {
-  width: 200px;
-  height: 200px;
+  width:30px;
+  height:30px;
   border-radius: 50%;
-  background: conic-gradient(from 180deg at 50% 50%, #704214, #d0864e);
+  background: conic-gradient(from 180deg at 50% 50%, #080808, #30ce00);
   position: relative;
   overflow: hidden;
 }
 .coffee-cup {
   width: 80px;
   height: 80px;
-  background-color: #704214;
+  background-color: #000000;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -84,4 +87,30 @@ div {
 @keyframes rotate {
   from { transform: rotate(0deg);}
   to {transform: rotate(360deg);}
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+}
+.logo{
+  display: flex;
+  flex-direction: row;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  color: rgb(161, 161, 161);
+}
+.footerLinkSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.sectionLinks {
+  width: 25%;
+}
+.sectionLinks > a, .navBar > a {
+  text-decoration: none;
+  color: rgb(161, 161, 161);
 }

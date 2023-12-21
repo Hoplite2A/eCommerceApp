@@ -1,6 +1,7 @@
 //! Imported Libraries -------------------------
 import { Link } from "react-router-dom";
 //! --------------------------------------------
+
 //! Imported Components/Variables---------------
 //! --------------------------------------------
 
@@ -8,7 +9,7 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="footerLinkSection">
-        <div className="getToKnowUs">
+        <div className="getToKnowUs sectionLinks">
           <h4 className="linksTitle">Get to Know Us</h4>
           <Link to="/about">
             <h5 className="footerLinks">About</h5>
@@ -26,7 +27,7 @@ export default function Footer() {
             <h5 className="footerLinks">Green Initiative Statement</h5>
           </Link>
         </div>
-        <div className="membershipFeatures">
+        <div className="membershipFeatures sectionLinks">
           <h4 className="linksTitle">Membership Features</h4>
           <Link to="/membershipInfo">
             <h5 className="footerLinks">Membership Benefits</h5>
@@ -35,7 +36,7 @@ export default function Footer() {
             <h5 className="footerLinks">How to Sell</h5>
           </Link>
         </div>
-        <div className="giftCardInfo">
+        <div className="giftCardInfo sectionLinks">
           <h4 className="giftCards">Gift Cards</h4>
           <Link to="/giftCards">
             <h5 className="footerLinks">Purchase Gift Cards</h5>
@@ -44,7 +45,7 @@ export default function Footer() {
             <h5 className="footerLinks">Reload Gift Card</h5>
           </Link>
         </div>
-        <div className="manageAccount">
+        <div className="manageAccount sectionLinks">
           <h4 className="linksTitle">Manage Account</h4>
           <Link to="/accountDetails">
             <h5 className="footerLinks">Your Account</h5>

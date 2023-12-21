@@ -1,6 +1,6 @@
 //! Imported Libraries -------------------------
 import { Link } from "react-router-dom";
-import { token } from "../../../App";
+import { token } from "../Login";
 //! --------------------------------------------
 //! Imported Components/Variables---------------
 // None to add as this is a simple navigation component.
