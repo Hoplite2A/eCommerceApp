@@ -1,6 +1,6 @@
 //! Imported Libraries --------------------------
 const client = require("./client");
-// const util = require("./util")
+// const { requireUser } = require('/utils');
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -47,8 +47,10 @@ async function getSingleProduct(id) {
 async function createProduct({ name, price, description, category, image }) {
 
   if (!token) {
-    name: "Member Feature",
-      message: "Must be a member to add new items to our catalog."
+    {
+      name: "Member Feature",
+        message: "Must be a member to add new items to our catalog."
+    }
   }
 
   try {

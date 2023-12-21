@@ -1,6 +1,7 @@
 //! Imported Libraries --------------------------
 const express = require("express");
 const productsRouter = express.Router();
+const { requireUser } = require('/utils');
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -41,7 +42,7 @@ productsRouter.get('/:id', async (req, res, next) => {
 //* ---------------GET SINGLE API----------------
 
 //* -------------CREATE PRODUCT API--------------
-productsRouter.post('/', (req, res, next) => {
+productsRouter.post('/', async (req, res, next) => {
     const { title, price, description, category, image } = req.body;
     try {
 
@@ -73,8 +74,8 @@ productsRouter.post('/', (req, res, next) => {
 //* -------------CREATE PRODUCT API-------------- 
 
 //* -------------UPDATE PRODUCT API-------------- 
-productsRouter.patch('/:id', (req, res, next) => {
-    const { id } = req.params;
+productsRouter.patch('/:id', async (req, res, next) => {
+    const { productId } = req.params;
     const { title, price, description, category, image } = req.body;
 
     const updateFields = {};
@@ -98,7 +99,16 @@ productsRouter.patch('/:id', (req, res, next) => {
     try {
         const originalProductDetails = await getSingleProduct(id);
 
-        if(originalProductDetails.owner.id === req.user.id)
+        if (originalProductDetails.owner.id === req.user.id) {
+            const updateProduct = await updateProduct(productId, updateFields)
+            res.send({ product: updateProduct })
+        } else {
+            console.log(`Unauthorized Attempt to edit item ${productId}`)
+            next({
+                name: UnauthorizedItemEdit,
+                message: `This attempt to edit this item (${productId}) is Unauthorized, please log in to edit this item.`
+            });
+        }
 
     } catch (err) {
         console.log(`An Error ocurred in productsRouter.patch('/') (API), ${err}`);
