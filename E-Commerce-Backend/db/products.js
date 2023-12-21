@@ -44,7 +44,7 @@ async function getSingleProduct(id) {
 //! ---------GET BY FILTER PRODUCTS Db----------
 
 //* --------------CREATE PRODUCT Db-------------
-async function createProduct({ name, price, description, category, image }) {
+async function createProduct({ name, price, description, category, image, token }) {
 
   if (!token) {
     throw {

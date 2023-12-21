@@ -10,8 +10,8 @@ const {
   getSingleProduct,
   createProduct,
   verifyProduct,
-    updateProduct,
-    deleteProduct
+  updateProduct,
+  deleteProduct
 } = require("../db/products");
 //! ---------------------------------------------
 
@@ -50,9 +50,9 @@ productsRouter.get('/:id', async (req, res, next) => {
 
 //* -------------CREATE PRODUCT API--------------
 productsRouter.post('/', requireUser, async (req, res, next) => {
+//TODO ---- requireUser in async params???????????
     const { title, price, description, category, image , sellerId} = req.body;
     try {
-
         const newProduct = await verifyProduct(title, description, category, sellerId);
         
         if (newProduct) {
@@ -70,7 +70,6 @@ productsRouter.post('/', requireUser, async (req, res, next) => {
             image,
             sellerId
         })
-
         res.send({
             message: `${title} has been added to the catalog, to edit/update this item. Go to your account details and access your added items there.`
         })
@@ -86,31 +85,32 @@ productsRouter.post('/', requireUser, async (req, res, next) => {
 
 //* -------------UPDATE PRODUCT API-------------- 
 productsRouter.patch('/:id', requireUser, async (req, res, next) => {
+//TODO ---- requireUser in async params???????????
 //! -------- To update the product the req will have to include the following: 
     const { productId } = req.params;
     const { userId, title, price, description, category, image } = req.body;
     //TODO ---- userId will have to be included in the req.body
 //! -------------------------------------------------------------------------- 
     
-    const updateFields = {};
 
     //Combining the different req.body values based on if there is a value > 0
     //and redefining it for consumption as a new array
-    if (title && title.length > 0) {
-        updateFields.title = title;
-    }
-    if (price && price.length > 0) {
-        updateFields.price = price;
-    }
-    if (description && description.length > 0) {
-        updateFields.description = description;
-    }
-    if (category && category.length > 0) {
-        updateFields.category = category;
-    }
-    if (image && image.length > 0) {
-        updateFields.image = image;
-    }
+    const updateFields = {};
+        if (title && title.length > 0) {
+            updateFields.title = title;
+        }
+        if (price && price.length > 0) {
+            updateFields.price = price;
+        }
+        if (description && description.length > 0) {
+            updateFields.description = description;
+        }
+        if (category && category.length > 0) {
+            updateFields.category = category;
+        }
+        if (image && image.length > 0) {
+            updateFields.image = image;
+        }
 
     try {
         const originalProductDetails = await getSingleProduct(id);
