@@ -2,14 +2,14 @@ const express = require("express");
 const apiRouter = express.Router();
 
 // Will add these once I have the APIs written
-const usersRouter = require("./users");
+const usersRouter = require("./usersAPI");
 apiRouter.use("/users", usersRouter);
 
 const productsRouter = require("./products");
 apiRouter.use("/products", productsRouter);
 
-const reviewsRouter = require("./reviews");
-apiRouter.use("/reviews", reviewsRouter);
+// const reviewsRouter = require("./reviews");
+// apiRouter.use("/reviews", reviewsRouter);
 
 apiRouter.use((error, req, res, next) => {
   console.log(req.header);
