@@ -36,7 +36,7 @@ async function createTables() {
       password VARCHAR(255) NOT NULL,
       first_name VARCHAR(255) NOT NULL,
       last_name VARCHAR(255) NOT NULL,
-      pname VARCHAR(255) NULL,
+      preferred_name VARCHAR(255) NULL,
       address VARCHAR(255) NOT NULL,
       apartment VARCHAR(255) NULL,
       city VARCHAR(255) NOT NULL,
