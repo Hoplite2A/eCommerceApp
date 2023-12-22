@@ -26,7 +26,7 @@ async function createUser({
         rows: [user],
       } = await client.query(
         `
-      INSERT INTO users(username, password, first_name, last_name, prefered_name, address, apartment, city, state, zip, phone, email, admin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+      INSERT INTO users(username, password, first_name, last_name, preferred_name, address, apartment, city, state, zip, phone, email, admin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
       ON CONFLICT (username) DO NOTHING 
       RETURNING *
     `,
@@ -52,7 +52,7 @@ async function createUser({
         rows: [user],
       } = await client.query(
         `
-      INSERT INTO users(username, password, first_name, last_name, prefered_name, address, apartment, city, state, zip, phone, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      INSERT INTO users(username, password, first_name, last_name, preferred_name, address, apartment, city, state, zip, phone, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       ON CONFLICT (username) DO NOTHING 
       RETURNING *
     `,

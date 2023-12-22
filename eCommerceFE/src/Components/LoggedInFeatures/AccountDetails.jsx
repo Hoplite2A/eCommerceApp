@@ -11,16 +11,12 @@ import { userDetails } from "../../Components/UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
-
 export default function AccountDetails() {
-  
-  
-  
   const navigate = useNavigate();
-  
+
   const nothing = () => {
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
@@ -36,7 +32,7 @@ export default function AccountDetails() {
     state,
     zip,
     // phoneType,
-    phoneNumber,
+    phone,
     email,
     username,
   } = userDetails.value;
@@ -53,11 +49,11 @@ export default function AccountDetails() {
   const [aState, setAState] = useState(state);
   const [aZip, setAZip] = useState(zip);
   // const [cType, setCType] = useState("");
-  const [cNumber, setCNumber] = useState(phoneNumber);
+  const [cNumber, setCNumber] = useState(phone);
   const [emailAddress, setEmailAddress] = useState(email);
 
   const [updateInfo, setUpdateInfo] = useState(false);
-  const [updatedPassword, setUpdatedPassword] = useState("")
+  const [updatedPassword, setUpdatedPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +75,7 @@ export default function AccountDetails() {
           state: aState,
           zip: aZip,
           // phoneType: cType,
-          phoneNumber: cNumber,
+          phone: cNumber,
           emailAddress: email,
           user: userName,
         }),
@@ -102,16 +98,16 @@ export default function AccountDetails() {
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordResetRequest = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const res = await fetch(`${BASE_URL}/u`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type':'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token.value}`,
         },
         body: JSON.stringify({
           username: username,
-          password: password
+          password: password,
         }),
       });
       const json = res.json();
@@ -120,24 +116,25 @@ export default function AccountDetails() {
       if (verdict === 1) {
         setPasswordResetVisible(true);
       }
+    } catch (err) {
+      console.log(
+        `Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`
+      );
     }
-    catch (err) {
-      console.log(`Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`);
-    }
-  }
+  };
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordReset = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const res = await fetch(`${BASE_URL}/u`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type':'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token.value}`,
         },
         body: JSON.stringify({
-          password: updatedPassword
+          password: updatedPassword,
         }),
       });
       const json = res.json();
@@ -146,12 +143,13 @@ export default function AccountDetails() {
       if (update === 1) {
         setPasswordResetVisible(true);
       }
-      alert(`${fName}, your password has been successfully updated.`)
+      alert(`${fName}, your password has been successfully updated.`);
+    } catch (err) {
+      console.log(
+        `Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`
+      );
     }
-    catch (err) {
-      console.log(`Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`);
-    }
-  }
+  };
 
   return (
     <>
@@ -242,12 +240,12 @@ export default function AccountDetails() {
                 value={phoneType}
                 onChange={(e) => setCType(e.target.value)}
               /> */}
-              <label htmlFor="phoneNumber"></label>
+              <label htmlFor="phone"></label>
               <input
                 type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={phoneNumber}
+                id="phone"
+                name="phone"
+                value={phone}
                 onChange={(e) => setCNumber(e.target.value)}
               />
               <label htmlFor="emailAddress"></label>
@@ -269,51 +267,73 @@ export default function AccountDetails() {
                 onChange={(e) => setUserName(e.target.value)}
                 disabled={updateInfo}
               />
-              {!passwordResetVisible ? (<>
-                <label htmlFor="pass">Enter Current Password</label>
-                <input
-                  type="text"
-                  id="pass"
-                  name="pass"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                </>) : (<>
-                <label htmlFor="pass">Enter New Password</label>
-                <input
-                  type="text"
-                  id="pass"
-                  name="pass"
-                  onChange={(e) => setUpdatedPassword(e.target.value)}
-                />
-                </>)}
-              {passwordResetVisible ? (
+              {!passwordResetVisible ? (
                 <>
-                  <button className="resetPasswordRequest"
-                    onClick={handlePasswordResetRequest}>Reset</button>
+                  <label htmlFor="pass">Enter Current Password</label>
+                  <input
+                    type="text"
+                    id="pass"
+                    name="pass"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </>
               ) : (
                 <>
-                <button className="resetPassword"
-                  onClick={handlePasswordReset}>Reset</button>
+                  <label htmlFor="pass">Enter New Password</label>
+                  <input
+                    type="text"
+                    id="pass"
+                    name="pass"
+                    onChange={(e) => setUpdatedPassword(e.target.value)}
+                  />
                 </>
-                )}
+              )}
+              {passwordResetVisible ? (
+                <>
+                  <button
+                    className="resetPasswordRequest"
+                    onClick={handlePasswordResetRequest}
+                  >
+                    Reset
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="resetPassword"
+                    onClick={handlePasswordReset}
+                  >
+                    Reset
+                  </button>
+                </>
+              )}
             </div>
-            {!updateInfo ? <>
-              <button type="button" className="ADSaveChangesButton" onClick={setUpdateInfo(!updateInfo)}>
-                Edit Info
-              </button>
-            </> : <>
-              <button type="submit" className="ADSaveChangesButton">
-                Save Changes
-              </button>
-            </>}
+            {!updateInfo ? (
+              <>
+                <button
+                  type="button"
+                  className="ADSaveChangesButton"
+                  onClick={setUpdateInfo(!updateInfo)}
+                >
+                  Edit Info
+                </button>
+              </>
+            ) : (
+              <>
+                <button type="submit" className="ADSaveChangesButton">
+                  Save Changes
+                </button>
+              </>
+            )}
           </form>
-          <Footer />     
+          <Footer />
         </>
       ) : (
         <>
-          <button className="goHome" onClick={nothing}>Nothing to see here.</button>
-        </>    
+          <button className="goHome" onClick={nothing}>
+            Nothing to see here.
+          </button>
+        </>
       )}
     </>
   );
