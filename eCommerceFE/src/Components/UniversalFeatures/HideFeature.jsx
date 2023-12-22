@@ -1,14 +1,25 @@
-import { useState } from "react";
+//! Imported Libraries -------------------------
+//None at this time
+//! --------------------------------------------
 
-export default function HideFeature() {
-  const [visible, setVisible] = useState(false);
+//! Imported Components/Variables---------------
+//None at this time
+//! --------------------------------------------
+
+
+export default function HideFeature({visible, setVisible}) {
 
   const handleClick = () => {
     setVisible(!visible);
   };
-  return (
-    <>
-      <div className="hideFeatureButton" onClick={handleClick}></div>
-    </>
-  );
+
+  return (<>
+    {visible ?
+        <div className="hideFeatureButton" onClick={handleClick}>
+            <p className="hideExpandMessage" >HIDE</p>
+        </div> :
+        <div className="hideFeatureButton" onClick={handleClick}>
+            <p className="hideExpandMessage" >EXPAND</p>
+        </div>}
+    </>);
 }

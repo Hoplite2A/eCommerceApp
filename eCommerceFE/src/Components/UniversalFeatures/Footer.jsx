@@ -71,9 +71,9 @@ export default function Footer() {
               <h4 className="footerLinks">Warranty Policy</h4>
             </Link>
           </div>
-          <div className="footerButton">
+          {/* <div className="footerButton">
             <button onClick={handleClick}>Close</button>
-          </div>
+          </div> */}
         </div>
         <div className="socialMediaLinks">
           <Link>
@@ -89,8 +89,9 @@ export default function Footer() {
             <img src="" alt="" />
           </Link>
         </div>
-      </div> </>:
-      <div className="collapsedFooterParent">
+      </div> </> : <>
+      <HideFeature visible={visible} setVisible={setVisible} />
+      {/* <div className="collapsedFooterParent"> */}
         <div className="collapsedFooter">
           <div className="collapedLinksTitle ">
             <h3 className="linksTitle ">Get to Know Us</h3>
@@ -99,7 +100,7 @@ export default function Footer() {
             <h3 className="linksTitle ">Membership Features</h3>
           </div>
           <div className="collapedLinksTitle ">
-            <h3 className="giftCards ">Gift Cards</h3>
+            <h3 className="linksTitle ">Gift Cards</h3>
           </div>
           <div className="collapedLinksTitle ">
             <h3 className="linksTitle ">Manage Account</h3>
@@ -130,7 +131,8 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>}</>
+        {/* </div> */}
+      </>}</>
   )
 }
       
