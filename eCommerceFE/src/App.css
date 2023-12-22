@@ -111,10 +111,13 @@ p.navBarLabels {
   bottom: 0%;
   left: 0%;
 }
-.sectionLinks, .collapedLinksTitle {
+.sectionLinks, 
+.collapedLinksTitle {
   width: 10%%;
 }
-.footerLinks{
+.footerLinks, 
+.linksTitle,
+.collapedLinksTitle{
   margin: 10px;
   text-align: left;
 }

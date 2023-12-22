@@ -48,7 +48,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="giftCardInfo sectionLinks">
-            <h3 className="giftCards">Gift Cards</h3>
+            <h3 className="linksTitle">Gift Cards</h3>
             <Link to="/giftCards">
               <h4 className="footerLinks">Purchase Gift Cards</h4>
             </Link>
