@@ -1,25 +1,25 @@
-//! Imported Libraries -------------------------
-//None at this time
-//! --------------------------------------------
+// //! Imported Libraries -------------------------
+// //None at this time
+// //! --------------------------------------------
 
-//! Imported Components/Variables---------------
-//None at this time
-//! --------------------------------------------
+// //! Imported Components/Variables---------------
+// import { visibility } from '../../App';
+// //! --------------------------------------------
 
 
-export default function HideFeature({visible, setVisible}) {
+// export default function HideFeature() {
 
-  const handleClick = () => {
-    setVisible(!visible);
-  };
+//   const handleClick = () => {
+//     setVisible(!visibility.value);
+//   };
 
-  return (<>
-    {visible ?
-        <div className="hideFeatureButton" onClick={handleClick}>
-            <p className="hideExpandMessage" >HIDE</p>
-        </div> :
-        <div className="hideFeatureButton" onClick={handleClick}>
-            <p className="hideExpandMessage" >EXPAND</p>
-        </div>}
-    </>);
-}
+//   return (<>
+//     {visibility.value ?
+//         <div className="hideFeatureButton" onClick={handleClick}>
+//             <p className="hideExpandMessage" >HIDE</p>
+//         </div> :
+//         <div className="hideFeatureButton" onClick={handleClick}>
+//             <p className="hideExpandMessage" >Expand</p>
+//         </div>}
+//     </>);
+// }

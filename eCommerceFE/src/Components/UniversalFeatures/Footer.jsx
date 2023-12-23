@@ -1,14 +1,14 @@
 //! Imported Libraries -------------------------
+import { useState } from 'react';
 import { Link } from "react-router-dom";
-import {useState} from 'react';
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
-import HideFeature from "./HideFeature";
+// import HideFeature from "./HideFeature";
 //! --------------------------------------------
 
 export default function Footer() {
-
+  
   const [visible, setVisible] = useState(false);
   
   const handleClick = () => {
@@ -17,62 +17,63 @@ export default function Footer() {
 
   return (<>
     {visible ? <>
-      <HideFeature visible={visible} setVisible={setVisible} />
       <div className="footer">
+        <div className="collapseFooterButton" onClick={handleClick}>COLLAPSE</div>
         <div className="footerLinkSection">
-          <div className="getToKnowUs sectionLinks">
+          <div className="getToKnowUs sectionLinks expanded">
             <h3 className="linksTitle">Get to Know Us</h3>
             <Link to="/about">
-              <h4 className="footerLinks">About</h4>
+              <h4 className="footerLinks pLink">About</h4>
             </Link>
             <Link to="/careers">
-              <h4 className="footerLinks">Careers</h4>
+              <h4 className="footerLinks pLink">Careers</h4>
             </Link>
             <Link to="/contactUs">
-              <h4 className="footerLinks">Contact Us</h4>
+              <h4 className="footerLinks pLink">Contact Us</h4>
             </Link>
             <Link to="/csrStatement">
-              <h4 className="footerLinks">CSR Statement</h4>
+              <h4 className="footerLinks pLink">CSR Statement</h4>
             </Link>
             <Link to="/greenInitiativeStatement">
-              <h4 className="footerLinks">Green Initiative</h4>
+              <h4 className="footerLinks pLink">Green Initiative</h4>
             </Link>
           </div>
-          <div className="membershipFeatures sectionLinks">
+          <div className="membershipFeatures sectionLinks expanded">
             <h3 className="linksTitle">Membership Features</h3>
             <Link to="/membershipInfo">
-              <h4 className="footerLinks">Membership Benefits</h4>
+              <h4 className="footerLinks pLink">Membership Benefits</h4>
             </Link>
             <Link to="/sellingInfo">
-              <h4 className="footerLinks">How to Sell</h4>
+              <h4 className="footerLinks pLink">How to Sell</h4>
             </Link>
           </div>
-          <div className="giftCardInfo sectionLinks">
+          <div className="giftCardInfo sectionLinks expanded">
             <h3 className="linksTitle">Gift Cards</h3>
             <Link to="/giftCards">
-              <h4 className="footerLinks">Purchase Gift Cards</h4>
+              <h4 className="footerLinks pLink">Purchase Gift Cards</h4>
             </Link>
             <Link to="/reloadGiftCard">
-              <h4 className="footerLinks">Reload Gift Card</h4>
+              <h4 className="footerLinks pLink">Reload Gift Card</h4>
             </Link>
           </div>
-          <div className="manageAccount sectionLinks">
+          <div className="manageAccount sectionLinks expanded">
             <h3 className="linksTitle">Manage Account</h3>
             <Link to="/accountDetails">
-              <h4 className="footerLinks">Your Account</h4>
+              <h4 className="footerLinks pLink">Your Account</h4>
             </Link>
             <Link to="/orderHistory">
-              <h4 className="footerLinks">Your Orders</h4>
+              <h4 className="footerLinks pLink">Your Orders</h4>
             </Link>
             <Link to="/returns">
-              <h4 className="footerLinks">Returns</h4>
+              <h4 className="footerLinks pLink">Returns</h4>
             </Link>
             <Link to="/warranty">
-              <h4 className="footerLinks">Warranty Policy</h4>
+              <h4 className="footerLinks pLink">Warranty Policy</h4>
             </Link>
           </div>
           {/* <div className="footerButton">
             <button onClick={handleClick}>Close</button>
+            </div>
           </div> */}
         </div>
         <div className="socialMediaLinks">
@@ -90,9 +91,9 @@ export default function Footer() {
           </Link>
         </div>
       </div> </> : <>
-      <HideFeature visible={visible} setVisible={setVisible} />
-      {/* <div className="collapsedFooterParent"> */}
-        <div className="collapsedFooter">
+      <div className="collapsedFooterParent footer">
+      <div className="closeButton" onClick={handleClick}>EXPAND</div>
+        <div className="collapsedFooter" onClick={handleClick}>
           <div className="collapedLinksTitle ">
             <h3 className="linksTitle ">Get to Know Us</h3>
           </div>
@@ -104,9 +105,6 @@ export default function Footer() {
           </div>
           <div className="collapedLinksTitle ">
             <h3 className="linksTitle ">Manage Account</h3>
-          </div>
-          <div className="footerButton" onClick={handleClick}>
-            <button onClick={handleClick}>Open</button>
           </div>
         </div>
         <div className="collapedSocialMediaLinks">
@@ -131,8 +129,8 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        {/* </div> */}
-      </>}</>
+      </div>
+    </>}</>
   )
 }
       
