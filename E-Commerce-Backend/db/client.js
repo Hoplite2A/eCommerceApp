@@ -1,7 +1,7 @@
 const { Client } = require("pg");
 
 const connectionString =
-  process.env.DATABASE_URL || "postgres://localhost:5432/dangazon";
+  process.env.DATABASE_URL || "https://localhost:5432/dangazon";
 
 const client = new Client({
   connectionString,
@@ -11,4 +11,4 @@ const client = new Client({
       : undefined,
 });
 
-module.exports = { client };
+module.exports = client;

@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 const express = require("express");
 const server = express();
 const PORT = process.env.PORT || 3000;
 
-const { client } = require("./db/client");
+const client = require("./db/client");
 client.connect();
 
 const bodyparser = require("body-parser");
@@ -14,6 +16,14 @@ server.use(cors());
 const morgan = require("morgan");
 server.use(morgan("dev"));
 
+server.use((req, res, next) => {
+  console.log("<____Body Logger START____>");
+  console.log(req.body);
+  console.log("<_____Body Logger END_____>");
+
+  next();
+});
+
 const apiRouter = require("./API/index");
 server.use("/api", apiRouter);
 
@@ -21,6 +31,9 @@ server.use("/api", apiRouter);
 const path = require("path");
 server.use("/docs", express.static(path.join(__dirname, "public")));
 server.get("/", (req, res) => {
+  res.redirect("/docs");
+});
+server.get("/api", (req, res) => {
   res.redirect("/docs");
 });
 

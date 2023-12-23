@@ -9,7 +9,6 @@ import { token } from "../UniversalFeatures/Login";
 //! ---------------------------------------------
 
 export default function RegisterForm() {
-
   const [fName, setFName] = useState("");
   const [pName, setPName] = useState("");
   const [lName, setLName] = useState("");
@@ -26,7 +25,7 @@ export default function RegisterForm() {
 
   //TODO -------------- Part of Validation Attempt
   //! const [valid, setValid] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -38,48 +37,48 @@ export default function RegisterForm() {
     //! return setValid(true);
 
     // if (valid) {
-      try {
-        const res = await fetch(`${BASE_URL}registration`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName: fName,
-            preferredName: pName,
-            lastName: lName,
-            street: streetAddress,
-            apartment: aApt,
-            city: aCity,
-            state: aState,
-            zip: aZip,
-            phoneType: cType,
-            phoneNumber: cNumber,
-            emailAddress: email,
-            user: userName,
-            pass: password,
-          }),
-        });
-        const json = res.json();
-        const authToken = json.token;
-        console.log(authToken);
-        token.value = authToken;
-      } catch (err) {
-        console.log(`Error occurred in RegisterForm function, ${err}`);
-        alert(err);
+    try {
+      const res = await fetch(`${BASE_URL}registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: fName,
+          preferredName: pName,
+          lastName: lName,
+          street: streetAddress,
+          apartment: aApt,
+          city: aCity,
+          state: aState,
+          zip: aZip,
+          phoneType: cType,
+          phoneNumber: cNumber,
+          emailAddress: email,
+          user: userName,
+          pass: password,
+        }),
+      });
+      const json = res.json();
+      const authToken = json.token;
+      console.log(authToken);
+      token.value = authToken;
+    } catch (err) {
+      console.log(`Error occurred in RegisterForm function, ${err}`);
+      alert(err);
     }
-    
+
     //! -----------------------------------Redirect if registration/api fails-----------
-      if (token.value !== null) {
-        navigate("/");
-      } else {
-        //TODO ----- Enter in code that will pull error messages from BE on whether it is a dataType error or
-        //TODO ----- if it is an user already has those credentials.
-        alert(
-          "Either a user with these credentials exist, or you entered in an invalid value. Please reattempt."
-        );
-      }
+    if (token.value !== null) {
+      navigate("/");
+    } else {
+      //TODO ----- Enter in code that will pull error messages from BE on whether it is a dataType error or
+      //TODO ----- if it is an user already has those credentials.
+      alert(
+        "Either a user with these credentials exist, or you entered in an invalid value. Please reattempt."
+      );
     }
+  };
 
   return (
     <>
@@ -94,9 +93,8 @@ export default function RegisterForm() {
               name="firstName"
               placeholder="First Name"
               onChange={(e) => {
-                  setFName(e.target.value);
-                } 
-              }
+                setFName(e.target.value);
+              }}
             />
           </label>
           <label className="regLabels">
@@ -107,9 +105,8 @@ export default function RegisterForm() {
               name="preferredName"
               placeholder="Preferred Name"
               onChange={(e) => {
-                  setPName(e.target.value);
-                } 
-              }
+                setPName(e.target.value);
+              }}
             />
           </label>
           <label className="regLabels">
@@ -120,9 +117,8 @@ export default function RegisterForm() {
               name="lastName"
               placeholder="Last Name"
               onChange={(e) => {
-                  setLName(e.target.value);
-                } 
-              }
+                setLName(e.target.value);
+              }}
             />
           </label>
         </div>
@@ -136,9 +132,8 @@ export default function RegisterForm() {
                 name="street"
                 placeholder="Street Address"
                 onChange={(e) => {
-                    setStreetAddress(e.target.value);
-                  } 
-                }
+                  setStreetAddress(e.target.value);
+                }}
               />
             </label>
             <label className="regLabel">
@@ -148,11 +143,10 @@ export default function RegisterForm() {
                 id="apartment"
                 name="apartment"
                 placeholder="APT/UNIT"
-                value={''}
+                value={""}
                 onChange={(e) => {
                   setAApt(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
           </div>
@@ -166,8 +160,7 @@ export default function RegisterForm() {
                 placeholder="City"
                 onChange={(e) => {
                   setACity(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
             <label className="regLabel">
@@ -179,8 +172,7 @@ export default function RegisterForm() {
                 placeholder="State"
                 onChange={(e) => {
                   setAState(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
             <label className="regLabel">
@@ -192,8 +184,7 @@ export default function RegisterForm() {
                 placeholder="ZIP Code"
                 onChange={(e) => {
                   setAZip(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
           </div>
@@ -207,8 +198,7 @@ export default function RegisterForm() {
                 placeholder="Phone Type"
                 onChange={(e) => {
                   setCType(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
             <label className="regLabels">
@@ -220,8 +210,7 @@ export default function RegisterForm() {
                 placeholder="Phone Number"
                 onChange={(e) => {
                   setCNumber(e.target.value);
-                  }
-                }
+                }}
               />
             </label>
             <label className="regLabels">
@@ -268,3 +257,5 @@ export default function RegisterForm() {
     </>
   );
 }
+
+module.exports = { token };
