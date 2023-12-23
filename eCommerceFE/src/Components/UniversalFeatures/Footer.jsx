@@ -1,79 +1,136 @@
 //! Imported Libraries -------------------------
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 //! --------------------------------------------
+
 //! Imported Components/Variables---------------
+// import HideFeature from "./HideFeature";
 //! --------------------------------------------
 
 export default function Footer() {
-  return (
-    <div className="footer">
-      <div className="footerLinkSection">
-        <div className="getToKnowUs">
-          <h4 className="linksTitle">Get to Know Us</h4>
-          <Link to="/about">
-            <h5 className="footerLinks">About</h5>
+  
+  const [visible, setVisible] = useState(false);
+  
+  const handleClick = () => {
+    setVisible(!visible);
+  }
+
+  return (<>
+    {visible ? <>
+      <div className="footer">
+        <div className="collapseFooterButton" onClick={handleClick}>COLLAPSE</div>
+        <div className="footerLinkSection">
+          <div className="getToKnowUs sectionLinks expanded">
+            <h3 className="linksTitle">Get to Know Us</h3>
+            <Link to="/about">
+              <h4 className="footerLinks pLink">About</h4>
+            </Link>
+            <Link to="/careers">
+              <h4 className="footerLinks pLink">Careers</h4>
+            </Link>
+            <Link to="/contactUs">
+              <h4 className="footerLinks pLink">Contact Us</h4>
+            </Link>
+            <Link to="/csrStatement">
+              <h4 className="footerLinks pLink">CSR Statement</h4>
+            </Link>
+            <Link to="/greenInitiativeStatement">
+              <h4 className="footerLinks pLink">Green Initiative</h4>
+            </Link>
+          </div>
+          <div className="membershipFeatures sectionLinks expanded">
+            <h3 className="linksTitle">Membership Features</h3>
+            <Link to="/membershipInfo">
+              <h4 className="footerLinks pLink">Membership Benefits</h4>
+            </Link>
+            <Link to="/sellingInfo">
+              <h4 className="footerLinks pLink">How to Sell</h4>
+            </Link>
+          </div>
+          <div className="giftCardInfo sectionLinks expanded">
+            <h3 className="linksTitle">Gift Cards</h3>
+            <Link to="/giftCards">
+              <h4 className="footerLinks pLink">Purchase Gift Cards</h4>
+            </Link>
+            <Link to="/reloadGiftCard">
+              <h4 className="footerLinks pLink">Reload Gift Card</h4>
+            </Link>
+          </div>
+          <div className="manageAccount sectionLinks expanded">
+            <h3 className="linksTitle">Manage Account</h3>
+            <Link to="/accountDetails">
+              <h4 className="footerLinks pLink">Your Account</h4>
+            </Link>
+            <Link to="/orderHistory">
+              <h4 className="footerLinks pLink">Your Orders</h4>
+            </Link>
+            <Link to="/returns">
+              <h4 className="footerLinks pLink">Returns</h4>
+            </Link>
+            <Link to="/warranty">
+              <h4 className="footerLinks pLink">Warranty Policy</h4>
+            </Link>
+          </div>
+          {/* <div className="footerButton">
+            <button onClick={handleClick}>Close</button>
+            </div>
+          </div> */}
+        </div>
+        <div className="socialMediaLinks">
+          <Link>
+            <img src="" alt="" />
           </Link>
-          <Link to="/careers">
-            <h5 className="footerLinks">Careers</h5>
+          <Link>
+            <img src="" alt="" />
           </Link>
-          <Link to="/contactUs">
-            <h5 className="footerLinks">Contact Us</h5>
+          <Link>
+            <img src="" alt="" />
           </Link>
-          <Link to="/csrStatement">
-            <h5 className="footgit push erLinks">CSR Statement</h5>
-          </Link>
-          <Link to="/greenInitiativeStatement">
-            <h5 className="footerLinks">Green Initiative Statement</h5>
+          <Link>
+            <img src="" alt="" />
           </Link>
         </div>
-        <div className="membershipFeatures">
-          <h4 className="linksTitle">Membership Features</h4>
-          <Link to="/membershipInfo">
-            <h5 className="footerLinks">Membership Benefits</h5>
-          </Link>
-          <Link to="/sellingInfo">
-            <h5 className="footerLinks">How to Sell</h5>
-          </Link>
+      </div> </> : <>
+      <div className="collapsedFooterParent footer">
+      <div className="closeButton" onClick={handleClick}>EXPAND</div>
+        <div className="collapsedFooter" onClick={handleClick}>
+          <div className="collapedLinksTitle ">
+            <h3 className="linksTitle ">Get to Know Us</h3>
+          </div>
+          <div className="collapedLinksTitle ">
+            <h3 className="linksTitle ">Membership Features</h3>
+          </div>
+          <div className="collapedLinksTitle ">
+            <h3 className="linksTitle ">Gift Cards</h3>
+          </div>
+          <div className="collapedLinksTitle ">
+            <h3 className="linksTitle ">Manage Account</h3>
+          </div>
         </div>
-        <div className="giftCardInfo">
-          <h4 className="giftCards">Gift Cards</h4>
-          <Link to="/giftCards">
-            <h5 className="footerLinks">Purchase Gift Cards</h5>
-          </Link>
-          <Link to="/reloadGiftCard">
-            <h5 className="footerLinks">Reload Gift Card</h5>
-          </Link>
-        </div>
-        <div className="manageAccount">
-          <h4 className="linksTitle">Manage Account</h4>
-          <Link to="/accountDetails">
-            <h5 className="footerLinks">Your Account</h5>
-          </Link>
-          <Link to="/orderHistory">
-            <h5 className="footerLinks">Your Orders</h5>
-          </Link>
-          <Link to="/returns">
-            <h5 className="footerLinks">Returns</h5>
-          </Link>
-          <Link to="/warranty">
-            <h5 className="footerLinks">Warranty Policy</h5>
-          </Link>
+        <div className="collapedSocialMediaLinks">
+          <div>
+            <Link>
+              <img src="" alt="" />
+            </Link>
+          </div>
+          <div>
+            <Link>
+              <img src="" alt="" />
+            </Link>
+          </div>
+          <div>
+            <Link>
+              <img src="" alt="" />
+            </Link>
+          </div>
+          <div>
+            <Link>
+              <img src="" alt="" />
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="socialMediaLinks">
-        <Link>
-          <img src="" alt="" />
-        </Link>
-        <Link>
-          <img src="" alt="" />
-        </Link>
-        <Link>
-          <img src="" alt="" />
-        </Link>
-        <Link>
-          <img src="" alt="" />
-        </Link>
-      </div>
-    </div>
-  );
+    </>}</>
+  )
 }
+      

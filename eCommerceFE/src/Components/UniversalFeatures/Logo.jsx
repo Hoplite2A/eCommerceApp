@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -47,23 +47,20 @@ import { Link } from 'react-router-dom';
 //     to {transform: rotate(360deg);}
 //   }
 
-export const companyName = 'QuantumShop';
+export const companyName = "QuantumShop";
 // export const companyName = 'JavaJunction';
 // export const companyName = 'BinaryBizaar';
 // export const companyName = 'CartHub';
 
-
 export default function Logo() {
-    
-    return (<>
-        <div className='body'>
-            <Link to='/'>
-                <div className="logo">
-                    <div className="ring"></div>
-                    <div className="coffee-cup"></div>
-                </div>
-                <h1 className="siteNameText">{companyName}</h1>
-            </Link>
-        </div>    
-    </>)
+
+  return (
+    <>
+      <div className="logo">
+        <Link to="/">
+          <p className="siteNameText">{companyName}</p>
+        </Link>
+      </div>
+    </>
+  );
 }

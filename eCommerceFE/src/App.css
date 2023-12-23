@@ -1,29 +1,36 @@
+body {
+  background-color: rgb(37, 41, 44);
+}
 div {
-  border-color: black;
-  border-style: solid;
-  border-width: 2px;
+  /* border-color: black; */
+  /* border-style: solid; */
+  /* border-width: 2px; */
   margin: 3px;
 }
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  padding: 0px;
 }
-
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+/* .logo:hover {
+  filter: drop-shadow(0 0 2em #fcee09);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #d1cc6d);
+} */
+.logo:hover  {
+  filter: drop-shadow(0 0 2em #fcee09);
 }
-
+p.navBarLabels:hover{
+  filter: drop-shadow(0 0 1em #fcee09);
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -46,42 +53,154 @@ div {
 .read-the-docs {
   color: #888;
 }
-.body {
-  background-color: #1a1a1a; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh;
-  margin: 0;
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(47, 52, 56);
+  padding-bottom: 7.5px;
 }
 .logo {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: conic-gradient(from 180deg at 50% 50%, #704214, #d0864e);
-  position: relative;
-  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
-.coffee-cup {
-  width: 80px;
-  height: 80px;
-  background-color: #704214;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+p.siteNameText {
+  margin: 10px;
+  font-size: 25px;
+  font-weight: 700;
 }
-.ring {
+.navBarMaster {
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+.navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+p.navBarLabels {
+  margin: 10px;
+  align-items: flex-end;
+  padding-top:10%;
+  padding-bottom:0%;
+}
+.footer {
+  left: 0%;
+  bottom: 0%;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  border: 4px solid #d0864e;
-  border-radius: 50%;
-  animation: rotate 6s linear infinite;
+  display: flex;
+  position: fixed;
+  background-color: rgb(47, 52, 56);
+  flex-direction: column;
+  color: rgb(161, 161, 161);
 }
-@keyframes rotate {
-  from { transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+.footerLinkSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+.collapsedFooter {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  justify-content: space-around;
+  background-color: rgb(47, 52, 56);
+  color: rgb(161, 161, 161);
+  position: fixed;
+  bottom: 0%;
+  left: 0%;
+}
+.collapsedFooterParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sectionLinks, 
+.collapedLinksTitle {
+  width: 20%;
+}
+/* .footerLinks, 
+.collapedLinksTitle{
+  margin: 10px;
+  text-align: center;
+} */
+.expanded>h3.linksTitle,
+.footerLinks{
+  margin: 10px;
+  text-align: left;
+}
+p.hideExpandMessage{
+  margin: 0px;
+}
+.pLink:hover {
+  color: rgb(160, 3, 160);
+}
+.sectionLinks > a,
+.navBar > a,
+.logo > a {
+  text-decoration: none;
+  color: #fcee09;
+}
+.collapedSocialMediaLinks{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.returnPolicyArticle{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 65px;
+}
+.articleDiv{
+  max-width:66%;
+  margin-left: 17.5%;
+  margin-right: 17.5%;
+}
+.sectionHeaders{
+  color: #fcee09;
+  margin-bottom: 7.5px;
+}
+p.body{
+  color: #fcee09;
+  text-align: center;
+}
+.retrunHome{
+  text-decoration: none;
+  color: #fcee09;
+}
+/* Color Schemes: */
+/* Color Theme Swatches in Hex */
+.Cyberpunk-2077-1-hex {
+  color: #050a0e;
+}
+.Cyberpunk-2077-2-hex {
+  color: #fcee09;
+}
+.Cyberpunk-2077-3-hex {
+  color: #ff003c;
+}
+.Cyberpunk-2077-4-hex {
+  color: #00f0ff;
+}
+.Cyberpunk-2077-5-hex {
+  color: #fafafa;
+}
+/* Color Theme Swatches in RGBA */
+/* .Cyberpunk-2077-1-rgba { color: rgba(4, 10, 14, 1); } */
+/* .Cyberpunk-2077-2-rgba { color: rgba(251, 237, 8, 1); } */
+/* .Cyberpunk-2077-3-rgba { color: rgba(255, 0, 59, 1); } */
+/* .Cyberpunk-2077-4-rgba { color: rgba(0, 239, 255, 1); } */
+/* .Cyberpunk-2077-5-rgba { color: rgba(249, 249, 249, 1); } */
+
+/* Color Theme Swatches in HSLA */
+/* .Cyberpunk-2077-1-hsla { color: hsla(206, 47, 3, 1); } */
+/* .Cyberpunk-2077-2-hsla { color: hsla(56, 97, 51, 1); } */
+/* .Cyberpunk-2077-3-hsla { color: hsla(345, 100, 50, 1); } */
+/* .Cyberpunk-2077-4-hsla { color: hsla(183, 100, 50, 1); } */
+/* .Cyberpunk-2077-5-hsla { color: hsla(0, 0, 98, 1); } */
