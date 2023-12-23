@@ -20,6 +20,8 @@ export default function CSRStatement() {
             environmental stewardship, and community engagement reflects our
             dedication to a responsible and inclusive business model. Join us in
             fostering a better future for everyone.
+//TODO ------- REMOVE Line 24
+            ;lzkjdhglkjzhxfkljghd;kjghbz;dkgbp;zkusddfhgadsfg
           </p>
         </article>
         <Link to="/">
