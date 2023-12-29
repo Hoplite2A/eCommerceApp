@@ -134,7 +134,7 @@ export default function RegisterForm() {
             <div className="streetAddress1">
               <label className="regLabels">
                 <input
-                  className="streetAddressInput"
+                  className="streetAddressInput street1Input"
                   type="text"
                   id="street"
                   name="street"
@@ -146,7 +146,7 @@ export default function RegisterForm() {
               </label>
               <label className="regLabels">
                 <input
-                  className="apartmentAddressInput"
+                  className="streetAddressInput aptInput"
                   type="text"
                   id="apartment"
                   name="apartment"
@@ -195,10 +195,10 @@ export default function RegisterForm() {
                 />
               </label>
             </div>
-            <div className="contactInfo">
+            <div className="contactInfo2">
               <label className="regLabels">
                 <input
-                  className="regInputs"
+                  className="regInputs contactInputs"
                   type="text"
                   id="phoneType"
                   name="phoneType"
@@ -210,7 +210,7 @@ export default function RegisterForm() {
               </label>
               <label className="regLabels">
                 <input
-                  className="regInputs"
+                  className="regInputs contactInputs"
                   type="text"
                   id="phoneNumber"
                   name="phoneNumber"
@@ -222,7 +222,7 @@ export default function RegisterForm() {
               </label>
               <label className="regLabels">
                 <input
-                  className="regInputs"
+                  className="regInputs contactInputs"
                   type="text"
                   id="emailAddress"
                   name="emailAddress"
@@ -237,7 +237,7 @@ export default function RegisterForm() {
           <div className="createCredentials">
             <label className="regLabels">
               <input
-                className="regInputs"
+                className="regInputs credInputs"
                 type="text"
                 id="user"
                 name="user"
@@ -249,7 +249,7 @@ export default function RegisterForm() {
             </label>
             <label className="regLabels">
               <input
-                className="regInputs"
+                className="regInputs credInputs"
                 type="text"
                 id="pass"
                 name="pass"
@@ -261,8 +261,8 @@ export default function RegisterForm() {
             </label>
           </div>
           <div className="regFormButtons">
-            <button className="regSubmitButton" onClick={handleSubmit}>Submit</button>
-            <button className="regGoBackButton" onClick={goBack}>Maybe Later</button>
+            <button className="regSubmitButton button1" onClick={handleSubmit}>Submit</button>
+            <button className="regGoBackButton button2" onClick={goBack}>Maybe Later</button>
           </div>
         </form>
       </div>

@@ -83,7 +83,7 @@ p.navBarLabels {
   padding-top:10%;
   padding-bottom:0%;
 }
-/*! ----- REGISTER BANNER STYLING START ------ */
+/*! -------- REGISTER BANNER STYLING --------- */
 .regBannerMessageAndButton{
   display: flex;
   flex-direction: row;
@@ -108,7 +108,7 @@ p.navBarLabels {
   font-family: 'Times New Roman', Times, serif;
 }
 button.regBannerButton:hover{
-  font-size: large;
+  font-size: .75rem;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
   color: #5dbd26;
@@ -116,7 +116,7 @@ button.regBannerButton:hover{
   background-color: #2f3438;
 }
 button.regBannerButton{
-  font-size: large;
+  font-size: .75rem;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
   color: white;
@@ -124,7 +124,7 @@ button.regBannerButton{
   background-color: #2f3438;
 }
 button.regCloseButton:hover{
-  font-size: large;
+  font-size: .75rem;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
   color: #991f3d;
@@ -132,7 +132,7 @@ button.regCloseButton:hover{
   background-color: #2f3438;
 }
 button.regCloseButton{
-  font-size: large;
+  font-size: .75rem;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
   color: white;
@@ -146,20 +146,26 @@ button.regCloseButton{
   justify-content: space-around;
 }
 .registrationForm {
+  max-height: 700px;
+  max-width: 700px;
+  margin-top: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  background-color: #2f3438;
+  border-width: 2px;;
+  border: #ffffff;
+  border-style: solid;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 700px;
-  max-width: 700px;
-  border-width: 2px;;
-  border: #888;
-  border-radius: 30px;
 }
 .registrationFormMessage{
   color: #991f3d;
 }
 .regLabels{
-  margin: 15px;
+  margin: 10px;
 }
 .regInputs { 
   font-family: 'Times New Roman', Times, serif;
@@ -173,15 +179,75 @@ button.regCloseButton{
 }
 /***************** Name Fields *****************/
 .nameInputs{
-
+  color: #5dbd26
 }
-
 .nameFields{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0px;
 }
-
+/************ Street Address1 Fields ***********/
+.streetAddressInput{
+color: #c57907;
+}
+.streetAddress1 > .regLabels > .street1Input{
+  width:450px;
+}
+.aptInput {
+  width: 160px;
+}
+.streetAddress1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px;
+}
+/************ Street Address2 Fields ***********/
+.cityAddressInput{
+color: #0ec0c0;
+}
+.streetAddress2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px;
+}
+/************* Contact Info Fields *************/
+.contactInputs{
+color: #b216f0;
+}
+.contactInfo2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px;
+}
+/************ Credential Info Fields ***********/
+.credInputs{
+  color: #fcee09;
+  margin-left: 15px;
+  margin-right: 30px;
+}
+.createCredentials{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0px;
+}
+/*********** Registration Form Buttons *********/
+.regFormButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+}
+.button1{
+margin-right: 35px;
+}
+.button2{
+  margin-left: 35px;
+}
 /*! ---------- FOOTER STYLING START ---------- */
 .footer {
   left: 0%;
@@ -277,29 +343,3 @@ p.body{
 }
 
 
-/* ! COLOR SCHEME */
-/* 
-Yellow:
-color: #fcee09
-
-Green: 
-color: #5dbd26
-
-Red: 
-color: #991f3d;
-
-Orange: 
-color: #c57907;
-
-Teal: 
-color: #0ec0c0;
-
-Purple: 
-color: #b216f0;
-
-Banner Blue: 
-color: #2f3438
-
-Background Blue:
-background-color: #25292c; 
-*/
