@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(37, 41, 44);
+  background-color: #25292c;
 }
 div {
   /* border-color: black; */
@@ -53,7 +53,7 @@ p.navBarLabels:hover{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgb(47, 52, 56);
+  background-color: #2f3438;
   padding-bottom: 7.5px;
 }
 .logo {
@@ -98,7 +98,7 @@ p.navBarLabels {
   margin:15.5px;
 }
 .regBanner{
-  background-color: rgba(47, 52, 56, 0.658);
+  background-color: #2f3438a8;
   width: 100%;
   margin: 0px;
 }
@@ -108,38 +108,79 @@ p.navBarLabels {
   font-family: 'Times New Roman', Times, serif;
 }
 button.regBannerButton:hover{
-  filter: drop-shadow(0 0 2em #fcee09);
-  color: #fcee09;
-  background-color: rgb(47, 52, 56);
   font-size: large;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
+  color: #5dbd26;
+  filter: drop-shadow(0 0 2em #5dbd26);
+  background-color: #2f3438;
 }
 button.regBannerButton{
-  color: white;
-  border-radius: 30px;
-  background-color: rgb(47, 52, 56);
   font-size: large;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
+  color: white;
+  border-radius: 30px;
+  background-color: #2f3438;
 }
 button.regCloseButton:hover{
-  filter: drop-shadow(0 0 2em rgb(160, 3, 160));
-  color: rgb(160, 3, 160);
-  background-color: rgb(47, 52, 56);
   font-size: large;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
+  color: #991f3d;
+  filter: drop-shadow(0 0 2em #991f3d);
+  background-color: #2f3438;
 }
 button.regCloseButton{
-  color: white;
-  border-radius: 30px;
-  background-color: rgb(47, 52, 56);
   font-size: large;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
+  color: white;
+  border-radius: 30px;
+  background-color: #2f3438;
+}
+/*! ------ REGISTER FORM STYLING START ------- */
+.registrationFormDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.registrationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 700px;
+  max-width: 700px;
+  border-width: 2px;;
+  border: #888;
+  border-radius: 30px;
+}
+.registrationFormMessage{
+  color: #991f3d;
+}
+.regLabels{
+  margin: 15px;
+}
+.regInputs { 
+  font-family: 'Times New Roman', Times, serif;
+}
+.regLabels > input {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: Source;
+  border-radius: 5px;
+  background-color: #2f3438;
+}
+/***************** Name Fields *****************/
+.nameInputs{
+
 }
 
+.nameFields{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 /*! ---------- FOOTER STYLING START ---------- */
 .footer {
@@ -148,9 +189,9 @@ button.regCloseButton{
   width: 100%;
   display: flex;
   position: fixed;
-  background-color: rgb(47, 52, 56);
+  background-color: #2f3438;
   flex-direction: column;
-  color: rgb(161, 161, 161);
+  color: #a1a1a1;
 }
 .footerLinkSection {
   display: flex;
@@ -163,8 +204,8 @@ button.regCloseButton{
   flex-direction: row;
   margin: 0px;
   justify-content: space-around;
-  background-color: rgb(47, 52, 56);
-  color: rgb(161, 161, 161);
+  background-color: #2f3438;
+  color: #a1a1a1;
   position: fixed;
   bottom: 0%;
   left: 0%;
@@ -178,11 +219,7 @@ button.regCloseButton{
 .collapedLinksTitle {
   width: 20%;
 }
-/* .footerLinks, 
-.collapedLinksTitle{
-  margin: 10px;
-  text-align: center;
-} */
+
 .expanded>h3.linksTitle,
 .footerLinks{
   margin: 10px;
@@ -191,8 +228,17 @@ button.regCloseButton{
 p.hideExpandMessage{
   margin: 0px;
 }
-.pLink:hover {
-  color: rgb(160, 3, 160);
+.getToKnowUs .pLink:hover {
+  color: #b216f0;
+}
+.membershipFeatures .pLink:hover {
+  color: #0ec0c0;
+}
+.giftCardInfo .pLink:hover {
+  color: #c57907;
+}
+.manageAccount .pLink:hover {
+  color: #5dbd26
 }
 .sectionLinks > a,
 .navBar > a,
@@ -227,4 +273,33 @@ p.body{
 .retrunHome{
   text-decoration: none;
   color: #fcee09;
+  color: #c57907;
 }
+
+
+/* ! COLOR SCHEME */
+/* 
+Yellow:
+color: #fcee09
+
+Green: 
+color: #5dbd26
+
+Red: 
+color: #991f3d;
+
+Orange: 
+color: #c57907;
+
+Teal: 
+color: #0ec0c0;
+
+Purple: 
+color: #b216f0;
+
+Banner Blue: 
+color: #2f3438
+
+Background Blue:
+background-color: #25292c; 
+*/
