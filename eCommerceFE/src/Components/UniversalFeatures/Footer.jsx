@@ -1,6 +1,7 @@
 //! Imported Libraries -------------------------
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { token } from "../UniversalFeatures/Login";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -58,9 +59,12 @@ export default function Footer() {
           </div>
           <div className="manageAccount sectionLinks expanded">
             <h3 className="linksTitle">Manage Account</h3>
-            <Link to="/accountDetails">
+            {!token ? <Link to="/accountDetails">
               <h4 className="footerLinks pLink">Your Account</h4>
-            </Link>
+              </Link> :
+              <Link to="/register">
+                <h4 className="footerLinks pLink">Register</h4>
+              </Link>}
             <Link to="/orderHistory">
               <h4 className="footerLinks pLink">Your Orders</h4>
             </Link>

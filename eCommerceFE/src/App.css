@@ -162,7 +162,7 @@ button.regCloseButton{
   justify-content: space-between;
 }
 .registrationFormMessage{
-  color: #991f3d;
+color: #c57907;
 }
 .regLabels{
   margin: 10px;
@@ -189,7 +189,7 @@ button.regCloseButton{
 }
 /************ Street Address1 Fields ***********/
 .streetAddressInput{
-color: #c57907;
+color: #991f3d;
 }
 .streetAddress1 > .regLabels > .street1Input{
   width:450px;
@@ -240,13 +240,35 @@ color: #b216f0;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 30px;
+  font-size: 25px;
+  font-weight: 600;
 }
 .button1{
-margin-right: 35px;
+  margin-right: 35px;
+  background-color:#5dbd26;
+  color: #2f3438;
+  border-radius: 15px;
+}
+.button1:hover{
+  margin-right: 35px;
+  background-color:#2f3438;
+  color: #5dbd26;
+  border-radius: 15px;
 }
 .button2{
   margin-left: 35px;
+  /* background-color: #991f3d; */
+  background-color: #c57907;
+  color: #2f3438;
+  border-radius: 15px;
+}
+.button2:hover{
+  margin-left: 35px;
+  background-color: #2f3438;
+  /* color: #991f3d; */
+  color: #c57907;
+  border-radius: 15px;
 }
 /*! ---------- FOOTER STYLING START ---------- */
 .footer {
@@ -306,7 +328,10 @@ p.hideExpandMessage{
 .manageAccount .pLink:hover {
   color: #5dbd26
 }
-.sectionLinks > a,
+.sectionLinks > a{
+  text-decoration: none;
+  color: #a1a1a1;
+}
 .navBar > a,
 .logo > a {
   text-decoration: none;

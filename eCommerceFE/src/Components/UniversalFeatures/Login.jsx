@@ -6,7 +6,9 @@ import { useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
+import Header from "./Navigation/Header";
 import { companyName } from "./Logo";
+import Footer from "./Footer";
 //! ---------------------------------------------
 
 export const token = signal(null);
@@ -51,6 +53,7 @@ export default function Login() {
 
   return (
     <>
+      <Header />
       <form className="loginForm" onSubmit={handleSubmit}>
         <h2 className="loginMessage">Login Here!</h2>
         <div className="formFields">
@@ -89,6 +92,7 @@ export default function Login() {
           <button>Sign Up</button>
         </Link>
       </div>
+      <Footer />
     </>
   );
 }

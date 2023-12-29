@@ -91,7 +91,7 @@ export default function RegisterForm() {
       <Header />
       <div className="registrationFormDiv">
         <form className="registrationForm" onSubmit={handleSubmit}>
-          <h2 className="registrationFormMessage">Sign Up Here!</h2>
+          <h2 className="registrationFormMessage">SIGN UP HERE!</h2>
           <div className="nameFields">
             <label className="regLabels">
               <input
@@ -250,7 +250,7 @@ export default function RegisterForm() {
             <label className="regLabels">
               <input
                 className="regInputs credInputs"
-                type="text"
+                type="password"
                 id="pass"
                 name="pass"
                 placeholder="Password"

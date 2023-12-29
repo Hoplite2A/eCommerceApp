@@ -18,29 +18,25 @@ export default function RegistrationBanner() {
     navigate('/register');
   };
 
-  return (
-    <>
-      {/*------------------Style this Banner! ------------  */}
-      {visible && (
-        <div className="regBanner">
-          <div className="regBannerMessageAndButton">
-            <div className="message">
-              <p className="regBannerText">
-                REGISTER NOW AND TAKE ADVANTAGE OF MEMBERSHIP BENEFITS!
-              </p>
-            </div>
-            <div className="regRedirectButton">
-              <button className="regBannerButton" onClick={registerButton}>
-                REGISTER NOW!
-              </button>
-              <button className="regCloseButton" onClick={closeButton}>
-                Maybe Later
-              </button>
-            </div>
+  return (<>
+    {visible && (
+      <div className="regBanner">
+        <div className="regBannerMessageAndButton">
+          <div className="message">
+            <p className="regBannerText">
+              REGISTER NOW AND TAKE ADVANTAGE OF MEMBERSHIP BENEFITS!
+            </p>
+          </div>
+          <div className="regRedirectButton">
+            <button className="regBannerButton" onClick={registerButton}>
+              REGISTER NOW!
+            </button>
+            <button className="regCloseButton" onClick={closeButton}>
+              MAYBE LATER
+            </button>
           </div>
         </div>
-      )}
-      {/*------------------Style this Banner! ------------  */}
-    </>
-  );
+      </div>
+    )}
+  </>);
 }
