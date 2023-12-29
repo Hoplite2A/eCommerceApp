@@ -38,7 +38,7 @@ export default function RegisterForm() {
     e.preventDefault();
 
     //TODO ---- Add validation of register fields and return
-    //TODOD ----a setvalid(true) prior to POST API Call
+    //TODO ---- a setvalid(true) prior to POST API Call
     //! if else OR Switch Statement
     //! return setValid(true);
 
