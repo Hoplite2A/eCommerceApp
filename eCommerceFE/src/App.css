@@ -13,18 +13,13 @@ div {
   text-align: center;
   padding: 0px;
 }
+/*! ----------- LOGO STYLING START ----------- */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
-/* .logo:hover {
-  filter: drop-shadow(0 0 2em #fcee09);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #d1cc6d);
-} */
 .logo:hover  {
   filter: drop-shadow(0 0 2em #fcee09);
 }
@@ -39,20 +34,19 @@ p.navBarLabels:hover{
     transform: rotate(360deg);
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
-
 .card {
   padding: 2em;
 }
-
 .read-the-docs {
   color: #888;
 }
+/*! ---------- HEADER STYLING START ---------- */
+
 .header {
   width: 100%;
   height: 50px;
@@ -67,6 +61,7 @@ p.navBarLabels:hover{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  max-height: 57.5px;
 }
 p.siteNameText {
   margin: 10px;
@@ -88,6 +83,63 @@ p.navBarLabels {
   padding-top:10%;
   padding-bottom:0%;
 }
+/*! ----- REGISTER BANNER STYLING START ------ */
+.regBannerMessageAndButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.regRedirectButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+  height: 25px;
+  margin:15.5px;
+}
+.regBanner{
+  background-color: rgba(47, 52, 56, 0.658);
+  width: 100%;
+  margin: 0px;
+}
+.regBannerText{
+  color: white;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+button.regBannerButton:hover{
+  filter: drop-shadow(0 0 2em #fcee09);
+  color: #fcee09;
+  background-color: rgb(47, 52, 56);
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+button.regBannerButton{
+  color: white;
+  border-radius: 30px;
+  background-color: rgb(47, 52, 56);
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+button.regCloseButton:hover{
+  filter: drop-shadow(0 0 2em rgb(160, 3, 160));
+  color: rgb(160, 3, 160);
+  background-color: rgb(47, 52, 56);
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+button.regCloseButton{
+  color: white;
+  border-radius: 30px;
+  background-color: rgb(47, 52, 56);
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+/*! ---------- FOOTER STYLING START ---------- */
 .footer {
   left: 0%;
   bottom: 0%;
@@ -174,33 +226,3 @@ p.body{
   text-decoration: none;
   color: #fcee09;
 }
-/* Color Schemes: */
-/* Color Theme Swatches in Hex */
-.Cyberpunk-2077-1-hex {
-  color: #050a0e;
-}
-.Cyberpunk-2077-2-hex {
-  color: #fcee09;
-}
-.Cyberpunk-2077-3-hex {
-  color: #ff003c;
-}
-.Cyberpunk-2077-4-hex {
-  color: #00f0ff;
-}
-.Cyberpunk-2077-5-hex {
-  color: #fafafa;
-}
-/* Color Theme Swatches in RGBA */
-/* .Cyberpunk-2077-1-rgba { color: rgba(4, 10, 14, 1); } */
-/* .Cyberpunk-2077-2-rgba { color: rgba(251, 237, 8, 1); } */
-/* .Cyberpunk-2077-3-rgba { color: rgba(255, 0, 59, 1); } */
-/* .Cyberpunk-2077-4-rgba { color: rgba(0, 239, 255, 1); } */
-/* .Cyberpunk-2077-5-rgba { color: rgba(249, 249, 249, 1); } */
-
-/* Color Theme Swatches in HSLA */
-/* .Cyberpunk-2077-1-hsla { color: hsla(206, 47, 3, 1); } */
-/* .Cyberpunk-2077-2-hsla { color: hsla(56, 97, 51, 1); } */
-/* .Cyberpunk-2077-3-hsla { color: hsla(345, 100, 50, 1); } */
-/* .Cyberpunk-2077-4-hsla { color: hsla(183, 100, 50, 1); } */
-/* .Cyberpunk-2077-5-hsla { color: hsla(0, 0, 98, 1); } */

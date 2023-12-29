@@ -71,10 +71,6 @@ export default function Footer() {
               <h4 className="footerLinks pLink">Warranty Policy</h4>
             </Link>
           </div>
-          {/* <div className="footerButton">
-            <button onClick={handleClick}>Close</button>
-            </div>
-          </div> */}
         </div>
         <div className="socialMediaLinks">
           <Link>
@@ -109,21 +105,25 @@ export default function Footer() {
         </div>
         <div className="collapedSocialMediaLinks">
           <div>
+            {/* //TODO ------------------ Create and Add X Account and link to account. */}
             <Link>
-              <img src="" alt="" />
+              <img src="./" alt="X (Formerly know as twitter) logo." />
             </Link>
           </div>
           <div>
+            {/* //TODO ------------------ Create and Add Insta Account and link to account. */}
             <Link>
-              <img src="" alt="" />
+              <img src="" alt="Instgram Logo" />
             </Link>
           </div>
           <div>
+            {/* //TODO ------------------ Create and Add GMail Account and link to account. */}
             <Link>
-              <img src="" alt="" />
+              <img src="" alt="GMail Logo and send us an email Link." />
             </Link>
           </div>
           <div>
+            {/* //TODO ------------------ Create and Add __________ Account and link to account. */}
             <Link>
               <img src="" alt="" />
             </Link>

@@ -12,6 +12,7 @@ import Login from "./Components/UniversalFeatures/Login";
 import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 
 import Footer from "./Components/UniversalFeatures/Footer";
+import ContactUs from './Components/UniversalFeatures/ContactUs';
 import CSRStatement from "./Components/MainPages/CSR";
 import GreenInitiativeStatement from "./Components/MainPages/GreenInitiative";
 import ReturnPolicy from "./Components/MainPages/ReturnPolicy";
@@ -54,7 +55,7 @@ export default function App() {
       {/* <Route path='/reloadGiftCard' element={<Reload />} /> */}
       {/* <Route path='/about' element={<About />} /> */}
       {/* <Route path='/careers' element={<Careers />} /> */}
-      {/* <Route path='/contactUs' element={<ContactUs />} /> */}
+      <Route path='/contactUs' element={<ContactUs />} />
       <Route path='/csrStatement' element={<CSRStatement />} />
       <Route path='/greenInitiativeStatement' element={<GreenInitiativeStatement />} />
       <Route path='/returns' element={<ReturnPolicy />} />

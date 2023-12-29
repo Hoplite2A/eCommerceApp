@@ -4,8 +4,10 @@ import { useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
+import Header from "../UniversalFeatures/Navigation/Header";
 import { BASE_URL } from "../../App";
 import { token } from "../UniversalFeatures/Login";
+import Footer from "../UniversalFeatures/Footer";
 //! ---------------------------------------------
 
 export default function RegisterForm() {
@@ -27,6 +29,10 @@ export default function RegisterForm() {
   //! const [valid, setValid] = useState(false);
 
   const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate('/');
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,6 +88,7 @@ export default function RegisterForm() {
 
   return (
     <>
+    <Header />
       <form className="registrationForm" onSubmit={handleSubmit}>
         <h2 className="registrationFormMessage">Sign Up Here!</h2>
         <div className="nameFields">
@@ -253,9 +260,12 @@ export default function RegisterForm() {
             />
           </label>
         </div>
+        <div className="regFormButtons">
+          <button className="regSubmitButton" onClick={handleSubmit}>Submit</button>
+          <button className="regGoBackButton" onClick={goBack}>Maybe Later</button>
+        </div>
       </form>
+      <Footer />
     </>
   );
 }
-
-module.exports = { token };

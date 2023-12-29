@@ -92,5 +92,3 @@ export default function Login() {
     </>
   );
 }
-
-module.exports = token;
