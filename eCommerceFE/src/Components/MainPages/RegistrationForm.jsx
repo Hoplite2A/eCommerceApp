@@ -88,123 +88,162 @@ export default function RegisterForm() {
 
   return (
     <>
-    <Header />
-      <form className="registrationForm" onSubmit={handleSubmit}>
-        <h2 className="registrationFormMessage">Sign Up Here!</h2>
-        <div className="nameFields">
-          <label className="regLabels">
-            <input
-              className="regInputs"
-              type="text"
-              id="firstName"
-              name="firstName"
-              placeholder="First Name"
-              onChange={(e) => {
-                setFName(e.target.value);
-              }}
-            />
-          </label>
-          <label className="regLabels">
-            <input
-              className="regInputs"
-              type="text"
-              id="preferredName"
-              name="preferredName"
-              placeholder="Preferred Name"
-              onChange={(e) => {
-                setPName(e.target.value);
-              }}
-            />
-          </label>
-          <label className="regLabels">
-            <input
-              className="regInputs"
-              type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Last Name"
-              onChange={(e) => {
-                setLName(e.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div className="contactInfo">
-          <div className="streetAddress1">
-            <label className="regLabel">
+      <Header />
+      <div className="registrationFormDiv">
+        <form className="registrationForm" onSubmit={handleSubmit}>
+          <h2 className="registrationFormMessage">Sign Up Here!</h2>
+          <div className="nameFields">
+            <label className="regLabels">
               <input
-                className="streetAddressInput"
+                className="regInputs nameInputs"
                 type="text"
-                id="street"
-                name="street"
-                placeholder="Street Address"
+                id="firstName"
+                name="firstName"
+                placeholder="First Name"
                 onChange={(e) => {
-                  setStreetAddress(e.target.value);
+                  setFName(e.target.value);
                 }}
               />
             </label>
-            <label className="regLabel">
+            <label className="regLabels">
               <input
-                className="apartmentAddressInput"
+                className="regInputs nameInputs"
                 type="text"
-                id="apartment"
-                name="apartment"
-                placeholder="APT/UNIT"
-                value={""}
+                id="preferredName"
+                name="preferredName"
+                placeholder="Preferred Name"
                 onChange={(e) => {
-                  setAApt(e.target.value);
+                  setPName(e.target.value);
                 }}
               />
             </label>
-          </div>
-          <div className="streetAddress2">
-            <label className="regLabel">
+            <label className="regLabels">
               <input
-                className="cityAddressInput"
+                className="regInputs nameInputs"
                 type="text"
-                id="city"
-                name="city"
-                placeholder="City"
+                id="lastName"
+                name="lastName"
+                placeholder="Last Name"
                 onChange={(e) => {
-                  setACity(e.target.value);
-                }}
-              />
-            </label>
-            <label className="regLabel">
-              <input
-                className="cityAddressInput"
-                type="text"
-                id="state"
-                name="state"
-                placeholder="State"
-                onChange={(e) => {
-                  setAState(e.target.value);
-                }}
-              />
-            </label>
-            <label className="regLabel">
-              <input
-                className="cityAddressInput"
-                type="text"
-                id="zip"
-                name="zip"
-                placeholder="ZIP Code"
-                onChange={(e) => {
-                  setAZip(e.target.value);
+                  setLName(e.target.value);
                 }}
               />
             </label>
           </div>
           <div className="contactInfo">
+            <div className="streetAddress1">
+              <label className="regLabels">
+                <input
+                  className="streetAddressInput"
+                  type="text"
+                  id="street"
+                  name="street"
+                  placeholder="Street Address"
+                  onChange={(e) => {
+                    setStreetAddress(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="regLabels">
+                <input
+                  className="apartmentAddressInput"
+                  type="text"
+                  id="apartment"
+                  name="apartment"
+                  placeholder="APT/UNIT"
+                  onChange={(e) => {
+                    setAApt(e.target.value);
+                  }}
+                />
+              </label>
+            </div>
+            <div className="streetAddress2">
+              <label className="regLabels">
+                <input
+                  className="cityAddressInput"
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="City"
+                  onChange={(e) => {
+                    setACity(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="regLabels">
+                <input
+                  className="cityAddressInput"
+                  type="text"
+                  id="state"
+                  name="state"
+                  placeholder="State"
+                  onChange={(e) => {
+                    setAState(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="regLabels">
+                <input
+                  className="cityAddressInput"
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  placeholder="ZIP Code"
+                  onChange={(e) => {
+                    setAZip(e.target.value);
+                  }}
+                />
+              </label>
+            </div>
+            <div className="contactInfo">
+              <label className="regLabels">
+                <input
+                  className="regInputs"
+                  type="text"
+                  id="phoneType"
+                  name="phoneType"
+                  placeholder="Phone Type"
+                  onChange={(e) => {
+                    setCType(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="regLabels">
+                <input
+                  className="regInputs"
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  onChange={(e) => {
+                    setCNumber(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="regLabels">
+                <input
+                  className="regInputs"
+                  type="text"
+                  id="emailAddress"
+                  name="emailAddress"
+                  placeholder="Email Address"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+          <div className="createCredentials">
             <label className="regLabels">
               <input
                 className="regInputs"
                 type="text"
-                id="phoneType"
-                name="phoneType"
-                placeholder="Phone Type"
+                id="user"
+                name="user"
+                placeholder="Username"
                 onChange={(e) => {
-                  setCType(e.target.value);
+                  setUserName(e.target.value);
                 }}
               />
             </label>
@@ -212,59 +251,21 @@ export default function RegisterForm() {
               <input
                 className="regInputs"
                 type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                placeholder="Phone Number"
+                id="pass"
+                name="pass"
+                placeholder="Password"
                 onChange={(e) => {
-                  setCNumber(e.target.value);
-                }}
-              />
-            </label>
-            <label className="regLabels">
-              <input
-                className="regInputs"
-                type="text"
-                id="emailAddress"
-                name="emailAddress"
-                placeholder="Email Address"
-                onChange={(e) => {
-                  setEmail(e.target.value);
+                  setPassword(e.target.value);
                 }}
               />
             </label>
           </div>
-        </div>
-        <div className="createCredentials">
-          <label className="regLabels">
-            <input
-              className="regInputs"
-              type="text"
-              id="user"
-              name="user"
-              placeholder="Username"
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-            />
-          </label>
-          <label className="regLabels">
-            <input
-              className="regInputs"
-              type="text"
-              id="pass"
-              name="pass"
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </label>
-        </div>
-        <div className="regFormButtons">
-          <button className="regSubmitButton" onClick={handleSubmit}>Submit</button>
-          <button className="regGoBackButton" onClick={goBack}>Maybe Later</button>
-        </div>
-      </form>
+          <div className="regFormButtons">
+            <button className="regSubmitButton" onClick={handleSubmit}>Submit</button>
+            <button className="regGoBackButton" onClick={goBack}>Maybe Later</button>
+          </div>
+        </form>
+      </div>
       <Footer />
     </>
   );
