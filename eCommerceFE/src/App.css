@@ -140,11 +140,13 @@ button.regCloseButton{
   background-color: #2f3438;
 }
 /*! ------ REGISTER FORM STYLING START ------- */
+.loginFormDiv,
 .registrationFormDiv{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
+.loginForm,
 .registrationForm {
   max-height: 700px;
   max-width: 700px;
@@ -164,12 +166,15 @@ button.regCloseButton{
 .registrationFormMessage{
 color: #c57907;
 }
+.loginLabels,
 .regLabels{
   margin: 10px;
 }
+.loginInputs,
 .regInputs { 
   font-family: 'Times New Roman', Times, serif;
 }
+.loginLabels > input,
 .regLabels > input {
   font-size: 15px;
   font-weight: 600;
@@ -280,6 +285,11 @@ color: #b216f0;
   background-color: #2f3438;
   flex-direction: column;
   color: #a1a1a1;
+}
+.collapseFooterButton{
+  font-size: 20px;
+  font-weight: bolder;
+  color: #991f3d;
 }
 .footerLinkSection {
   display: flex;

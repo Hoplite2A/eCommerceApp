@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signal } from "@preact/signals-react";
 import { useState } from "react";
 //! ---------------------------------------------
@@ -19,6 +19,10 @@ export default function Login() {
   const [password, setPassword] = useState(null);
 
   const navigate = useNavigate();
+
+  const redirect = () => {
+    navigate('/register');
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,43 +58,44 @@ export default function Login() {
   return (
     <>
       <Header />
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <h2 className="loginMessage">Login Here!</h2>
-        <div className="formFields">
-          <label className="loginLabels">
-            <input
-              className="loginInputs"
-              type="text"
-              id="user"
-              name="user"
-              placeholder="User Name"
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-            />
-          </label>
-          <label className="loginLabels">
-            <input
-              className="loginInputs"
-              type="text"
-              id="pass"
-              name="pass"
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </label>
+      <div className="loginFormDiv">
+        <form className="loginForm" onSubmit={handleSubmit}>
+          <h2 className="loginMessage">Login Here!</h2>
+          <div className="formFields">
+            <label className="loginLabels">
+              <input
+                className="loginInputs credInputs"
+                type="text"
+                id="user"
+                name="user"
+                placeholder="User Name"
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+                />
+            </label>
+            <label className="loginLabels">
+              <input
+                className="loginInputs credInputs"
+                type="text"
+                id="pass"
+                name="pass"
+                placeholder="Password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                />
+            </label>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <div className="newUser">
+          <p className="newUserMessage">
+            New to {companyName}?
+            <br></br>Sign up and start exploring all the benefits!
+          </p>
+          <button onClick={redirect}>Sign Up</button>
         </div>
-        <button type="submit">Login</button>
-      </form>
-      <div className="newUser">
-        <p className="newUserMessage">
-          New to {companyName}? Sign up and start exploring all the benefits!
-        </p>
-        <Link to="/register">
-          <button>Sign Up</button>
-        </Link>
       </div>
       <Footer />
     </>
