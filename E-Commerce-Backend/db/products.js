@@ -55,12 +55,12 @@ async function createProduct({
   image,
   sellerId,
 }) {
-  // if (!token) {
-  //   throw {
-  //     name: "Member Feature",
-  //     message: "Must be a member to add new items to our catalog.",
-  //   };
-  // }
+  if (!req.user.admin) {
+    throw {
+      name: "Member Feature",
+      message: "Must be a member to add new items to our catalog.",
+    };
+  }
 
   try {
     const {
