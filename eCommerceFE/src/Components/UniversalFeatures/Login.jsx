@@ -59,12 +59,12 @@ export default function Login() {
     <>
       <Header />
       <div className="loginFormDiv">
-        <form className="loginForm" onSubmit={handleSubmit}>
+        <form className="loginForm lF1" onSubmit={handleSubmit}>
           <h2 className="loginMessage">Login Here!</h2>
           <div className="formFields">
             <label className="loginLabels">
               <input
-                className="loginInputs credInputs"
+                className="loginInputs credInputs loginCredsInput1"
                 type="text"
                 id="user"
                 name="user"
@@ -76,8 +76,8 @@ export default function Login() {
             </label>
             <label className="loginLabels">
               <input
-                className="loginInputs credInputs"
-                type="text"
+                className="loginInputs credInputs loginCredsInput2"
+                type="password"
                 id="pass"
                 name="pass"
                 placeholder="Password"
@@ -87,14 +87,18 @@ export default function Login() {
                 />
             </label>
           </div>
-          <button type="submit">Login</button>
+          <div className="loginButton2">
+            <button className="loginButton lB2" type="submit">Login</button>
+          </div>
         </form>
         <div className="newUser">
           <p className="newUserMessage">
             New to {companyName}?
             <br></br>Sign up and start exploring all the benefits!
           </p>
-          <button onClick={redirect}>Sign Up</button>
+          <div className="signUpButtonDiv">
+            <button className="signUpButton" onClick={redirect}>Sign Up</button>
+          </div>
         </div>
       </div>
       <Footer />

@@ -29,7 +29,7 @@ export default function RegistrationBanner() {
           </div>
           <div className="regRedirectButton">
             <button className="regBannerButton" onClick={registerButton}>
-              REGISTER NOW!
+              SIGN UP NOW!
             </button>
             <button className="regCloseButton" onClick={closeButton}>
               MAYBE LATER

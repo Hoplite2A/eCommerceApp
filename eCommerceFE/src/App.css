@@ -1,5 +1,6 @@
 body {
   background-color: #25292c;
+  margin: 0%;
 }
 div {
   /* border-color: black; */
@@ -46,7 +47,10 @@ p.navBarLabels:hover{
   color: #888;
 }
 /*! ---------- HEADER STYLING START ---------- */
-
+.homeDiv{
+  margin:0px;
+  padding:0px;
+}
 .header {
   width: 100%;
   height: 50px;
@@ -54,6 +58,7 @@ p.navBarLabels:hover{
   flex-direction: row;
   justify-content: space-between;
   background-color: #2f3438;
+  margin:0px;
   padding-bottom: 7.5px;
 }
 .logo {
@@ -139,14 +144,32 @@ button.regCloseButton{
   border-radius: 30px;
   background-color: #2f3438;
 }
-/*! ------ REGISTER FORM STYLING START ------- */
+/*! --- REGISTER/LOGIN FORM STYLING START ---- */
 .loginFormDiv,
 .registrationFormDiv{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.loginForm,
+.loginForm{
+  max-height: 700px;
+  max-width: 700px;
+  margin-top: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  background-color: #2f3438;
+  border-width: 2px;;
+  border: #ffffff;
+  border-style: solid;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.lF1{
+  padding-bottom: 12.5px;
+}
 .registrationForm {
   max-height: 700px;
   max-width: 700px;
@@ -163,8 +186,15 @@ button.regCloseButton{
   flex-direction: column;
   justify-content: space-between;
 }
+.loginMessage{
+  color: #5dbd26
+}
 .registrationFormMessage{
-color: #c57907;
+  color: #c57907;
+}
+.newUserMessage{
+  color: #0ec0c0;
+  font-size: 1.5rem;
 }
 .loginLabels,
 .regLabels{
@@ -178,10 +208,18 @@ color: #c57907;
 .regLabels > input {
   font-size: 15px;
   font-weight: 600;
-  font-family: Source;
   border-radius: 5px;
   background-color: #2f3438;
 }
+.newUser{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.signUpButtonDiv > button {
+  margin: 0px;
+  justify-content: center;
+} 
 /***************** Name Fields *****************/
 .nameInputs{
   color: #5dbd26
@@ -194,7 +232,7 @@ color: #c57907;
 }
 /************ Street Address1 Fields ***********/
 .streetAddressInput{
-color: #991f3d;
+  color: #991f3d;
 }
 .streetAddress1 > .regLabels > .street1Input{
   width:450px;
@@ -240,7 +278,15 @@ color: #b216f0;
   justify-content: space-around;
   margin: 0px;
 }
-/*********** Registration Form Buttons *********/
+.loginCredsInput1{
+  margin:0px;
+  color:#b216f0;
+}
+.loginCredsInput2{
+  margin:0px;
+  color: #c57907;
+}
+/***************** Form Buttons ****************/
 .regFormButtons{
   display: flex;
   flex-direction: row;
@@ -249,31 +295,69 @@ color: #b216f0;
   font-size: 25px;
   font-weight: 600;
 }
+.loginButton,
 .button1{
   margin-right: 35px;
+  padding:5px;
   background-color:#5dbd26;
   color: #2f3438;
   border-radius: 15px;
 }
+.lB2{
+  margin-right:0px;
+}
+.loginButton2{
+  padding-top:15px;
+  justify-content: center;
+}
 .button1:hover{
   margin-right: 35px;
+  padding:5px;
   background-color:#2f3438;
   color: #5dbd26;
   border-radius: 15px;
 }
 .button2{
   margin-left: 35px;
-  /* background-color: #991f3d; */
+  padding:5px;
   background-color: #c57907;
   color: #2f3438;
   border-radius: 15px;
 }
 .button2:hover{
   margin-left: 35px;
+  padding:5px;
   background-color: #2f3438;
-  /* color: #991f3d; */
+  color: #5dbd26;
+  border-radius: 15px;
+}
+.loginButton{
+  width: 65px;
+  padding:5px;
   color: #c57907;
   border-radius: 15px;
+  background-color: #2f3438;
+}
+.loginButton:hover{
+  width: 65px;
+  padding:5px;
+  color: #2f3438;
+  border-radius: 15px;
+  background-color: #c57907;
+}
+.signUpButton{
+  width: 65px;
+  padding:5px;
+  color: #0ec0c0;
+  border-radius: 15px;
+  background-color: #2f3438;
+}
+.signUpButton:hover{
+  width: 65px;
+  padding:5px;
+  color: #2f3438;
+  border-radius: 15px;
+  background-color: #0ec0c0;
 }
 /*! ---------- FOOTER STYLING START ---------- */
 .footer {
