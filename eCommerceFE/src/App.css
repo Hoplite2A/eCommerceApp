@@ -144,6 +144,9 @@ button.regCloseButton{
   border-radius: 30px;
   background-color: #2f3438;
 }
+/*! --------- ALL ITEMS STYLING START -------- */
+
+
 /*! --- REGISTER/LOGIN FORM STYLING START ---- */
 .loginFormDiv,
 .registrationFormDiv{
@@ -461,9 +464,9 @@ p.body{
   color: #c57907;
 }
 /*! -------- FOOTER DOCS STYLING START ------- */
-.sectionHeaders{
+/* .sectionHeaders{
 
 }
 .bodyContent{
   
-}
+} */

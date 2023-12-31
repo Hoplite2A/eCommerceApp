@@ -11,6 +11,9 @@ import RegistrationBanner from "./Components/UniversalFeatures/RegistrationBanne
 import Login from "./Components/UniversalFeatures/Login";
 import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 
+import AllItems from "./Components/MainPages/AllItems";
+import IndividualItem from "./Components/MainPages/IndividualItemTiles";
+
 import Footer from "./Components/UniversalFeatures/Footer";
 import ContactUs from './Components/UniversalFeatures/ContactUs';
 import CSRStatement from "./Components/MainPages/CSR";
@@ -40,6 +43,8 @@ export default function App() {
   //*Import on each component where JWT is relevant as so (no need for props):
   // import {token} from '@preact/signals-react';
   
+  
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -48,6 +53,10 @@ export default function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/accountDetails' element={<AccountDetails />} />
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
+      
+      <Route path='/AllItems' element={<AllItems />} />
+      <Route path='/IndividualItemTiles' element={<IndividualItem />} />
+
       <Route path='/Footer' element={<Footer />} />
       {/* <Route path='/membershipInfo' element={<MembershipInfo />} /> */}
       {/* <Route path='/sellingInfo' element={<SellingInfo />} /> */}

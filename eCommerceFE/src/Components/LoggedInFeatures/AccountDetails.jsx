@@ -121,8 +121,8 @@ export default function AccountDetails() {
   return (
     <>
       {visible && details ? (
-              <>
-            <Header />
+        <>
+          <Header />
           <form className="accountDetails" onSubmit={handleSubmit}>
             <div className="userAccountDetails">
               {/* Profile Image */}
@@ -258,7 +258,7 @@ export default function AccountDetails() {
               Save Changes
             </button>
           </form>
-        <Footer />     
+          <Footer />     
         </>
       ) : (
         <></>
