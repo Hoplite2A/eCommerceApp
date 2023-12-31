@@ -6,6 +6,8 @@ import { signals } from '@preact/signals-react';
 //! Imported Components/Variables----------------
 import { cartCount, setCartCount } from '../../MainPages/IndividualItemTiles';
 import { cartList, setCartList } from '../../MainPages/AllItems';
+import CartItemsList from './CartItemsList';
+import CartSubTotal from './CartSubTotal';
 //! ---------------------------------------------
 
 
@@ -20,14 +22,15 @@ export default function Cart() {
     }
 
     return (<>
-        {visible ? 
-            <>
+            {visible ? 
                 <div className="cartPageDiv">
-                    
-                </div>
-            </> :
-            <></>
-        }
-
-    </>)   
+                    {cartList.map((cartItem) => {
+                        <CartItemList key={cartItem.id} cartItem={cartItem} />
+                    })}
+                <CartSubTotal cartItem={cartItem} />
+                </div> :
+                null
+            }
+        </>
+    )   
 }

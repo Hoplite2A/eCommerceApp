@@ -21,11 +21,11 @@ export default function IndividualItem({key, item}) {
     
     //!Logged-In WishList && Cart    
     //*Variable Function to add item to Wishlist:
-    const addToWishlist = (key) => {
+    const addToWishlist = (key, item) => {
         
     }
     //*Variable Function to add item to Cart:
-    const addToCart = (key) => {
+    const addToCart = (key, item) => {
         setCartCount(cartCount + 1);
         //Insert into localStorage Array
         //Upon leaving site, send array to database for cross application and session access && retrieval.
@@ -34,7 +34,7 @@ export default function IndividualItem({key, item}) {
 
     //!Visitor
     //*Variable Function to add item to Cart:
-    const addToGuestCart = (key) => {
+    const addToGuestCart = (key, item) => {
         setCartCount(cartCount + 1);
         //Insert into Temp (localstorage) Array
         //Upon leaving site, cart will be erased
