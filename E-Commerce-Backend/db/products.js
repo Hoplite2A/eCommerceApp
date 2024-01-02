@@ -1,14 +1,10 @@
-// //! Imported Libraries --------------------------
+//! Imported Libraries --------------------------
 const client = require("./client");
-// // const { requireUser } = require('/utils');
-// //! ---------------------------------------------
+// const { requireUser } = require('/utils');
+//! ---------------------------------------------
 
-// //! Imported Components/Variables----------------
-// const {
-//   token,
-// } = require("../../eCommerceFE/src/Components/UniversalFeatures/Login");
-// // import token from "../../eCommerceFE/src/Components/UniversalFeatures/Login";
-// //! ---------------------------------------------
+//! Imported Components/Variables----------------
+//! ---------------------------------------------
 
 // //* -----------------GET ALL Db-----------------
 async function getAllProducts() {
@@ -41,12 +37,7 @@ async function getSingleProduct(id) {
 }
 //* ----------------GET SINGLE Db---------------
 
-// //! ---------GET BY FILTER PRODUCTS Db----------
-// //! ----- Not sure we should do this rather perform a getAllProducts
-// //! ----- and filter on the front end only.
-// //! ---------GET BY FILTER PRODUCTS Db----------
-
-// //* --------------CREATE PRODUCT Db-------------
+//* --------------CREATE PRODUCT Db-------------
 async function createProduct({
   title,
   price,
