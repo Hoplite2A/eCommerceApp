@@ -15,6 +15,6 @@ export default function CartSubTotal({cartList}) {
     
 
     return (<>
-
+        
     </>)
 }

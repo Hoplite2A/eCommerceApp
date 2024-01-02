@@ -1,26 +1,21 @@
 //! Imported Libraries --------------------------
-import { useSignal } from 'react';
-import { signals } from '@preact/signals-react';
+import { useSignal } from "react";
+import { signals } from "@preact/signals-react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { cartCount, setCartCount } from '../../MainPages/IndividualItemTiles';
-import { cartList, setCartList } from '../../MainPages/AllItems';
+import { cartCount, setCartCount } from "../../MainPages/IndividualItemTiles";
+import { cartList, setCartList } from "../../MainPages/AllItems";
 //! ---------------------------------------------
 
 export default function CartItemsList() {
-    
-    const removeItem = () => {
-        setCartList(
-            cartList.filter(cartItem =>
-                cartItem.id !== cartItem.id
-            )
-        );
-    }
-    
-    return (<>
-        <div className="cartListItemTile">
-            
-        </div>
-    </>)
+  const removeItem = () => {
+    setCartList(cartList.filter((cartItem) => cartItem.id !== cartItem.id));
+  };
+
+  return (
+    <>
+      <div className="cartListItemTile"></div>
+    </>
+  );
 }
