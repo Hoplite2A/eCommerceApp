@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useState, useSignal } from 'react';
+import { useSignal } from 'react';
 import { signals } from '@preact/signals-react';
 //! ---------------------------------------------
 
@@ -25,9 +25,9 @@ export default function Cart() {
             {visible ? 
                 <div className="cartPageDiv">
                     {cartList.map((cartItem) => {
-                        <CartItemList key={cartItem.id} cartItem={cartItem} />
+                        <CartItemsList key={cartItem.id} cartItem={cartItem} />
                     })}
-                <CartSubTotal cartItem={cartItem} />
+                <CartSubTotal cartList={cartList} />
                 </div> :
                 null
             }

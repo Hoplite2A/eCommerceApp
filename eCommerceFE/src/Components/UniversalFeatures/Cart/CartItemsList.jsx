@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useState, useSignal } from 'react';
+import { useSignal } from 'react';
 import { signals } from '@preact/signals-react';
 //! ---------------------------------------------
 

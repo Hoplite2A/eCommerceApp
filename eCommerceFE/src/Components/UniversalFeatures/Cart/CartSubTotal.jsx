@@ -8,13 +8,13 @@ import { cartCount, setCartCount } from '../../MainPages/IndividualItemTiles';
 import { cartList, setCartList } from '../../MainPages/AllItems';
 //! ---------------------------------------------
 
-export default function CartSubTotal() {
+export default function CartSubTotal({cartList}) {
     
     const [subTotal, setSubTotal] = useSignal(0);
 
-
+    
 
     return (<>
-        
+
     </>)
 }
