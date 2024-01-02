@@ -1,4 +1,5 @@
 // //! Imported Libraries --------------------------
+const { nextTick } = require("process");
 const client = require("./client");
 // // const { requireUser } = require('/utils');
 // //! ---------------------------------------------
@@ -27,13 +28,21 @@ async function getAllProducts() {
 
 //* ----------------GET SINGLE Db---------------
 async function getSingleProduct(id) {
+  console.log("We made it to getSingleProduct");
+  console.log(id);
   try {
-    const { rows } = await client.query(`
+    const {
+      rows: [product],
+    } = await client.query(
+      `
     SELECT *
-    FROM prodcuts
-    WHERE id=${id};
-    `);
-    return rows;
+    FROM products
+    WHERE id = $1
+    `,
+      [id]
+    );
+    console.log({ product });
+    return product;
   } catch (err) {
     console.log(`Error occurred in the getSingleProduct Db Call, ${err}`);
     throw err;
@@ -55,13 +64,6 @@ async function createProduct({
   image,
   sellerId,
 }) {
-  if (!req.user.admin) {
-    throw {
-      name: "Member Feature",
-      message: "Must be a member to add new items to our catalog.",
-    };
-  }
-
   try {
     const {
       rows: [product],
@@ -97,9 +99,32 @@ async function verifyProduct(title, description, category, sellerId) {
     `,
       [newProduct]
     );
+    if (!newProduct) {
+      return null;
+    }
   } catch (err) {
     console.log(`An error has ocurred in verifyProduct() (db), ${err}`);
     throw err;
+  }
+}
+
+async function getProductByTitle(title) {
+  try {
+    const {
+      rows: [product],
+    } = await client.query(
+      `
+      SELECT * FROM products
+      WHERE title=$1;
+      `,
+      [title]
+    );
+    console.log("Product:");
+    console.log(product);
+    return product;
+  } catch (error) {
+    console.log("An error has occured inside getProductByTitle()");
+    throw error;
   }
 }
 //* -------------VERIFY !DUPLICATE--------------
@@ -142,16 +167,20 @@ async function updateProduct(id, fields = {}) {
 async function deleteProduct(productId) {
   try {
     const {
-      rows: [deletedProduct],
+      rows: [product],
     } = await client.query(
       `
-      DELETE * FROM products
-      WHERE id=${id};
+      DELETE FROM products
+      WHERE id=$1
+      RETURNING *;
       `,
-      [deletedProduct]
+      [productId]
     );
+    return product;
   } catch (err) {
-    console.log(`Error ocurred in deleteProduct Db, ${err} for item: ${id}`);
+    console.log(
+      `Error ocurred in deleteProduct Db, ${err} for item: ${productId}`
+    );
     throw err;
   }
 }
@@ -165,4 +194,5 @@ module.exports = {
   verifyProduct,
   updateProduct,
   deleteProduct,
+  getProductByTitle,
 };

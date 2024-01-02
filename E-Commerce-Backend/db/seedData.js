@@ -1,14 +1,15 @@
 const client = require("./client");
-const { createProduct } = require("./products");
+const { createProduct } = require("./productsDB");
 const { createReview } = require("./reviews");
-const { createUser } = require("./users");
+const { createUser } = require("./usersDB");
+const { addToCart } = require("./cartDB");
 
 async function dropTables() {
   console.log("Dropping all tables");
   // Drop all tables in the correct order
   try {
     await client.query(`
-    DROP TABLE IF EXISTS reviews;
+    DROP TABLE IF EXISTS carts;
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS users;
     `);
@@ -61,6 +62,16 @@ async function createTables() {
     //   title VARCHAR(255) NOT NULL,
     //   comment TEXT NOT NULL
     // )`);
+
+    await client.query(`
+    CREATE TABLE carts(
+      "user_id" INTEGER REFERENCES users(id),
+      "product_id" INTEGER REFERENCES products(id),
+      price MONEY NOT NULL,
+      quantity INTEGER NOT NULL,
+      PRIMARY KEY (user_id, product_id)
+    );
+    `);
 
     console.log("Finished building tables");
   } catch (error) {
@@ -418,36 +429,46 @@ async function createInitialUsers() {
   }
 }
 
-async function createInitialReviews() {
+async function createInitialCarts() {
   try {
-    console.log("starting to create reviews");
+    console.log("starting to create carts");
 
-    const reviewsToCreate = [
+    const cartsToCreate = [
       {
-        creatorId: 1,
+        userId: 1,
         productId: 1,
-        title: "I love cats",
-        comment: "Cats are amazing and I highly recommend them! 5 stars!",
+        quantity: 2,
       },
       {
-        creatorId: 2,
+        userId: 1,
         productId: 4,
-        title: "I love kirby",
-        comment:
-          "Getting to suck stuff up as Kirby is so fun! I just can't get enough sucking!!!",
+        quantity: 1,
       },
       {
-        creatorId: 3,
+        userId: 1,
         productId: 5,
-        title: "I love PS5",
-        comment: "This is so great and a huge upgrade from my sega saturn.",
+        quantity: 1,
+      },
+      {
+        userId: 1,
+        productId: 18,
+        quantity: 20,
       },
     ];
-    const reviews = await Promise.all(
-      reviewsToCreate.map((review) => createReview(review))
+    const carts = await Promise.all(
+      cartsToCreate.map(async (cartItem) => {
+        const { userId, productId, quantity } = cartItem;
+        console.log({ userId });
+        console.log({ productId });
+        console.log({ quantity });
+
+        const addedCart = await addToCart(productId, userId, quantity);
+        console.log({ addedCart });
+      })
     );
-    console.log("Comments Created", reviews);
-    console.log("Finished creating reviews");
+    console.log("Carts Created:");
+    console.log(carts);
+    console.log("Finished creating carts");
   } catch (error) {
     throw error;
   }
@@ -460,6 +481,7 @@ async function rebuildDB() {
     await createTables();
     await createInitialProducts();
     await createInitialUsers();
+    await createInitialCarts();
     // await createInitialReviews();
   } catch (error) {
     console.log("Error during rebuildDB");
