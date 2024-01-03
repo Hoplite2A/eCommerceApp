@@ -1,18 +1,17 @@
 //! Imported Libraries --------------------------
+import { useSignal, useState } from 'react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { cartCount, setCartCount } from "../../MainPages/IndividualItemTiles";
 import { cartList, setCartList } from "../../MainPages/AllItems";
+import { cartCount } from './Cart';
 //! ---------------------------------------------
 
 export default function CartItemsList({key, cartItem}) {
 
   const { image, title, price, description, quantity} = cartItem;
 
-  //TODO ---- Create subtotal function against the method -------------------
-  const [cartSubTotal, setCartSubTotal] = useSignal(0);
-
+  const [itemQuant, setItemQuant] = useState(quantity)
 
   //*Initializing CartQuantity for future calculations.
   setCartCount(quantity);
@@ -21,8 +20,13 @@ export default function CartItemsList({key, cartItem}) {
     setCartList(cartList.filter((cartItem) => cartItem.id !== cartItem.id));
     
     //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
-    setCartCoumt(cartCount - 1)
+    setCartCoumt(cartCount - quantity)
   };
+
+  const updateCartQuantity = (e) => {
+    setCartCount(cartCount + (quantity));
+    setItemQuant(e.target.value);
+  }
 
   return (
     <>
@@ -35,7 +39,10 @@ export default function CartItemsList({key, cartItem}) {
           <p className="cartListItemPrice">{price}</p>
           <p className="cartItemListDescription">{description}</p>
         </div>
-        <div className="cartListItemButton">
+        <div className="cartListItemButtonSelector">
+          <label>Qty:
+            <input id="quantity" type="number" placeholder={itemQuant} min={1} max={1000000} onChange={updateCartQuantity(e.target.value)}/>
+          </label>
           <button className="removeItem" onClick={removeItem}>Remove</button>
         </div>
       </div>
