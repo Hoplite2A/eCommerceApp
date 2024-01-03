@@ -24,7 +24,7 @@ import "./App.css";
 //! ---------------------------------------------
 
 //! Universal Variables -------------------------
-export const BASE_URL = 'https://www.makeupSite.com/'
+export const BASE_URL = 'https://localhost:5432/dangazon'
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
