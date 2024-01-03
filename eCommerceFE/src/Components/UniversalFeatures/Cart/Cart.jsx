@@ -1,11 +1,10 @@
 //! Imported Libraries --------------------------
 import { useSignal } from 'react';
-import { signals } from '@preact/signals-react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { cartCount, setCartCount } from '../../MainPages/IndividualItemTiles';
-import { cartList, setCartList } from '../../MainPages/AllItems';
+import { cartCount } from '../../MainPages/IndividualItemTiles';
+import { cartList } from '../../MainPages/AllItems';
 import CartItemsList from './CartItemsList';
 import CartSubTotal from './CartSubTotal';
 //! ---------------------------------------------
@@ -27,7 +26,7 @@ export default function Cart() {
                     {cartList.map((cartItem) => {
                         <CartItemsList key={cartItem.id} cartItem={cartItem} />
                     })}
-                <CartSubTotal cartList={cartList} />
+                <CartSubTotal />
                 </div> :
                 null
             }
