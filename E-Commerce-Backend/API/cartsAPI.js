@@ -22,7 +22,7 @@ cartsRouter.post("/", requireUser, async (req, res, next) => {
   let { quantity } = req.body;
   const userId = req.user.id;
   try {
-    const cart = await getCart(userId);
+    // const cart = await getCart(userId);
     const addedItem = await addToCart(productId, userId, quantity);
     res.send(addedItem);
   } catch (error) {

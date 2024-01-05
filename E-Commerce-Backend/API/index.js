@@ -59,6 +59,9 @@ apiRouter.use("/cart", cartsRouter);
 const pastPurchasesRouter = require("./pastPurchasesAPI");
 apiRouter.use("/pastPurchases", pastPurchasesRouter);
 
+const wishlistsRouter = require("./wishlistAPI");
+apiRouter.use("/wishlist", wishlistsRouter);
+
 apiRouter.use((error, req, res, next) => {
   console.log(req.header);
   console.log(error);

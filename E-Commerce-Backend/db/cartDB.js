@@ -29,17 +29,6 @@ async function getCart(userId) {
     );
     if (!cartItems) return null;
     const items = cartItems.rows;
-    // const totalCost = await client.query(
-    //   `SELECT
-    //     SUM(quantity * price) AS overall_total_cost
-    //   FROM
-    //     carts
-    //   WHERE
-    //     user_id=$1;
-    //     `,
-    //   [userId]
-    // );
-    // const total = totalCost.rows[0].overall_total_cost;
     return items;
   } catch (error) {
     throw error;
@@ -104,3 +93,15 @@ async function deleteUserCart(userId) {
 }
 
 module.exports = { addToCart, getCart, deleteUserCart };
+
+// const totalCost = await client.query(
+//   `SELECT
+//     SUM(quantity * price) AS overall_total_cost
+//   FROM
+//     carts
+//   WHERE
+//     user_id=$1;
+//     `,
+//   [userId]
+// );
+// const total = totalCost.rows[0].overall_total_cost;
