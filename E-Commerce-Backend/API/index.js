@@ -59,9 +59,6 @@ apiRouter.use("/cart", cartsRouter);
 const pastPurchasesRouter = require("./pastPurchasesAPI");
 apiRouter.use("/pastPurchases", pastPurchasesRouter);
 
-// const reviewsRouter = require("./reviews");
-// apiRouter.use("/reviews", reviewsRouter);
-
 apiRouter.use((error, req, res, next) => {
   console.log(req.header);
   console.log(error);
