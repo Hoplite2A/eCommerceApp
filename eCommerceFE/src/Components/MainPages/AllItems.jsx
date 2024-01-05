@@ -1,38 +1,48 @@
 //! Imported Libraries -------------------------
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
-import { BASE_URL } from '../../App';
-import IndividualItem from './IndividualItemTiles';
+import { BASE_URL } from "../../App";
+import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
 
 export default function AllItems() {
+  const [allItems, setAllItems] = useState([]);
 
-    const [allItems, setAllItems] = useState({});
-    const [error, setError] = useState(false);
-
-    try {
-        const res = fetch(`${BASE_URL}`);
-        const json = res.json();
-        setAllItems(json);
-    } catch (err) {
-        console.log(`Error occured in AllItems data Fetch, ${err}`)
-        setError(true)
+  useEffect(() => {
+    async function fetchAllItems() {
+      try {
+        const res = await fetch(`${BASE_URL}/products/`);
+        const json = await res.json();
+        console.log(json);
+        const allItemsPH = await json.allProducts;
+        console.log(allItemsPH);
+        setAllItems(allItemsPH);
+      } catch (err) {
+        console.log(
+          `Error occured in fetchAllItems within the AllItems component, ${err}`
+        );
+        return (<>
+          <div className="allItemsErrorMessage">
+            <p className="errorMessage">
+              Our servers are on strike. We will work with them to get back to
+              serving you.
+            </p>
+          </div>
+        </>);
+      }
     }
+    return () => fetchAllItems();
+  }, []);
 
-    return (<>
-        {!error ?
-            <div className="allItemsDiv">
-                {allItems.map((item) => {
-                    <IndividualItem key={item.id} item={item} />
-                    })} 
-            </div> : 
-            <div className="allItemsErrorMessage">
-                <p className="errorMessage">
-                    Our servers are on strike. We will work with them to get back to serving you. 
-                </p>
-            </div>
-        }    
-    </>)
+  return (
+    <>
+      <div className="allItemsDiv">
+        {allItems.map((item) => {
+          return <IndividualItem key={item.id} item={item} />;
+        })}
+      </div>
+    </>
+  );
 }
