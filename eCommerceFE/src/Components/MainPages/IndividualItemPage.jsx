@@ -12,14 +12,14 @@ import { BASE_URL } from '../../App';
 export default function IndividualItemPage(id) {
     
     const [item, setItem] = useState({});
-    
+
     useEffect(() => {
         async function IndividualItemPageFetch() {
             try {
                 const res = await fetch(`${BASE_URL}/products/${id}`);
                 const json = await res.json();
                 console.log(json);
-                setItem(json);
+                setItem(json.allProducts);
             } catch (err) {
                 console.log(`Error occurred in the IndividualItemPageFetch within the IndividualItemPage component, ${err}`);
                 return (<>
