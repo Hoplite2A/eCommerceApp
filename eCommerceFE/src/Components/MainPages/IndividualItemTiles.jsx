@@ -10,6 +10,7 @@ import { token } from "../UniversalFeatures/Login";
 export default function IndividualItem({ item }) {
   //*Destructured props from AllItems Fetch:
   const { id, title, price, image } = item;
+    const indItem = item;
 
   // //*Defining Cart Count for cart feature option:
   // const [cartCount, setCartCount] = useSignal(0);
@@ -40,14 +41,19 @@ export default function IndividualItem({ item }) {
 
   const visible = token.value;
 
-    //! Test IndividualItemPage Route &&
-    //TODO ---- Change/Test all desconstruct item object variables in return statement
-    
+  //! Test IndividualItemPage Route &&
+  //TODO ---- Change/Test all desconstruct item object variables in return statement
+
   return (
     <>
       <div className="individualItemTile">
         <div className="individualItemTileTop">
-          <Link to={`/IndividualItemPage/${item.id}`}>
+          <Link
+            to={{
+                pathname: "/IndividualItemPage/:id",
+                state: { indItem }
+            }}
+          >
             <div className="individualItemImage">
               <img src={item.image} alt={item.title} />
             </div>
