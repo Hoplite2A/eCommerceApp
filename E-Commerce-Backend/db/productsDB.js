@@ -25,8 +25,6 @@ async function getAllProducts() {
 
 //* ----------------GET SINGLE Db---------------
 async function getSingleProduct(id) {
-  console.log("We made it to getSingleProduct");
-  console.log(id);
   try {
     const {
       rows: [product],
@@ -38,7 +36,6 @@ async function getSingleProduct(id) {
     `,
       [id]
     );
-    console.log({ product });
     return product;
   } catch (err) {
     console.log(`Error occurred in the getSingleProduct Db Call, ${err}`);
