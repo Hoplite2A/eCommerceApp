@@ -13,6 +13,7 @@ import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 
 import AllItems from "./Components/MainPages/AllItems";
 import IndividualItem from "./Components/MainPages/IndividualItemTiles";
+import IndividualItemPage from "./Components/MainPages/IndividualItemPage";
 
 import Footer from "./Components/UniversalFeatures/Footer";
 import ContactUs from './Components/UniversalFeatures/ContactUs';
@@ -24,7 +25,7 @@ import "./App.css";
 //! ---------------------------------------------
 
 //! Universal Variables -------------------------
-export const BASE_URL = 'https://www.makeupSite.com/'
+export const BASE_URL = 'http://localhost:3000/api'
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
@@ -56,6 +57,7 @@ export default function App() {
       
       <Route path='/AllItems' element={<AllItems />} />
       <Route path='/IndividualItemTiles' element={<IndividualItem />} />
+      <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
 
       <Route path='/Footer' element={<Footer />} />
       {/* <Route path='/membershipInfo' element={<MembershipInfo />} /> */}

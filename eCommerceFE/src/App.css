@@ -145,6 +145,67 @@ button.regCloseButton{
   background-color: #2f3438;
 }
 /*! --------- ALL ITEMS STYLING START -------- */
+.allItemsDiv{
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.individualItemTile{
+  width: 300px;
+  margin-top: 20px;
+  border: #2f3438;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 30px;
+  background-color: #2f3438;
+}
+.individualItemTile:hover{
+  width: 300px;
+  transform: scale(1.05);
+  border: #2f3438;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 30px;
+  color: black;
+  background-color: #2f3438;
+}
+.individualItemImage{
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+.individualItemImage > img{
+  min-width: 125px;
+  max-width: 200px;
+}
+.individualItemBottom{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.individualTitle{
+  font-size: medium;
+  color: #ffffff;
+}
+.individualItemPrice{
+  color: #ffffff;
+}
+.individualItemButton{
+  color: white;
+  background-color: #25292c;
+  border-radius: 20px;
+}
+.individualItemButton:hover{
+  color: #fcee09;
+  background-color: #25292c;
+  border-radius: 20px;
+}
+/*! ----- INDIVIDUAL ITEMS STYLING START ----- */
+.individualItemPage
 
 
 /*! --- REGISTER/LOGIN FORM STYLING START ---- */
@@ -374,6 +435,7 @@ color: #b216f0;
   color: #a1a1a1;
 }
 .collapseFooterButton{
+  
   font-size: 20px;
   font-weight: bolder;
   color: #991f3d;
