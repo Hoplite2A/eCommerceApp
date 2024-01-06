@@ -1,6 +1,5 @@
 //! Imported Libraries -------------------------
-import { Link } from "react-router-dom";
-import { useSignal } from "@preact/signals-react";
+import { Link, useNavigate } from "react-router-dom";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -8,10 +7,19 @@ import { token } from "../UniversalFeatures/Login";
 //! --------------------------------------------
 
 export default function IndividualItem({ item }) {
-  //*Destructured props from AllItems Fetch:
-  const { id, title, price, image } = item;
-    const indItem = item;
 
+    const navigate = useNavigate();
+    const itemDetailsPage = () => {
+        navigate(`/IndividualItemPage/${item.id}`);
+    }
+
+    //! To Test logged in versus visitor view enable 
+    //! line titled Not-Visible and comment out Visible
+    //*Not-Visible:
+    // const visible = !token.value;
+    //*Visible: 
+    const visible = !token.value;
+    
   // //*Defining Cart Count for cart feature option:
   // const [cartCount, setCartCount] = useSignal(0);
 
@@ -39,7 +47,6 @@ export default function IndividualItem({ item }) {
   //     // Upon leaving site, cart will be erased
   // }
 
-  const visible = token.value;
 
   //! Test IndividualItemPage Route &&
   //TODO ---- Change/Test all desconstruct item object variables in return statement
@@ -48,20 +55,15 @@ export default function IndividualItem({ item }) {
     <>
       <div className="individualItemTile">
         <div className="individualItemTileTop">
-          <Link
-            to={{
-                pathname: "/IndividualItemPage/:id",
-                state: { indItem }
-            }}
-          >
-            <div className="individualItemImage">
-              <img src={item.image} alt={item.title} />
-            </div>
+            <Link to={`/IndividualItemPage/${item.id}`}>
+                <div className="individualItemImage">
+                    <img src={item.image} alt={item.title} />
+                </div>
           </Link>
         </div>
         <div className="individualItemBottom">
-          <h3 className="individualTitle">{item.title}</h3>
-          <p className="individualItemPrice price">{item.price}</p>
+          <h3 className="individualTitle" onClick={itemDetailsPage}>{item.title}</h3>
+          <p className="individualItemPrice price">${item.price}</p>
         </div>
         <div className="individualItemTileButton">
           {visible ? (
