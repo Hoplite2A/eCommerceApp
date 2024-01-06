@@ -1,11 +1,17 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect } from "react";
+import { useSignal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
+
+export const [wishlist, setWishlist] = useSignal([]);
+
+export const [cart, setCart] = useSignal([]);
+
 
 export default function AllItems() {
   const [allItems, setAllItems] = useState([]);
