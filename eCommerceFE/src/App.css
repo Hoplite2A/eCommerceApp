@@ -14,6 +14,9 @@ div {
   text-align: center;
   padding: 0px;
 }
+.linkStyling{
+  text-decoration: none;
+}
 /*! ----------- LOGO STYLING START ----------- */
 .logo {
   height: 6em;
@@ -181,15 +184,26 @@ button.regCloseButton{
   min-width: 125px;
   max-width: 200px;
 }
+.individualTitle{
+  color: white;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+.individualTitle:hover,
+.individualItemPrice:hover{
+  color: #fcee09;
+}
 .individualItemBottom{
   display: flex;
   flex-direction: row;
   margin-left: 15px;
   margin-right: 15px;
+  justify-content: space-between;
 }
 .individualTitle{
   font-size: medium;
   color: #ffffff;
+  text-align: left;
 }
 .individualItemPrice{
   color: #ffffff;
@@ -203,10 +217,84 @@ button.regCloseButton{
   color: #fcee09;
   background-color: #25292c;
   border-radius: 20px;
+  filter: drop-shadow(0 0 2em #fcee09);
 }
 /*! ----- INDIVIDUAL ITEMS STYLING START ----- */
-.individualItemPage
-
+.individualItemPage{
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-top: 25px;
+  background-color: white;
+  border-radius: 20px;
+}
+.individualItemPageImage > img{
+  min-width: 200px;
+  max-width: 300px;
+  border-radius: 20px;
+}
+.individualItemPageRight{
+  display: flex;
+  flex-direction: column;
+}
+.individualItemPageTitle{
+  color: black;
+  text-align: left;
+}
+.individualItemPagePrice{
+  color: black;
+}
+.individualItemPageInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.individualItemPageButtonVisiting{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.individualItemPageButtonLoggedIn{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cartButton.individualItemPageButton,
+.wishlistButton.individualItemPageButton{
+  color: white;
+  background-color: #25292c;
+  border-radius: 20px;
+  margin:15px;
+}
+.cartButton.individualItemPageButton:hover{
+  color: #c57907;
+  background-color: #25292c;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 2em #c57907);
+}
+.wishlistButton.individualItemPageButton:hover{
+  color: #0ec0c0;
+  background-color: #25292c;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 2em #0ec0c0);
+}
+.backMessage{
+  color: white;
+  text-decoration: none;
+}
+.backToHome{
+  color: white;
+  background-color: #25292c;
+  border-radius: 20px;
+}
+.backToHome:hover{
+  color: #5dbd26;
+  background-color: #25292c;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 2em #5dbd26);
+}
 
 /*! --- REGISTER/LOGIN FORM STYLING START ---- */
 .loginFormDiv,
