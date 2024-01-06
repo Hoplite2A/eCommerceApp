@@ -44,7 +44,7 @@ export default function RegisterForm() {
 
     // if (valid) {
     try {
-      const res = await fetch(`${BASE_URL}registration`, {
+      const res = await fetch(`${BASE_URL}/usersAPI`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
