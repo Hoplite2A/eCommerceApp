@@ -1,19 +1,3 @@
-// Create addToCart(productId, userId)
-// Update quantity in cart with userId and productId
-// DO we need price?
-//
-// Get cart will have to retun all items with userId === userId
-
-// await client.query(`
-//     CREATE TABLE cart(
-//       "user_id" INTEGER REFERENCES users(id),
-//       "product_id" INTEGER REFERENCES product(id),
-//       price MONEY NOT NULL,
-//       quantity INTEGER NOT NULL,
-//       PRIMARY KEY (user_id, product_id)
-//     );
-//     `);
-
 const client = require("./client");
 const { getSingleProduct } = require("./productsDB");
 
@@ -74,6 +58,21 @@ async function addToCart(productId, userId, quantity) {
     throw error;
   }
 }
+
+// Edit cart
+// Patch1 Compare and edit:
+// Get users current cart
+// If it exists in users cart and update cart, update quantity,
+// If it exists in users cart and not in update quantity, remove from cart
+// else add to cart
+// Patch2 Add:
+// Requires only cart items that were increased or added
+// Get users current cart
+// If it exists, increase quantity by new quantity(or just update quantity to new quantity)
+// Else add to cart
+// Patch3 Remove:
+// Get user cart
+//  If it exists in users cart, delete item(or decrease quantity)
 
 async function deleteUserCart(userId) {
   try {
