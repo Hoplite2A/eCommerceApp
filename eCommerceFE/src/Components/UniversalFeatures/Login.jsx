@@ -9,6 +9,7 @@ import { useState } from "react";
 import Header from "./Navigation/Header";
 import { companyName } from "./Logo";
 import Footer from "./Footer";
+import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
 export const token = signal(null);
@@ -27,22 +28,23 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("", {
+      const res = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: userName,
-          pass: password,
+          username: userName,
+          password: password,
         }),
       });
       //! ---------------- Add response if no user found button - reattempt and go to login or
       //! ---------------- button link to registration form
-      const json = res.json();
-      const authToken = json.token;
+      const json = await res.json();
+      console.log(json);
+      const authToken = await json.token;
       console.log(authToken);
       token.value = authToken;
     } catch (err) {
-      console.log(`Login funciton error durring handleSubmit, ${err}`);
+      console.log(`Login function error durring handleSubmit, ${err}`);
       alert(err);
     }
 

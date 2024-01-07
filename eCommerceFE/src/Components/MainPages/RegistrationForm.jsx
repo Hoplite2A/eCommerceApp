@@ -19,8 +19,8 @@ export default function RegisterForm() {
   const [aCity, setACity] = useState("");
   const [aState, setAState] = useState("");
   const [aZip, setAZip] = useState("");
-  const [cType, setCType] = useState("");
-  const [cNumber, setCNumber] = "";
+  // const [cType, setCType] = useState("");
+  const [cNumber, setCNumber] = useState("");
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -37,47 +37,44 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //TODO ---- Add validation of register fields and return
-    //TODO ---- a setValid(true) prior to POST API Call
-    //! if else OR Switch Statement
-    //! return setValid(true);
-
-    // if (valid) {
-    try {
-      const res = await fetch(`${BASE_URL}/usersAPI`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: fName,
-          preferredName: pName,
-          lastName: lName,
-          street: streetAddress,
-          apartment: aApt,
-          city: aCity,
-          state: aState,
-          zip: aZip,
-          phoneType: cType,
-          phoneNumber: cNumber,
-          emailAddress: email,
-          user: userName,
-          pass: password,
-        }),
-      });
-      const json = res.json();
-      const authToken = json.token;
-      console.log(authToken);
-      token.value = authToken;
-    } catch (err) {
-      console.log(`Error occurred in RegisterForm function, ${err}`);
-      alert(err);
-    }
-
-    //! -----------------------------------Redirect if registration/api fails-----------
-    if (token.value !== null) {
+      try {
+        const res = await fetch(`${BASE_URL}/users/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: userName,
+            password: password,
+            fName: fName,
+            pName: pName,
+            lName: lName,
+            streetAddress: streetAddress,
+            apt: aApt,
+            city: aCity,
+            state: aState,
+            zip: aZip,
+            // phoneType: cType,
+            phone: cNumber,
+            email: email,
+          }),
+        });
+        const json = await res.json();
+        console.log(json);
+        const authToken = await json.token;
+        console.log(authToken);
+        token.value = authToken;
+      } catch (err) {
+        console.log(`Error occurred in RegisterForm function, ${err}`);
+        alert(err);
+      }
+  
+      if (token.value !== null) {
+      //TODO -----------------------------------CUSTOMIZE ALERT WITH Material-UI----------------------------
+      alert("You have successfully Registered!");
       navigate("/");
     } else {
+      //TODO -----------------------------------CUSTOMIZE ALERT WITH Material-UI----------------------------
       //TODO ----- Enter in code that will pull error messages from BE on whether it is a dataType error or
       //TODO ----- if it is an user already has those credentials.
       alert(
@@ -196,7 +193,7 @@ export default function RegisterForm() {
               </label>
             </div>
             <div className="contactInfo2">
-              <label className="regLabels">
+              {/* <label className="regLabels">
                 <input
                   className="regInputs contactInputs"
                   type="text"
@@ -207,7 +204,7 @@ export default function RegisterForm() {
                     setCType(e.target.value);
                   }}
                 />
-              </label>
+              </label> */}
               <label className="regLabels">
                 <input
                   className="regInputs contactInputs"
@@ -223,7 +220,7 @@ export default function RegisterForm() {
               <label className="regLabels">
                 <input
                   className="regInputs contactInputs"
-                  type="text"
+                  type="email"
                   id="emailAddress"
                   name="emailAddress"
                   placeholder="Email Address"
