@@ -8,9 +8,9 @@ import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
 
-export const [wishlist, setWishlist] = useSignal([]);
+// export const [wishlist, setWishlist] = useSignal([]);
 
-export const [cart, setCart] = useSignal([]);
+// export const [cart, setCart] = useSignal([]);
 
 
 export default function AllItems() {
