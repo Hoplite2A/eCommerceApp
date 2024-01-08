@@ -7,10 +7,13 @@ import { useState } from "react";
 import Header from "../UniversalFeatures/Navigation/Header";
 import { BASE_URL } from "../../App";
 import { token } from "../UniversalFeatures/Login";
+import {userDetails} from "../UniversalFeatures/Login";
 import Footer from "../UniversalFeatures/Footer";
 //! ---------------------------------------------
 
 export default function RegisterForm() {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [fName, setFName] = useState("");
   const [pName, setPName] = useState("");
   const [lName, setLName] = useState("");
@@ -22,8 +25,6 @@ export default function RegisterForm() {
   // const [cType, setCType] = useState("");
   const [cNumber, setCNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
 
   //TODO -------------- Part of Validation Attempt
   //! const [valid, setValid] = useState(false);
@@ -61,9 +62,12 @@ export default function RegisterForm() {
         });
         const json = await res.json();
         console.log(json);
-        const authToken = await json.token;
-        console.log(authToken);
-        token.value = authToken;
+        const acctDetails = await json.user;
+        userDetails.value = await acctDetails;
+        console.log(userDetails.value);
+        const tempToken = await json.token;
+        token.value = tempToken;
+        console.log(token.value);
       } catch (err) {
         console.log(`Error occurred in RegisterForm function, ${err}`);
         alert(err);

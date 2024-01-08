@@ -1,60 +1,67 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from "react";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
 import Footer from "../UniversalFeatures/Footer";
 import { token } from "../../Components/UniversalFeatures/Login";
+import { userDetails } from "../../Components/UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
+
 export default function AccountDetails() {
+  
+  // const navigate = useNavigate();
+  
+  // const nothing = () => {
+  //   navigate('/');
+  // }
+
   //Used for making certain data visible as a security precaution:
   const [visible, setVisible] = useState(false);
+  
+  const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
-  //Used for defining data from GET API upon initial page landing:
-  const [details, setDetails] = useState("");
-  //Deconstructed State Variable pulled from GET API and utilized for current (non-edit) data view:
+  //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const {
-    firstName,
-    preferredName,
-    lastName,
-    street,
+    first_name,
+    pname,
+    last_name,
+    address,
     apartment,
     city,
     state,
     zip,
-    phoneType,
+    // phoneType,
     phoneNumber,
-    emailAddress,
-    user,
-  } = details;
+    email,
+    username,
+  } = userDetails.value;
 
   //Used for pulling changed values from
-  const [fName, setFName] = useState("");
-  const [pName, setPName] = useState("");
-  const [lName, setLName] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
-  const [aApt, setAApt] = useState("");
-  const [aCity, setACity] = useState("");
-  const [aState, setAState] = useState("");
-  const [aZip, setAZip] = useState("");
-  const [cType, setCType] = useState("");
-  const [cNumber, setCNumber] = "";
-  const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-
-  //Used for making Reset password feature visible to end user:
-  const [passwordResetVisible, setPasswordResetVisible] = useState(false);
+  const [userName, setUserName] = useState(username);
+  // const [password, setPassword] = useState("");
+  const [fName, setFName] = useState(first_name);
+  const [pName, setPName] = useState(pname);
+  const [lName, setLName] = useState(last_name);
+  const [streetAddress, setStreetAddress] = useState(address);
+  const [aApt, setAApt] = useState(apartment);
+  const [aCity, setACity] = useState(city);
+  const [aState, setAState] = useState(state);
+  const [aZip, setAZip] = useState(zip);
+  // const [cType, setCType] = useState("");
+  const [cNumber, setCNumber] = useState(phoneNumber);
+  const [emailAddress, setEmailAddress] = useState(email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${BASE_URL}/`, {
+      const res = await fetch(`${BASE_URL}/users/updateprofile`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +76,7 @@ export default function AccountDetails() {
           city: aCity,
           state: aState,
           zip: aZip,
-          phoneType: cType,
+          // phoneType: cType,
           phoneNumber: cNumber,
           emailAddress: email,
           user: userName,
@@ -80,7 +87,7 @@ export default function AccountDetails() {
 
       if (json.message === "Profile has been updated Successfully") {
         //TODO -------------------------------- Update alert to acknowledgement
-        alert(`${firstName}, your profile has been successfully updated.`);
+        alert(`${first_name}, your profile has been successfully updated.`);
       } else {
         console.log("An error occurred when performing update.");
       }
@@ -91,42 +98,39 @@ export default function AccountDetails() {
     }
   };
 
-  if (token) {
-    setVisible(true);
-  }
 
-  useEffect(() => {
-    async function fetchAccountDetails() {
-      try {
-        const res = await fetch(`${BASE_URL}accountDetails`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            //TODO -------------------------------- Add body values for GET API
-          }),
-        });
-        const json = await res.json();
-        setDetails(json);
-      } catch (err) {
-        console.log(
-          `An Error occurred within the fetchAccountDetails API Call, ${err}`
-        );
-      }
-    }
-    return () => fetchAccountDetails();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchAccountDetails() {
+  //     try {
+  //       const res = await fetch(`${BASE_URL}accountDetails`, {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({
+  //           //TODO -------------------------------- Add body values for GET API
+  //         }),
+  //       });
+  //       const json = await res.json();
+  //       setDetails(json);
+  //     } catch (err) {
+  //       console.log(
+  //         `An Error occurred within the fetchAccountDetails API Call, ${err}`
+  //       );
+  //     }
+  //   }
+  //   return () => fetchAccountDetails();
+  // }, []);
 
   return (
     <>
-      {visible && details ? (
+      {token.value && userDetails.value ? (
         <>
           <Header />
           <form className="accountDetails" onSubmit={handleSubmit}>
             <div className="userAccountDetails">
               {/* Profile Image */}
-              <h2 className="accountDetailsTitle">Hi, {firstName}</h2>
+              <h2 className="accountDetailsTitle">Hi, {first_name}</h2>
             </div>
             <div className="ADNameFields">
               <label htmlFor="fistName">First Name:</label>
@@ -134,7 +138,7 @@ export default function AccountDetails() {
                 type="text"
                 id="firstName"
                 name="firstName"
-                value={firstName}
+                value={first_name}
                 onChange={(e) => setFName(e.target.value)}
               />
               <label htmlFor="preferredName">Nick Name:</label>
@@ -142,7 +146,7 @@ export default function AccountDetails() {
                 type="text"
                 id="preferredName"
                 name="preferredName"
-                value={preferredName}
+                value={pname}
                 onChange={(e) => setPName(e.target.value)}
               />
               <label htmlFor="lastName">LastName:</label>
@@ -150,7 +154,7 @@ export default function AccountDetails() {
                 type="text"
                 id="lastName"
                 name="lastName"
-                value={lastName}
+                value={last_name}
                 onChange={(e) => setLName(e.target.value)}
               />
             </div>
@@ -160,7 +164,7 @@ export default function AccountDetails() {
                 type="text"
                 id="street"
                 name="street"
-                value={street}
+                value={address}
                 onChange={(e) => setStreetAddress(e.target.value)}
               />
               <label htmlFor="">APT/Unit</label>
@@ -199,14 +203,14 @@ export default function AccountDetails() {
               />
             </div>
             <div className="ADContactInfo">
-              <label htmlFor="phoneType">Phone Type:</label>
+              {/* <label htmlFor="phoneType">Phone Type:</label>
               <input
                 type="text"
                 id="phoneType"
                 name="phoneType"
                 value={phoneType}
                 onChange={(e) => setCType(e.target.value)}
-              />
+              /> */}
               <label htmlFor="phoneNumber"></label>
               <input
                 type="text"
@@ -221,7 +225,7 @@ export default function AccountDetails() {
                 id="emailAddress"
                 name="emailAddress"
                 value={emailAddress}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmailAddress(e.target.value)}
               />
             </div>
             <div className="ADCredententials">
@@ -230,7 +234,7 @@ export default function AccountDetails() {
                 type="text"
                 id="user"
                 name="user"
-                value={user}
+                value={username}
                 onChange={(e) => setUserName(e.target.value)}
               />
               <div className="resetPassword">
@@ -261,7 +265,9 @@ export default function AccountDetails() {
           <Footer />     
         </>
       ) : (
-        <></>
+        <>
+          <button className="goHome" onClick={nothing}>Nothing to see here.</button>
+        </>    
       )}
     </>
   );

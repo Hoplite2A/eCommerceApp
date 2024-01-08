@@ -15,6 +15,9 @@ import { BASE_URL } from "../../App";
 export const token = signal(null);
 console.log(`Token Value Prior to Login: ${token.value}`);
 
+export const userDetails = signal(null);
+console.log(`userDetails Value Prior to Login: ${userDetails.value}`);
+
 export default function Login() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
@@ -40,9 +43,12 @@ export default function Login() {
       //! ---------------- button link to registration form
       const json = await res.json();
       console.log(json);
-      const authToken = await json.token;
-      console.log(authToken);
-      token.value = authToken;
+      const acctDetails = await json.user;
+      userDetails.value = await acctDetails;
+      console.log(userDetails.value);
+      const tempToken = await json.token;
+      token.value = tempToken;
+      console.log(token.value);
     } catch (err) {
       console.log(`Login function error durring handleSubmit, ${err}`);
       alert(err);
