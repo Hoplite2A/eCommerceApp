@@ -1,6 +1,6 @@
 //! Imported Libraries --------------------------
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -14,15 +14,12 @@ import { BASE_URL } from "../../App";
 
 export default function AccountDetails() {
   
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   
-  // const nothing = () => {
-  //   navigate('/');
-  // }
+  const nothing = () => {
+    navigate('/');
+  }
 
-  //Used for making certain data visible as a security precaution:
-  const [visible, setVisible] = useState(false);
-  
   const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
@@ -44,7 +41,7 @@ export default function AccountDetails() {
 
   //Used for pulling changed values from
   const [userName, setUserName] = useState(username);
-  // const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [fName, setFName] = useState(first_name);
   const [pName, setPName] = useState(pname);
   const [lName, setLName] = useState(last_name);
@@ -57,6 +54,8 @@ export default function AccountDetails() {
   const [cNumber, setCNumber] = useState(phoneNumber);
   const [emailAddress, setEmailAddress] = useState(email);
 
+  const [updatedPassword, setUpdatedPassword] = useState("")
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +64,7 @@ export default function AccountDetails() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer: ${token}`,
+          Authorization: `Bearer: ${token.value}`,
         },
         body: JSON.stringify({
           firstName: fName,
@@ -80,14 +79,13 @@ export default function AccountDetails() {
           phoneNumber: cNumber,
           emailAddress: email,
           user: userName,
-          pass: password,
         }),
       });
       const json = res.json();
 
       if (json.message === "Profile has been updated Successfully") {
-        //TODO -------------------------------- Update alert to acknowledgement
-        alert(`${first_name}, your profile has been successfully updated.`);
+        //TODO --------------------- Update alert to acknowledgement
+        alert(`${fName}, your profile has been successfully updated.`);
       } else {
         console.log("An error occurred when performing update.");
       }
@@ -98,29 +96,59 @@ export default function AccountDetails() {
     }
   };
 
+  //TODO ---------- Need to add path in BE for password update POST
+  const handlePasswordResetRequest = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await fetch(`${BASE_URL}/u`, {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json',
+          Authorization: `Bearer ${token.value}`,
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        }),
+      });
+      const json = res.json();
+      const verdict = json.code;
+      //! ------------------------- Add BE Logic for this return value
+      if (verdict === 1) {
+        setPasswordResetVisible(true);
+      }
+    }
+    catch (err) {
+      console.log(`Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`);
+    }
+  }
 
-  // useEffect(() => {
-  //   async function fetchAccountDetails() {
-  //     try {
-  //       const res = await fetch(`${BASE_URL}accountDetails`, {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           //TODO -------------------------------- Add body values for GET API
-  //         }),
-  //       });
-  //       const json = await res.json();
-  //       setDetails(json);
-  //     } catch (err) {
-  //       console.log(
-  //         `An Error occurred within the fetchAccountDetails API Call, ${err}`
-  //       );
-  //     }
-  //   }
-  //   return () => fetchAccountDetails();
-  // }, []);
+  //TODO ---------- Need to add path in BE for password update POST
+  const handlePasswordReset = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await fetch(`${BASE_URL}/u`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type':'application/json',
+          Authorization: `Bearer ${token.value}`,
+        },
+        body: JSON.stringify({
+          password: updatedPassword
+        }),
+      });
+      const json = res.json();
+      const update = json.code;
+      //! ------------------------- Add BE Logic for this return value
+      if (update === 1) {
+        setPasswordResetVisible(true);
+      }
+      alert(`${fName}, your password has been successfully updated.`)
+    }
+    catch (err) {
+      console.log(`Error occurred in handlePasswordReset within the AccountDetails component, ${err}.`);
+    }
+  }
 
   return (
     <>
@@ -237,30 +265,42 @@ export default function AccountDetails() {
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
               />
-              <div className="resetPassword">
-                <label className="passCheckBox">
-                  <input
-                    type="checkbox"
-                    id="resetPassword"
-                    onChange={setPasswordResetVisible(!passwordResetVisible)}
-                  />
-                </label>
-                {passwordResetVisible ? (
-                  <>
-                    <label htmlFor="pass">Reset Password</label>
-                    <input
-                      type="text"
-                      id="pass"
-                      name="pass"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </>
-                ) : null}
-              </div>
+              {!passwordResetVisible ? (<>
+                <label htmlFor="pass">Enter Current Password</label>
+                <input
+                  type="text"
+                  id="pass"
+                  name="pass"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                </>) : (<>
+                <label htmlFor="pass">Enter New Password</label>
+                <input
+                  type="text"
+                  id="pass"
+                  name="pass"
+                  onChange={(e) => setUpdatedPassword(e.target.value)}
+                />
+                </>)}
+              {passwordResetVisible ? (
+                <>
+                  <button className="resetPasswordRequest"
+                    onClick={handlePasswordResetRequest}>Reset</button>
+                </>
+              ) : (
+                <>
+                <button className="resetPassword"
+                  onClick={handlePasswordReset}>Reset</button>
+                </>
+                )}
             </div>
-            <button type="submit" className="ADSaveChangesButton">
-              Save Changes
-            </button>
+            {updateInfo ?
+              <button type="submit" className="ADSaveChangesButton">
+                Edit Info
+              </button> :
+              <button type="submit" className="ADSaveChangesButton">
+                Save Changes
+              </button>}
           </form>
           <Footer />     
         </>
