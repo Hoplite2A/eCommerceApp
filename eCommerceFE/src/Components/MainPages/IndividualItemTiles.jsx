@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 //! Imported Components/Variables---------------
 import { token } from "../UniversalFeatures/Login";
-import { cart, setCart } from './AllItems';
-import { wishlist, setWishlist } from './AllItems';
+// import { cart, setCart } from './AllItems';
+// import { wishlist, setWishlist } from './AllItems';
 
 //! --------------------------------------------
 

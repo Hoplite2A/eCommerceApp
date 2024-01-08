@@ -1,6 +1,6 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect } from "react";
-import { useSignal } from "@preact/signals-react";
+// import { useSignal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -8,9 +8,9 @@ import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
 
-export const [wishlist, setWishlist] = useSignal([]);
+// export const [wishlist, setWishlist] = useSignal([]);
 
-export const [cart, setCart] = useSignal([]);
+// export const [cart, setCart] = useSignal([]);
 
 
 export default function AllItems() {
@@ -21,9 +21,7 @@ export default function AllItems() {
       try {
         const res = await fetch(`${BASE_URL}/products/`);
         const json = await res.json();
-        console.log(json);
         const allItemsPH = await json.allProducts;
-        console.log(allItemsPH);
         setAllItems(allItemsPH);
       } catch (err) {
         console.log(

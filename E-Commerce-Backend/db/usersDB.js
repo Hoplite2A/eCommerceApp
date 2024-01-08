@@ -114,6 +114,7 @@ async function getAllUsers() {
 
 async function getUser({ username, password }) {
   if (!username || !password) {
+    console.log(`Error ln117, ${err}`);
     return;
   }
   try {
