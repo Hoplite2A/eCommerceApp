@@ -4,9 +4,8 @@ import { useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-// None at this point in time.
+import { token } from "./Login";
 //! ---------------------------------------------
-
 
 export default function RegistrationBanner() {
   
@@ -19,7 +18,7 @@ export default function RegistrationBanner() {
   };
 
   return (<>
-    {visible && (
+    {visible && !token.value ? <>
       <div className="regBanner">
         <div className="regBannerMessageAndButton">
           <div className="message">
@@ -37,6 +36,8 @@ export default function RegistrationBanner() {
           </div>
         </div>
       </div>
-    )}
+    </> :
+      null
+    }
   </>);
 }
