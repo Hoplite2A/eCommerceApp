@@ -48,7 +48,7 @@ export default function RegisterForm() {
             username: userName,
             password: password,
             fName: fName,
-            pName: pName,
+            preferred_name: pName,
             lName: lName,
             streetAddress: streetAddress,
             apt: aApt,

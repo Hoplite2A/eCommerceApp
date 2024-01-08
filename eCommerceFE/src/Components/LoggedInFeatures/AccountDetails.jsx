@@ -26,7 +26,7 @@ export default function AccountDetails() {
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const {
     first_name,
-    pname,
+    preferred_name,
     last_name,
     address,
     apartment,
@@ -43,7 +43,7 @@ export default function AccountDetails() {
   const [userName, setUserName] = useState(username);
   const [password, setPassword] = useState("");
   const [fName, setFName] = useState(first_name);
-  const [pName, setPName] = useState(pname);
+  const [pName, setPName] = useState(preferred_name);
   const [lName, setLName] = useState(last_name);
   const [streetAddress, setStreetAddress] = useState(address);
   const [aApt, setAApt] = useState(apartment);
@@ -54,6 +54,7 @@ export default function AccountDetails() {
   const [cNumber, setCNumber] = useState(phoneNumber);
   const [emailAddress, setEmailAddress] = useState(email);
 
+  const [updateInfo, setUpdateInfo] = useState(false);
   const [updatedPassword, setUpdatedPassword] = useState("")
 
   const handleSubmit = async (e) => {
@@ -68,7 +69,7 @@ export default function AccountDetails() {
         },
         body: JSON.stringify({
           firstName: fName,
-          preferredName: pName,
+          preferred_name: pName,
           lastName: lName,
           street: streetAddress,
           apartment: aApt,
@@ -174,7 +175,7 @@ export default function AccountDetails() {
                 type="text"
                 id="preferredName"
                 name="preferredName"
-                value={pname}
+                value={preferred_name}
                 onChange={(e) => setPName(e.target.value)}
               />
               <label htmlFor="lastName">LastName:</label>
@@ -264,6 +265,7 @@ export default function AccountDetails() {
                 name="user"
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
+                disabled={updateInfo}
               />
               {!passwordResetVisible ? (<>
                 <label htmlFor="pass">Enter Current Password</label>
@@ -294,13 +296,15 @@ export default function AccountDetails() {
                 </>
                 )}
             </div>
-            {updateInfo ?
-              <button type="submit" className="ADSaveChangesButton">
+            {!updateInfo ? <>
+              <button type="button" className="ADSaveChangesButton" onClick={setUpdateInfo(!updateInfo)}>
                 Edit Info
-              </button> :
+              </button>
+            </> : <>
               <button type="submit" className="ADSaveChangesButton">
                 Save Changes
-              </button>}
+              </button>
+            </>}
           </form>
           <Footer />     
         </>
