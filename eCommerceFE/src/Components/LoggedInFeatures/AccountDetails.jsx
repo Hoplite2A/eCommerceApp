@@ -14,6 +14,8 @@ import { BASE_URL } from "../../App";
 
 export default function AccountDetails() {
   
+  
+  
   const navigate = useNavigate();
   
   const nothing = () => {

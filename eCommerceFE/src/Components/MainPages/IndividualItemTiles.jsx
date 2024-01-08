@@ -21,7 +21,7 @@ export default function IndividualItem({ item }) {
     //*Not-Visible:
     // const visible = !token.value;
     //*Visible: 
-    const visible = !token.value;
+    const visible = token.value;
     
   // //*Defining Cart Count for cart feature option:
   // const [cartCount, setCartCount] = useSignal(0);
