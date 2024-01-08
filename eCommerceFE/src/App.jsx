@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
 import { Routes, Route } from "react-router-dom";
-import { signal } from '@preact/signals-react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -29,8 +28,6 @@ export const BASE_URL = 'http://localhost:3000/api'
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
-export const userDetails = signal([]);
-
 
 export default function App() {
 
