@@ -15,7 +15,7 @@ export default function IndividualItemPage() {
 
     const navigate = useNavigate();
     const allItemsPage = () => {
-        navigate('/AllItems');
+        navigate('/');
     }
 
     //! To Test logged in versus visitor view enable 

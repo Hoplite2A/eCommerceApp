@@ -435,19 +435,20 @@ async function createInitialUsers() {
         admin: true,
       },
 
-      // {
-      //   username: "dave",
-      //   password: "dave123",
-      //   fName: "David",
-      //   lName: "Crocket",
-      //   pName: "Davey",
-      //   streetAddress: "789 Fake Street",
-      //   city: "Lakeland",
-      //   state: "Florida",
-      //   zip: 344567,
-      //   phone: 8045551234,
-      //   email: "email@email.com",
-      // },
+      {
+        username: "dave",
+        password: "dave123",
+        fName: "David",
+        lName: "Crocket",
+        pName: "Davey",
+        streetAddress: "789 Fake Street",
+        city: "Lakeland",
+        state: "Florida",
+        zip: 344567,
+        phone: 8045551234,
+        email: "email@email.com",
+        admin: true,
+      },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
 

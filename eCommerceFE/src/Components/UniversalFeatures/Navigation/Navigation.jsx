@@ -30,7 +30,7 @@ export default function Navigation() {
         <Link to="/">
           <p className="navBarLabels">Home</p>
         </Link>
-        {token.value !== null ? (
+        {token.value !== null && token.value !== undefined ? (
           <>
             <Link to="/addItem">
               <p className="navBarLabels">Sell Items</p>

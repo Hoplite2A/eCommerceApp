@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { cartList } from '../../MainPages/AllItems';
+// import { cartList } from '../../MainPages/AllItems';
 //! ---------------------------------------------
 
 export default function CartSubTotal() {
