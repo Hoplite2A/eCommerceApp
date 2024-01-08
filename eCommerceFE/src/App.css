@@ -89,6 +89,7 @@ p.siteNameText {
   justify-content: space-between;
   padding-top: 10px;
 }
+p.logoutButton.navBarLabels,
 p.navBarLabels {
   margin: 10px;
   align-items: flex-end;
@@ -583,6 +584,7 @@ p.hideExpandMessage{
   text-decoration: none;
   color: #a1a1a1;
 }
+.logoutButton,
 .navBar > a,
 .logo > a {
   text-decoration: none;

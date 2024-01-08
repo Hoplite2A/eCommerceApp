@@ -59,18 +59,22 @@ export default function Footer() {
           </div>
           <div className="manageAccount sectionLinks expanded">
             <h3 className="linksTitle">Manage Account</h3>
-            {!token ? <Link to="/accountDetails">
+            {token.value ? <>
+            <Link to="/accountDetails">
               <h4 className="footerLinks pLink">Your Account</h4>
-              </Link> :
-              <Link to="/register">
-                <h4 className="footerLinks pLink">Register</h4>
-              </Link>}
-            <Link to="/orderHistory">
+            </Link>
+              <Link to="/orderHistory">
               <h4 className="footerLinks pLink">Your Orders</h4>
             </Link>
             <Link to="/returns">
               <h4 className="footerLinks pLink">Returns</h4>
             </Link>
+              </> : <>
+              <Link to="/register">
+                <h4 className="footerLinks pLink">Register</h4>
+              </Link>
+            </>}
+            
             <Link to="/warranty">
               <h4 className="footerLinks pLink">Warranty Policy</h4>
             </Link>

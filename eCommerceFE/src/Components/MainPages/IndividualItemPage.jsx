@@ -23,7 +23,7 @@ export default function IndividualItemPage() {
     //*Not-Visible:
     // const visible = !token.value;
     //*Visible: 
-    const visible = !token.value;
+    const visible = token.value;
     
     //Pulled param for use in useEffect API Call for individual Item Details
     const { id } = useParams();
