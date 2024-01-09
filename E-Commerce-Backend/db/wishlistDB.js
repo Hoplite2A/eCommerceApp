@@ -9,8 +9,6 @@ async function getUserWishlist(userId) {
       `,
       [userId]
     );
-    console.log(wishlist.rows);
-    console.log(wishlist.rows.length);
 
     if (!wishlist.rows.length) {
       throw {
@@ -34,8 +32,6 @@ async function addToWishlist(productId, userId) {
       [productId, userId]
     );
     const existingProduct = existingWishlistCheck.rows;
-    console.log({ existingWishlistCheck });
-    console.log(existingProduct);
     if (existingProduct.length > 0) {
       throw {
         name: "ItemAlreadyExists",
