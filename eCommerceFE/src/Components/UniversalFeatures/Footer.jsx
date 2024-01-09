@@ -74,7 +74,6 @@ export default function Footer() {
                 <h4 className="footerLinks pLink">Register</h4>
               </Link>
             </>}
-            
             <Link to="/warranty">
               <h4 className="footerLinks pLink">Warranty Policy</h4>
             </Link>

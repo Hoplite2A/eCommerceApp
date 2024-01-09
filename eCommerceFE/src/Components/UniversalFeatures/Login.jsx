@@ -54,10 +54,10 @@ export default function Login() {
       alert(err);
     }
 
-    if (token.value !== null) {
-      navigate("/");
-    } else {
+    if (!token.value) {
       navigate("/login");
+    } else {
+      navigate("/");
     }
   };
 

@@ -36,7 +36,7 @@ export default function AccountDetails() {
     state,
     zip,
     // phoneType,
-    phoneNumber,
+    phone,
     email,
     username,
   } = userDetails.value;
@@ -53,7 +53,7 @@ export default function AccountDetails() {
   const [aState, setAState] = useState(state);
   const [aZip, setAZip] = useState(zip);
   // const [cType, setCType] = useState("");
-  const [cNumber, setCNumber] = useState(phoneNumber);
+  const [cNumber, setCNumber] = useState(phone);
   const [emailAddress, setEmailAddress] = useState(email);
 
   const [updateInfo, setUpdateInfo] = useState(false);
@@ -79,7 +79,7 @@ export default function AccountDetails() {
           state: aState,
           zip: aZip,
           // phoneType: cType,
-          phoneNumber: cNumber,
+          phone: cNumber,
           emailAddress: email,
           user: userName,
         }),
@@ -242,12 +242,12 @@ export default function AccountDetails() {
                 value={phoneType}
                 onChange={(e) => setCType(e.target.value)}
               /> */}
-              <label htmlFor="phoneNumber"></label>
+              <label htmlFor="phone"></label>
               <input
                 type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={phoneNumber}
+                id="phone"
+                name="phone"
+                value={phone}
                 onChange={(e) => setCNumber(e.target.value)}
               />
               <label htmlFor="emailAddress"></label>
