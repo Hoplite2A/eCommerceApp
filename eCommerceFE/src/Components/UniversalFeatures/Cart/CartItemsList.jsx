@@ -7,7 +7,7 @@ import { useSignal, useState } from 'react';
 
 export default function CartItemsList({key, cartListItem}) {
 
-  const { image, title, price, description, qunatity} = cartListItem;
+  // const { image, title, price, description, qunatity} = cartListItem;
 
   // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
   // setCartCoumt(cartCount - quantity)
@@ -26,7 +26,7 @@ export default function CartItemsList({key, cartListItem}) {
 
   return (
     <>
-      <div className="cartListItemTile">
+      {/* <div className="cartListItemTile">
         <div className="cartListItemImage">
           <img src={image} alt="" />
         </div>
@@ -41,7 +41,7 @@ export default function CartItemsList({key, cartListItem}) {
           </label>
           <button className="removeItem">Remove</button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
