@@ -23,6 +23,7 @@ export default function AccountDetails() {
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const {
+    username,
     first_name,
     preferred_name,
     last_name,
@@ -31,10 +32,8 @@ export default function AccountDetails() {
     city,
     state,
     zip,
-    // phoneType,
     phone,
     email,
-    username,
   } = userDetails.value;
 
   //Used for pulling changed values from
@@ -48,7 +47,6 @@ export default function AccountDetails() {
   const [aCity, setACity] = useState(city);
   const [aState, setAState] = useState(state);
   const [aZip, setAZip] = useState(zip);
-  // const [cType, setCType] = useState("");
   const [cNumber, setCNumber] = useState(phone);
   const [emailAddress, setEmailAddress] = useState(email);
 
@@ -74,7 +72,6 @@ export default function AccountDetails() {
           city: aCity,
           state: aState,
           zip: aZip,
-          // phoneType: cType,
           phone: cNumber,
           emailAddress: email,
           user: userName,
@@ -232,14 +229,6 @@ export default function AccountDetails() {
               />
             </div>
             <div className="ADContactInfo">
-              {/* <label htmlFor="phoneType">Phone Type:</label>
-              <input
-                type="text"
-                id="phoneType"
-                name="phoneType"
-                value={phoneType}
-                onChange={(e) => setCType(e.target.value)}
-              /> */}
               <label htmlFor="phone"></label>
               <input
                 type="text"
