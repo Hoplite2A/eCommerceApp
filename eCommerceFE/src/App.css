@@ -244,6 +244,7 @@ button.regCloseButton{
   flex-direction: column;
   margin-left:10px;
 }
+.individualItemPageDescription,
 .individualItemPageTitle{
   color: black;
   text-align: left;
