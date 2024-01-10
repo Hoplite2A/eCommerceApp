@@ -3,30 +3,26 @@ import { useSignal, useState } from 'react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { cartList, setCartList } from "../../MainPages/AllItems";
-import { cartCount } from './Cart';
 //! ---------------------------------------------
 
-export default function CartItemsList({key, cartItem}) {
+export default function CartItemsList({key, cartListItem}) {
 
-  const { image, title, price, description, quantity} = cartItem;
+  const { image, title, price, description, qunatity} = cartListItem;
 
-  const [itemQuant, setItemQuant] = useState(quantity)
+  // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
+  // setCartCoumt(cartCount - quantity)
 
-  //*Initializing CartQuantity for future calculations.
-  setCartCount(quantity);
+  // const updateCartQuantity = (e) => {
+  //   setCartCount(cartCount + (quantity));
+  //   setItemQuant(e.target.value);
+  // }
 
-  const removeItem = () => {
-    setCartList(cartList.filter((cartItem) => cartItem.id !== cartItem.id));
-    
-    //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
-    setCartCoumt(cartCount - quantity)
-  };
+  // const removeItem = () => {
 
-  const updateCartQuantity = (e) => {
-    setCartCount(cartCount + (quantity));
-    setItemQuant(e.target.value);
-  }
+  //   const updatedCartValue = [...tempCart, item ];
+  //   setTempCart(updatedCartValue);
+  //   localStorage.setItem('cart', JSON.stringify(updatedCartValue));
+  // }
 
   return (
     <>
@@ -41,9 +37,9 @@ export default function CartItemsList({key, cartItem}) {
         </div>
         <div className="cartListItemButtonSelector">
           <label>Qty:
-            <input id="quantity" type="number" placeholder={itemQuant} min={1} max={1000000} onChange={updateCartQuantity(e.target.value)}/>
+            <input id="quantity" type="number" placeholder={quantity} min={1} max={1000000} onChange={updateCartQuantity(e.target.value)}/>
           </label>
-          <button className="removeItem" onClick={removeItem}>Remove</button>
+          <button className="removeItem">Remove</button>
         </div>
       </div>
     </>

@@ -1,12 +1,10 @@
 //! Imported Libraries -------------------------
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState} from "react";
+import { useEffect} from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { token } from "../UniversalFeatures/Login";
-// import { wishlist, setWishlist } from './AllItems';
-
 //! --------------------------------------------
 
 export default function IndividualItem({ item, tempCart, setTempCart, tempWishlist, setTempWishlist}) {
@@ -18,12 +16,9 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempWishli
         navigate(`/IndividualItemPage/${item.id}`);
     }
 
-  //* --------- ADD TO WISHLIST FUNCTION --------
+  //* --------- ADD TO LOCAL WISHLIST FUNCTION --------
   const addToWishlist = (item) => {
-    console.log(item);
-    console.log(tempWishlist);
     const updatedWishlistValue = [...tempWishlist, item ];
-    console.log(updatedWishlistValue);
     setTempWishlist(updatedWishlistValue);
     localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
   }
@@ -37,9 +32,9 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempWishli
       localStorage.setItem('wishlist', JSON.stringify([]));
     }
   }, []);
-  //* --------- ADD TO WISHLIST FUNCTION --------
+  //* --------- ADD TO LOCAL WISHLIST FUNCTION --------
 
-  //* ----------- ADD TO CART FUNCTION ----------
+  //* ----------- ADD TO LOCAL CART FUNCTION ----------
   const addToCart = (item) => {
     const updatedCartValue = [...tempCart, item ];
     setTempCart(updatedCartValue);
@@ -55,7 +50,7 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempWishli
       localStorage.setItem('cart', JSON.stringify([]));
     }
   }, []);
-  //* ----------- ADD TO CART FUNCTION ----------
+  //* ----------- ADD TO LOCAL CART FUNCTION ----------
   
   return (
     <>

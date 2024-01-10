@@ -11,7 +11,7 @@ import IndividualItem from "./IndividualItemTiles";
 export default function AllItems() {
   const [allItems, setAllItems] = useState([]);
   const [tempCart, setTempCart] = useState([]);
-  const [tempWishlist, setTempWishlist] = useState();
+  const [tempWishlist, setTempWishlist] = useState([]);
 
   useEffect(() => {
     async function fetchAllItems() {
