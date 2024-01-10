@@ -9,17 +9,7 @@ import { token } from "../UniversalFeatures/Login";
 
 //! --------------------------------------------
 
-export default function IndividualItem({ item, tempCart, setTempCart}) {
-
-  // useEffect(() => {
-  //   const localCart = localStorage.getItem('cart');
-  //   if (localCart) {
-  //     const storedCart = JSON.parse(localCart) || [];
-  //     setTempCart(storedCart);
-  //   } else {
-  //     localStorage.setItem('cart', JSON.stringify([]));
-  //   }
-  // }, []);
+export default function IndividualItem({ item, tempCart, setTempCart, tempWishlist, setTempWishlist}) {
 
   const { id, image, title, price } = item;
 
@@ -29,27 +19,29 @@ export default function IndividualItem({ item, tempCart, setTempCart}) {
     }
 
   //* --------- ADD TO WISHLIST FUNCTION --------
-  const [wishlist, setWishlist] = useState();
   const addToWishlist = (item) => {
     console.log(item);
-    const updatedWishlistValue = [...wishlist, item ];
-    setWishlist(updatedWishlistValue);
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    console.log(wishlist);
+    console.log(tempWishlist);
+    const updatedWishlistValue = [...tempWishlist, item ];
+    console.log(updatedWishlistValue);
+    setTempWishlist(updatedWishlistValue);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
   }
   
   useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    setWishlist(storedWishlist);
+    const localWishlist = localStorage.getItem('wishlist');
+    if (localWishlist) {
+      const storedWishlist = JSON.parse(localWishlist);
+      setTempWishlist(storedWishlist);
+    } else {
+      localStorage.setItem('wishlist', JSON.stringify([]));
+    }
   }, []);
   //* --------- ADD TO WISHLIST FUNCTION --------
 
-  //! ----------- ADD TO CART FUNCTION ----------
+  //* ----------- ADD TO CART FUNCTION ----------
   const addToCart = (item) => {
-    console.log(item);
-    console.log(tempCart);
     const updatedCartValue = [...tempCart, item ];
-    console.log(updatedCartValue);
     setTempCart(updatedCartValue);
     localStorage.setItem('cart', JSON.stringify(updatedCartValue));
   }
@@ -63,7 +55,7 @@ export default function IndividualItem({ item, tempCart, setTempCart}) {
       localStorage.setItem('cart', JSON.stringify([]));
     }
   }, []);
-  //! ----------- ADD TO CART FUNCTION ----------
+  //* ----------- ADD TO CART FUNCTION ----------
   
   return (
     <>
