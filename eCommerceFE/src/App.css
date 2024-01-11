@@ -14,7 +14,7 @@ div {
   text-align: center;
   padding: 0px;
 }
-.linkStyling{
+.linkStyling {
   text-decoration: none;
 }
 /*! ----------- LOGO STYLING START ----------- */
@@ -24,10 +24,10 @@ div {
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover  {
+.logo:hover {
   filter: drop-shadow(0 0 2em #fcee09);
 }
-p.navBarLabels:hover{
+p.navBarLabels:hover {
   filter: drop-shadow(0 0 1em #fcee09);
 }
 @keyframes logo-spin {
@@ -50,9 +50,9 @@ p.navBarLabels:hover{
   color: #888;
 }
 /*! ---------- HEADER STYLING START ---------- */
-.homeDiv{
-  margin:0px;
-  padding:0px;
+.homeDiv {
+  margin: 0px;
+  padding: 0px;
 }
 .header {
   width: 100%;
@@ -61,7 +61,7 @@ p.navBarLabels:hover{
   flex-direction: row;
   justify-content: space-between;
   background-color: #2f3438;
-  margin:0px;
+  margin: 0px;
   padding-bottom: 7.5px;
 }
 .logo {
@@ -93,66 +93,66 @@ p.logoutButton.navBarLabels,
 p.navBarLabels {
   margin: 10px;
   align-items: flex-end;
-  padding-bottom:0%;
+  padding-bottom: 0%;
 }
 /*! -------- REGISTER BANNER STYLING --------- */
-.regBannerMessageAndButton{
+.regBannerMessageAndButton {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.regRedirectButton{
+.regRedirectButton {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 25%;
   height: 25px;
-  margin:15.5px;
+  margin: 15.5px;
 }
-.regBanner{
+.regBanner {
   background-color: #2f3438a8;
   width: 100%;
   margin: 0px;
 }
-.regBannerText{
+.regBannerText {
   color: white;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
-button.regBannerButton:hover{
-  font-size: .75rem;
+button.regBannerButton:hover {
+  font-size: 0.75rem;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: #5dbd26;
   filter: drop-shadow(0 0 2em #5dbd26);
   background-color: #2f3438;
 }
-button.regBannerButton{
-  font-size: .75rem;
+button.regBannerButton {
+  font-size: 0.75rem;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: white;
   border-radius: 30px;
   background-color: #2f3438;
 }
-button.regCloseButton:hover{
-  font-size: .75rem;
+button.regCloseButton:hover {
+  font-size: 0.75rem;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: #991f3d;
   filter: drop-shadow(0 0 2em #991f3d);
   background-color: #2f3438;
 }
-button.regCloseButton{
-  font-size: .75rem;
+button.regCloseButton {
+  font-size: 0.75rem;
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   color: white;
   border-radius: 30px;
   background-color: #2f3438;
 }
 /*! --------- ALL ITEMS STYLING START -------- */
-.allItemsDiv{
+.allItemsDiv {
   margin-left: 15px;
   margin-right: 15px;
   display: flex;
@@ -160,7 +160,7 @@ button.regCloseButton{
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.individualItemTile{
+.individualItemTile {
   width: 300px;
   margin-top: 20px;
   border: #2f3438;
@@ -169,7 +169,7 @@ button.regCloseButton{
   border-radius: 30px;
   background-color: #2f3438;
 }
-.individualItemTile:hover{
+.individualItemTile:hover {
   width: 300px;
   transform: scale(1.05);
   border: #2f3438;
@@ -179,52 +179,52 @@ button.regCloseButton{
   color: black;
   background-color: #2f3438;
 }
-.individualItemImage{
+.individualItemImage {
   margin-top: 10px;
   background-color: #ffffff;
   border-radius: 20px;
 }
-.individualItemImage > img{
+.individualItemImage > img {
   min-width: 125px;
   max-width: 200px;
 }
-.individualTitle{
+.individualTitle {
   color: white;
   text-decoration: underline;
   text-decoration-thickness: 1px;
 }
 .individualTitle:hover,
-.individualItemPrice:hover{
+.individualItemPrice:hover {
   color: #fcee09;
 }
-.individualItemBottom{
+.individualItemBottom {
   display: flex;
   flex-direction: row;
   margin-left: 15px;
   margin-right: 15px;
   justify-content: space-between;
 }
-.individualTitle{
+.individualTitle {
   font-size: medium;
   color: #ffffff;
   text-align: left;
 }
-.individualItemPrice{
+.individualItemPrice {
   color: #ffffff;
 }
-.individualItemButton{
+.individualItemButton {
   color: white;
   background-color: #25292c;
   border-radius: 20px;
 }
-.individualItemButton:hover{
+.individualItemButton:hover {
   color: #fcee09;
   background-color: #25292c;
   border-radius: 20px;
   filter: drop-shadow(0 0 2em #fcee09);
 }
 /*! ----- INDIVIDUAL ITEMS STYLING START ----- */
-.individualItemPage{
+.individualItemPage {
   width: 600px;
   display: flex;
   flex-direction: row;
@@ -234,21 +234,21 @@ button.regCloseButton{
   background-color: white;
   border-radius: 20px;
 }
-.individualItemPageImage > img{
+.individualItemPageImage > img {
   min-width: 200px;
   max-width: 300px;
   border-radius: 20px;
 }
-.individualItemPageRight{
+.individualItemPageRight {
   display: flex;
   flex-direction: column;
-  margin-left:10px;
+  margin-left: 10px;
 }
-.individualItemPageTitle{
+.individualItemPageTitle {
   color: black;
   text-align: left;
 }
-.individualItemPagePrice{
+.individualItemPagePrice {
   color: black;
 }
 .individualItemPageInfo {
@@ -256,45 +256,45 @@ button.regCloseButton{
   flex-direction: row;
   justify-content: space-around;
 }
-.individualItemPageButtonVisiting{
+.individualItemPageButtonVisiting {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.individualItemPageButtonLoggedIn{
+.individualItemPageButtonLoggedIn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .cartButton.individualItemPageButton,
-.wishlistButton.individualItemPageButton{
+.wishlistButton.individualItemPageButton {
   color: white;
   background-color: #25292c;
   border-radius: 20px;
-  margin:15px;
+  margin: 15px;
 }
-.cartButton.individualItemPageButton:hover{
+.cartButton.individualItemPageButton:hover {
   color: #c57907;
   background-color: #25292c;
   border-radius: 20px;
   filter: drop-shadow(0 0 2em #c57907);
 }
-.wishlistButton.individualItemPageButton:hover{
+.wishlistButton.individualItemPageButton:hover {
   color: #0ec0c0;
   background-color: #25292c;
   border-radius: 20px;
   filter: drop-shadow(0 0 2em #0ec0c0);
 }
-.backMessage{
+.backMessage {
   color: white;
   text-decoration: none;
 }
-.backToHome{
+.backToHome {
   color: white;
   background-color: #25292c;
   border-radius: 20px;
 }
-.backToHome:hover{
+.backToHome:hover {
   color: #5dbd26;
   background-color: #25292c;
   border-radius: 20px;
@@ -303,12 +303,12 @@ button.regCloseButton{
 
 /*! --- REGISTER/LOGIN FORM STYLING START ---- */
 .loginFormDiv,
-.registrationFormDiv{
+.registrationFormDiv {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.loginForm{
+.loginForm {
   max-height: 700px;
   max-width: 700px;
   margin-top: 15px;
@@ -316,7 +316,7 @@ button.regCloseButton{
   padding-right: 25px;
   padding-bottom: 25px;
   background-color: #2f3438;
-  border-width: 2px;;
+  border-width: 2px;
   border: #ffffff;
   border-style: solid;
   border-radius: 30px;
@@ -324,7 +324,7 @@ button.regCloseButton{
   flex-direction: column;
   justify-content: space-around;
 }
-.lF1{
+.lF1 {
   padding-bottom: 12.5px;
 }
 .registrationForm {
@@ -335,7 +335,7 @@ button.regCloseButton{
   padding-right: 25px;
   padding-bottom: 25px;
   background-color: #2f3438;
-  border-width: 2px;;
+  border-width: 2px;
   border: #ffffff;
   border-style: solid;
   border-radius: 30px;
@@ -343,23 +343,23 @@ button.regCloseButton{
   flex-direction: column;
   justify-content: space-between;
 }
-.loginMessage{
-  color: #5dbd26
+.loginMessage {
+  color: #5dbd26;
 }
-.registrationFormMessage{
+.registrationFormMessage {
   color: #c57907;
 }
-.newUserMessage{
+.newUserMessage {
   color: #0ec0c0;
   font-size: 1.5rem;
 }
 .loginLabels,
-.regLabels{
+.regLabels {
   margin: 10px;
 }
 .loginInputs,
-.regInputs { 
-  font-family: 'Times New Roman', Times, serif;
+.regInputs {
+  font-family: "Times New Roman", Times, serif;
 }
 .loginLabels > input,
 .regLabels > input {
@@ -368,7 +368,7 @@ button.regCloseButton{
   border-radius: 5px;
   background-color: #2f3438;
 }
-.newUser{
+.newUser {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -376,75 +376,75 @@ button.regCloseButton{
 .signUpButtonDiv > button {
   margin: 0px;
   justify-content: center;
-} 
-/***************** Name Fields *****************/
-.nameInputs{
-  color: #5dbd26
 }
-.nameFields{
+/***************** Name Fields *****************/
+.nameInputs {
+  color: #5dbd26;
+}
+.nameFields {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0px;
 }
 /************ Street Address1 Fields ***********/
-.streetAddressInput{
+.streetAddressInput {
   color: #991f3d;
 }
-.streetAddress1 > .regLabels > .street1Input{
-  width:450px;
+.streetAddress1 > .regLabels > .street1Input {
+  width: 450px;
 }
 .aptInput {
   width: 160px;
 }
-.streetAddress1{
+.streetAddress1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0px;
 }
 /************ Street Address2 Fields ***********/
-.cityAddressInput{
-color: #0ec0c0;
+.cityAddressInput {
+  color: #0ec0c0;
 }
-.streetAddress2{
+.streetAddress2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0px;
 }
 /************* Contact Info Fields *************/
-.contactInputs{
-color: #b216f0;
+.contactInputs {
+  color: #b216f0;
 }
-.contactInfo2{
+.contactInfo2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0px;
 }
 /************ Credential Info Fields ***********/
-.credInputs{
+.credInputs {
   color: #fcee09;
   margin-left: 15px;
   margin-right: 30px;
 }
-.createCredentials{
+.createCredentials {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin: 0px;
 }
-.loginCredsInput1{
-  margin:0px;
-  color:#b216f0;
+.loginCredsInput1 {
+  margin: 0px;
+  color: #b216f0;
 }
-.loginCredsInput2{
-  margin:0px;
+.loginCredsInput2 {
+  margin: 0px;
   color: #c57907;
 }
 /***************** Form Buttons ****************/
-.regFormButtons{
+.regFormButtons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -453,65 +453,65 @@ color: #b216f0;
   font-weight: 600;
 }
 .loginButton,
-.button1{
+.button1 {
   margin-right: 35px;
-  padding:5px;
-  background-color:#5dbd26;
+  padding: 5px;
+  background-color: #5dbd26;
   color: #2f3438;
   border-radius: 15px;
 }
-.lB2{
-  margin-right:0px;
+.lB2 {
+  margin-right: 0px;
 }
-.loginButton2{
-  padding-top:15px;
+.loginButton2 {
+  padding-top: 15px;
   justify-content: center;
 }
-.button1:hover{
+.button1:hover {
   margin-right: 35px;
-  padding:5px;
-  background-color:#2f3438;
-  color: #5dbd26;
-  border-radius: 15px;
-}
-.button2{
-  margin-left: 35px;
-  padding:5px;
-  background-color: #c57907;
-  color: #2f3438;
-  border-radius: 15px;
-}
-.button2:hover{
-  margin-left: 35px;
-  padding:5px;
+  padding: 5px;
   background-color: #2f3438;
   color: #5dbd26;
   border-radius: 15px;
 }
-.loginButton{
+.button2 {
+  margin-left: 35px;
+  padding: 5px;
+  background-color: #c57907;
+  color: #2f3438;
+  border-radius: 15px;
+}
+.button2:hover {
+  margin-left: 35px;
+  padding: 5px;
+  background-color: #2f3438;
+  color: #5dbd26;
+  border-radius: 15px;
+}
+.loginButton {
   width: 65px;
-  padding:5px;
+  padding: 5px;
   color: #c57907;
   border-radius: 15px;
   background-color: #2f3438;
 }
-.loginButton:hover{
+.loginButton:hover {
   width: 65px;
-  padding:5px;
+  padding: 5px;
   color: #2f3438;
   border-radius: 15px;
   background-color: #c57907;
 }
-.signUpButton{
+.signUpButton {
   width: 65px;
-  padding:5px;
+  padding: 5px;
   color: #0ec0c0;
   border-radius: 15px;
   background-color: #2f3438;
 }
-.signUpButton:hover{
+.signUpButton:hover {
   width: 65px;
-  padding:5px;
+  padding: 5px;
   color: #2f3438;
   border-radius: 15px;
   background-color: #0ec0c0;
@@ -527,8 +527,7 @@ color: #b216f0;
   flex-direction: column;
   color: #a1a1a1;
 }
-.collapseFooterButton{
-  
+.collapseFooterButton {
   font-size: 20px;
   font-weight: bolder;
   color: #991f3d;
@@ -555,17 +554,17 @@ color: #b216f0;
   flex-direction: column;
   justify-content: space-between;
 }
-.sectionLinks, 
+.sectionLinks,
 .collapedLinksTitle {
   width: 20%;
 }
 
-.expanded>h3.linksTitle,
-.footerLinks{
+.expanded > h3.linksTitle,
+.footerLinks {
   margin: 10px;
   text-align: left;
 }
-p.hideExpandMessage{
+p.hideExpandMessage {
   margin: 0px;
 }
 .getToKnowUs .pLink:hover {
@@ -578,9 +577,9 @@ p.hideExpandMessage{
   color: #c57907;
 }
 .manageAccount .pLink:hover {
-  color: #5dbd26
+  color: #5dbd26;
 }
-.sectionLinks > a{
+.sectionLinks > a {
   text-decoration: none;
   color: #a1a1a1;
 }
@@ -590,35 +589,80 @@ p.hideExpandMessage{
   text-decoration: none;
   color: #fcee09;
 }
-.collapedSocialMediaLinks{
+.collapedSocialMediaLinks {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.returnPolicyArticle{
+.returnPolicyArticle {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 65px;
 }
-.articleDiv{
-  max-width:66%;
+.articleDiv {
+  max-width: 66%;
   margin-left: 17.5%;
   margin-right: 17.5%;
 }
-.sectionHeaders{
+.sectionHeaders {
   color: #fcee09;
   margin-bottom: 7.5px;
 }
-p.body{
+p.body {
   color: #fcee09;
   text-align: center;
 }
-.retrunHome{
+.retrunHome {
   text-decoration: none;
   color: #fcee09;
   color: #c57907;
 }
+
+/*! -------- PAST PURCHASES START */
+.pastPurchasePreviewDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  /* height: 35%; */
+  color: #a1a1a1;
+  margin-bottom: 10px;
+}
+
+.pppTitle {
+  margin-bottom: 0;
+}
+
+.pppIndividualTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
+  height: 500px;
+  background-color: #2f3438;
+  margin: 10px 10px;
+}
+
+.pppIndividualTile p {
+  margin: 2px;
+}
+
+.pppImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 90%;
+  object-fit: contain;
+}
+
+.pppImage {
+  height: 80%;
+}
+
 /*! -------- FOOTER DOCS STYLING START ------- */
 /* .sectionHeaders{
 
