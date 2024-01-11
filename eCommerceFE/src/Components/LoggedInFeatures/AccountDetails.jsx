@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
 import Footer from "../UniversalFeatures/Footer";
+import PastPurchasesPreview from "./PastPurchasesPreview";
 import { token } from "../../Components/UniversalFeatures/Login";
 import { userDetails } from "../../Components/UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
@@ -315,6 +316,7 @@ export default function AccountDetails() {
               </>
             )}
           </form>
+          <PastPurchasesPreview />
           <Footer />
         </>
       ) : (
