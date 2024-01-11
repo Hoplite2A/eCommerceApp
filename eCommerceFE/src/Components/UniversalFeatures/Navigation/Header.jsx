@@ -4,6 +4,7 @@
 //! Imported Components/Variables---------------
 import Logo from "../Logo";
 import Navigation from "./Navigation";
+import Cart from "../Cart/Cart";
 // import SearchBar from '../SearchFilters/SearchBar';
 //! --------------------------------------------
 
@@ -15,7 +16,8 @@ export default function Header() {
     <div className="header">
         <Logo />
         {/* <SearchBar /> */}
-        <Navigation />
+      <Navigation />
+      <Cart />
     </div>
   );
 }

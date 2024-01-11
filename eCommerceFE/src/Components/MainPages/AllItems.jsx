@@ -1,20 +1,17 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect } from "react";
-// import { useSignal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
+// import { car, setCart, wishlist, setWishlist } from './IndividualItemTiles';
 //! --------------------------------------------
-
-// export const [wishlist, setWishlist] = useSignal([]);
-
-// export const [cart, setCart] = useSignal([]);
-
 
 export default function AllItems() {
   const [allItems, setAllItems] = useState([]);
+  const [tempCart, setTempCart] = useState([]);
+  const [tempWishlist, setTempWishlist] = useState([]);
 
   useEffect(() => {
     async function fetchAllItems() {
@@ -44,7 +41,12 @@ export default function AllItems() {
     <>
       <div className="allItemsDiv">
         {allItems.map((item) => {
-          return <IndividualItem key={item.id} item={item} />;
+          return <IndividualItem key={item.id}
+            item={item}
+            tempCart={tempCart}
+            setTempCart={setTempCart}
+            tempWishlist={tempWishlist}
+            setTempWishlist={setTempWishlist} />;
         })}
       </div>
     </>

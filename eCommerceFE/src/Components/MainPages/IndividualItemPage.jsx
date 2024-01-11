@@ -1,6 +1,6 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -9,7 +9,6 @@ import Footer from '../UniversalFeatures/Footer';
 import { token } from "../UniversalFeatures/Login";
 import { BASE_URL } from '../../App';
 //! --------------------------------------------
-
 
 export default function IndividualItemPage() {
 
@@ -31,6 +30,7 @@ export default function IndividualItemPage() {
     //Defined Object to destructure and use for function return fields from 
     //the useEffect API Call
     const [item, setItem] = useState({});
+    const { image, title, description, price } = item;
     
     useEffect(() => {
     async function IndividualItemPageFetch() {
@@ -58,14 +58,15 @@ export default function IndividualItemPage() {
         <div className="individualItemPage">
             <div className="individualItemPageLeft">
                     <div className="individualItemPageImage">
-                        <img src={item.image} alt={item.title} />
+                        <img src={image} alt={title} />
                     </div>
             </div>
             <div className="individualItemPageRight">
-                    <h3 className="individualItemPageTitle">{item.title}</h3>
+                    <h3 className="individualItemPageTitle">{title}</h3>
+                <p className="individualItemPageDescription">{description}</p>
                 <div className="individualItemPageInfo">
                     <div className="individualItemPagePriceDiv">
-                        <p className="individualItemPagePrice price">${item.price}</p>
+                        <p className="individualItemPagePrice price">${price}</p>
                     </div>
                     <div className={visible ? "individualItemPageButtonLoggedIn" : "individualItemPageButtonVisiting"}>
                     {/* <div className="individualItemPageButtonVisiting individualItemPageButtonLoggedIn"> */}

@@ -22,6 +22,8 @@ export default function Login() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
 
+  const [errorMessage, setErrorMessage] = useState('');
+  
   const navigate = useNavigate();
 
   const redirect = () => {
@@ -43,20 +45,24 @@ export default function Login() {
       //! ---------------- button link to registration form
       const json = await res.json();
       console.log(json);
+      setErrorMessage(json.message);
       const acctDetails = await json.user;
       userDetails.value = await acctDetails;
       console.log(userDetails.value);
       const tempToken = await json.token;
       token.value = tempToken;
       console.log(token.value);
+      
     } catch (err) {
       console.log(`Login function error durring handleSubmit, ${err}`);
-      alert(err);
+      
     }
 
     if (!token.value) {
+      alert(`${errorMessage}`);
       navigate("/login");
     } else {
+      alert(`Welcome${userDetails.fname}, you have successfully logged in.`);
       navigate("/");
     }
   };
