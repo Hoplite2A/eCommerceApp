@@ -9,6 +9,7 @@ const { getCart, addToCart, deleteUserCart } = require("../db/cartDB");
 // Get user cart by userId
 cartsRouter.get("/", requireUser, async (req, res, next) => {
   try {
+    console.log(req.user);
     const cart = await getCart(req.user.id);
     res.send(cart);
   } catch (error) {
@@ -29,6 +30,9 @@ cartsRouter.post("/", requireUser, async (req, res, next) => {
     next(error);
   }
 });
+
+// Add to cart
+cartsRouter.patch("/", requireUser, async (req, res, next) => {});
 
 // Deletes entire users cart by userId
 cartsRouter.delete("/", requireUser, async (req, res, next) => {

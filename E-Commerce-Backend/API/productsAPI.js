@@ -19,6 +19,7 @@ const { requireUser } = require("./utils");
 
 //* -----------------GET ALL API-----------------
 productsRouter.get("/", async (req, res, next) => {
+  console.log("SOMEHOW WE FUCKING IN HERE");
   try {
     const allProducts = await getAllProducts();
     res.send({ allProducts });

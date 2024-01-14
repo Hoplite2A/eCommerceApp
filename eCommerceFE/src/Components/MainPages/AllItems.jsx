@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
+import { token } from "../UniversalFeatures/Login";
 // import { car, setCart, wishlist, setWishlist } from './IndividualItemTiles';
 //! --------------------------------------------
 
@@ -24,29 +25,34 @@ export default function AllItems() {
         console.log(
           `Error occured in fetchAllItems within the AllItems component, ${err}`
         );
-        return (<>
-          <div className="allItemsErrorMessage">
-            <p className="errorMessage">
-              Our servers are on strike. We will work with them to get back to
-              serving you.
-            </p>
-          </div>
-        </>);
+        return (
+          <>
+            <div className="allItemsErrorMessage">
+              <p className="errorMessage">
+                Our servers are on strike. We will work with them to get back to
+                serving you.
+              </p>
+            </div>
+          </>
+        );
       }
     }
     return () => fetchAllItems();
   }, []);
-
   return (
     <>
       <div className="allItemsDiv">
         {allItems.map((item) => {
-          return <IndividualItem key={item.id}
-            item={item}
-            tempCart={tempCart}
-            setTempCart={setTempCart}
-            tempWishlist={tempWishlist}
-            setTempWishlist={setTempWishlist} />;
+          return (
+            <IndividualItem
+              key={item.id}
+              item={item}
+              tempCart={tempCart}
+              setTempCart={setTempCart}
+              tempWishlist={tempWishlist}
+              setTempWishlist={setTempWishlist}
+            />
+          );
         })}
       </div>
     </>

@@ -10,12 +10,16 @@ const { JWT_SECRET = "asugertiughfhsvduhsv" } = process.env;
 apiRouter.use(async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
+  console.log(req.header);
   if (!auth) {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
     try {
       const parsedToken = jwt.verify(token, JWT_SECRET);
+      console.log("After the verify");
+      console.log({ parsedToken });
+      console.log(parsedToken.id);
       const id = parsedToken && parsedToken.id;
 
       if (id) {

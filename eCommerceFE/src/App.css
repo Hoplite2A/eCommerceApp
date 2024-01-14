@@ -246,7 +246,7 @@ button.regCloseButton {
 }
 
 .individualItemPageDescription,
-.individualItemPageTitle{
+.individualItemPageTitle {
   color: black;
   text-align: left;
 }
@@ -622,6 +622,7 @@ p.body {
 }
 
 /*! -------- PAST PURCHASES START */
+/* Past Purchases Preview Start */
 .pastPurchasePreviewDiv {
   display: flex;
   flex-direction: row;
@@ -640,10 +641,10 @@ p.body {
 .pppIndividualTile {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 25%;
-  height: 500px;
+  height: 420px;
   background-color: #2f3438;
   margin: 10px 10px;
 }
@@ -663,6 +664,51 @@ p.body {
 
 .pppImage {
   height: 80%;
+}
+
+/* Past Purchases Page Start */
+.ppPageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pastPurchaseTile {
+  display: flex;
+  /* justify-content: space-around;
+  align-items: center; */
+  flex-direction: column;
+  margin: 20px;
+  background-color: #2f3438;
+  height: 350px;
+  width: 80%;
+}
+
+.pastPurchaseTileInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  background-color: #a1a1a1;
+  height: 20%;
+}
+
+.ppPageImageDiv {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 80%;
+  padding: 5px 0px;
+}
+
+.ppPageImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /*! -------- FOOTER DOCS STYLING START ------- */
