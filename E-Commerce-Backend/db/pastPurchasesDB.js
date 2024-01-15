@@ -58,7 +58,7 @@ async function createPastItems(id, cartItem) {
 }
 
 async function getPastPurchases(userId) {
-  console.log(userId);
+  console.log("Recived user:", userId);
   try {
     const result = await client.query(
       `
