@@ -72,6 +72,13 @@ async function createTables() {
     );
     `);
 
+    // await client.query(`
+    // ALTER TABLE carts
+    // ADD FOREIGN KEY (product_id)
+    // REFERENCES products (id)
+    // ON DELETE CASCADE;
+    // )`);
+
     await client.query(`
     CREATE TABLE past_purchases(
       id SERIAL PRIMARY KEY,

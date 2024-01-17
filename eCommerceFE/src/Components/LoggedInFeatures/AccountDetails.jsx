@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
@@ -9,12 +9,20 @@ import Header from "../UniversalFeatures/Navigation/Header";
 // import WishlistPreview from '../LoggedInFeatures/WishlistPreview';
 // import PastPurhcases from '../UniversalFeatures/PastPurhcases';
 import Footer from "../UniversalFeatures/Footer";
+import PastPurchasesPreview from "./PastPurchases/PastPurchasesPreview";
 import { token } from "../../Components/UniversalFeatures/Login";
 import { userDetails } from "../../Components/UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
 export default function AccountDetails() {
+  useEffect(() => {
+    console.log("AccountDetails mounted");
+    return () => {
+      console.log("AccountDetails unmounted");
+    };
+  }, []);
+  console.log("in account details");
   const navigate = useNavigate();
 
   const nothing = () => {
@@ -328,6 +336,8 @@ export default function AccountDetails() {
               {/* <PastPurhcases /> */}
             </div>
           </div>
+          <PastPurchasesPreview />
+
           <Footer />
         </>
       ) : (

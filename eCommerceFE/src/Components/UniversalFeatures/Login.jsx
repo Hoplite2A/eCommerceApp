@@ -22,13 +22,13 @@ export default function Login() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const [errorMessage, setErrorMessage] = useState('');
-  
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const redirect = () => {
-    navigate('/register');
-  }
+    navigate("/register");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,12 +50,11 @@ export default function Login() {
       userDetails.value = await acctDetails;
       console.log(userDetails.value);
       const tempToken = await json.token;
+      console.log({ tempToken });
       token.value = tempToken;
       console.log(token.value);
-      
     } catch (err) {
       console.log(`Login function error durring handleSubmit, ${err}`);
-      
     }
 
     if (!token.value) {
@@ -86,7 +85,7 @@ export default function Login() {
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
-                />
+              />
             </label>
             <label className="loginLabels">
               <input
@@ -98,20 +97,24 @@ export default function Login() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                />
+              />
             </label>
           </div>
           <div className="loginButton2">
-            <button className="loginButton lB2" type="submit">Login</button>
+            <button className="loginButton lB2" type="submit">
+              Login
+            </button>
           </div>
         </form>
         <div className="newUser">
           <p className="newUserMessage">
-            New to {companyName}?
-            <br></br>Sign up and start exploring all the benefits!
+            New to {companyName}?<br></br>Sign up and start exploring all the
+            benefits!
           </p>
           <div className="signUpButtonDiv">
-            <button className="signUpButton" onClick={redirect}>Sign Up</button>
+            <button className="signUpButton" onClick={redirect}>
+              Sign Up
+            </button>
           </div>
         </div>
       </div>

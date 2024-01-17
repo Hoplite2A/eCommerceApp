@@ -25,6 +25,8 @@ async function getAllProducts() {
 
 //* ----------------GET SINGLE Db---------------
 async function getSingleProduct(id) {
+  console.log("IN GET SINGLE PRODUCT...");
+  console.log({ id });
   try {
     const {
       rows: [product],
@@ -122,8 +124,8 @@ async function getProductByTitle(title) {
 //
 async function updateProduct(id, fields = {}) {
   const setString = Object.keys(fields)
-    .map((key, index) => `"${keys}"=$${index + 1}`)
-    .join(".");
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
   if (setString.length === 0) {
     console.log(`setString is empty, nothing to update.`);
@@ -131,6 +133,11 @@ async function updateProduct(id, fields = {}) {
   }
 
   try {
+    // Use of "transaction" to ensure changes to a product are reflected in carts and wishlists
+    // Transactions begin with a "BEGIN" in postgresSQL
+    await client.query("BEGIN");
+
+    // Update product and return update product
     const {
       rows: [updatedProduct],
     } = await client.query(
@@ -139,11 +146,35 @@ async function updateProduct(id, fields = {}) {
     SET ${setString}
     WHERE id=${id}
     RETURNING *;
-    `,
+      `,
       Object.values(fields)
     );
+    // Next update carts
+    await client.query(
+      `
+    UPDATE carts
+    SET ${setString}
+    WHERE product_id=${id};
+      `,
+      Object.values(fields)
+    );
+
+    // Update wishlists now too
+    await client.query(
+      `
+    UPDATE wishlists
+    SET ${setString}
+    WHERE product_id=${id};
+      `,
+      Object.values(fields)
+    );
+    // IF all went well, commit all changes to databse
+    // This only happens if ALL CHANGES are made successfully
+    await client.query("COMMIT");
     return updatedProduct;
   } catch (err) {
+    // IF any changes fail, ROLLBACK returns all items to their original state
+    await client.query("ROLLBACK");
     console.log(
       `Error ocurred in updateProduct Db Call, ${err} for item: ${id}`
     );

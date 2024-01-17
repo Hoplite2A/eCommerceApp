@@ -58,6 +58,7 @@ async function createPastItems(id, cartItem) {
 }
 
 async function getPastPurchases(userId) {
+  console.log("Recived user:", userId);
   try {
     const result = await client.query(
       `
@@ -71,6 +72,7 @@ async function getPastPurchases(userId) {
       `,
       [userId]
     );
+    console.log(result.rows);
 
     const organizedResults = {};
 
@@ -105,7 +107,9 @@ async function getPastPurchases(userId) {
         image,
       });
     });
+
     const resultArray = Object.values(organizedResults);
+    console.log({ resultArray });
     // return organizedResults;
     return resultArray;
   } catch (error) {

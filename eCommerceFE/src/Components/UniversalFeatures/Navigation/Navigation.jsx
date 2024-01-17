@@ -7,18 +7,16 @@ import { userDetails } from "../Login";
 //! --------------------------------------------
 
 export default function Navigation() {
-  
-  
-      const navigate = useNavigate();
-  
-      const handleLogout = () => {
-          token.value = null;
-          console.log(token.value);
-          userDetails.value = null;
-          console.log(userDetails.value); 
-          navigate('/');
-      }
-          
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    token.value = null;
+    console.log(token.value);
+    userDetails.value = null;
+    console.log(userDetails.value);
+    navigate("/");
+  };
+
   return (
     <div className="navBarMaster">
       <div className="navBar">
@@ -33,7 +31,9 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-              <p className="logoutButton navBarLabels" onClick={handleLogout}>Logout</p>
+            <p className="logoutButton navBarLabels" onClick={handleLogout}>
+              Logout
+            </p>
           </>
         ) : (
           <Link to="/login">

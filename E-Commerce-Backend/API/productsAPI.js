@@ -14,7 +14,7 @@ const {
   deleteProduct,
   getProductByTitle,
 } = require("../db/productsDB");
-const { requireUser } = require("./utils");
+const { requireUser, requireAdmin } = require("./utils");
 //! ---------------------------------------------
 
 //* -----------------GET ALL API-----------------
@@ -57,8 +57,9 @@ productsRouter.get("/:id", async (req, res, next) => {
 
 //* -------------CREATE PRODUCT API--------------
 // Need to add require user back here once I get it running
-productsRouter.post("/", async (req, res, next) => {
-  const { title, price, description, category, image, sellerId } = req.body;
+productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
+  const { title, price, description, category, image } = req.body;
+  const sellerId = req.user.id;
   if (!req.user.admin) {
     res.send({
       name: "Member Feature",
@@ -102,9 +103,12 @@ productsRouter.post("/", async (req, res, next) => {
 // Add back requireUser
 // ONly need double veryify on log in
 
-productsRouter.patch("/:id", async (req, res, next) => {
+productsRouter.patch("/:id", requireUser, async (req, res, next) => {
   //! -------- To update the product the req will have to include the following:
-  const { productId } = req.params;
+  const { id } = req.params;
+  console.log("productId and req.params.id: ");
+  console.log({ id });
+  console.log(typeof id);
   const { userId, title, price, description, category, image } = req.body;
   //TODO ---- userId will have to be included in the req.body
   //! --------------------------------------------------------------------------
@@ -132,8 +136,8 @@ productsRouter.patch("/:id", async (req, res, next) => {
   try {
     const originalProductDetails = await getSingleProduct(id);
 
-    if (originalProductDetails.owner.id === userId) {
-      const updatedProduct = await updateProduct(productId, updateFields);
+    if (originalProductDetails.sellerid === req.user.id || req.user.admin) {
+      const updatedProduct = await updateProduct(id, updateFields);
       res.send({ product: updatedProduct });
     } else {
       console.log(`Unauthorized Attempt to edit item ${productId}`);
