@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
+// import CartPreview from '../LoggedInFeatures/CartPreview';
+// import WishlistPreview from '../LoggedInFeatures/WishlistPreview';
+// import PastPurhcases from '../UniversalFeatures/PastPurhcases';
 import Footer from "../UniversalFeatures/Footer";
 import { token } from "../../Components/UniversalFeatures/Login";
 import { userDetails } from "../../Components/UniversalFeatures/Login";
@@ -18,7 +21,7 @@ export default function AccountDetails() {
     navigate("/");
   };
 
-  const [passwordResetVisible, setPasswordResetVisible] = useState(false);
+  const [passwordResetVisible, setPasswordResetVisible] = useState(true);
 
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
@@ -111,7 +114,7 @@ export default function AccountDetails() {
       const verdict = json.code;
       //! ------------------------- Add BE Logic for this return value
       if (verdict === 1) {
-        setPasswordResetVisible(true);
+        setPasswordResetVisible(!passwordResetVisible);
       }
     } catch (err) {
       console.log(
@@ -153,152 +156,152 @@ export default function AccountDetails() {
       {token.value && userDetails.value ? (
         <>
           <Header />
-          <form className="accountDetails" onSubmit={handleSubmit}>
-            <div className="userAccountDetails">
-              {/* Profile Image */}
-              <h2 className="accountDetailsTitle">Hi, {first_name}</h2>
-            </div>
-            <div className="ADNameFields">
-              <label htmlFor="fistName">First Name:</label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={first_name}
-                onChange={(e) => setFName(e.target.value)}
-              />
-              <label htmlFor="preferredName">Nick Name:</label>
-              <input
-                type="text"
-                id="preferredName"
-                name="preferredName"
-                value={preferred_name}
-                onChange={(e) => setPName(e.target.value)}
-              />
-              <label htmlFor="lastName">LastName:</label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={last_name}
-                onChange={(e) => setLName(e.target.value)}
-              />
-            </div>
-            <div className="ADStreetAddress1">
-              <label htmlFor="street1">Street</label>
-              <input
-                type="text"
-                id="street"
-                name="street"
-                value={address}
-                onChange={(e) => setStreetAddress(e.target.value)}
-              />
-              <label htmlFor="">APT/Unit</label>
-              <input
-                type="text"
-                id="Apt"
-                name="Apt"
-                value={apartment}
-                onChange={(e) => setAApt(e.target.value)}
-              />
-            </div>
-            <div className="ADStreetAddress2">
-              <label htmlFor="city">City</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={city}
-                onChange={(e) => setACity(e.target.value)}
-              />
-              <label htmlFor="state">State:</label>
-              <input
-                type="text"
-                id="state"
-                name="state"
-                value={state}
-                onChange={(e) => setAState(e.target.value)}
-              />
-              <label htmlFor="zip">ZIP:</label>
-              <input
-                type="text"
-                id="zip"
-                name="zip"
-                value={zip}
-                onChange={(e) => setAZip(e.target.value)}
-              />
-            </div>
-            <div className="ADContactInfo">
-              <label htmlFor="phone"></label>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                value={phone}
-                onChange={(e) => setCNumber(e.target.value)}
-              />
-              <label htmlFor="emailAddress"></label>
-              <input
-                type="text"
-                id="emailAddress"
-                name="emailAddress"
-                value={emailAddress}
-                onChange={(e) => setEmailAddress(e.target.value)}
-              />
-            </div>
-            <div className="ADCredententials">
-              <label htmlFor="user">Username</label>
-              <input
-                type="text"
-                id="user"
-                name="user"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-                disabled={updateInfo}
-              />
-              {!passwordResetVisible ? (
-                <>
-                  <label htmlFor="pass">Enter Current Password</label>
+          <div className="accountDetailsDiv">
+            <div className="accountDetailsTopHalf">
+              <form className="accountDetails" onSubmit={handleSubmit}>
+                <div className="userAccountDetails">
+                  {/* Profile Image */}
+                  <h2 className="accountDetailsTitle">Hi, {first_name}</h2>
+                </div>
+                <div className="ADNameFields">
+                  <label htmlFor="fistName">First Name:</label>
                   <input
                     type="text"
-                    id="pass"
-                    name="pass"
-                    onChange={(e) => setPassword(e.target.value)}
+                    id="firstName"
+                    name="firstName"
+                    value={first_name}
+                    onChange={(e) => setFName(e.target.value)}
                   />
-                </>
-              ) : (
-                <>
-                  <label htmlFor="pass">Enter New Password</label>
+                  <label htmlFor="preferredName">Nick Name:</label>
                   <input
                     type="text"
-                    id="pass"
-                    name="pass"
-                    onChange={(e) => setUpdatedPassword(e.target.value)}
+                    id="preferredName"
+                    name="preferredName"
+                    value={preferred_name}
+                    onChange={(e) => setPName(e.target.value)}
                   />
-                </>
-              )}
-              {passwordResetVisible ? (
-                <>
-                  <button
-                    className="resetPasswordRequest"
-                    onClick={handlePasswordResetRequest}
-                  >
-                    Reset
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="resetPassword"
-                    onClick={handlePasswordReset}
-                  >
-                    Reset
-                  </button>
-                </>
-              )}
-            </div>
-            {!updateInfo ? (
-              <>
+                  <label htmlFor="lastName">LastName:</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={last_name}
+                    onChange={(e) => setLName(e.target.value)}
+                  />
+                </div>
+                <div className="ADStreetAddress1">
+                  <label htmlFor="street1">Street</label>
+                  <input
+                    type="text"
+                    id="street"
+                    name="street"
+                    value={address}
+                    onChange={(e) => setStreetAddress(e.target.value)}
+                  />
+                  <label htmlFor="">APT/Unit</label>
+                  <input
+                    type="text"
+                    id="Apt"
+                    name="Apt"
+                    value={apartment}
+                    onChange={(e) => setAApt(e.target.value)}
+                  />
+                </div>
+                <div className="ADStreetAddress2">
+                  <label htmlFor="city">City</label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={city}
+                    onChange={(e) => setACity(e.target.value)}
+                  />
+                  <label htmlFor="state">State:</label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    value={state}
+                    onChange={(e) => setAState(e.target.value)}
+                  />
+                  <label htmlFor="zip">ZIP:</label>
+                  <input
+                    type="text"
+                    id="zip"
+                    name="zip"
+                    value={zip}
+                    onChange={(e) => setAZip(e.target.value)}
+                  />
+                </div>
+                <div className="ADContactInfo">
+                  <label htmlFor="phone"></label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setCNumber(e.target.value)}
+                  />
+                  <label htmlFor="emailAddress"></label>
+                  <input
+                    type="text"
+                    id="emailAddress"
+                    name="emailAddress"
+                    value={emailAddress}
+                    onChange={(e) => setEmailAddress(e.target.value)}
+                  />
+                </div>
+                <div className="ADCredententials">
+                  <label htmlFor="user">Username</label>
+                  <input
+                    type="text"
+                    id="user"
+                    name="user"
+                    value={username}
+                    onChange={(e) => setUserName(e.target.value)}
+                    disabled={updateInfo}
+                  />
+                  {!passwordResetVisible ? (
+                    <>
+                      <label htmlFor="pass">Enter Current Password</label>
+                      <input
+                        type="text"
+                        id="pass"
+                        name="pass"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <label htmlFor="pass">Enter New Password</label>
+                      <input
+                        type="text"
+                        id="pass"
+                        name="pass"
+                        onChange={(e) => setUpdatedPassword(e.target.value)}
+                      />
+                    </>
+                  )}
+                  {passwordResetVisible ? (
+                    <>
+                      <button
+                        className="resetPasswordRequest"
+                        onClick={handlePasswordResetRequest}
+                      >
+                        Reset
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="resetPassword"
+                        onClick={handlePasswordReset}
+                      >
+                        Reset
+                      </button>
+                    </>
+                  )}
+                </div>
                 <button
                   type="button"
                   className="ADSaveChangesButton"
@@ -306,15 +309,25 @@ export default function AccountDetails() {
                 >
                   Edit Info
                 </button>
-              </>
-            ) : (
-              <>
-                <button type="submit" className="ADSaveChangesButton">
-                  Save Changes
-                </button>
-              </>
-            )}
-          </form>
+                {updateInfo ? (
+                  <>
+                    <button type="submit" className="ADSaveChangesButton">
+                      Save Changes
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </form>
+            </div>
+            <div className="cartWishlistPreview">
+              <div className="cartPreview">{/* <CartPreview /> */}</div>
+              <div className="wishlistPreview">{/* <WishlistPreview /> */}</div>
+            </div>
+            <div className="accountDetailsBottomHalf">
+              {/* <PastPurhcases /> */}
+            </div>
+          </div>
           <Footer />
         </>
       ) : (
