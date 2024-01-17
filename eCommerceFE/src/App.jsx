@@ -13,7 +13,7 @@ import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 import AllItems from "./Components/MainPages/AllItems";
 import IndividualItem from "./Components/MainPages/IndividualItemTiles";
 import IndividualItemPage from "./Components/MainPages/IndividualItemPage";
-import Cart from "./Components/UniversalFeatures/Cart/Cart";
+// import Cart from "./Components/UniversalFeatures/Cart/Cart";
 // import Checkout from './Components/UniversalFeature/Checkout';
 
 import Footer from "./Components/UniversalFeatures/Footer";
@@ -55,7 +55,7 @@ export default function App() {
       <Route path="/AllItems" element={<AllItems />} />
       <Route path="/IndividualItemTiles" element={<IndividualItem />} />
       <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
-      <Route path="/Cart" element={<Cart />} />
+      {/* <Route path="/Cart" element={<Cart  />} /> */}
       {/* <Route path="/Checkout" element={<Checkout  />} /> */}
 
       <Route path="/Footer" element={<Footer />} />

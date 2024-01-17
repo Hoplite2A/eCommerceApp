@@ -19,6 +19,7 @@ async function createUser({
   admin,
 }) {
   // use bcrypt to "hash" a function by SALT_COUNT to create unique hashedPassword that is more secure
+  console.log(fName);
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
     if (admin) {

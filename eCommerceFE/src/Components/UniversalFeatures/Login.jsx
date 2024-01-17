@@ -61,7 +61,7 @@ export default function Login() {
       alert(`${errorMessage}`);
       navigate("/login");
     } else {
-      alert(`Welcome${userDetails.fname}, you have successfully logged in.`);
+      alert(`You have successfully logged in.`);
       navigate("/");
     }
   };
