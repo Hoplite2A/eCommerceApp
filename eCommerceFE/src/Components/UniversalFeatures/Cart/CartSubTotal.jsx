@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-// import { cartList } from '../../MainPages/AllItems';
+import { dbCart } from '../../MainPages/AllItems';
 //! ---------------------------------------------
 
 export default function CartSubTotal() {
     
+    const cartList = dbCart.value;
+
     //TODO ---- Create subtotal function against the method -------------------
     const priceArray = [];
     const [cartSubTotal, setCartSubTotal] = useState(0);

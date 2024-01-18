@@ -63,6 +63,9 @@ p.navBarLabels:hover {
   background-color: #2f3438;
   margin: 0px;
   padding-bottom: 7.5px;
+  /* position: fixed;
+  top: 0%;
+  left: 0%; */
 }
 .logo {
   padding: 5px;
@@ -113,6 +116,8 @@ p.navBarLabels {
   background-color: #2f3438a8;
   width: 100%;
   margin: 0px;
+  margin-top: 57.6px;
+  /* position: fixed; */
 }
 .regBannerText {
   color: white;
@@ -209,6 +214,12 @@ button.regCloseButton {
   color: #ffffff;
   text-align: left;
 }
+.cartListItemTitle{
+  font-size: medium;
+  color: #000000;
+  text-align: left;
+}
+
 .individualItemPrice {
   color: #ffffff;
 }
@@ -224,6 +235,7 @@ button.regCloseButton {
   filter: drop-shadow(0 0 2em #fcee09);
 }
 /*! ----- INDIVIDUAL ITEMS STYLING START ----- */
+.cartListItemTile,
 .individualItemPage {
   width: 600px;
   display: flex;
@@ -234,17 +246,19 @@ button.regCloseButton {
   background-color: white;
   border-radius: 20px;
 }
+.cartListItemImage > img,
 .individualItemPageImage > img {
   min-width: 200px;
   max-width: 300px;
   border-radius: 20px;
 }
+.cartListItemTileRight,
 .individualItemPageRight {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
 }
-
+.cartItemListDescription,
 .individualItemPageDescription,
 .individualItemPageTitle {
   color: black;
@@ -268,6 +282,8 @@ button.regCloseButton {
   flex-direction: column;
   justify-content: space-between;
 }
+.continueShopping,
+.cartListItemButtonSelector.cartListItemQuantity,
 .cartButton.individualItemPageButton,
 .wishlistButton.individualItemPageButton {
   color: white;

@@ -1,18 +1,50 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect } from "react";
+import { signal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
-import { token } from "../UniversalFeatures/Login";
-// import { car, setCart, wishlist, setWishlist } from './IndividualItemTiles';
+import { dbCart } from "../../App";
 //! --------------------------------------------
 
 export default function AllItems() {
-  const [allItems, setAllItems] = useState([]);
+
+//! ------------------------------------Adding to Wishlist------------------------------------  
+
+//*To Render the products on the AllItem Page
+const [allItems, setAllItems] = useState([]);
+//*Temporary Wishlist for Duplication Elimination and insertion of quantity key:value pair
+const [tempWishlist, setTempWishlist] = useState([]);
+
+//! ------------------------------------Adding to Wishlist------------------------------------
+  
+//! --------------------------------------Adding to Cart--------------------------------------
+  //*Temporary Cart for Duplication Elimination and insertion of quantity key:value pair
   const [tempCart, setTempCart] = useState([]);
-  const [tempWishlist, setTempWishlist] = useState([]);
+  //*To pass the Item.id from the item being added
+  const [cartItemId, setCartItemId] = useState(null);
+  //*To pass the count of occurances in TempCart from IndividualItemTiles
+  const [tempCountCart, setTempCountCart] = useState(0);
+  
+  useEffect(() => {
+    for (let i = 0; i < tempCart.length; i++){
+      if (tempCart[i].id === cartItemId) {
+        tempCart[i].quantity = tempCountCart;
+      }
+    }
+    //*Removing Duplicates from tempCart
+    const uniqueCartArr = tempCart.filter((value, id, array) => array.indexOf(value) == id);
+    //*Defining dbCart as uniqueCartArr
+    dbCart.value = uniqueCartArr;
+    console.log(dbCart.value);
+    
+    //*Sending dbCart to LocalStorage
+    localStorage.setItem('cart', JSON.stringify(dbCart));
+    //*Dependency for re-render after something is added to tempCart
+  }, [tempCart])
+//! --------------------------------------Adding to Cart--------------------------------------  
 
   useEffect(() => {
     async function fetchAllItems() {
@@ -39,6 +71,7 @@ export default function AllItems() {
     }
     return () => fetchAllItems();
   }, []);
+  
   return (
     <>
       <div className="allItemsDiv">
@@ -49,6 +82,9 @@ export default function AllItems() {
               item={item}
               tempCart={tempCart}
               setTempCart={setTempCart}
+              tempCountCart={tempCountCart}
+              setTempCountCart={setTempCountCart}
+              setCartItemId={setCartItemId}
               tempWishlist={tempWishlist}
               setTempWishlist={setTempWishlist}
             />

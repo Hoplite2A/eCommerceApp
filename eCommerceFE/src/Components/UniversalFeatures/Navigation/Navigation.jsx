@@ -31,15 +31,19 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            <p className="logoutButton navBarLabels" onClick={handleLogout}>
-              Logout
-            </p>
+            <Link to="/Cart">
+            <p className="navBarLabels">Cart</p>
+            </Link>
+            <p className="logoutButton navBarLabels" onClick={handleLogout}>Logout</p>
           </>
-        ) : (
+        ) : ( <>
           <Link to="/login">
             <p className="navBarLabels">Login</p>
           </Link>
-        )}
+          <Link to="/Cart">
+              <p className="navBarLabels">Cart</p>
+          </Link>
+        </>)}
       </div>
     </div>
   );
