@@ -621,8 +621,54 @@ p.body {
   color: #c57907;
 }
 
-/*! -------- PAST PURCHASES START */
+/*! -------- ACCOUNT DETAILS START */
+/* Account Details Start */
+.gridContainer {
+  margin: 0;
+  /* height: 70vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 67px;
+  /* flex-grow: 1; */
+}
+.aDGrid {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100vw;
+  height: 85vh;
+  /* flex-grow: 1; */
+  place-items: stretch;
+}
+
+.accountDetails {
+  background-color: red;
+  grid-row: 1 / span 2;
+  grid-column: 1 / span 3;
+}
+
+.aDWishlistDiv {
+  background-color: white;
+  grid-row: 1 / span 2;
+  grid-column: 4 / span 1;
+}
+
+.aDCartDiv {
+  background-color: blue;
+  grid-row: 1 / span 2;
+  grid-column: 5 / span 1;
+}
+
+.pppContainer {
+  background-color: green;
+  grid-row: 3 / span 1;
+  grid-column: 1 / span 5;
+}
+
 /* Past Purchases Preview Start */
+
 .pastPurchasePreviewDiv {
   display: flex;
   flex-direction: row;
@@ -644,7 +690,7 @@ p.body {
   justify-content: center;
   align-items: center;
   width: 25%;
-  height: 420px;
+  /* height: 350px; */
   background-color: #2f3438;
   margin: 10px 10px;
 }
@@ -666,7 +712,7 @@ p.body {
   height: 80%;
 }
 
-/* Past Purchases Page Start */
+/*! -------- PAST PURCHASES PAGE START */
 .ppPageDiv {
   display: flex;
   justify-content: center;

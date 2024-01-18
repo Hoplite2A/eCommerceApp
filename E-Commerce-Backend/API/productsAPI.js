@@ -11,6 +11,7 @@ const {
   createProduct,
   verifyProduct,
   updateProduct,
+  updateProductAvailability,
   deleteProduct,
   getProductByTitle,
 } = require("../db/productsDB");
@@ -19,6 +20,7 @@ const { requireUser, requireAdmin } = require("./utils");
 
 //* -----------------GET ALL API-----------------
 productsRouter.get("/", async (req, res, next) => {
+  console.log("IN GET PRODUCTS API");
   try {
     const allProducts = await getAllProducts();
     res.send({ allProducts });
@@ -70,25 +72,31 @@ productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
   try {
     const newProduct = await getProductByTitle(title);
 
-    if (newProduct) {
+    if (newProduct && newProduct.available === true) {
       next({
         name: "DuplicateProductDetected",
         message: `${newProduct.title} already exists. Please update the existing product. Find item by ID: ${newProduct.id}`,
       });
+    } else if (newProduct && newProduct.available === false) {
+      await updateProductAvailability(newProduct.id, true);
+      res.send({
+        message: `${title} already existed in the catalog and has been made available again! To edit/update this item. Go to your account details and access your added items there.`,
+        product: newProduct,
+      });
+    } else {
+      const addedProduct = await createProduct({
+        title,
+        price,
+        description,
+        category,
+        image,
+        sellerId,
+      });
+
+      res.send({
+        message: `${title} has been added to the catalog, to edit/update this item. Go to your account details and access your added items there.`,
+      });
     }
-
-    const addedProduct = await createProduct({
-      title,
-      price,
-      description,
-      category,
-      image,
-      sellerId,
-    });
-
-    res.send({
-      message: `${title} has been added to the catalog, to edit/update this item. Go to your account details and access your added items there.`,
-    });
   } catch (err) {
     console.log(`An Error ocurred in the productsRouter.post('/'), ${err}`);
     next({

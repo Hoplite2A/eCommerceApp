@@ -10,10 +10,12 @@ const client = require("./client");
 
 // //* -----------------GET ALL Db-----------------
 async function getAllProducts() {
+  console.log("IN GET ALL PRODUCTS");
   try {
     const { rows } = await client.query(`
     SELECT *
-    FROM products;
+    FROM products
+    WHERE available = true;
     `);
     return rows;
   } catch (err) {
@@ -121,7 +123,24 @@ async function getProductByTitle(title) {
 //* -------------VERIFY !DUPLICATE--------------
 
 //* --------------UPDATE PRODUCT Db-------------
-//
+// Update product availability
+async function updateProductAvailability(id, availability) {
+  try {
+    await client.query(
+      `
+      UPDATE products
+      SET available = $1
+      WHERE id = $2;
+      `,
+      [availability, id]
+    );
+  } catch (error) {
+    console.log(`Error updating product availability: ${error}`);
+    throw error;
+  }
+}
+
+// Update product values
 async function updateProduct(id, fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
@@ -190,12 +209,14 @@ async function deleteProduct(productId) {
       rows: [product],
     } = await client.query(
       `
-      DELETE FROM products
-      WHERE id=$1
+      UPDATE products
+      SET available = false
+      WHERE id = $1
       RETURNING *;
       `,
       [productId]
     );
+
     return product;
   } catch (err) {
     console.log(
@@ -213,6 +234,46 @@ module.exports = {
   createProduct,
   verifyProduct,
   updateProduct,
+  updateProductAvailability,
   deleteProduct,
   getProductByTitle,
 };
+
+// await client.query("BEGIN");
+
+// // update carts table to show unavailable
+// await client.query(
+//   `
+//   UPDATE carts
+//   SET product_id = -$1,
+//   title = 'We''re sorry, but ' || $2 || ' is no longer available',
+//   image = 'https://images.squarespace-cdn.com/content/v1/56db9f01c6fc08b9910d053a/1595609119785-0NP8XIMCG8RWCWPC49UC/south+park+bp+2.jpg?format=2500w'
+//   WHERE product_id=$1;
+//   `,
+//   [productId, productName]
+// );
+
+// // update wishlist
+// await client.query(
+//   `
+//   UPDATE wishlists
+//   SET product_id = -$1,
+//   title = 'We''re sorry, but ' || $2 || ' is no longer available',
+//   image = 'https://images.squarespace-cdn.com/content/v1/56db9f01c6fc08b9910d053a/1595609119785-0NP8XIMCG8RWCWPC49UC/south+park+bp+2.jpg?format=2500w'
+//   WHERE product_id=$1;
+//   `,
+//   [productId, productName]
+// );
+
+// await client.query(
+//   `
+//   DELETE FROM products
+//   WHERE id=$1
+//   RETURNING *;
+//   `,
+//   [productId]
+// );
+
+// await client.query("COMMIT");
+
+// await client.query("ROLLBACK");

@@ -29,8 +29,12 @@ async function createPastPurchase(userID, cart) {
     const { id } = purchase;
     let purchaseItems = [];
     for (const product of cart) {
-      const itemEntry = await createPastItems(id, product);
-      purchaseItems.push(itemEntry);
+      console.log({ product });
+      console.log(product.available);
+      if (product.available !== false) {
+        const itemEntry = await createPastItems(id, product);
+        purchaseItems.push(itemEntry);
+      }
     }
     const purchaseInfo = { purchase, purchaseItems };
     return purchaseInfo;
@@ -69,6 +73,7 @@ async function getPastPurchases(userId) {
       JOIN
         past_purchases_items ppi ON pp.id = ppi.purchase_id
       WHERE pp.user_id=$1
+      ORDER BY purchase_date DESC
       `,
       [userId]
     );
@@ -108,9 +113,12 @@ async function getPastPurchases(userId) {
       });
     });
 
-    const resultArray = Object.values(organizedResults);
-    console.log({ resultArray });
-    // return organizedResults;
+    // Sort by purchase date to ensure results are in DESCENDING order by date
+    const resultArray = Object.values(organizedResults).sort(
+      // Compares A to B, if result is negative, A goes in front of B, vice versa. If 0, stays same
+      (a, b) => new Date(b.purchase_date) - new Date(a.purchase_date)
+    );
+
     return resultArray;
   } catch (error) {
     throw error;
