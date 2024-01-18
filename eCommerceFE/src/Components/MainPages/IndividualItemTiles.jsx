@@ -1,14 +1,16 @@
+/* eslint-disable no-unused-vars */
 //! Imported Libraries -------------------------
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { token } from "../UniversalFeatures/Login";
 //! --------------------------------------------
 
-export default function IndividualItem({ item, tempCart, setTempCart, tempWishlist, setTempWishlist}) {
-
+// eslint-disable-next-line react/prop-types
+export default function IndividualItem({ item, tempCart, setTempCart, tempCountCart, setTempCountCart, setCartItemId, tempWishlist, setTempWishlist}) {
+  
   const { id, image, title, price } = item;
 
     const navigate = useNavigate();
@@ -16,13 +18,13 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempWishli
         navigate(`/IndividualItemPage/${item.id}`);
     }
 
-  //* --------- ADD TO LOCAL WISHLIST FUNCTION --------
+//! ------------------------------------Adding to Wishlist------------------------------------  
   const addToWishlist = (item) => {
     const updatedWishlistValue = [...tempWishlist, item ];
     setTempWishlist(updatedWishlistValue);
     localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
   }
-  
+
   useEffect(() => {
     const localWishlist = localStorage.getItem('wishlist');
     if (localWishlist) {
@@ -32,25 +34,25 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempWishli
       localStorage.setItem('wishlist', JSON.stringify([]));
     }
   }, []);
-  //* --------- ADD TO LOCAL WISHLIST FUNCTION --------
+//! ------------------------------------Adding to Wishlist------------------------------------  
 
-  //* ----------- ADD TO LOCAL CART FUNCTION ----------
+//! --------------------------------------Adding to Cart--------------------------------------
+  const [counter, setCounter] = useState(1);
   const addToCart = (item) => {
+    
+    setCartItemId(item.id);
+
     const updatedCartValue = [...tempCart, item ];
-    setTempCart(updatedCartValue);
-    localStorage.setItem('cart', JSON.stringify(updatedCartValue));
-  }
-  
-  useEffect(() => {
-    const localCart = localStorage.getItem('cart');
-    if (localCart) {
-      const storedCart = JSON.parse(localCart);
-      setTempCart(storedCart);
-    } else {
-      localStorage.setItem('cart', JSON.stringify([]));
+    for (let i = 0; i < updatedCartValue.length; i++) {
+      if (updatedCartValue[i].id === item.id) {
+        setCounter(updatedCartValue[i].quantity);
+        setCounter(counter + 1);
+      }
     }
-  }, []);
-  //* ----------- ADD TO LOCAL CART FUNCTION ----------
+    setTempCountCart(counter);
+    setTempCart(updatedCartValue);
+  }
+//! --------------------------------------Adding to Cart--------------------------------------
   
   return (
     <>

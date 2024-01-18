@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
 import { Routes, Route } from "react-router-dom";
+import { signal } from "@preact/signals-react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -13,7 +14,7 @@ import AccountDetails from "./Components/LoggedInFeatures/AccountDetails";
 import AllItems from "./Components/MainPages/AllItems";
 import IndividualItem from "./Components/MainPages/IndividualItemTiles";
 import IndividualItemPage from "./Components/MainPages/IndividualItemPage";
-// import Cart from "./Components/UniversalFeatures/Cart/Cart";
+import Cart from "./Components/UniversalFeatures/Cart/Cart";
 // import Checkout from './Components/UniversalFeature/Checkout';
 
 import Footer from "./Components/UniversalFeatures/Footer";
@@ -28,6 +29,8 @@ import PastPurchasesPage from "./Components/LoggedInFeatures/PastPurchases/PastP
 
 //! Universal Variables -------------------------
 export const BASE_URL = "http://localhost:3000/api";
+//*Final signal Cart for sending to localStorage & for use in Cart Rendering
+export const dbCart = signal([]);
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
@@ -55,7 +58,7 @@ export default function App() {
       <Route path="/AllItems" element={<AllItems />} />
       <Route path="/IndividualItemTiles" element={<IndividualItem />} />
       <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
-      {/* <Route path="/Cart" element={<Cart  />} /> */}
+      <Route path="/Cart" element={<Cart  />} />
       {/* <Route path="/Checkout" element={<Checkout  />} /> */}
 
       <Route path="/Footer" element={<Footer />} />

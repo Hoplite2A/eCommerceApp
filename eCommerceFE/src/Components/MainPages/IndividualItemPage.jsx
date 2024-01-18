@@ -8,6 +8,7 @@ import Header from "../UniversalFeatures/Navigation/Header";
 import Footer from "../UniversalFeatures/Footer";
 import { token } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
+// import { tempCart, setTempCart, tempWishlist, setTempWishlist } from './AllItems';
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
@@ -36,9 +37,7 @@ export default function IndividualItemPage() {
       try {
         const res = await fetch(`${BASE_URL}/products/${id}`);
         const json = await res.json();
-        console.log(json);
         setItem(json.singleProduct);
-        console.log("Individual Item Page");
       } catch (err) {
         console.log(
           `Error occurred in the IndividualItemPageFetch within the IndividualItemPage component, ${err}`
@@ -57,6 +56,11 @@ export default function IndividualItemPage() {
     }
     return () => IndividualItemPageFetch();
   }, [id]);
+
+//TODO -------------------- Add Cart && Add Wishlist Button   
+
+
+//TODO -------------------- Add Cart && Add Wishlist Button   
 
   return (
     <>
@@ -84,16 +88,16 @@ export default function IndividualItemPage() {
               {/* <div className="individualItemPageButtonVisiting individualItemPageButtonLoggedIn"> */}
               {visible ? (
                 <>
-                  <button className="wishlistButton individualItemPageButton">
+                  <button className="wishlistButton individualItemPageButton" >
                     Add to Wishlist
                   </button>
-                  <button className="cartButton individualItemPageButton">
+                  <button className="cartButton individualItemPageButton" >
                     Add to Cart
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="cartButton individualItemPageButton">
+                  <button className="cartButton individualItemPageButton" >
                     Add to Cart
                   </button>
                 </>
