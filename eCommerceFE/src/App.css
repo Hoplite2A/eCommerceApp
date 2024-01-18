@@ -103,6 +103,7 @@ p.navBarLabels {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 0px;
 }
 .regRedirectButton {
   display: flex;
@@ -116,7 +117,7 @@ p.navBarLabels {
   background-color: #2f3438a8;
   width: 100%;
   margin: 0px;
-  margin-top: 57.6px;
+  /* margin-top: 57.6px; */
   /* position: fixed; */
 }
 .regBannerText {
@@ -282,6 +283,33 @@ button.regCloseButton {
   flex-direction: column;
   justify-content: space-between;
 }
+.cartListItemDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.titlePrice{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.titlePriceSubDivTitle{
+  text-align: left;
+  max-width: 200px;
+}
+.cartListItemPrice,
+.titlePriceSubDivPrice{
+  text-align: left;
+  margin: 0%;
+}
+label.cartListItemQuantity{
+  margin-right: 10px;
+  text-align: left;
+}
+input.cartListItemQuantity{
+  max-width: 40px;
+}
+.checkout,
 .continueShopping,
 .cartListItemButtonSelector.cartListItemQuantity,
 .cartButton.individualItemPageButton,
@@ -318,7 +346,6 @@ button.regCloseButton {
   border-radius: 20px;
   filter: drop-shadow(0 0 2em #5dbd26);
 }
-
 /*! --- REGISTER/LOGIN FORM STYLING START ---- */
 .loginFormDiv,
 .registrationFormDiv {
@@ -726,6 +753,19 @@ p.body {
   height: 100%;
   object-fit: contain;
 }
+/*! ----------- CART STYLING START ----------- */
+.cartPageDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.cartPageDivRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 25px;
+}
+
 
 /*! -------- FOOTER DOCS STYLING START ------- */
 /* .sectionHeaders{

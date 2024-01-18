@@ -1,14 +1,15 @@
 //! Imported Libraries --------------------------
+import { useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-
 //! ---------------------------------------------
 
-export default function CartItemsList({cartListItem, tempCart, setTempCart}) {
-
+export default function CartItemsList({cartListItem}) {
+  console.log('CartItemsList Component');
+  console.log(cartListItem);
+  //*Possible prop drilling: , tempCart, setTempCart
   
-
   const { image, title, price, description, quantity} = cartListItem;
 
   // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
@@ -19,11 +20,8 @@ export default function CartItemsList({cartListItem, tempCart, setTempCart}) {
   //   setItemQuant(e.target.value);
   // }
 
-  // const removeItem = () => {
-
-  //   const updatedCartValue = [...tempCart, item ];
-  //   setTempCart(updatedCartValue);
-  //   localStorage.setItem('cart', JSON.stringify(updatedCartValue));
+  // const removeItem = (id) => {
+    
   // }
 
   return (
@@ -34,17 +32,25 @@ export default function CartItemsList({cartListItem, tempCart, setTempCart}) {
         </div>
         <div className="cartListItemTileRight">
           <div className="cartListItemDetails">
-            <p className="cartListItemTitle">{title}</p>
-            <p className="cartListItemPrice">{price}</p>
-            <p className="cartItemListDescription">{description}</p>
+            <div className="titlePrice">
+              <div className="titlePriceSubDivTitle">
+                <p className="cartListItemTitle">{title}</p> 
+              </div>
+              <div className="titlePriceSubDivPrice">
+                <p className="cartListItemPrice">{price}</p>
+              </div>
+            </div>
+            {/* <div className="description">
+              <p className="cartItemListDescription">{description}</p>
+            </div> */}
           </div>
           <div className="cartListItemButtonSelector">
-            <label>Qty:
+            <label className="cartListItemQuantity">Qty:
               <input className="cartListItemQuantity" id="quantity" type="number" placeholder={quantity} min={1} max={1000000} />
               {/* //TODO -----------------------------Add Event Listener for input/change to quantity and then update CartListItem.quantity &&
               //TODO ---------------------------------then update TempCart */}
             </label>
-            <button className="removeItem">Remove</button>
+            <button className="removeItem" >Remove</button>
           </div>
         </div>
       </div>

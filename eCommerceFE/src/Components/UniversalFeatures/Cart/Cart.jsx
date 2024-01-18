@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 //! Imported Components/Variables----------------
 import CartItemsList from './CartItemsList';
-// import CartSubTotal from './CartSubTotal';
+import CartSubTotal from './CartSubTotal';
 import { dbCart } from '../../../App';
 import Header from '../Navigation/Header';
 import Footer from '../Footer';
@@ -17,19 +17,11 @@ import Footer from '../Footer';
 export default function Cart() {
     
     const tempCart = dbCart.value;
-    console.log('Cart Start');
-    console.log(dbCart);
-    console.log(tempCart);
-    console.log('Cart End');
     
     //TODO -- Write function for watching for session launch (toggle signal to True)
     // const session = signal(false);
     
     const navigate = useNavigate();
-
-    const redirect = () => {
-        navigate('/');
-    }
 
     // const checkout = () => {
     //     async function CheckoutCart() {
@@ -57,13 +49,17 @@ export default function Cart() {
     return (<>
             <Header />
                 <div className="cartPageDiv">
-                    <button className='continueShopping' onClick={redirect}>Continue Shopping</button>
-                    {tempCart.map((cartListItem) => {
-                        return <CartItemsList key={cartListItem.id} cartListItem={cartListItem} />
-                    })}
-                    {/* <CartSubTotal /> */}
-                    <button className="checkout" >Checkout</button>
+                    <div className="cartPageDivLeft">
+                        {tempCart.map((cartListItem, index) => {
+                            return <CartItemsList key={index} cartListItem={cartListItem} />
+                        })}
+                    </div>
+                    <div className="cartPageDivRight">
+                        <CartSubTotal />
+                    {tempCart ? <button className="checkout" >Checkout</button> : <></>}
+                    </div>
                 </div> 
+                <button className='continueShopping' onClick={() => navigate('/')}>Continue Shopping</button>
             <Footer />
         </>)   
 }

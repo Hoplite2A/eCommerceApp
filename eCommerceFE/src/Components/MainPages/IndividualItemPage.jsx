@@ -17,18 +17,8 @@ export default function IndividualItemPage() {
     navigate("/");
   };
 
-  //! To Test logged in versus visitor view enable
-  //! line titled Not-Visible and comment out Visible
-  //*Not-Visible:
-  // const visible = !token.value;
-  //*Visible:
   const visible = token.value;
-
-  //Pulled param for use in useEffect API Call for individual Item Details
   const { id } = useParams();
-
-  //Defined Object to destructure and use for function return fields from
-  //the useEffect API Call
   const [item, setItem] = useState({});
   const { image, title, description, price } = item;
 
@@ -57,10 +47,23 @@ export default function IndividualItemPage() {
     return () => IndividualItemPageFetch();
   }, [id]);
 
-//TODO -------------------- Add Cart && Add Wishlist Button   
+//! --------------------------------------Adding to Cart--------------------------------------
+const [counter, setCounter] = useState(1);
+const addToCart = (item) => {
+  
+  setCartItemId(id);
 
-
-//TODO -------------------- Add Cart && Add Wishlist Button   
+  const updatedCartValue = [...tempCart, item ];
+  for (let i = 0; i < updatedCartValue.length; i++) {
+    if (updatedCartValue[i].id === id) {
+      setCounter(updatedCartValue[i].quantity);
+      setCounter(counter + 1);
+    }
+  }
+  setTempCountCart(counter);
+  setTempCart(updatedCartValue);
+}
+//! --------------------------------------Adding to Cart--------------------------------------
 
   return (
     <>
@@ -91,13 +94,13 @@ export default function IndividualItemPage() {
                   <button className="wishlistButton individualItemPageButton" >
                     Add to Wishlist
                   </button>
-                  <button className="cartButton individualItemPageButton" >
+                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
                     Add to Cart
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="cartButton individualItemPageButton" >
+                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
                     Add to Cart
                   </button>
                 </>

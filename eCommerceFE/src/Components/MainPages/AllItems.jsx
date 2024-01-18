@@ -6,11 +6,12 @@ import { signal } from "@preact/signals-react";
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
+import CartItemsList from "../UniversalFeatures/Cart/CartItemsList";
 import { dbCart } from "../../App";
 //! --------------------------------------------
 
 export default function AllItems() {
-
+//Possible prop drilling reqiured: {tempCart, setTempCart, cartItemId, setCartItemId, tempCountCart, setTempCountCart}
 //! ------------------------------------Adding to Wishlist------------------------------------  
 
 //*To Render the products on the AllItem Page
@@ -21,28 +22,20 @@ const [tempWishlist, setTempWishlist] = useState([]);
 //! ------------------------------------Adding to Wishlist------------------------------------
   
 //! --------------------------------------Adding to Cart--------------------------------------
-  //*Temporary Cart for Duplication Elimination and insertion of quantity key:value pair
-  const [tempCart, setTempCart] = useState([]);
-  //*To pass the Item.id from the item being added
-  const [cartItemId, setCartItemId] = useState(null);
-  //*To pass the count of occurances in TempCart from IndividualItemTiles
-  const [tempCountCart, setTempCountCart] = useState(0);
-  
+const [tempCart, setTempCart] = useState([]);
+const [cartItemId, setCartItemId] = useState(null);
+const [tempCountCart, setTempCountCart] = useState(0);
+
   useEffect(() => {
     for (let i = 0; i < tempCart.length; i++){
       if (tempCart[i].id === cartItemId) {
         tempCart[i].quantity = tempCountCart;
       }
     }
-    //*Removing Duplicates from tempCart
     const uniqueCartArr = tempCart.filter((value, id, array) => array.indexOf(value) == id);
-    //*Defining dbCart as uniqueCartArr
     dbCart.value = uniqueCartArr;
-    console.log(dbCart.value);
     
-    //*Sending dbCart to LocalStorage
     localStorage.setItem('cart', JSON.stringify(dbCart));
-    //*Dependency for re-render after something is added to tempCart
   }, [tempCart])
 //! --------------------------------------Adding to Cart--------------------------------------  
 
@@ -74,22 +67,31 @@ const [tempWishlist, setTempWishlist] = useState([]);
   
   return (
     <>
-      <div className="allItemsDiv">
-        {allItems.map((item) => {
-          return (
-            <IndividualItem
-              key={item.id}
-              item={item}
-              tempCart={tempCart}
-              setTempCart={setTempCart}
-              tempCountCart={tempCountCart}
-              setTempCountCart={setTempCountCart}
-              setCartItemId={setCartItemId}
-              tempWishlist={tempWishlist}
-              setTempWishlist={setTempWishlist}
-            />
-          );
+      <div className="AllItemsParentDiv">
+        <div className="allItemsDiv">
+          {allItems.map((item) => {
+            return (
+              <IndividualItem
+                key={item.id}
+                item={item}
+                tempCart={tempCart}
+                setTempCart={setTempCart}
+                tempCountCart={tempCountCart}
+                setTempCountCart={setTempCountCart}
+                setCartItemId={setCartItemId}
+                tempWishlist={tempWishlist}
+                setTempWishlist={setTempWishlist}
+              />
+            );
+          })}
+        </div>
+        <div className={dbCart.value ? "nothingToDisplay" : "cartListDisplay"}>
+        {tempCart.map((cartListItem, index) => {
+          return <CartItemsList
+            key={index} cartListItem={cartListItem}
+            setTempCart={setTempCart} tempCountCart={tempCountCart} />
         })}
+        </div>
       </div>
     </>
   );

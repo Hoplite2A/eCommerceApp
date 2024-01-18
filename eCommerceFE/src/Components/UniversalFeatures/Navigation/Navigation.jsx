@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 //! Imported Components/Variables---------------
 import { token } from "../Login";
 import { userDetails } from "../Login";
+import { dbCart } from "../../../App";
 //! --------------------------------------------
 
 export default function Navigation() {
@@ -11,9 +12,7 @@ export default function Navigation() {
 
   const handleLogout = () => {
     token.value = null;
-    console.log(token.value);
     userDetails.value = null;
-    console.log(userDetails.value);
     navigate("/");
   };
 
@@ -31,18 +30,20 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            <Link to="/Cart">
-            <p className="navBarLabels">Cart</p>
-            </Link>
+            {dbCart.value.length === 0 ? <></> :
+              <Link to="/Cart">
+                <p className="navBarLabels">Cart</p>
+              </Link>}
             <p className="logoutButton navBarLabels" onClick={handleLogout}>Logout</p>
           </>
         ) : ( <>
           <Link to="/login">
             <p className="navBarLabels">Login</p>
           </Link>
-          <Link to="/Cart">
-              <p className="navBarLabels">Cart</p>
-          </Link>
+            {dbCart.value.length === 0 ? <></> :
+              <Link to="/Cart">
+                <p className="navBarLabels">Cart</p>
+              </Link>}
         </>)}
       </div>
     </div>

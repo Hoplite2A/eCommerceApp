@@ -15,7 +15,7 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempCountC
 
     const navigate = useNavigate();
     const itemDetailsPage = () => {
-        navigate(`/IndividualItemPage/${item.id}`);
+        navigate(`/IndividualItemPage/${id}`);
     }
 
 //! ------------------------------------Adding to Wishlist------------------------------------  
@@ -40,11 +40,11 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempCountC
   const [counter, setCounter] = useState(1);
   const addToCart = (item) => {
     
-    setCartItemId(item.id);
+    setCartItemId(id);
 
     const updatedCartValue = [...tempCart, item ];
     for (let i = 0; i < updatedCartValue.length; i++) {
-      if (updatedCartValue[i].id === item.id) {
+      if (updatedCartValue[i].id === id) {
         setCounter(updatedCartValue[i].quantity);
         setCounter(counter + 1);
       }
@@ -58,7 +58,7 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempCountC
     <>
       <div className="individualItemTile">
         <div className="individualItemTileTop">
-            <Link to={`/IndividualItemPage/${id}`}>
+            <Link to={`/IndividualItemPage/${id}`} >
                 <div className="individualItemImage">
                     <img src={image} alt={title} />
                 </div>
