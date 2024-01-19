@@ -23,6 +23,7 @@ export async function initializePastPurchases() {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
       const json = await res.json();
+      console.log({ json });
       pastPurchases.value = json;
     } catch (error) {
       console.log(`Error occurred in PastPurchasesSignal: ${error}`);

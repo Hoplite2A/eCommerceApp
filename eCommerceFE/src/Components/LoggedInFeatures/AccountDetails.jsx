@@ -173,8 +173,11 @@ export default function AccountDetails() {
     <Header />
       {token.value ? (
         <>
-          <div className="accountDetailsDiv">
-            <div className="accountDetailsTopHalf">
+          <Header />
+          <div className="gridContainer">
+            <div className="aDGrid">
+           {/*<div className="accountDetailsDiv">
+            <div className="accountDetailsTopHalf">*/}
               <form className="accountDetails" onSubmit={handleSubmit}>
                 <div className="userAccountDetails">
                   {/* Profile Image */}
@@ -303,6 +306,10 @@ export default function AccountDetails() {
                         name="pass"
                         onChange={(e) => setUpdatedPassword(e.target.value)}
                       />
+                    </>
+                  )}
+                  {passwordResetVisible ? (
+                    <>
                       <button
                         className="resetPasswordRequest"
                         onClick={handlePasswordResetRequest}
@@ -310,35 +317,41 @@ export default function AccountDetails() {
                         Reset
                       </button>
                     </>
+                  ) : (
+                    <>
+                      <button
+                        className="resetPassword"
+                        onClick={handlePasswordReset}
+                      >
+                        Reset
+                      </button>
+                    </>
                   )}
                 </div>
-                <button
-                  type="button"
-                  className="ADSaveChangesButton"
-                  onClick={()=>setUpdateInfo(!updateInfo)}
-                >
-                  Edit Info
-                </button>
-                {updateInfo ? (
+                {!updateInfo ? (
+                  <>
+                    <button
+                      type="button"
+                      className="ADSaveChangesButton"
+                      onClick={setUpdateInfo(!updateInfo)}
+                    >
+                      Edit Info
+                    </button>
+                  </>
+                ) : (
                   <>
                     <button type="submit" className="ADSaveChangesButton">
                       Save Changes
                     </button>
                   </>
-                ) : (
-                  <></>
                 )}
               </form>
-            </div>
-            <div className="cartWishlistPreview">
-              <div className="cartPreview">{/* <CartPreview /> */}</div>
-              <div className="wishlistPreview">{/* <WishlistPreview /> */}</div>
-            </div>
-            <div className="accountDetailsBottomHalf">
-              {/* <PastPurchases /> */}
+              <div className="aDWishlistDiv">WISHLIST SECTION</div>
+              <div className="aDCartDiv">CART SECTION</div>
+              <PastPurchasesPreview />
             </div>
           </div>
-          <PastPurchasesPreview />
+          <Footer />
         </>
       ) : (
         <>

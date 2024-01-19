@@ -56,7 +56,8 @@ async function createTables() {
       description VARCHAR NOT NULL,
       category VARCHAR(255) NOT NULL,
       image VARCHAR(255),
-      "sellerid" INTEGER REFERENCES users(id)
+      "sellerid" INTEGER REFERENCES users(id),
+      available BOOLEAN NOT NULL DEFAULT true
     );
     `);
 
@@ -68,7 +69,8 @@ async function createTables() {
       price DECIMAL(8, 2) NOT NULL,
       quantity INTEGER NOT NULL,
       image VARCHAR(255),
-      PRIMARY KEY (user_id, product_id)
+      PRIMARY KEY (user_id, product_id),
+      available BOOLEAN NOT NULL DEFAULT true
     );
     `);
 
@@ -106,8 +108,75 @@ async function createTables() {
       title VARCHAR(255) NOT NULL,
       price DECIMAL(8, 2) NOT NULL,
       image VARCHAR(255),
+      available BOOLEAN NOT NULL DEFAULT true,
       CONSTRAINT user_product_combination UNIQUE (product_id, user_id)
     )`);
+
+    // Create "trigger" FUNCTION to execute when "triggered"
+    // In this case: BEFORE update of product to available = false
+    // This will check if the NEW item is set to available = false, and then perform updates on carts and wishlists.
+    // Any other changes will be handles through the update product function with a transaction
+    // plpgsql is Procedural Language/PostgresSQL. Just gotta specify the procedural language when writing a trigger
+    // $$ denotes the beginning and end of a functon.
+    await client.query(`
+    CREATE OR REPLACE FUNCTION before_unavailable_product()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      IF NEW.available = false THEN
+        UPDATE carts
+        SET available = false,
+            title = 'We''re sorry, but ' || OLD.title || ' is no longer available',
+            image = 'https://images.squarespace-cdn.com/content/v1/56db9f01c6fc08b9910d053a/1595609119785-0NP8XIMCG8RWCWPC49UC/south+park+bp+2.jpg?format=2500w'
+        WHERE product_id = NEW.id;
+        
+        UPDATE wishlists
+        SET available = false,
+        title = 'We''re sorry, but ' || NEW.title || ' is no longer available',
+        image = 'https://images.squarespace-cdn.com/content/v1/56db9f01c6fc08b9910d053a/1595609119785-0NP8XIMCG8RWCWPC49UC/south+park+bp+2.jpg?format=2500w'
+        WHERE product_id = NEW.id;
+      END IF;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql
+    `);
+
+    // Now we create the TRIGGER so when the function needs to be fired
+    await client.query(`
+      CREATE TRIGGER before_unavailable_product_trigger
+      BEFORE UPDATE ON products
+      FOR EACH ROW
+      EXECUTE FUNCTION before_unavailable_product();
+    `);
+
+    await client.query(`
+    CREATE OR REPLACE FUNCTION before_available_product()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      IF NEW.available = true THEN
+        UPDATE carts
+        SET available = true,
+            title = NEW.title,
+            image = NEW.image
+        WHERE product_id = NEW.id;
+        
+        UPDATE wishlists
+        SET available = true,
+        title = NEW.title,
+        image = NEW.image
+        WHERE product_id = NEW.id;
+      END IF;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql
+    `);
+
+    // Now we create the TRIGGER so when the function needs to be fired
+    await client.query(`
+      CREATE TRIGGER before_available_product_trigger
+      BEFORE UPDATE ON products
+      FOR EACH ROW
+      EXECUTE FUNCTION before_available_product();
+    `);
 
     console.log("Finished building tables");
   } catch (error) {

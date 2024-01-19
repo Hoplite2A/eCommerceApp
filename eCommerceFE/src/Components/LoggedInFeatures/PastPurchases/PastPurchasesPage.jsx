@@ -49,11 +49,7 @@ export default function PastPurchasesPage() {
           <Footer />
         </>
       ) : (
-        <>
-          <button className="goHome" onClick={() => navigate("/")}>
-            Nothing to see here.
-          </button>
-        </>
+        navigate("/")
       )}
     </>
   );

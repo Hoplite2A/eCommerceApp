@@ -1,3 +1,11 @@
+// API TO Pull Users cart brgins in:
+// user_id, product_id, title, price, quantity, image
+// Could deconstruct product_id, price, quantity and map into local storage
+// On add cart, parse local storage, check if alraedy contained product_id increase quantity else add to cart array
+// Add array back to local storage
+// On log out API call to delete users old cart
+// Map through users local storage with addToCart(product_id, quantiy)
+
 const client = require("./client");
 const { getSingleProduct } = require("./productsDB");
 
