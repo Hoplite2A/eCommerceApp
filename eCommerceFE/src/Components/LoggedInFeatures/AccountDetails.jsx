@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
+// import CartPreview from '../LoggedInFeatures/CartPreview';
+// import WishlistPreview from '../LoggedInFeatures/WishlistPreview';
+// import PastPurhcases from '../UniversalFeatures/PastPurhcases';
 import Footer from "../UniversalFeatures/Footer";
 import PastPurchasesPreview from "./PastPurchases/PastPurchasesPreview";
 import { token } from "../../Components/UniversalFeatures/Login";
@@ -26,8 +29,10 @@ export default function AccountDetails() {
     navigate("/");
   };
 
-  const [passwordResetVisible, setPasswordResetVisible] = useState(false);
+  const [passwordResetVisible, setPasswordResetVisible] = useState(true);
 
+  console.log('Testing');
+  
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const {
@@ -43,6 +48,7 @@ export default function AccountDetails() {
     phone,
     email,
   } = userDetails.value;
+  console.log('Testing');
 
   //Used for pulling changed values from
   const [userName, setUserName] = useState(username);
@@ -60,6 +66,7 @@ export default function AccountDetails() {
 
   const [updateInfo, setUpdateInfo] = useState(false);
   const [updatedPassword, setUpdatedPassword] = useState("");
+  console.log('Testing');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +92,7 @@ export default function AccountDetails() {
           user: userName,
         }),
       });
-      const json = res.json();
+      const json = await res.json();
 
       if (json.message === "Profile has been updated Successfully") {
         //TODO --------------------- Update alert to acknowledgement
@@ -99,10 +106,12 @@ export default function AccountDetails() {
       );
     }
   };
+  console.log('Testing');
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordResetRequest = async (e) => {
     e.preventDefault();
+
     try {
       const res = await fetch(`${BASE_URL}/u`, {
         method: "POST",
@@ -115,11 +124,11 @@ export default function AccountDetails() {
           password: password,
         }),
       });
-      const json = res.json();
-      const verdict = json.code;
+      const json = await res.json();
+      const verdict = await json.code;
       //! ------------------------- Add BE Logic for this return value
       if (verdict === 1) {
-        setPasswordResetVisible(true);
+        setPasswordResetVisible(!passwordResetVisible);
       }
     } catch (err) {
       console.log(
@@ -127,10 +136,12 @@ export default function AccountDetails() {
       );
     }
   };
+  console.log('Testing');
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordReset = async (e) => {
     e.preventDefault();
+    
     try {
       const res = await fetch(`${BASE_URL}/u`, {
         method: "PATCH",
@@ -142,8 +153,8 @@ export default function AccountDetails() {
           password: updatedPassword,
         }),
       });
-      const json = res.json();
-      const update = json.code;
+      const json = await res.json();
+      const update = await json.code;
       //! ------------------------- Add BE Logic for this return value
       if (update === 1) {
         setPasswordResetVisible(true);
@@ -155,14 +166,18 @@ export default function AccountDetails() {
       );
     }
   };
+  console.log('Testing');
 
   return (
     <>
-      {token.value && userDetails.value ? (
+    <Header />
+      {token.value ? (
         <>
           <Header />
           <div className="gridContainer">
             <div className="aDGrid">
+           {/*<div className="accountDetailsDiv">
+            <div className="accountDetailsTopHalf">*/}
               <form className="accountDetails" onSubmit={handleSubmit}>
                 <div className="userAccountDetails">
                   {/* Profile Image */}
@@ -275,6 +290,12 @@ export default function AccountDetails() {
                         name="pass"
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      <button
+                        className="resetPassword"
+                        onClick={handlePasswordReset}
+                      >
+                        Reset
+                      </button>
                     </>
                   ) : (
                     <>
@@ -334,11 +355,12 @@ export default function AccountDetails() {
         </>
       ) : (
         <>
-          <button className="goHome" onClick={nothing}>
-            Nothing to see here.
-          </button>
+            <button className="goHome" onClick={nothing}>
+              Nothing to see here.
+            </button>
         </>
       )}
+    <Footer />
     </>
   );
 }

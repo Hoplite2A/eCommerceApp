@@ -8,6 +8,7 @@ import Header from "../UniversalFeatures/Navigation/Header";
 import Footer from "../UniversalFeatures/Footer";
 import { token } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
+// import { tempCart, setTempCart, tempWishlist, setTempWishlist } from './AllItems';
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
@@ -16,18 +17,8 @@ export default function IndividualItemPage() {
     navigate("/");
   };
 
-  //! To Test logged in versus visitor view enable
-  //! line titled Not-Visible and comment out Visible
-  //*Not-Visible:
-  // const visible = !token.value;
-  //*Visible:
   const visible = token.value;
-
-  //Pulled param for use in useEffect API Call for individual Item Details
   const { id } = useParams();
-
-  //Defined Object to destructure and use for function return fields from
-  //the useEffect API Call
   const [item, setItem] = useState({});
   const { image, title, description, price } = item;
 
@@ -36,9 +27,7 @@ export default function IndividualItemPage() {
       try {
         const res = await fetch(`${BASE_URL}/products/${id}`);
         const json = await res.json();
-        console.log(json);
         setItem(json.singleProduct);
-        console.log("Individual Item Page");
       } catch (err) {
         console.log(
           `Error occurred in the IndividualItemPageFetch within the IndividualItemPage component, ${err}`
@@ -57,6 +46,24 @@ export default function IndividualItemPage() {
     }
     return () => IndividualItemPageFetch();
   }, [id]);
+
+//! --------------------------------------Adding to Cart--------------------------------------
+const [counter, setCounter] = useState(1);
+const addToCart = (item) => {
+  
+  setCartItemId(id);
+
+  const updatedCartValue = [...tempCart, item ];
+  for (let i = 0; i < updatedCartValue.length; i++) {
+    if (updatedCartValue[i].id === id) {
+      setCounter(updatedCartValue[i].quantity);
+      setCounter(counter + 1);
+    }
+  }
+  setTempCountCart(counter);
+  setTempCart(updatedCartValue);
+}
+//! --------------------------------------Adding to Cart--------------------------------------
 
   return (
     <>
@@ -84,16 +91,16 @@ export default function IndividualItemPage() {
               {/* <div className="individualItemPageButtonVisiting individualItemPageButtonLoggedIn"> */}
               {visible ? (
                 <>
-                  <button className="wishlistButton individualItemPageButton">
+                  <button className="wishlistButton individualItemPageButton" >
                     Add to Wishlist
                   </button>
-                  <button className="cartButton individualItemPageButton">
+                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
                     Add to Cart
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="cartButton individualItemPageButton">
+                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
                     Add to Cart
                   </button>
                 </>

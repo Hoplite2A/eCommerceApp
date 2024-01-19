@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { signal } from "@preact/signals-react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -14,6 +16,7 @@ import AllItems from "./Components/MainPages/AllItems";
 import IndividualItem from "./Components/MainPages/IndividualItemTiles";
 import IndividualItemPage from "./Components/MainPages/IndividualItemPage";
 import Cart from "./Components/UniversalFeatures/Cart/Cart";
+import CartSubTotal from "./Components/UniversalFeatures/Cart/CartSubTotal";
 // import Checkout from './Components/UniversalFeature/Checkout';
 
 import Footer from "./Components/UniversalFeatures/Footer";
@@ -28,20 +31,15 @@ import PastPurchasesPage from "./Components/LoggedInFeatures/PastPurchases/PastP
 
 //! Universal Variables -------------------------
 export const BASE_URL = "http://localhost:3000/api";
+//*Final signal Cart for sending to localStorage & for use in Cart Rendering
+export const dbCart = signal([]);
+
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 
 export default function App() {
-  //*Added State variable to App.jsx for propdrilling of JWT Token
-  // const [token, setToken] = useState(null)
-  //*Route syntax for useState Prop Drilling of JWT Token
-  // <Route path='' element={} token={token} setToken={setToken}/>
-
-  //*Route template syntax utilizing SignalState for passing JWT Token to components:
-  // <Route path='pathway' element={<Component />} />
-  //*Import on each component where JWT is relevant as so (no need for props):
-  // import {token} from '@preact/signals-react';
+  
 
   return (
     <Routes>
@@ -52,10 +50,27 @@ export default function App() {
       <Route path="/accountDetails" element={<AccountDetails />} />
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
       <Route path="/pastPurchases" element={<PastPurchasesPage />} />
-      <Route path="/AllItems" element={<AllItems />} />
+      <Route path="/AllItems" element={<AllItems 
+      // tempCart={tempCart} setTempCart={setTempCart} 
+      // cartItemId={cartItemId} setCartItemId={setCartItemId} 
+      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+      />} />
       <Route path="/IndividualItemTiles" element={<IndividualItem />} />
-      <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
-      <Route path="/Cart" element={<Cart />} />
+      <Route path="/IndividualItemPage/:id" element={<IndividualItemPage 
+      // tempCart={tempCart} setTempCart={setTempCart}
+      // cartItemId={cartItemId} setCartItemId={setCartItemId}
+      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+      />} />
+      <Route path="/Cart" element={<Cart  
+      // tempCart={tempCart} setTempCart={setTempCart}
+      // cartItemId={cartItemId} setCartItemId={setCartItemId}
+      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+      />} />
+      <Route path='/CartSubTotal' element={<CartSubTotal
+      // tempCart={tempCart} setTempCart={setTempCart}
+      // cartItemId={cartItemId} setCartItemId={setCartItemId}
+      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+      />} />
       {/* <Route path="/Checkout" element={<Checkout  />} /> */}
 
       <Route path="/Footer" element={<Footer />} />

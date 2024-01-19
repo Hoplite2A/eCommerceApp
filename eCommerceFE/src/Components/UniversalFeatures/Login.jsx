@@ -13,10 +13,8 @@ import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
 export const token = signal(null);
-console.log(`Token Value Prior to Login: ${token.value}`);
 
 export const userDetails = signal(null);
-console.log(`userDetails Value Prior to Login: ${userDetails.value}`);
 
 export default function Login() {
   const [userName, setUserName] = useState(null);
@@ -61,7 +59,7 @@ export default function Login() {
       alert(`${errorMessage}`);
       navigate("/login");
     } else {
-      alert(`Welcome${userDetails.fname}, you have successfully logged in.`);
+      alert(`You have successfully logged in.`);
       navigate("/");
     }
   };
