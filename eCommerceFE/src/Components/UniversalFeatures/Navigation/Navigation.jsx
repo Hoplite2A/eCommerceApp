@@ -1,15 +1,19 @@
 //! Imported Libraries -------------------------
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
+
 //! Imported Components/Variables---------------
 import { token } from "../Login";
 import { userDetails } from "../Login";
-import { dbCart } from "../../../App";
 //! --------------------------------------------
 
 export default function Navigation() {
-  const navigate = useNavigate();
 
+  const { tempCart } = useContext(CartWishlistContext);
+  
+  const navigate = useNavigate();
   const handleLogout = () => {
     token.value = null;
     userDetails.value = null;
@@ -30,7 +34,7 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            {dbCart.value.length === 0 ? <></> :
+            {tempCart.length === 0 ? <></> :
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>}
@@ -40,7 +44,7 @@ export default function Navigation() {
           <Link to="/login">
             <p className="navBarLabels">Login</p>
           </Link>
-            {dbCart.value.length === 0 ? <></> :
+            {tempCart.length === 0 ? <></> :
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>}

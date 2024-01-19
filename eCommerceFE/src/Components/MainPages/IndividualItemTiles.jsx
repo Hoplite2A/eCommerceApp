@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 //! Imported Libraries -------------------------
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState} from "react";
+import { useEffect, useState, useContext} from "react";
+import {CartWishlistContext} from "../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -9,9 +10,11 @@ import { token } from "../UniversalFeatures/Login";
 //! --------------------------------------------
 
 // eslint-disable-next-line react/prop-types
-export default function IndividualItem({ item, tempCart, setTempCart, tempCountCart, setTempCountCart, setCartItemId, tempWishlist, setTempWishlist}) {
+export default function IndividualItem({ item }) {
   
   const { id, image, title, price } = item;
+
+  const {tempCart, setTempCart, setCartItemId, setTempCountCart } = useContext(CartWishlistContext);
 
     const navigate = useNavigate();
     const itemDetailsPage = () => {
@@ -19,21 +22,21 @@ export default function IndividualItem({ item, tempCart, setTempCart, tempCountC
     }
 
 //! ------------------------------------Adding to Wishlist------------------------------------  
-  const addToWishlist = (item) => {
-    const updatedWishlistValue = [...tempWishlist, item ];
-    setTempWishlist(updatedWishlistValue);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
-  }
+  // const addToWishlist = (item) => {
+  //   const updatedWishlistValue = [...tempWishlist, item ];
+  //   setTempWishlist(updatedWishlistValue);
+  //   localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
+  // }
 
-  useEffect(() => {
-    const localWishlist = localStorage.getItem('wishlist');
-    if (localWishlist) {
-      const storedWishlist = JSON.parse(localWishlist);
-      setTempWishlist(storedWishlist);
-    } else {
-      localStorage.setItem('wishlist', JSON.stringify([]));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const localWishlist = localStorage.getItem('wishlist');
+  //   if (localWishlist) {
+  //     const storedWishlist = JSON.parse(localWishlist);
+  //     setTempWishlist(storedWishlist);
+  //   } else {
+  //     localStorage.setItem('wishlist', JSON.stringify([]));
+  //   }
+  // }, []);
 //! ------------------------------------Adding to Wishlist------------------------------------  
 
 //! --------------------------------------Adding to Cart--------------------------------------
