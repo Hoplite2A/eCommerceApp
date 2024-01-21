@@ -1,6 +1,7 @@
 //! Imported Libraries -------------------------
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import {CartWishlistContext} from "../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -12,6 +13,9 @@ import { BASE_URL } from "../../App";
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
+  
+  const { tempCart, setTempCart, setCartItemId, setTempCountCart, } = useContext(CartWishlistContext);
+  
   const navigate = useNavigate();
   const allItemsPage = () => {
     navigate("/");
@@ -94,13 +98,13 @@ const addToCart = (item) => {
                   <button className="wishlistButton individualItemPageButton" >
                     Add to Wishlist
                   </button>
-                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
+                  <button className="cartButton individualItemPageButton" onClick={() => addToCart(item)}>
                     Add to Cart
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="cartButton individualItemPageButton" onClick={addToCart}>
+                  <button className="cartButton individualItemPageButton" onClick={() => addToCart(item)}>
                     Add to Cart
                   </button>
                 </>
@@ -113,7 +117,7 @@ const addToCart = (item) => {
       <button className="backToHome" onClick={allItemsPage}>
         OTHER ITEMS
       </button>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

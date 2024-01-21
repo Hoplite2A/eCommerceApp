@@ -1,41 +1,39 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CartWishlistContext } from '../../../Contexts/CartWishlistContextProvider';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { dbCart } from '../../../App';
 //! ---------------------------------------------
 
 export default function CartSubTotal() {
     
-    const cartList = dbCart.value;
-
-    // let testTotal = 2 * "109.95";
-    // console.log(testTotal);
-
+    const { localCart } = useContext(CartWishlistContext);
+    console.log(`CartSubTotal Component`);
+    console.log(localCart);
     //TODO ---- Create subtotal function against the method -------------------
-    const [cartSubTotal, setCartSubTotal] = useState(0);
+    const [cartSubTotal, setCartSubTotal] = useState([]);
     
-    useEffect((cartList) => {
-        const priceArray = [];
-        if (cartList) {
-            cartList.map((individualPrice) => {
-                let itemPrice = individualPrice.price;
-                let quantity = individualPrice.quantity;
-                let individualTotal = (itemPrice * quantity);
-                priceArray.push(individualTotal);
-            });
-            const tempPriceArray = priceArray.reduce((a, b) => a + b);
-            setCartSubTotal(tempPriceArray);
-        } 
-    }, [cartList])
+    useEffect(() => {
+    if (localCart) {
+      const priceArray = localCart.map((individualPrice) => {
+        let itemPrice = individualPrice.price;
+        let quantity = individualPrice.quantity;
+        return itemPrice * quantity; // Return the individual total
+      });
+
+      const tempPriceArray = priceArray.reduce((a, b) => a + b, 0);
+        const roundedArray = Math.round(tempPriceArray * 10 ** 2) / 10 ** 2;
+      setCartSubTotal(roundedArray);
+    }
+  }, [localCart]);
 
     console.log(cartSubTotal);
 
     return (<>
         {cartSubTotal ? <>
             <div className="cartSubTotal">
-                <p className="cartSubTotalText">{cartSubTotal}</p>
+                <p className="cartSubTotalText">Cart Total: {cartSubTotal}</p>
             </div>
         </> : <>
         </>}

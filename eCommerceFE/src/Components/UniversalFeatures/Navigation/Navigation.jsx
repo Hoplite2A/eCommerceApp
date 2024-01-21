@@ -1,10 +1,16 @@
 //! Imported Libraries -------------------------
-import { Link, useFetcher, useNavigate } from "react-router-dom";
+
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
+
 //! --------------------------------------------
+
 //! Imported Components/Variables---------------
 import { token } from "../Login";
 import { userDetails } from "../Login";
-import { dbCart } from "../../../App";
+
+
 import { useEffect, useState } from "react";
 //! --------------------------------------------
 
@@ -22,6 +28,9 @@ export default function Navigation() {
 
   const navigate = useNavigate();
 
+  const { tempCart } = useContext(CartWishlistContext);
+  
+  const navigate = useNavigate();
   const handleLogout = () => {
     token.value = null;
     userDetails.value = null;
@@ -42,9 +51,9 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            {dbCart.value.length === 0 ? (
-              <></>
-            ) : (
+
+            {tempCart.length === 0 ? <></> :
+
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
@@ -58,14 +67,13 @@ export default function Navigation() {
               </Link>
             )}
           </>
-        ) : (
-          <>
-            <Link to="/login">
-              <p className="navBarLabels">Login</p>
-            </Link>
-            {dbCart.value.length === 0 ? (
-              <></>
-            ) : (
+
+        ) : ( <>
+          <Link to="/login">
+            <p className="navBarLabels">Login</p>
+          </Link>
+            {tempCart.length === 0 ? <></> :
+
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
