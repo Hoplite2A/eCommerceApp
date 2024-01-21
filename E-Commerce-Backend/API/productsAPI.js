@@ -62,6 +62,7 @@ productsRouter.get("/:id", async (req, res, next) => {
 productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
   const { title, price, description, category, image } = req.body;
   const sellerId = req.user.id;
+  console.log(title);
   if (!req.user.admin) {
     res.send({
       name: "Member Feature",
@@ -71,6 +72,7 @@ productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
   }
   try {
     const newProduct = await getProductByTitle(title);
+    console.log({ newProduct });
 
     if (newProduct && newProduct.available === true) {
       next({
@@ -80,7 +82,8 @@ productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
     } else if (newProduct && newProduct.available === false) {
       await updateProductAvailability(newProduct.id, true);
       res.send({
-        message: `${title} already existed in the catalog and has been made available again! To edit/update this item. Go to your account details and access your added items there.`,
+        name: "UpdateProductAvailSuccess",
+        message: `${title} already existed in the catalog and has been made available again! To edit/update this item, go to your admin page.`,
         product: newProduct,
       });
     } else {
@@ -94,7 +97,8 @@ productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
       });
 
       res.send({
-        message: `${title} has been added to the catalog, to edit/update this item. Go to your account details and access your added items there.`,
+        name: "AddProductSuccess",
+        message: `${title} has been added to the catalog. To edit/update this item, go to your admin page.`,
       });
     }
   } catch (err) {

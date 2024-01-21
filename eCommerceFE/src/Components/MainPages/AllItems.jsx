@@ -11,6 +11,7 @@ import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
 
 export default function AllItems() {
+
   const {tempCart, setTempCart, cartItemId, tempCountCart, localCart, setLocalCart} = useContext(CartWishlistContext);
 //! ------------------------------------Adding to Wishlist------------------------------------  
 
@@ -26,18 +27,21 @@ const [allItems, setAllItems] = useState([]);
 // const [cartItemId, setCartItemId] = useState(null);
 // const [tempCountCart, setTempCountCart] = useState(0);
 
+
   useEffect(() => {
-    for (let i = 0; i < tempCart.length; i++){
+    for (let i = 0; i < tempCart.length; i++) {
       if (tempCart[i].id === cartItemId) {
         tempCart[i].quantity = tempCountCart;
       }
     }
+
     const uniqueCartArr = tempCart.filter((value, id, array) => array.indexOf(value) == id);
     setLocalCart(uniqueCartArr);
     
     localStorage.setItem('cart', JSON.stringify(localCart));
   }, [tempCart])
 //! --------------------------------------Adding to Cart--------------------------------------  
+
 
   useEffect(() => {
     async function fetchAllItems() {
@@ -64,7 +68,7 @@ const [allItems, setAllItems] = useState([]);
     }
     return () => fetchAllItems();
   }, []);
-  
+
   return (
     <>
       <div className="AllItemsParentDiv">
@@ -75,11 +79,13 @@ const [allItems, setAllItems] = useState([]);
             );
           })}
         </div>
+
         {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>
         {tempCart.map((cartListItem, index) => {
           return <CartItemsList key={index} cartListItem={cartListItem} />
         })}
         </div> */}
+
       </div>
     </>
   );
