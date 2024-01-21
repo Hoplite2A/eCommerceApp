@@ -11,33 +11,35 @@ import { dbCart } from "../../App";
 //! --------------------------------------------
 
 export default function AllItems() {
-//Possible prop drilling reqiured: {tempCart, setTempCart, cartItemId, setCartItemId, tempCountCart, setTempCountCart}
-//! ------------------------------------Adding to Wishlist------------------------------------  
+  //Possible prop drilling reqiured: {tempCart, setTempCart, cartItemId, setCartItemId, tempCountCart, setTempCountCart}
+  //! ------------------------------------Adding to Wishlist------------------------------------
 
-//*To Render the products on the AllItem Page
-const [allItems, setAllItems] = useState([]);
-//*Temporary Wishlist for Duplication Elimination and insertion of quantity key:value pair
-const [tempWishlist, setTempWishlist] = useState([]);
+  //*To Render the products on the AllItem Page
+  const [allItems, setAllItems] = useState([]);
+  //*Temporary Wishlist for Duplication Elimination and insertion of quantity key:value pair
+  const [tempWishlist, setTempWishlist] = useState([]);
 
-//! ------------------------------------Adding to Wishlist------------------------------------
-  
-//! --------------------------------------Adding to Cart--------------------------------------
-const [tempCart, setTempCart] = useState([]);
-const [cartItemId, setCartItemId] = useState(null);
-const [tempCountCart, setTempCountCart] = useState(0);
+  //! ------------------------------------Adding to Wishlist------------------------------------
+
+  //! --------------------------------------Adding to Cart--------------------------------------
+  const [tempCart, setTempCart] = useState([]);
+  const [cartItemId, setCartItemId] = useState(null);
+  const [tempCountCart, setTempCountCart] = useState(0);
 
   useEffect(() => {
-    for (let i = 0; i < tempCart.length; i++){
+    for (let i = 0; i < tempCart.length; i++) {
       if (tempCart[i].id === cartItemId) {
         tempCart[i].quantity = tempCountCart;
       }
     }
-    const uniqueCartArr = tempCart.filter((value, id, array) => array.indexOf(value) == id);
+    const uniqueCartArr = tempCart.filter(
+      (value, id, array) => array.indexOf(value) == id
+    );
     dbCart.value = uniqueCartArr;
-    
-    localStorage.setItem('cart', JSON.stringify(dbCart));
-  }, [tempCart])
-//! --------------------------------------Adding to Cart--------------------------------------  
+
+    localStorage.setItem("cart", JSON.stringify(dbCart));
+  }, [tempCart]);
+  //! --------------------------------------Adding to Cart--------------------------------------
 
   useEffect(() => {
     async function fetchAllItems() {
@@ -64,7 +66,7 @@ const [tempCountCart, setTempCountCart] = useState(0);
     }
     return () => fetchAllItems();
   }, []);
-  
+
   return (
     <>
       <div className="AllItemsParentDiv">
@@ -86,11 +88,16 @@ const [tempCountCart, setTempCountCart] = useState(0);
           })}
         </div>
         <div className={dbCart.value ? "nothingToDisplay" : "cartListDisplay"}>
-        {tempCart.map((cartListItem, index) => {
-          return <CartItemsList
-            key={index} cartListItem={cartListItem}
-            setTempCart={setTempCart} tempCountCart={tempCountCart} />
-        })}
+          {tempCart.map((cartListItem, index) => {
+            return (
+              <CartItemsList
+                key={index}
+                cartListItem={cartListItem}
+                setTempCart={setTempCart}
+                tempCountCart={tempCountCart}
+              />
+            );
+          })}
         </div>
       </div>
     </>

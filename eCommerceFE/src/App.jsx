@@ -27,6 +27,7 @@ import ReturnPolicy from "./Components/MainPages/ReturnPolicy";
 import WarrantyPolicy from "./Components/MainPages/WarrantyPolicy";
 import "./App.css";
 import PastPurchasesPage from "./Components/LoggedInFeatures/PastPurchases/PastPurchasesPage";
+import AdminFeaturesPage from "./Components/AdminFeatures/AdminFeaturesPage";
 //! ---------------------------------------------
 
 //! Universal Variables -------------------------
@@ -39,8 +40,6 @@ export const dbCart = signal([]);
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 
 export default function App() {
-  
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -50,27 +49,48 @@ export default function App() {
       <Route path="/accountDetails" element={<AccountDetails />} />
       {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
       <Route path="/pastPurchases" element={<PastPurchasesPage />} />
-      <Route path="/AllItems" element={<AllItems 
-      // tempCart={tempCart} setTempCart={setTempCart} 
-      // cartItemId={cartItemId} setCartItemId={setCartItemId} 
-      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
-      />} />
+      <Route path="/AdminFeatures" element={<AdminFeaturesPage />} />
+      <Route
+        path="/AllItems"
+        element={
+          <AllItems
+          // tempCart={tempCart} setTempCart={setTempCart}
+          // cartItemId={cartItemId} setCartItemId={setCartItemId}
+          // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+          />
+        }
+      />
       <Route path="/IndividualItemTiles" element={<IndividualItem />} />
-      <Route path="/IndividualItemPage/:id" element={<IndividualItemPage 
-      // tempCart={tempCart} setTempCart={setTempCart}
-      // cartItemId={cartItemId} setCartItemId={setCartItemId}
-      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
-      />} />
-      <Route path="/Cart" element={<Cart  
-      // tempCart={tempCart} setTempCart={setTempCart}
-      // cartItemId={cartItemId} setCartItemId={setCartItemId}
-      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
-      />} />
-      <Route path='/CartSubTotal' element={<CartSubTotal
-      // tempCart={tempCart} setTempCart={setTempCart}
-      // cartItemId={cartItemId} setCartItemId={setCartItemId}
-      // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
-      />} />
+      <Route
+        path="/IndividualItemPage/:id"
+        element={
+          <IndividualItemPage
+          // tempCart={tempCart} setTempCart={setTempCart}
+          // cartItemId={cartItemId} setCartItemId={setCartItemId}
+          // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+          />
+        }
+      />
+      <Route
+        path="/Cart"
+        element={
+          <Cart
+          // tempCart={tempCart} setTempCart={setTempCart}
+          // cartItemId={cartItemId} setCartItemId={setCartItemId}
+          // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+          />
+        }
+      />
+      <Route
+        path="/CartSubTotal"
+        element={
+          <CartSubTotal
+          // tempCart={tempCart} setTempCart={setTempCart}
+          // cartItemId={cartItemId} setCartItemId={setCartItemId}
+          // tempCountCart={tempCountCart} setTempCountCart={setTempCountCart}
+          />
+        }
+      />
       {/* <Route path="/Checkout" element={<Checkout  />} /> */}
 
       <Route path="/Footer" element={<Footer />} />

@@ -1,13 +1,25 @@
 //! Imported Libraries -------------------------
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useFetcher, useNavigate } from "react-router-dom";
 //! --------------------------------------------
 //! Imported Components/Variables---------------
 import { token } from "../Login";
 import { userDetails } from "../Login";
 import { dbCart } from "../../../App";
+import { useEffect, useState } from "react";
 //! --------------------------------------------
 
 export default function Navigation() {
+  // console.log(userDetails.value.admin);
+  const [adminPrivileges, setAdminPrivileges] = useState(false);
+
+  useEffect(() => {
+    const details = userDetails.value;
+    if (details && details.admin === true) {
+      console.log(details.admin);
+      setAdminPrivileges(true);
+    }
+  }, [userDetails.value]);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -30,21 +42,36 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            {dbCart.value.length === 0 ? <></> :
+            {dbCart.value.length === 0 ? (
+              <></>
+            ) : (
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
-              </Link>}
-            <p className="logoutButton navBarLabels" onClick={handleLogout}>Logout</p>
+              </Link>
+            )}
+            <p className="logoutButton navBarLabels" onClick={handleLogout}>
+              Logout
+            </p>
+            {adminPrivileges && (
+              <Link to="/AdminFeatures">
+                <p className="navBarLabels">Admin</p>
+              </Link>
+            )}
           </>
-        ) : ( <>
-          <Link to="/login">
-            <p className="navBarLabels">Login</p>
-          </Link>
-            {dbCart.value.length === 0 ? <></> :
+        ) : (
+          <>
+            <Link to="/login">
+              <p className="navBarLabels">Login</p>
+            </Link>
+            {dbCart.value.length === 0 ? (
+              <></>
+            ) : (
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
-              </Link>}
-        </>)}
+              </Link>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
