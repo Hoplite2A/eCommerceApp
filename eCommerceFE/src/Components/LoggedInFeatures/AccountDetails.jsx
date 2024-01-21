@@ -22,6 +22,7 @@ export default function AccountDetails() {
       console.log("AccountDetails unmounted");
     };
   }, []);
+  console.log("in account details");
   const navigate = useNavigate();
 
   const nothing = () => {

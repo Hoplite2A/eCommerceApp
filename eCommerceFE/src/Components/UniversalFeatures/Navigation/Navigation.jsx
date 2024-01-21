@@ -10,7 +10,6 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 import { token } from "../Login";
 import { userDetails } from "../Login";
 
-
 import { useEffect, useState } from "react";
 //! --------------------------------------------
 
@@ -29,8 +28,7 @@ export default function Navigation() {
   const navigate = useNavigate();
 
   const { tempCart } = useContext(CartWishlistContext);
-  
-  const navigate = useNavigate();
+
   const handleLogout = () => {
     token.value = null;
     userDetails.value = null;
@@ -52,8 +50,9 @@ export default function Navigation() {
               <p className="navBarLabels">Account Details</p>
             </Link>
 
-            {tempCart.length === 0 ? <></> :
-
+            {tempCart.length === 0 ? (
+              <></>
+            ) : (
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
@@ -67,13 +66,14 @@ export default function Navigation() {
               </Link>
             )}
           </>
-
-        ) : ( <>
-          <Link to="/login">
-            <p className="navBarLabels">Login</p>
-          </Link>
-            {tempCart.length === 0 ? <></> :
-
+        ) : (
+          <>
+            <Link to="/login">
+              <p className="navBarLabels">Login</p>
+            </Link>
+            {tempCart.length === 0 ? (
+              <></>
+            ) : (
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
