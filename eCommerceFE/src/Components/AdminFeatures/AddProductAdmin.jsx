@@ -36,12 +36,8 @@ export default function AddProductAdmin() {
         }),
       });
       const json = await res.json();
-      console.log(typeof json);
-      console.log({ json });
-      console.log(typeof json.message);
       const info = await json;
       setResponse(info);
-      console.log(response.name);
     } catch (error) {
       console.log(
         `An error occurred within the handleAddProduct on the Admin Page. Error: ${error}`
