@@ -18,7 +18,7 @@ import { token } from "../UniversalFeatures/Login";
 import { userDetails } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 import AddProductAdmin from "./AddProductAdmin";
-import ViewUsersAdmin from "./ViewUsersAdmin";
+import ViewUsersAdmin from "./ViewAllUsers/ViewUsersAdmin";
 import ViewAllProductsAdmin from "./ViewAllProductsAdmin";
 //! ---------------------------------------------
 
