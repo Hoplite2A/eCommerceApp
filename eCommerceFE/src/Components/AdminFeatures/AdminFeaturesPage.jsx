@@ -19,10 +19,11 @@ import { userDetails } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 import AddProductAdmin from "./AddProductAdmin";
 import ViewUsersAdmin from "./ViewAllUsers/ViewUsersAdmin";
-import ViewAllProductsAdmin from "./ViewAllProductsAdmin";
+import ViewAllProductsAdmin from "./ViewAllProducts/ViewAllProductsAdmin";
 //! ---------------------------------------------
 
 export default function AdminFeaturesPage() {
+  console.log("iN ADMIN FEATURES PAGE");
   const [adminPrivileges, setAdminPrivileges] = useState(false);
   const [viewProductForm, setViewProductForm] = useState(false);
   const [viewProductsTable, setViewProductTable] = useState(false);

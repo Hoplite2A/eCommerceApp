@@ -67,24 +67,11 @@ async function addToCart(productId, userId, quantity) {
   }
 }
 
-// Edit cart
-// Patch1 Compare and edit:
-// Get users current cart
-// If it exists in users cart and update cart, update quantity,
-// If it exists in users cart and not in update quantity, remove from cart
-// else add to cart
-// Patch2 Add:
-// Requires only cart items that were increased or added
-// Get users current cart
-// If it exists, increase quantity by new quantity(or just update quantity to new quantity)
-// Else add to cart
-// Patch3 Remove:
-// Get user cart
-//  If it exists in users cart, delete item(or decrease quantity)
-
 async function deleteUserCart(userId) {
   try {
-    const deletedCart = await client.query(
+    const {
+      rows: [deletedCart],
+    } = await client.query(
       `
       DELETE FROM carts
       WHERE user_id=$1
@@ -92,8 +79,7 @@ async function deleteUserCart(userId) {
       `,
       [userId]
     );
-    console.log(deletedCart.rows);
-    return deletedCart.rows;
+    return deletedCart;
   } catch (error) {
     throw error;
   }

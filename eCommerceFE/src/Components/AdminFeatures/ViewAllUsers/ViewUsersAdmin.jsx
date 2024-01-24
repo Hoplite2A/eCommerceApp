@@ -1,13 +1,12 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { userDetails } from "../../UniversalFeatures/Login";
 import { BASE_URL } from "../../../App";
 import { token } from "../../UniversalFeatures/Login";
 import ViewUsersRow from "./ViewUsersRow";
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function ViewUsersAdmin() {
@@ -44,12 +43,9 @@ export default function ViewUsersAdmin() {
     users && console.log("Users Rendered");
   }, [users]);
 
-  console.log({ users });
-  console.log(users.length);
-
   return (
     <>
-      <table>
+      <table className="styled-table">
         <thead>
           <tr>
             <th colSpan="13">All Users</th>
@@ -72,11 +68,9 @@ export default function ViewUsersAdmin() {
             <td>Admin</td>
           </tr>
           {users ? (
-            users.map((userObject) => {
-              console.log("In this fucking map function");
-              console.log(typeof userObject);
-              return <ViewUsersRow key={userObject.id} user={userObject} />;
-            })
+            users.map((userObject) => (
+              <ViewUsersRow key={userObject.id} user={userObject} />
+            ))
           ) : (
             <></>
           )}
