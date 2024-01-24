@@ -161,6 +161,7 @@ button.regCloseButton {
 .allItemsDiv {
   margin-left: 15px;
   margin-right: 15px;
+  margin-bottom: 65px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
