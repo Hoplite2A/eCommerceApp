@@ -45,7 +45,7 @@ export default function ViewUsersAdmin() {
 
   return (
     <>
-      <table>
+      <table className="styled-table">
         <thead>
           <tr>
             <th colSpan="13">All Users</th>

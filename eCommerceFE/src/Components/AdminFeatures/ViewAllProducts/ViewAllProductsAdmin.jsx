@@ -13,7 +13,7 @@ export default function ViewAllProductsAdmin() {
     useContext(CartWishlistContext);
   return (
     <>
-      <table>
+      <table className="styled-table">
         <thead>
           <tr>
             <th colSpan="8">All AllProducts</th>
