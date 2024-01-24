@@ -55,7 +55,6 @@ export default function AllItems() {
   useEffect(() => {
     async function fetchAllItems() {
       try {
-        console.log("MAKING ANOTHER FETCH");
         const res = await fetch(`${BASE_URL}/products/`);
         const json = await res.json();
         const allItemsPH = await json.allProducts;

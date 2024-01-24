@@ -889,7 +889,7 @@ p.body {
 }
 .miniBottomRight {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 75px;
 }
 .wishlistQuantity,

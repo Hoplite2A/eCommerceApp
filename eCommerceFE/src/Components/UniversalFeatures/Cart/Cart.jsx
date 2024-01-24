@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 //! ---------------------------------------------
 
@@ -9,15 +9,18 @@ import CartSubTotal from './CartSubTotal';
 import Header from '../Navigation/Header';
 import Footer from '../Footer';
 // import { BASE_URL } from '../../../App';
+import { CartWishlistContext } from '../../../Contexts/CartWishlistContextProvider';
 //! ---------------------------------------------
 
 export default function Cart() {
     
-    const navigate = useNavigate();
-    const localCart = JSON.parse(localStorage.getItem('cart'));
+    const { localCart } = useContext(CartWishlistContext);
     
+    const navigate = useNavigate();
+    const LSCart = JSON.parse(localStorage.getItem('cart'));
+
     useEffect(() => {
-    }, [localCart])
+    }, [LSCart, localCart])
 
     // const checkout = () => {
     //     async function CheckoutCart() {
@@ -42,20 +45,21 @@ export default function Cart() {
     //     navigate('/CheckoutCartMessage');
     // }
 
+    console.log(LSCart);
+
     return (<>
             <div className="cartPage">
                 <Header />
                     <div className="cartPageDiv">
                         <div className="cartPageDivLeft">
-                    {localCart.map((cartListItem, index) => {
+                    {LSCart.map((cartListItem, index) => {
                         return <CartItemsList key={index} cartListItem={cartListItem} />
                     })}
                         </div>
                         <div className="cartPageDivRight">
-                            <CartSubTotal localCart={localCart} />
-                            {localCart ? <div className="cartbuttons">
+                            <CartSubTotal localCart={LSCart} />
+                            {LSCart ? <div className="cartbuttons">
                                     <button className="checkout">Checkout</button> 
-                                    <button className="updateCart">Update Cart</button>
                                 </div> : <></>}
                         </div>
                     </div> 
