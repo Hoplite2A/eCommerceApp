@@ -9,6 +9,7 @@ import IndividualItem from "./IndividualItemTiles";
 //! --------------------------------------------
 
 export default function AllItems() {
+
 const [allItems, setAllItems] = useState([]);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const [allItems, setAllItems] = useState([]);
     }
     return () => fetchAllItems();
   }, []);
-  
+
   return (
     <>
       <div className="AllItemsParentDiv">
@@ -47,11 +48,13 @@ const [allItems, setAllItems] = useState([]);
             );
           })}
         </div>
+
         {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>
         {tempCart.map((cartListItem, index) => {
           return <CartItemsList key={index} cartListItem={cartListItem} />
         })}
         </div> */}
+
       </div>
     </>
   );

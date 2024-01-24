@@ -7,8 +7,7 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 //! ---------------------------------------------
 
 export default function CartItemsList({cartListItem}) {
-  console.log('This is the CartItemList');
-  console.log(cartListItem);
+  
   const { image, title, price, quantity} = cartListItem;
 
   // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.

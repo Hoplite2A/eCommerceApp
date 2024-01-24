@@ -14,7 +14,7 @@ import { BASE_URL } from "../../App";
 
 export default function IndividualItemPage() {
   
-  const { tempCart, setTempCart, setCartItemId } = useContext(CartWishlistContext);
+  const { tempCart, setTempCart } = useContext(CartWishlistContext);
   
   const navigate = useNavigate();
   const allItemsPage = () => {

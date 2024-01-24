@@ -25,6 +25,7 @@ import ReturnPolicy from "./Components/MainPages/ReturnPolicy";
 import WarrantyPolicy from "./Components/MainPages/WarrantyPolicy";
 import "./App.css";
 import PastPurchasesPage from "./Components/LoggedInFeatures/PastPurchases/PastPurchasesPage";
+import AdminFeaturesPage from "./Components/AdminFeatures/AdminFeaturesPage";
 //! ---------------------------------------------
 
 //! Universal Variables -------------------------
@@ -44,13 +45,17 @@ export default function App() {
         <Route path="/registerBanner" element={<RegistrationBanner />} />
         <Route path="/login" element={<Login />} />
         <Route path="/accountDetails" element={<AccountDetails />} />
+        <Route path="/AdminFeatures" element={<AdminFeaturesPage />} />
         {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
         <Route path="/pastPurchases" element={<PastPurchasesPage />} />
         <Route path="/AllItems" element={<AllItems />} />
         <Route path="/IndividualItemTiles" element={<IndividualItem />} />
-        <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
+        <Route
+          path="/IndividualItemPage/:id"
+          element={<IndividualItemPage />}
+        />
         <Route path="/Cart" element={<Cart />} />
-        <Route path='/CartSubTotal' element={<CartSubTotal />} />
+        <Route path="/CartSubTotal" element={<CartSubTotal />} />
         {/* <Route path="/Checkout" element={<Checkout  />} /> */}
 
         <Route path="/Footer" element={<Footer />} />
@@ -62,11 +67,13 @@ export default function App() {
         {/* <Route path='/careers' element={<Careers />} /> */}
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/csrStatement" element={<CSRStatement />} />
-        <Route path="/greenInitiativeStatement" element={<GreenInitiativeStatement />} />
+        <Route
+          path="/greenInitiativeStatement"
+          element={<GreenInitiativeStatement />}
+        />
         <Route path="/returns" element={<ReturnPolicy />} />
         <Route path="/warranty" element={<WarrantyPolicy />} />
       </Routes>
     </CartWishlistContextProvider>
-    
   );
 }
