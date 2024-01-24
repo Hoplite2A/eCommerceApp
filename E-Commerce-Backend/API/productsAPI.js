@@ -183,19 +183,28 @@ productsRouter.patch("/:id", requireUser, async (req, res, next) => {
 //* -------------DELETE PRODUCT API--------------
 productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
   const { productId } = req.params;
-  const productToDelete = await getSingleProduct(productId);
-  const { title, sellerid } = productToDelete;
 
   try {
-    //Validation that the user deleting this item is the original seller
-    if (req.user.id === sellerid || req.user.admin) {
-      const deletedProduct = await deleteProduct(productId);
-      res.send({ success: true, ...deletedProduct });
-    } else {
+    const productToDelete = await getSingleProduct(productId);
+    if (!productToDelete) {
       next({
-        name: "NotAuthorizedSeller",
-        message: "Must be the original seller or SysAdmin to delete this item.",
+        name: "ProductNotFound",
+        message:
+          "We were not able to find the product you were trying to delete.",
       });
+    } else {
+      const { title, sellerid } = productToDelete;
+      //Validation that the user deleting this item is the original seller
+      if (req.user.id === sellerid || req.user.admin) {
+        const deletedProduct = await deleteProduct(productId);
+        res.send({ success: true, ...deletedProduct });
+      } else {
+        next({
+          name: "NotAuthorizedSeller",
+          message:
+            "Must be the original seller or SysAdmin to delete this item.",
+        });
+      }
     }
   } catch (err) {
     console.log(

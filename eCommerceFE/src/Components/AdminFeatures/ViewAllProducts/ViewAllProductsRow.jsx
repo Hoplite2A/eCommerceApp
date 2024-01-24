@@ -1,12 +1,11 @@
 //! Imported Libraries --------------------------
-import { useState } from "react";
+import { useState, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { userDetails } from "../../UniversalFeatures/Login";
 import { BASE_URL } from "../../../App";
 import { token } from "../../UniversalFeatures/Login";
-import { allItems } from "../../MainPages/AllItemsSignal";
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function ViewllProductsRow({ product }) {
@@ -17,14 +16,10 @@ export default function ViewllProductsRow({ product }) {
   const [category, setCategory] = useState(product.category);
   const [image, setImage] = useState(product.image);
   const [available, setAvailable] = useState(product.available);
+  const { allItems, allItemsAdmin, setAllItemAdmin } =
+    useContext(CartWishlistContext);
 
-  // const [adminValue, setAdminValue] = useState(admin);
   const [editable, setEditable] = useState(false);
-
-  // async function handleAdminChange(e) {
-  //   setAdminValue(e.target.value);
-  //   setSubmitVisible(true);
-  // // }
 
   async function submitChange(e) {
     e.preventDefault();
@@ -45,14 +40,8 @@ export default function ViewllProductsRow({ product }) {
         }),
       });
       const json = await res.json();
-      const updatedProduct = await json;
-      const updatedProducts = allItems.value.allProducts.map((item) =>
-        item.id === updatedProduct.id ? updatedProduct : item
-      );
-      allItems.value = updatedProducts;
-      console.log("AFTER UPDATE");
-      console.log({ allItems });
       setEditable(false);
+      setAllItemAdmin(!allItemsAdmin);
     } catch (error) {
       console.log(
         `An error occurred with the handleAdminChange function on the ViewProductsRow. Error: ${error}`
@@ -73,11 +62,8 @@ export default function ViewllProductsRow({ product }) {
       alert(
         `${json.title} has been successfully deleted from the catalog. Nobody will ever be able to access it again.`
       );
-      const remainingProducts = allItems.value.allProducts.map(
-        (item) => item.id !== id
-      );
-      allItems.value = remainingProducts;
       setEditable(false);
+      setAllItemAdmin(!allItemsAdmin);
     } catch (error) {
       console.log(
         `An error occurred inside of deleteProduct om ViewAllProductRow: ${error}`

@@ -7,12 +7,14 @@ import { signal } from "@preact/signals-react";
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
-import { allItems, initializeAllItems } from "./AllItemsSignal";
 // import CartItemsList from "../UniversalFeatures/Cart/CartItemsList";
 //! --------------------------------------------
 
 export default function AllItems() {
   const {
+    allItems,
+    setAllItems,
+    allItemsAdmin,
     tempCart,
     setTempCart,
     cartItemId,
@@ -50,24 +52,39 @@ export default function AllItems() {
   }, [tempCart]);
   //! --------------------------------------Adding to Cart--------------------------------------
 
-  async function initialize() {
-    try {
-      await initializeAllItems();
-    } catch (error) {
-      console.log(`Error during initialization for AllItems: ${error}`);
-    }
-  }
-
   useEffect(() => {
-    initialize();
-  }, []);
+    async function fetchAllItems() {
+      try {
+        console.log("MAKING ANOTHER FETCH");
+        const res = await fetch(`${BASE_URL}/products/`);
+        const json = await res.json();
+        const allItemsPH = await json.allProducts;
+        setAllItems(allItemsPH);
+      } catch (err) {
+        console.log(
+          `Error occured in fetchAllItems within the AllItems component, ${err}`
+        );
+        return (
+          <>
+            <div className="allItemsErrorMessage">
+              <p className="errorMessage">
+                Our servers are on strike. We will work with them to get back to
+                serving you.
+              </p>
+            </div>
+          </>
+        );
+      }
+    }
+    return () => fetchAllItems();
+  }, [allItemsAdmin]);
 
   return (
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
-          {allItems.value.allProducts &&
-            allItems.value.allProducts.map((item) => {
+          {allItems &&
+            allItems.map((item) => {
               if (item.available) {
                 return <IndividualItem key={item.id} item={item} />;
               }
@@ -84,32 +101,15 @@ export default function AllItems() {
   );
 }
 
-// useEffect(() => {
-//   async function fetchAllItems() {
-//     try {
-//       console.log("MAKING ANOTHER FETCH");
-//       const res = await fetch(`${BASE_URL}/products/`);
-//       const json = await res.json();
-//       const allItemsPH = await json.allProducts;
-//       setAllItems(allItemsPH);
-//       allItemsSignal.value = allItemsPH;
-//       console.log({ allItemsPH });
-//       console.log({ allItemsSignal });
-//     } catch (err) {
-//       console.log(
-//         `Error occured in fetchAllItems within the AllItems component, ${err}`
-//       );
-//       return (
-//         <>
-//           <div className="allItemsErrorMessage">
-//             <p className="errorMessage">
-//               Our servers are on strike. We will work with them to get back to
-//               serving you.
-//             </p>
-//           </div>
-//         </>
-//       );
-//     }
+// async function initialize() {
+//   try {
+//     await initializeAllItems();
+//   } catch (error) {
+//     console.log(`Error during initialization for AllItems: ${error}`);
 //   }
-//   return () => fetchAllItems();
+// }
+
+// useEffect(() => {
+//   s;
+//   initialize();
 // }, []);

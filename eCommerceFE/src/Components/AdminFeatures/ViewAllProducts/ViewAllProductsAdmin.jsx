@@ -1,39 +1,16 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from "react";
-import { Signal } from "@preact/signals-react";
+import { useState, useEffect, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { BASE_URL } from "../../../App";
-import { token } from "../../UniversalFeatures/Login";
+
 import ViewAllProductsRow from "./ViewAllProductsRow";
-import { allItems, initializeAllItems } from "../../MainPages/AllItemsSignal";
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function ViewAllProductsAdmin() {
-  const [allProducts, setAllProducts] = useState(allItems.value.allProducts);
-  console.log({ allItems });
-  async function initialize() {
-    try {
-      await initializeAllItems();
-    } catch (error) {
-      console.log(`Error during initialization for AllItems: ${error}`);
-    }
-  }
-
-  useEffect(() => {
-    initialize();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = allItems.subscribe((value) => {
-      setAllProducts(value.allProducts);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
+  const { allItems, setAllItems, allItemsAdmin, setAllItemsAdmin } =
+    useContext(CartWishlistContext);
   return (
     <>
       <table>
@@ -56,8 +33,8 @@ export default function ViewAllProductsAdmin() {
             <td>Submit</td>
             <td>Delete</td>
           </tr>
-          {allItems.value.allProducts ? (
-            allItems.value.allProducts.map((productObject) => {
+          {allItems ? (
+            allItems.map((productObject) => {
               return (
                 <ViewAllProductsRow
                   key={productObject.id}
