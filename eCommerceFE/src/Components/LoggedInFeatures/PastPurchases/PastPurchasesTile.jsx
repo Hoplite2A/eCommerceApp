@@ -14,7 +14,6 @@ export default function PastPurchasesTile({ purchase }) {
       </div>
       <div className="ppPageImageDiv">
         {items.map((item) => {
-          console.log(typeof item);
           return (
             <img
               key={item.product_id}

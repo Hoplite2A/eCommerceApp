@@ -1,10 +1,8 @@
 //! Imported Libraries --------------------------
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { userDetails } from "../../UniversalFeatures/Login";
 import { BASE_URL } from "../../../App";
 import { token } from "../../UniversalFeatures/Login";
 import ViewUsersRow from "./ViewUsersRow";
@@ -44,9 +42,6 @@ export default function ViewUsersAdmin() {
     users && console.log("Users Rendered");
   }, [users]);
 
-  console.log({ users });
-  console.log(users.length);
-
   return (
     <>
       <table>
@@ -72,11 +67,9 @@ export default function ViewUsersAdmin() {
             <td>Admin</td>
           </tr>
           {users ? (
-            users.map((userObject) => {
-              console.log("In this fucking map function");
-              console.log(typeof userObject);
-              return <ViewUsersRow key={userObject.id} user={userObject} />;
-            })
+            users.map((userObject) => (
+              <ViewUsersRow key={userObject.id} user={userObject} />
+            ))
           ) : (
             <></>
           )}

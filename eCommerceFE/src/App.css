@@ -215,7 +215,7 @@ button.regCloseButton {
   color: #ffffff;
   text-align: left;
 }
-.cartListItemTitle{
+.cartListItemTitle {
   font-size: medium;
   color: #000000;
   text-align: left;
@@ -283,30 +283,30 @@ button.regCloseButton {
   flex-direction: column;
   justify-content: space-between;
 }
-.cartListItemDetails{
+.cartListItemDetails {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.titlePrice{
+.titlePrice {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.titlePriceSubDivTitle{
+.titlePriceSubDivTitle {
   text-align: left;
   max-width: 200px;
 }
 .cartListItemPrice,
-.titlePriceSubDivPrice{
+.titlePriceSubDivPrice {
   text-align: left;
   margin: 0%;
 }
-label.cartListItemQuantity{
+label.cartListItemQuantity {
   margin-right: 10px;
   text-align: left;
 }
-input.cartListItemQuantity{
+input.cartListItemQuantity {
   max-width: 40px;
 }
 .checkout,
@@ -800,19 +800,27 @@ p.body {
   object-fit: contain;
 }
 /*! ----------- CART STYLING START ----------- */
-.cartPageDiv{
+.cartPageDiv {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding-bottom: 65.1px;
 }
-.cartPageDivRight{
+.cartPageDivRight {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin-top: 25px;
 }
 
+/*! -------- ADMIN PAGE START */
+td img {
+  height: 50px;
+}
+
+.deleteButton {
+  background-color: red;
+}
 
 /*! -------- FOOTER DOCS STYLING START ------- */
 /* .sectionHeaders{

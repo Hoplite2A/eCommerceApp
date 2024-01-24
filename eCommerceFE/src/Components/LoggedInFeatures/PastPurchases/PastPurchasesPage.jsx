@@ -20,7 +20,9 @@ export default function PastPurchasesPage() {
       await initializePastPurchases();
       // const updatedPurchases = pastPurchases.value;
     } catch (error) {
-      console.log(`Error during initialization: ${error}`);
+      console.log(
+        `Error during initialization for PastPurchasesPage: ${error}`
+      );
     }
   }
 

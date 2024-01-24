@@ -11,8 +11,10 @@ import { BASE_URL } from "../../../App";
 export const pastPurchases = signal([]);
 
 export async function initializePastPurchases() {
+  console.log({ pastPurchases });
   if (pastPurchases.value.length === 0) {
     try {
+      console.log("Its fetching again in InitializePastPurchases");
       const res = await fetch(`${BASE_URL}/pastPurchases`, {
         headers: {
           "Content-Type": "application/json",

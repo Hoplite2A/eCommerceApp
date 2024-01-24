@@ -31,8 +31,6 @@ export default function AccountDetails() {
 
   const [passwordResetVisible, setPasswordResetVisible] = useState(true);
 
-  console.log("Testing");
-
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const {
@@ -48,7 +46,6 @@ export default function AccountDetails() {
     phone,
     email,
   } = userDetails.value;
-  console.log("Testing");
 
   //Used for pulling changed values from
   const [userName, setUserName] = useState(username);
@@ -66,7 +63,6 @@ export default function AccountDetails() {
 
   const [updateInfo, setUpdateInfo] = useState(false);
   const [updatedPassword, setUpdatedPassword] = useState("");
-  console.log("Testing");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +102,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordResetRequest = async (e) => {
@@ -136,7 +131,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordReset = async (e) => {
@@ -166,7 +160,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   return (
     <>
