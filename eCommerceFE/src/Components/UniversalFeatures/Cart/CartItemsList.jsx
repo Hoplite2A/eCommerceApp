@@ -1,28 +1,20 @@
 //! Imported Libraries --------------------------
-import { useState } from "react";
+import { useState, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function CartItemsList({cartListItem}) {
-  console.log('CartItemsList Component');
+  console.log('This is the CartItemList');
   console.log(cartListItem);
-  //*Possible prop drilling: , tempCart, setTempCart
-  
-  const { image, title, price, description, quantity} = cartListItem;
+  const { image, title, price, quantity} = cartListItem;
 
   // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
-  // setCartCoumt(cartCount - quantity)
+  //TODO -------------- UPDATE QUANTITY
 
-  // const updateCartQuantity = (e) => {
-  //   setCartCount(cartCount + (quantity));
-  //   setItemQuant(e.target.value);
-  // }
-
-  // const removeItem = (id) => {
-    
-  // }
+  //TODO -------------- REMOVE BUTTON
 
   return (
     <>

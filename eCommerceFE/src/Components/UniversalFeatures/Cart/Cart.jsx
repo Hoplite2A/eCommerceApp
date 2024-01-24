@@ -1,7 +1,6 @@
 //! Imported Libraries --------------------------
-import { useState, useContext } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartWishlistContext } from '../../../Contexts/CartWishlistContextProvider';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -13,12 +12,15 @@ import Footer from '../Footer';
 //! ---------------------------------------------
 
 export default function Cart() {
-    const { localCart } = useContext(CartWishlistContext);
-    
-    //TODO -- Write function for watching for session launch (toggle signal to True)
-    // const session = signal(false);
     
     const navigate = useNavigate();
+    const localCart = JSON.parse(localStorage.getItem('cart'));
+    
+    console.log('Cart.jsx -------------------');
+    console.log(localCart);
+
+    useEffect(() => {
+    }, [localCart])
 
     // const checkout = () => {
     //     async function CheckoutCart() {
@@ -52,7 +54,7 @@ export default function Cart() {
                         })}
                     </div>
                     <div className="cartPageDivRight">
-                       <CartSubTotal />
+                <CartSubTotal localCart={localCart} />
                     {localCart ? <button className="checkout" >Checkout</button> : <></>}
                     </div>
                 <button className='continueShopping' onClick={() => navigate('/')}>Continue Shopping</button>

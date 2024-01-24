@@ -2,7 +2,8 @@
 //! Imported Libraries --------------------------
 import { useNavigate } from "react-router-dom";
 import { signal } from "@preact/signals-react";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -12,16 +13,14 @@ import Footer from "./Footer";
 import { BASE_URL } from "../../App";
 //! ---------------------------------------------
 
+export const userDetails = signal(null);
 export const token = signal(null);
 
-export const userDetails = signal(null);
-
 export default function Login() {
+  
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
-
   const [errorMessage, setErrorMessage] = useState("");
-
   const navigate = useNavigate();
 
   const redirect = () => {
@@ -46,11 +45,8 @@ export default function Login() {
       setErrorMessage(json.message);
       const acctDetails = await json.user;
       userDetails.value = await acctDetails;
-      console.log(userDetails.value);
       const tempToken = await json.token;
-      console.log({ tempToken });
       token.value = tempToken;
-      console.log(token.value);
     } catch (err) {
       console.log(`Login function error durring handleSubmit, ${err}`);
     }
@@ -63,8 +59,6 @@ export default function Login() {
       navigate("/");
     }
   };
-
-  console.log(`Token Value after Login: ${token.value}`);
 
   return (
     <>

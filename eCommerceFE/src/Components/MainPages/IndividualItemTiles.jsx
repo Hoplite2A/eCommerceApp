@@ -14,7 +14,7 @@ export default function IndividualItem({ item }) {
   
   const { id, image, title, price } = item;
 
-  const {tempCart, setTempCart, setCartItemId, setTempCountCart } = useContext(CartWishlistContext);
+  const { tempCart, setTempCart} = useContext(CartWishlistContext);
 
     const navigate = useNavigate();
     const itemDetailsPage = () => {
@@ -38,23 +38,35 @@ export default function IndividualItem({ item }) {
   //   }
   // }, []);
 //! ------------------------------------Adding to Wishlist------------------------------------  
+//TODO ---------------- Convert to Wishlist
+  // const addToCart = (item) => {
+  //   const result = tempCart.find(cartItem => cartItem.id == item.id);
+  //   if (result) {
+  //     result.quantity += 1;
+  //     const otherItems = tempCart.filter(cartItem => cartItem.id !== item.id);
+  //     setTempCart([...otherItems, result]);
+  //     localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
+  //   } else {
+  //     item.quantity = 1;
+  //     setTempCart([...tempCart, item]);
+  //     localStorage.setItem('cart', JSON.stringify([...tempCart, item]));
+  //   }
+  // }
 
 //! --------------------------------------Adding to Cart--------------------------------------
-  const [counter, setCounter] = useState(1);
-  const addToCart = (item) => {
-    
-    setCartItemId(id);
-
-    const updatedCartValue = [...tempCart, item ];
-    for (let i = 0; i < updatedCartValue.length; i++) {
-      if (updatedCartValue[i].id === id) {
-        setCounter(updatedCartValue[i].quantity);
-        setCounter(counter + 1);
-      }
-    }
-    setTempCountCart(counter);
-    setTempCart(updatedCartValue);
+const addToCart = (item) => {
+  const result = tempCart.find(cartItem => cartItem.id == item.id);
+  if (result) {
+    result.quantity += 1;
+    const otherItems = tempCart.filter(cartItem => cartItem.id !== item.id);
+    setTempCart([...otherItems, result]);
+    localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
+  } else {
+    item.quantity = 1;
+    setTempCart([...tempCart, item]);
+    localStorage.setItem('cart', JSON.stringify([...tempCart, item]));
   }
+}
 //! --------------------------------------Adding to Cart--------------------------------------
   
   return (

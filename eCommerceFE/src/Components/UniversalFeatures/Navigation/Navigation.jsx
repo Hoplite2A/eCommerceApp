@@ -11,8 +11,8 @@ import { userDetails } from "../Login";
 
 export default function Navigation() {
 
-  const { tempCart } = useContext(CartWishlistContext);
-  
+  const { tempCart, localCart, visible } = useContext(CartWishlistContext);
+
   const navigate = useNavigate();
   const handleLogout = () => {
     token.value = null;
@@ -34,7 +34,7 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            {tempCart.length === 0 ? <></> :
+            {!visible ? <></> :
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>}
@@ -44,7 +44,7 @@ export default function Navigation() {
           <Link to="/login">
             <p className="navBarLabels">Login</p>
           </Link>
-            {tempCart.length === 0 ? <></> :
+            {visible ? <></> :
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>}
