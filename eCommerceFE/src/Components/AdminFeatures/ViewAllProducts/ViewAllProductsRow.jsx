@@ -16,8 +16,7 @@ export default function ViewllProductsRow({ product }) {
   const [category, setCategory] = useState(product.category);
   const [image, setImage] = useState(product.image);
   const [available, setAvailable] = useState(product.available);
-  const { allItems, allItemsAdmin, setAllItemAdmin } =
-    useContext(CartWishlistContext);
+  const { allItemsAdmin, setAllItemAdmin } = useContext(CartWishlistContext);
 
   const [editable, setEditable] = useState(false);
 
