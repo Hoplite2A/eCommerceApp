@@ -14,45 +14,28 @@ export default function IndividualItem({ item }) {
   
   const { id, image, title, price } = item;
 
-  const { tempCart, setTempCart} = useContext(CartWishlistContext);
+  const { tempCart, setTempCart, tempWishlist, setTempWishlist} = useContext(CartWishlistContext);
 
     const navigate = useNavigate();
     const itemDetailsPage = () => {
         navigate(`/IndividualItemPage/${id}`);
     }
 
-//! ------------------------------------Adding to Wishlist------------------------------------  
-  // const addToWishlist = (item) => {
-  //   const updatedWishlistValue = [...tempWishlist, item ];
-  //   setTempWishlist(updatedWishlistValue);
-  //   localStorage.setItem('wishlist', JSON.stringify(updatedWishlistValue));
-  // }
-
-  // useEffect(() => {
-  //   const localWishlist = localStorage.getItem('wishlist');
-  //   if (localWishlist) {
-  //     const storedWishlist = JSON.parse(localWishlist);
-  //     setTempWishlist(storedWishlist);
-  //   } else {
-  //     localStorage.setItem('wishlist', JSON.stringify([]));
-  //   }
-  // }, []);
-//! ------------------------------------Adding to Wishlist------------------------------------  
-//TODO ---------------- Convert to Wishlist
-  // const addToCart = (item) => {
-  //   const result = tempCart.find(cartItem => cartItem.id == item.id);
-  //   if (result) {
-  //     result.quantity += 1;
-  //     const otherItems = tempCart.filter(cartItem => cartItem.id !== item.id);
-  //     setTempCart([...otherItems, result]);
-  //     localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
-  //   } else {
-  //     item.quantity = 1;
-  //     setTempCart([...tempCart, item]);
-  //     localStorage.setItem('cart', JSON.stringify([...tempCart, item]));
-  //   }
-  // }
-
+//! ------------------------------------Adding to Wishlist------------------------------------
+const addToWishlist = (item) => {
+  const result = tempWishlist.find((wishlistItem) => wishlistItem.id == item.id);
+  if (result) {
+    result.quantity += 1;
+    const otherItems = tempWishlist.filter((wishlistItem) => wishlistItem.id !== item.id);
+    setTempWishlist([...otherItems, result]);
+    localStorage.setItem("wishlist", JSON.stringify([...otherItems, result]));
+  } else {
+    item.quantity = 1;
+    setTempWishlist([...tempWishlist, item]);
+    localStorage.setItem("wishlist", JSON.stringify([...tempWishlist, item]));
+  }
+};
+//! ------------------------------------Adding to Wishlist------------------------------------
 //! --------------------------------------Adding to Cart--------------------------------------
 const addToCart = (item) => {
   const result = tempCart.find(cartItem => cartItem.id == item.id);

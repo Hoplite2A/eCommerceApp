@@ -10,8 +10,9 @@ export const CartWishlistContext = createContext();
 
 export default function CartWishlistContextProvider({children}) {
     const [tempCart, setTempCart] = useState([]);
-    const [cartItemId, setCartItemId] = useState(null);
     const [localCart, setLocalCart] = useState([]);
+    const [tempWishlist, setTempWishlist] = useState([]);
+    const [localWishlist, setLocalWishlist] = useState([]);
     const [visible, setVisible] = useState(false);
     const [subTotal, setSubTotal] = useState(0);
     
@@ -25,15 +26,27 @@ export default function CartWishlistContextProvider({children}) {
         }
     }, [])
     
+    useEffect(() => {
+        const launchWishlist = localStorage.getItem('wishlist');
+        if (launchWishlist) {
+            setTempCart(JSON.parse(launchWishlist));
+            setLocalCart(JSON.parse(launchWishlist));
+        } else {
+            localStorage.setItem('wishlist', JSON.stringify([]));
+        }
+    }, [])
+
     return (
         <CartWishlistContext.Provider
             value={{
                 tempCart,
                 setTempCart,
-                cartItemId,
-                setCartItemId,
                 localCart,
                 setLocalCart,
+                tempWishlist,
+                setTempWishlist,
+                localWishlist,
+                setLocalWishlist,
                 visible,
                 setVisible,
                 subTotal,

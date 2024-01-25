@@ -13,7 +13,7 @@ import { BASE_URL } from "../../App";
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
-  const { tempCart, setTempCart } = useContext(CartWishlistContext);
+  const { tempCart, setTempCart, tempWishlist, setTempWishlist } = useContext(CartWishlistContext);
 
   const navigate = useNavigate();
   const allItemsPage = () => {
@@ -49,7 +49,21 @@ export default function IndividualItemPage() {
     }
     return () => IndividualItemPageFetch();
   }, [id]);
-
+  //! ------------------------------------Adding to Wishlist------------------------------------
+  const addToWishlist = (item) => {
+    const result = tempWishlist.find((wishlistItem) => wishlistItem.id == item.id);
+    if (result) {
+      result.quantity += 1;
+      const otherItems = tempWishlist.filter((wishlistItem) => wishlistItem.id !== item.id);
+      setTempWishlist([...otherItems, result]);
+      localStorage.setItem("wishlist", JSON.stringify([...otherItems, result]));
+    } else {
+      item.quantity = 1;
+      setTempWishlist([...tempWishlist, item]);
+      localStorage.setItem("wishlist", JSON.stringify([...tempWishlist, item]));
+    }
+  };
+  //! ------------------------------------Adding to Wishlist------------------------------------
   //! --------------------------------------Adding to Cart--------------------------------------
   const addToCart = (item) => {
     const result = tempCart.find((cartItem) => cartItem.id == item.id);
@@ -92,7 +106,9 @@ export default function IndividualItemPage() {
               {/* <div className="individualItemPageButtonVisiting individualItemPageButtonLoggedIn"> */}
               {visible ? (
                 <>
-                  <button className="wishlistButton individualItemPageButton">
+                  <button
+                    className="wishlistButton individualItemPageButton"
+                    onClick={()=> addToWishlist(item)}>
                     Add to Wishlist
                   </button>
                   <button
