@@ -1,7 +1,7 @@
 //! Imported Libraries -------------------------
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {CartWishlistContext} from "../../Contexts/CartWishlistContextProvider";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -13,9 +13,8 @@ import { BASE_URL } from "../../App";
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
-  
   const { tempCart, setTempCart } = useContext(CartWishlistContext);
-  
+
   const navigate = useNavigate();
   const allItemsPage = () => {
     navigate("/");
@@ -51,21 +50,21 @@ export default function IndividualItemPage() {
     return () => IndividualItemPageFetch();
   }, [id]);
 
-//! --------------------------------------Adding to Cart--------------------------------------
-const addToCart = (item) => {
-  const result = tempCart.find(cartItem => cartItem.id == item.id);
-  if (result) {
-    result.quantity += 1;
-    const otherItems = tempCart.filter(cartItem => cartItem.id !== item.id);
-    setTempCart([...otherItems, result]);
-    localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
-  } else {
-    item.quantity = 1;
-    setTempCart([...tempCart, item]);
-    localStorage.setItem('cart', JSON.stringify([...tempCart, item]));
-  }
-}
-//! --------------------------------------Adding to Cart--------------------------------------
+  //! --------------------------------------Adding to Cart--------------------------------------
+  const addToCart = (item) => {
+    const result = tempCart.find((cartItem) => cartItem.id == item.id);
+    if (result) {
+      result.quantity += 1;
+      const otherItems = tempCart.filter((cartItem) => cartItem.id !== item.id);
+      setTempCart([...otherItems, result]);
+      localStorage.setItem("cart", JSON.stringify([...otherItems, result]));
+    } else {
+      item.quantity = 1;
+      setTempCart([...tempCart, item]);
+      localStorage.setItem("cart", JSON.stringify([...tempCart, item]));
+    }
+  };
+  //! --------------------------------------Adding to Cart--------------------------------------
 
   return (
     <>
@@ -93,16 +92,22 @@ const addToCart = (item) => {
               {/* <div className="individualItemPageButtonVisiting individualItemPageButtonLoggedIn"> */}
               {visible ? (
                 <>
-                  <button className="wishlistButton individualItemPageButton" >
+                  <button className="wishlistButton individualItemPageButton">
                     Add to Wishlist
                   </button>
-                  <button className="cartButton individualItemPageButton" onClick={() => addToCart(item)}>
+                  <button
+                    className="cartButton individualItemPageButton"
+                    onClick={() => addToCart(item)}
+                  >
                     Add to Cart
                   </button>
                 </>
               ) : (
                 <>
-                  <button className="cartButton individualItemPageButton" onClick={() => addToCart(item)}>
+                  <button
+                    className="cartButton individualItemPageButton"
+                    onClick={() => addToCart(item)}
+                  >
                     Add to Cart
                   </button>
                 </>

@@ -2,8 +2,7 @@
 //! Imported Libraries --------------------------
 import { useNavigate } from "react-router-dom";
 import { signal } from "@preact/signals-react";
-import { useState, useContext } from "react";
-import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
+import { useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------

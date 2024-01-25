@@ -15,7 +15,9 @@ import { useEffect, useState } from "react";
 
 export default function Navigation() {
   // console.log(userDetails.value.admin);
+  const { tempCart, localCart, visible } = useContext(CartWishlistContext);
   const [adminPrivileges, setAdminPrivileges] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const details = userDetails.value;
@@ -25,16 +27,7 @@ export default function Navigation() {
     }
   }, [userDetails.value]);
 
-  const navigate = useNavigate();
 
-<<<<<<< HEAD
-  const { tempCart, localCart, visible } = useContext(CartWishlistContext);
-
-  const navigate = useNavigate();
-=======
-  const { tempCart } = useContext(CartWishlistContext);
-
->>>>>>> refs/remotes/origin/main
   const handleLogout = () => {
     token.value = null;
     userDetails.value = null;
@@ -55,14 +48,9 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-<<<<<<< HEAD
-            {!visible ? <></> :
-=======
-
             {tempCart.length === 0 ? (
               <></>
             ) : (
->>>>>>> refs/remotes/origin/main
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
@@ -76,13 +64,6 @@ export default function Navigation() {
               </Link>
             )}
           </>
-<<<<<<< HEAD
-        ) : ( <>
-          <Link to="/login">
-            <p className="navBarLabels">Login</p>
-          </Link>
-            {visible ? <></> :
-=======
         ) : (
           <>
             <Link to="/login">
@@ -91,7 +72,6 @@ export default function Navigation() {
             {tempCart.length === 0 ? (
               <></>
             ) : (
->>>>>>> refs/remotes/origin/main
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>

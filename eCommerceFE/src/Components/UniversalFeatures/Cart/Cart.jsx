@@ -49,9 +49,9 @@ export default function Cart() {
             <Header />
                 <div className="cartPageDiv">
                     <div className="cartPageDivLeft">
-                        {localCart.map((cartListItem, index) => {
-                            return <CartItemsList key={index} cartListItem={cartListItem} />
-                        })}
+                {localCart.map((cartListItem, index) => {
+                    return <CartItemsList key={index} cartListItem={cartListItem} />
+                })}
                     </div>
                     <div className="cartPageDivRight">
                 <CartSubTotal localCart={localCart} />
