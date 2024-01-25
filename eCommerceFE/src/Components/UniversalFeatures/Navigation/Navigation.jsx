@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 export default function Navigation() {
   // console.log(userDetails.value.admin);
-  const { tempCart, localCart, visible } = useContext(CartWishlistContext);
+  const { tempCart, visible } = useContext(CartWishlistContext);
   const [adminPrivileges, setAdminPrivileges] = useState(false);
   const navigate = useNavigate();
 
