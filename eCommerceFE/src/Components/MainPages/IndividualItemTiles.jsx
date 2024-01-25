@@ -66,7 +66,7 @@ const addToCart = (item) => {
     setTempCart([...tempCart, item]);
     localStorage.setItem('cart', JSON.stringify([...tempCart, item]));
   }
-}
+  }
 //! --------------------------------------Adding to Cart--------------------------------------
   
   return (
