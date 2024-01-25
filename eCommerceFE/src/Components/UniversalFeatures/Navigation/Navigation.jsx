@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //! Imported Libraries -------------------------
 
 import { useContext } from "react";

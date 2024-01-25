@@ -1,16 +1,17 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from 'react';
+import {useEffect, useContext } from 'react';
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
+import { CartWishlistContext } from '../../../Contexts/CartWishlistContextProvider';
 //! ---------------------------------------------
 
 export default function CartSubTotal(localCart) {
+
+  const { subTotal, setSubTotal } = useContext(CartWishlistContext);
+  
   const localSubTotal = localCart.localCart;
 
-    //TODO ---- Create subtotal function against the method -------------------
-    const [cartSubTotal, setCartSubTotal] = useState([]);
-    
     useEffect(() => {
     if (localSubTotal) {
       const priceArray = localSubTotal.map((individualPrice) => {
@@ -20,14 +21,14 @@ export default function CartSubTotal(localCart) {
 
       const tempPriceArray = priceArray.reduce((a, b) => a + b, 0);
         const roundedArray = Math.round(tempPriceArray * 10 ** 2) / 10 ** 2;
-      setCartSubTotal(roundedArray);
-    }
+        setSubTotal(roundedArray);
+      }
   }, [localSubTotal]);
 
     return (<>
-        {cartSubTotal ? <>
+        {subTotal ? <>
             <div className="cartSubTotal">
-                <p className="cartSubTotalText">Cart Total: ${cartSubTotal}</p>
+                <p className="cartSubTotalText">Cart Total: ${subTotal}</p>
             </div>
         </> : <>
         </>}

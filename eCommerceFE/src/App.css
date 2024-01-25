@@ -238,6 +238,7 @@ button.regCloseButton {
 /*! ----- INDIVIDUAL ITEMS STYLING START ----- */
 .cartListItemTile,
 .individualItemPage {
+  height: 320px;
   width: 600px;
   display: flex;
   flex-direction: row;
@@ -249,8 +250,8 @@ button.regCloseButton {
 }
 .cartListItemImage > img,
 .individualItemPageImage > img {
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 100px;
+  max-width: 200px;
   border-radius: 20px;
 }
 .cartListItemTileRight,
@@ -309,6 +310,7 @@ label.cartListItemQuantity{
 input.cartListItemQuantity{
   max-width: 40px;
 }
+.updateCart,
 .checkout,
 .continueShopping,
 .cartListItemButtonSelector.cartListItemQuantity,
@@ -696,14 +698,28 @@ p.body {
   background-color: white;
   grid-row: 1 / span 2;
   grid-column: 4 / span 1;
+  overflow: auto;
+  border-radius: 25px;
 }
-
+.aDWishlistDiv::-webkit-scrollbar {
+  display:none;
+}
 .aDCartDiv {
   background-color: blue;
   grid-row: 1 / span 2;
   grid-column: 5 / span 1;
+  border-radius: 25px;
+  overflow: auto;
+  position: relative;
 }
-
+.aDCartDiv::-webkit-scrollbar{
+  display: none;
+}
+h3.CurrentCart{
+  position: fixed;
+  text-align: center;
+  margin-bottom:15px;
+}
 .pppContainer {
   background-color: green;
   grid-row: 3 / span 1;
@@ -803,16 +819,64 @@ p.body {
 .cartPageDiv{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding-bottom: 65.1px;
+  justify-content: center;
+  margin-bottom: 120px;
+}
+.cartPageDivLeft{
+  max-height: 710px;
+  overflow: auto;
+}
+.cartPageDivLeft::-webkit-scrollbar {
+  display:none;
 }
 .cartPageDivRight{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   margin-top: 25px;
+  margin-left: 40px;
 }
-
+.cartbuttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 102px;
+  margin-left: 10px;
+}
+.continueShopping{
+  margin-bottom: 25px;
+  margin-top: 15px;
+  position: fixed;
+  bottom: 70px;
+  justify-content: center;
+}
+.cartSubTotalText{
+  color: white;
+}
+/*! ------ ACCOUNT DETAILS STYLING START ------ */
+/**----------------CURRENT CART ----------------*/
+.miniTileDiv{
+display: flex;
+flex-direction: column;
+}
+.miniBottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.miniBottomLeft > img{
+  max-width: 50px;
+}
+.miniBottomRight{
+  display: flex;
+  flex-direction: column;
+}
+.miniPriceDiv,
+.miniQuantityupdate{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
 /*! -------- FOOTER DOCS STYLING START ------- */
 /* .sectionHeaders{

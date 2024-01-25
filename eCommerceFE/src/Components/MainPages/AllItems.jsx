@@ -1,16 +1,17 @@
 //! Imported Libraries -------------------------
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 // import CartItemsList from "../UniversalFeatures/Cart/CartItemsList";
 //! --------------------------------------------
 
 export default function AllItems() {
 
-const [allItems, setAllItems] = useState([]);
+  const { allItems, setAllItems, allItemsAdmin } = useContext(CartWishlistContext);
 
   useEffect(() => {
     async function fetchAllItems() {
@@ -36,7 +37,7 @@ const [allItems, setAllItems] = useState([]);
       }
     }
     return () => fetchAllItems();
-  }, []);
+  }, [allItemsAdmin]);
 
   return (
     <>
