@@ -1,37 +1,43 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
-// import CartPreview from '../LoggedInFeatures/CartPreview';
-// import WishlistPreview from '../LoggedInFeatures/WishlistPreview';
+import AccountDetailListItems from "./AccountDetailListItems";
 // import PastPurhcases from '../UniversalFeatures/PastPurhcases';
-import Footer from "../UniversalFeatures/Footer";
 import PastPurchasesPreview from "./PastPurchases/PastPurchasesPreview";
+import Footer from "../UniversalFeatures/Footer";
 import { token } from "../../Components/UniversalFeatures/Login";
 import { userDetails } from "../../Components/UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
+import CartSubTotal from "../UniversalFeatures/Cart/CartSubTotal";
+import WishlistSubTotalComp from "./WishlistSubTotal";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function AccountDetails() {
-  useEffect(() => {
-    console.log("AccountDetails mounted");
-    return () => {
-      console.log("AccountDetails unmounted");
-    };
-  }, []);
-  console.log("in account details");
-  const navigate = useNavigate();
 
+  const { localCart, localWishlist } = useContext(CartWishlistContext);
+  const [passwordResetVisible, setPasswordResetVisible] = useState(true);
+
+  //*Rendering the Current Cart -----------------
+  const currentCart = JSON.parse(localStorage.getItem("cart"));
+  useEffect(() => {}, [localCart]);
+  //*--------------------------------------------
+
+  //*Rendering the Current Wishlist -------------
+  const currentWishlist = JSON.parse(localStorage.getItem("wishlist"));
+  useEffect(() => {}, [localWishlist]);
+  //*--------------------------------------------
+
+  //*Configuring Redirect button utilizing useNavigate
+  const navigate = useNavigate();
   const nothing = () => {
     navigate("/");
   };
-
-  const [passwordResetVisible, setPasswordResetVisible] = useState(true);
-
-  console.log("Testing");
+  //*-------------------------------------------------
 
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
@@ -48,7 +54,6 @@ export default function AccountDetails() {
     phone,
     email,
   } = userDetails.value;
-  console.log("Testing");
 
   //Used for pulling changed values from
   const [userName, setUserName] = useState(username);
@@ -66,7 +71,6 @@ export default function AccountDetails() {
 
   const [updateInfo, setUpdateInfo] = useState(false);
   const [updatedPassword, setUpdatedPassword] = useState("");
-  console.log("Testing");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +110,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordResetRequest = async (e) => {
@@ -136,7 +139,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordReset = async (e) => {
@@ -166,7 +168,6 @@ export default function AccountDetails() {
       );
     }
   };
-  console.log("Testing");
 
   return (
     <>
@@ -175,8 +176,6 @@ export default function AccountDetails() {
         <>
           <div className="gridContainer">
             <div className="aDGrid">
-              {/*<div className="accountDetailsDiv">
-            <div className="accountDetailsTopHalf">*/}
               <form className="accountDetails" onSubmit={handleSubmit}>
                 <div className="userAccountDetails">
                   {/* Profile Image */}
@@ -345,12 +344,29 @@ export default function AccountDetails() {
                   </>
                 )}
               </form>
-              <div className="aDWishlistDiv">WISHLIST SECTION</div>
-              <div className="aDCartDiv">CART SECTION</div>
+              <div className="aDWishlistDiv">
+                <h3 className="wishlistHeader">Wishlist</h3>
+                {currentWishlist.map((item) => {
+                  return <AccountDetailListItems key={item.id} item={item} />;
+                })}
+                <WishlistSubTotalComp localWishlist={currentWishlist} />
+              </div>
+              <div className="aDCartDiv">
+                <h3 className="CurrentCart">Current Cart</h3>
+                //! Creating new div to allow cart title to be visible -------------
+                <div className="cartListItemsHOlderDiv">
+                {currentCart.map((item) => {
+                  return <AccountDetailListItems key={item.id} item={item} />;
+                })}
+                </div>
+                <div className="cartSubTotalDiv">
+                  <CartSubTotal localCart={currentCart} />
+                </div>
+                //! Fixing Subtotal to bottom-----------------------------------------
+              </div>
               <PastPurchasesPreview />
             </div>
           </div>
-          <Footer />
         </>
       ) : (
         <>

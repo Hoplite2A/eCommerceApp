@@ -16,9 +16,6 @@ export default function Cart() {
     const navigate = useNavigate();
     const localCart = JSON.parse(localStorage.getItem('cart'));
     
-    console.log('Cart.jsx -------------------');
-    console.log(localCart);
-
     useEffect(() => {
     }, [localCart])
 
@@ -46,19 +43,24 @@ export default function Cart() {
     // }
 
     return (<>
-            <Header />
-                <div className="cartPageDiv">
-                    <div className="cartPageDivLeft">
-                {localCart.map((cartListItem, index) => {
-                    return <CartItemsList key={index} cartListItem={cartListItem} />
-                })}
-                    </div>
-                    <div className="cartPageDivRight">
-                <CartSubTotal localCart={localCart} />
-                    {localCart ? <button className="checkout" >Checkout</button> : <></>}
-                    </div>
-                <button className='continueShopping' onClick={() => navigate('/')}>Continue Shopping</button>
-                </div> 
-            <Footer />
+            <div className="cartPage">
+                <Header />
+                    <div className="cartPageDiv">
+                        <div className="cartPageDivLeft">
+                    {localCart.map((cartListItem, index) => {
+                        return <CartItemsList key={index} cartListItem={cartListItem} />
+                    })}
+                        </div>
+                        <div className="cartPageDivRight">
+                            <CartSubTotal localCart={localCart} />
+                            {localCart ? <div className="cartbuttons">
+                                    <button className="checkout">Checkout</button> 
+                                    <button className="updateCart">Update Cart</button>
+                                </div> : <></>}
+                        </div>
+                    </div> 
+                    <button className='continueShopping' onClick={() => navigate('/')}>Continue Shopping</button>
+                <Footer />
+            </div>
         </>)   
 }

@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
+// import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 //! ---------------------------------------------
 
@@ -16,7 +17,6 @@ import IndividualItemPage from "./Components/MainPages/IndividualItemPage";
 import Cart from "./Components/UniversalFeatures/Cart/Cart";
 import CartSubTotal from "./Components/UniversalFeatures/Cart/CartSubTotal";
 // import Checkout from './Components/UniversalFeature/Checkout';
-
 import Footer from "./Components/UniversalFeatures/Footer";
 import ContactUs from "./Components/UniversalFeatures/ContactUs";
 import CSRStatement from "./Components/MainPages/CSR";
@@ -32,11 +32,22 @@ import AdminFeaturesPage from "./Components/AdminFeatures/AdminFeaturesPage";
 export const BASE_URL = "http://localhost:3000/api";
 //*Final signal Cart for sending to localStorage & for use in Cart Rendering
 import CartWishlistContextProvider from "./Contexts/CartWishlistContextProvider";
+// import { token } from "./Components/UniversalFeatures/Login";
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 
 export default function App() {
+  
+  // const notLoggedIn = () => {
+  //   redirect('/');
+  // }
+  // useEffect(() => {
+  //   if (!token.value) {
+  //     notLoggedIn();
+  //   }
+  // }, [])
+  
   return (
     <CartWishlistContextProvider>
       <Routes>

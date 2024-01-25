@@ -1,9 +1,7 @@
 //! Imported Libraries --------------------------
-import { useState, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function CartItemsList({cartListItem}) {
