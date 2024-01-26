@@ -49,10 +49,7 @@ export default function AccountDetailListItems(item) {
                 </div>
                 <div className="miniBottomRight">
                     <div className="miniPriceDiv">
-                        <p className="miniPrice">${itemPrice}</p>
-                        <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
-                    </div>
-                    <div className="miniQuantityupdate">
+                        <p className="miniPrice">${price}</p>
                         <label className="cartListItemQuantity">Qty:
                             <input className="cartListItemQuantity"
                                 id="quantity" type="number"
@@ -60,7 +57,10 @@ export default function AccountDetailListItems(item) {
                                 min={1} max={1000000}
                                 onChange={(e) => setNewQuantity(e.target.value)} 
                             />
-                            </label>
+                        </label>
+                    </div>
+                    <div className="miniQuantityupdate">
+                        <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
                         <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
                     </div>
                 </div>

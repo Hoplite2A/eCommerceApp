@@ -48,7 +48,7 @@ export default function AccountDetailWishlistItems(item) {
                 </div>
                 <div className="miniBottomRight">
                     <div className="miniPriceDiv">
-                        <p className="miniPrice">${itemPrice}</p>
+                        <p className="miniPrice">${price}</p>
                         <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
                     </div>
                     <div className="miniQuantityupdate">
