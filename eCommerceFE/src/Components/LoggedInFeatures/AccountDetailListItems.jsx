@@ -8,10 +8,10 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetailListItems(item) {
 
-    const { tempCart, setTempCart, setLocalCart } = useContext(CartWishlistContext);
+    const { tempCart, setTempCart, localCart, setLocalCart } = useContext(CartWishlistContext);
     
     const subItem = item.item;
-    const { title, image, price, quantity } = subItem;
+    const { title, image, price, quantity, id } = subItem;
     console.log(subItem);
 
     const [itemPrice, setItemPrice] = useState(0); 
@@ -28,12 +28,24 @@ export default function AccountDetailListItems(item) {
     // }
     // console.log(`subItem.quantity = ${testingQuant}`);
     
-    const updateQuantity = (subItem) => {
-        const otherItems = tempCart.filter(cartItem => cartItem.id !== subItem.id);
-        setTempCart([...otherItems, subItem]);
-        setLocalCart([...otherItems, subItem]);
-        localStorage.setItem('cart', JSON.stringify([...otherItems, subItem]));
+    // const updateQuantity = (subItem) => {
+    //     const otherItems = tempCart.filter(cartItem => cartItem.id !== subItem.id);
+    //     setTempCart([...otherItems, subItem]);
+    //     setLocalCart([...otherItems, subItem]);
+    //     localStorage.setItem('cart', JSON.stringify([...otherItems, subItem]));
+    // }
+
+    const [testItem, setTestItem] = useState([]);
+ 
+    const remove = () => {
+        const editableCart = localCart.filter((item) => item.id !== id);
+        setTestItem(editableCart);
+        setTempCart(editableCart);
+        setLocalCart(editableCart);
+        localStorage.setItem('cart', JSON.stringify(editableCart));
     }
+
+    console.log(testItem);
 
     return (<>
         <div className="miniTileDiv">
@@ -47,7 +59,7 @@ export default function AccountDetailListItems(item) {
                 <div className="miniBottomRight">
                     <div className="miniPriceDiv">
                         <p className="miniPrice">{itemPrice}</p>
-                        <button className="removeFromWishlistButton">Remove</button>
+                        <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
                     </div>
                     <div className="miniQuantityupdate">
                         <label className="cartListItemQuantity">Qty:
@@ -60,7 +72,7 @@ export default function AccountDetailListItems(item) {
                             {/* //TODO -----------------------------Add Event Listener for input/change to quantity and then update CartListItem.quantity &&
                             //TODO ---------------------------------then update TempCart */}
                             </label>
-                        <button className="updateWishlistQuantity" onClick={updateQuantity}>Update</button>
+                        <button className="updateWishlistQuantity" >Update</button>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default function Cart() {
     
     const navigate = useNavigate();
     const localCart = JSON.parse(localStorage.getItem('cart'));
-    
+
     useEffect(() => {
     }, [localCart])
 
@@ -41,6 +41,8 @@ export default function Cart() {
     //     return () => CheckoutCart();
     //     navigate('/CheckoutCartMessage');
     // }
+
+    console.log(localCart);
 
     return (<>
             <div className="cartPage">

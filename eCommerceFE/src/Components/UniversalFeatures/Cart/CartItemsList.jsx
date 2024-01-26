@@ -1,17 +1,32 @@
 //! Imported Libraries --------------------------
+import { useContext, useState, useEffect } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
+import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function CartItemsList({cartListItem}) {
   
-  const { image, title, price, quantity} = cartListItem;
-
+  const { image, title, price, quantity, id} = cartListItem;
+  const { setTempCart, localCart, setLocalCart } = useContext(CartWishlistContext);
+  
   // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
   //TODO -------------- UPDATE QUANTITY
 
   //TODO -------------- REMOVE BUTTON
+  
+  const [testItem, setTestItem] = useState([]);
+ 
+  const remove = () => {
+    const editableCart = localCart.filter((item) => item.id !== id);
+    setTestItem(editableCart);
+    setTempCart(editableCart);
+    setLocalCart(editableCart);
+    localStorage.setItem('cart', JSON.stringify(editableCart));
+  }
+
+  console.log(testItem);
 
   return (
     <>
@@ -39,7 +54,7 @@ export default function CartItemsList({cartListItem}) {
               {/* //TODO -----------------------------Add Event Listener for input/change to quantity and then update CartListItem.quantity &&
               //TODO ---------------------------------then update TempCart */}
             </label>
-            <button className="removeItem" >Remove</button>
+            <button className="removeItem" onClick={() => remove()}>Remove</button>
           </div>
         </div>
       </div>
