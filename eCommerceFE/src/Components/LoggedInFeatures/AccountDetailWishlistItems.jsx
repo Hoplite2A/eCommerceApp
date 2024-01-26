@@ -6,13 +6,12 @@ import { useState, useEffect, useContext } from "react";
 import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
-export default function AccountDetailListItems(item) {
+export default function AccountDetailWishlistItems(item) {
 
-    const { tempCart, setTempCart, localCart, setLocalCart } = useContext(CartWishlistContext);
+    const { tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
-    console.log(subItem);
 
     const [itemPrice, setItemPrice] = useState(0); 
     useEffect(() => {
@@ -20,22 +19,22 @@ export default function AccountDetailListItems(item) {
         const roundedPrice = Math.round(itemPricePH * 10 ** 2) / 10 ** 2;
         setItemPrice(roundedPrice);
     },[item])
-  
+    
     const [newQuantity, setNewQuantity] = useState(0);
     const updateQuantity = () => {
-        const requiredItem = tempCart.find((item) => item.id == id);
+        const requiredItem = tempWishlist.find((item) => item.id == id);
         requiredItem.quantity = newQuantity * 1;
-        const requiredCartItems = tempCart.filter((item) => item.id !== id);
-        setTempCart([...requiredCartItems, requiredItem]);
-        setLocalCart([...requiredCartItems, requiredItem]);
-        localStorage.setItem('cart', JSON.stringify([...requiredCartItems, requiredItem]));
+        const requiredCartItems = tempWishlist.filter((item) => item.id !== id);
+        setTempWishlist([...requiredCartItems, requiredItem]);
+        setLocalWishlist([...requiredCartItems, requiredItem]);
+        localStorage.setItem('wishlist', JSON.stringify([...requiredCartItems, requiredItem]));
    }
 
     const remove = () => {
-        const editableCart = localCart.filter((item) => item.id !== id);
-        setTempCart(editableCart);
-        setLocalCart(editableCart);
-        localStorage.setItem('cart', JSON.stringify(editableCart));
+        const editableCart = localWishlist.filter((item) => item.id !== id);
+        setTempWishlist(editableCart);
+        setLocalWishlist(editableCart);
+        localStorage.setItem('wishlist', JSON.stringify(editableCart));
     }
 
     return (<>

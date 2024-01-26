@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 //! Imported Components/Variables----------------
 import Header from "../UniversalFeatures/Navigation/Header";
 import AccountDetailListItems from "./AccountDetailListItems";
+import AccountDetailWishlistItems from "./AccountDetailWishlistItems";
 // import PastPurhcases from '../UniversalFeatures/PastPurhcases';
 import PastPurchasesPreview from "./PastPurchases/PastPurchasesPreview";
 import Footer from "../UniversalFeatures/Footer";
@@ -349,7 +350,7 @@ export default function AccountDetails() {
                   <h3 className="wishlistHeader">Wishlist</h3>
                 </div>
                 {currentWishlist.map((item) => {
-                  return <AccountDetailListItems key={item.id} item={item} />;
+                  return <AccountDetailWishlistItems key={item.id} item={item} />;
                 })}
                 <WishlistSubTotalComp localWishlist={currentWishlist} />
               </div>
