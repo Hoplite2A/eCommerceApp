@@ -15,7 +15,6 @@ async function getAllProducts() {
     const { rows } = await client.query(`
     SELECT *
     FROM products
-    WHERE available = true;
     `);
     return rows;
   } catch (err) {
@@ -125,6 +124,7 @@ async function getProductByTitle(title) {
 //* --------------UPDATE PRODUCT Db-------------
 // Update product availability
 async function updateProductAvailability(id, availability) {
+  console.log("UPDATE PRODUCT AVAILABILITY");
   try {
     await client.query(
       `
@@ -142,18 +142,22 @@ async function updateProductAvailability(id, availability) {
 
 // Update product values
 async function updateProduct(id, fields = {}) {
-  const setString = Object.keys(fields)
-    .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(", ");
-
-  if (setString.length === 0) {
-    console.log(`setString is empty, nothing to update.`);
-    throw err;
-  }
+  console.log("IN UPDATE PRODUCT");
+  console.log({ fields });
+  const excludedColumns = ["description", "category"];
 
   try {
-    // Use of "transaction" to ensure changes to a product are reflected in carts and wishlists
-    // Transactions begin with a "BEGIN" in postgresSQL
+    const cartColumns = await getColumnNames("carts");
+    const wishlistColumns = await getColumnNames("wishlists");
+
+    const setString = Object.keys(fields)
+      .map((key, index) => `"${key}"=$${index + 1}`)
+      .join(", ");
+
+    if (setString.length === 0) {
+      console.log(`setString is empty, nothing to update.`);
+      throw err;
+    }
     await client.query("BEGIN");
 
     // Update product and return update product
@@ -168,37 +172,78 @@ async function updateProduct(id, fields = {}) {
       `,
       Object.values(fields)
     );
-    // Next update carts
+
+    const setStringCarts = generateSetString(fields, cartColumns);
+    const setValueCarts = generateValueString(fields, cartColumns);
+    // console.log({ setString });
+    console.log({ setStringCarts });
+    // console.log({ fields });
+    // console.log(Object.values(fields));
+    console.log({ setValueCarts });
+    // console.log(Object.values(setValueCarts));
     await client.query(
       `
     UPDATE carts
-    SET ${setString}
+    SET ${setStringCarts}
     WHERE product_id=${id};
       `,
-      Object.values(fields)
+      Object.values(setValueCarts)
     );
 
-    // Update wishlists now too
+    const setStringWishlists = generateSetString(fields, wishlistColumns);
+    const setValueWishlists = generateValueString(fields, wishlistColumns);
+
     await client.query(
       `
     UPDATE wishlists
-    SET ${setString}
+    SET ${setStringWishlists}
     WHERE product_id=${id};
       `,
-      Object.values(fields)
+      Object.values(setValueWishlists)
     );
-    // IF all went well, commit all changes to databse
-    // This only happens if ALL CHANGES are made successfully
+
     await client.query("COMMIT");
+
     return updatedProduct;
   } catch (err) {
-    // IF any changes fail, ROLLBACK returns all items to their original state
     await client.query("ROLLBACK");
     console.log(
       `Error ocurred in updateProduct Db Call, ${err} for item: ${id}`
     );
     throw err;
   }
+}
+
+// Select Column Names Contained In Table
+async function getColumnNames(tableName) {
+  const result = await client.query(
+    `
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name=$1;
+    `,
+    [tableName]
+  );
+  return result.rows.map((row) => row.column_name);
+}
+
+// Filter Out Columns Not Contained In Table
+function generateSetString(fields, columns) {
+  return Object.keys(fields)
+    .filter((key) => columns.includes(key))
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+}
+
+// Return array of update values
+function generateValueString(fields, columns) {
+  let valueString = [];
+  for (const [key, value] of Object.entries(fields)) {
+    if (columns.includes(key)) {
+      valueString.push(value);
+    }
+  }
+  return valueString;
 }
 //* --------------UPDATE PRODUCT Db-------------
 
@@ -209,8 +254,7 @@ async function deleteProduct(productId) {
       rows: [product],
     } = await client.query(
       `
-      UPDATE products
-      SET available = false
+      DELETE FROM products
       WHERE id = $1
       RETURNING *;
       `,

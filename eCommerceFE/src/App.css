@@ -215,7 +215,7 @@ button.regCloseButton {
   color: #ffffff;
   text-align: left;
 }
-.cartListItemTitle{
+.cartListItemTitle {
   font-size: medium;
   color: #000000;
   text-align: left;
@@ -284,30 +284,30 @@ button.regCloseButton {
   flex-direction: column;
   justify-content: space-between;
 }
-.cartListItemDetails{
+.cartListItemDetails {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.titlePrice{
+.titlePrice {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.titlePriceSubDivTitle{
+.titlePriceSubDivTitle {
   text-align: left;
   max-width: 200px;
 }
 .cartListItemPrice,
-.titlePriceSubDivPrice{
+.titlePriceSubDivPrice {
   text-align: left;
   margin: 0%;
 }
-label.cartListItemQuantity{
+label.cartListItemQuantity {
   margin-right: 10px;
   text-align: left;
 }
-input.cartListItemQuantity{
+input.cartListItemQuantity {
   max-width: 40px;
 }
 .updateCart,
@@ -706,7 +706,7 @@ p.body {
   border-width: 1px;
 }
 .aDWishlistDiv::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 .aDCartDiv {
   background-color: blue;
@@ -716,18 +716,18 @@ p.body {
   overflow: auto;
   position: relative;
 }
-.aDCartDiv::-webkit-scrollbar{
+.aDCartDiv::-webkit-scrollbar {
   display: none;
 }
-.wishlistHeader{
+.wishlistHeader {
   justify-content: center;
   text-align: center;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
-.CurrentCart{
+.CurrentCart {
   justify-content: center;
   text-align: center;
-  margin-bottom:15px;
+  margin-bottom: 15px;
   background-color: blue;
 }
 .pppContainer {
@@ -826,41 +826,41 @@ p.body {
   object-fit: contain;
 }
 /*! ----------- CART STYLING START ----------- */
-.cartPageDiv{
+.cartPageDiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 120px;
 }
-.cartPageDivLeft{
+.cartPageDivLeft {
   max-height: 710px;
   overflow: auto;
 }
 .cartPageDivLeft::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
-.cartPageDivRight{
+.cartPageDivRight {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   margin-top: 25px;
   margin-left: 40px;
 }
-.cartbuttons{
+.cartbuttons {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 102px;
   margin-left: 10px;
 }
-.continueShopping{
+.continueShopping {
   margin-bottom: 25px;
   margin-top: 15px;
   position: fixed;
   bottom: 70px;
   justify-content: center;
 }
-.cartSubTotalText{
+.cartSubTotalText {
   color: white;
   background-color: #2f3438;
   border-radius: 25px;
@@ -868,35 +868,35 @@ p.body {
 }
 /*! ------ ACCOUNT DETAILS STYLING START ------ */
 /**----------------CURRENT CART ----------------*/
-.miniTileDiv{
-display: flex;
-flex-direction: column;
-background-color: #2f3438;
-border-radius: 25px;
+.miniTileDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: #2f3438;
+  border-radius: 25px;
 }
-.miniTitle{
+.miniTitle {
   margin-top: 10px;
   margin-bottom: 2px;
 }
-.miniBottom{
+.miniBottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.miniBottomLeft > img{
+.miniBottomLeft > img {
   max-width: 50px;
 }
-.miniBottomRight{
+.miniBottomRight {
   display: flex;
   flex-direction: column;
   height: 75px;
 }
 .wishlistQuantity,
-.miniPrice{
+.miniPrice {
   margin: 2px;
 }
 .miniPriceDiv,
-.miniQuantityupdate{
+.miniQuantityupdate {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -907,6 +907,53 @@ button.updateWishlistQuantity {
   height: 25px;
   align-self: center;
 }
+
+/*! -------- ADMIN PAGE START */
+td img {
+  height: 50px;
+}
+
+.deleteButton {
+  background-color: red;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
 /*! -------- FOOTER DOCS STYLING START ------- */
 /* .sectionHeaders{
 

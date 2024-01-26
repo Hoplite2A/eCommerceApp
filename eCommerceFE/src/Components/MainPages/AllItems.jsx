@@ -1,21 +1,61 @@
 //! Imported Libraries -------------------------
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
+import { signal } from "@preact/signals-react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
 import { BASE_URL } from "../../App";
 import IndividualItem from "./IndividualItemTiles";
-import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 // import CartItemsList from "../UniversalFeatures/Cart/CartItemsList";
 //! --------------------------------------------
 
 export default function AllItems() {
+  const {
+    allItems,
+    setAllItems,
+    allItemsAdmin,
+    tempCart,
+    setTempCart,
+    cartItemId,
+    tempCountCart,
+    localCart,
+    setLocalCart,
+  } = useContext(CartWishlistContext);
+  //! ------------------------------------Adding to Wishlist------------------------------------
 
-  const { allItems, setAllItems, allItemsAdmin } = useContext(CartWishlistContext);
+  //*To Render the products on the AllItem Page
+  // const [allItems, setAllItems] = useState([]);
+  //*Temporary Wishlist for Duplication Elimination and insertion of quantity key:value pair
+  // const [tempWishlist, setTempWishlist] = useState([]);
+
+  //! ------------------------------------Adding to Wishlist------------------------------------
+
+  //! --------------------------------------Adding to Cart--------------------------------------
+  // const [tempCart, setTempCart] = useState([]);
+  // const [cartItemId, setCartItemId] = useState(null);
+  // const [tempCountCart, setTempCountCart] = useState(0);
+
+  useEffect(() => {
+    for (let i = 0; i < tempCart.length; i++) {
+      if (tempCart[i].id === cartItemId) {
+        tempCart[i].quantity = tempCountCart;
+      }
+    }
+
+    const uniqueCartArr = tempCart.filter(
+      (value, id, array) => array.indexOf(value) == id
+    );
+    setLocalCart(uniqueCartArr);
+
+    localStorage.setItem("cart", JSON.stringify(localCart));
+  }, [tempCart]);
+  //! --------------------------------------Adding to Cart--------------------------------------
 
   useEffect(() => {
     async function fetchAllItems() {
       try {
+        console.log("MAKING ANOTHER FETCH");
         const res = await fetch(`${BASE_URL}/products/`);
         const json = await res.json();
         const allItemsPH = await json.allProducts;
@@ -43,11 +83,12 @@ export default function AllItems() {
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
-          {allItems.map((item) => {
-            return (
-              <IndividualItem key={item.id} item={item} />
-            );
-          })}
+          {allItems &&
+            allItems.map((item) => {
+              if (item.available) {
+                return <IndividualItem key={item.id} item={item} />;
+              }
+            })}
         </div>
 
         {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>
@@ -55,7 +96,6 @@ export default function AllItems() {
           return <CartItemsList key={index} cartListItem={cartListItem} />
         })}
         </div> */}
-
       </div>
     </>
   );

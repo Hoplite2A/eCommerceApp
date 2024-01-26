@@ -121,7 +121,11 @@ productsRouter.patch("/:id", requireUser, async (req, res, next) => {
   console.log("productId and req.params.id: ");
   console.log({ id });
   console.log(typeof id);
-  const { userId, title, price, description, category, image } = req.body;
+  const { userId, title, price, description, category, image, available } =
+    req.body;
+
+  console.log(req.body);
+  console.log({ available });
   //TODO ---- userId will have to be included in the req.body
   //! --------------------------------------------------------------------------
 
@@ -144,6 +148,14 @@ productsRouter.patch("/:id", requireUser, async (req, res, next) => {
   if (image && image.length > 0) {
     updateFields.image = image;
   }
+
+  if (available !== null || available !== undefined) {
+    console.log({ available });
+    updateFields.available = available;
+  }
+
+  console.log("UPDATE FIELDS");
+  console.log({ updateFields });
 
   try {
     const originalProductDetails = await getSingleProduct(id);
@@ -169,23 +181,30 @@ productsRouter.patch("/:id", requireUser, async (req, res, next) => {
 //* -------------UPDATE PRODUCT API--------------
 
 //* -------------DELETE PRODUCT API--------------
-// Add back requireUser
 productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
-  //TODO ---- requireUser in async params???????????
   const { productId } = req.params;
-  const productToDelete = await getSingleProduct(productId);
-  const { title, sellerid } = productToDelete;
 
   try {
-    //Validation that the user deleting this item is the original seller
-    if (req.user.id === sellerid || req.user.admin) {
-      const deletedProduct = await deleteProduct(productId);
-      res.send({ success: true, ...deletedProduct });
-    } else {
+    const productToDelete = await getSingleProduct(productId);
+    if (!productToDelete) {
       next({
-        name: "NotAuthorizedSeller",
-        message: "Must be the original seller or SysAdmin to delete this item.",
+        name: "ProductNotFound",
+        message:
+          "We were not able to find the product you were trying to delete.",
       });
+    } else {
+      const { title, sellerid } = productToDelete;
+      //Validation that the user deleting this item is the original seller
+      if (req.user.id === sellerid || req.user.admin) {
+        const deletedProduct = await deleteProduct(productId);
+        res.send({ success: true, ...deletedProduct });
+      } else {
+        next({
+          name: "NotAuthorizedSeller",
+          message:
+            "Must be the original seller or SysAdmin to delete this item.",
+        });
+      }
     }
   } catch (err) {
     console.log(
