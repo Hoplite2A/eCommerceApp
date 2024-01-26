@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 //! Imported Libraries -------------------------
 import { createContext, useState, useEffect } from "react";
+import { token } from "../Components/UniversalFeatures/Login";
 // import { redirect } from 'react-router-dom';
 //! --------------------------------------------
 
@@ -10,6 +11,8 @@ import { createContext, useState, useEffect } from "react";
 export const CartWishlistContext = createContext();
 
 export default function CartWishlistContextProvider({ children }) {
+  const [pastPurchases, setPastPurchases] = useState([]);
+  const [updatePastPurchases, setUpdatePastPurchases] = useState(true);
   const [allItems, setAllItems] = useState([]);
   const [allItemsAdmin, setAllItemAdmin] = useState(true);
   const [tempCart, setTempCart] = useState([]);
@@ -19,6 +22,7 @@ export default function CartWishlistContextProvider({ children }) {
   const [visible, setVisible] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
   const [wishlistSubTotal, setWishlistSubTotal] = useState(0);
+  const [checkoutCart, setCheckoutCart] = useState([]);
 
   useEffect(() => {
     const launchCart = localStorage.getItem("cart");
@@ -43,6 +47,8 @@ export default function CartWishlistContextProvider({ children }) {
   return (
     <CartWishlistContext.Provider
       value={{
+        pastPurchases,
+        setPastPurchases,
         allItems,
         setAllItems,
         allItemsAdmin,
@@ -61,6 +67,8 @@ export default function CartWishlistContextProvider({ children }) {
         setSubTotal,
         wishlistSubTotal,
         setWishlistSubTotal,
+        checkoutCart,
+        setCheckoutCart,
       }}
     >
       {children}
