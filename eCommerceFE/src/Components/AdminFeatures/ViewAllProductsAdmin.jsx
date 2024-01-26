@@ -14,5 +14,7 @@ export default function ViewAllProductsAdmin() {
     setAllItemAdmin(!allItemsAdmin);
   }
 
-  return <>VIEW ALL PRODUCTS</>;
+  return <>
+    <button className="handleUpdate" onClick={()=>handleUpdate}>Update</button>
+  </>;
 }

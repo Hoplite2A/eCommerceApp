@@ -345,15 +345,18 @@ export default function AccountDetails() {
                 )}
               </form>
               <div className="aDWishlistDiv">
-                <h3 className="wishlistHeader">Wishlist</h3>
+                <div className="wishlistHeader">
+                  <h3 className="wishlistHeader">Wishlist</h3>
+                </div>
                 {currentWishlist.map((item) => {
                   return <AccountDetailListItems key={item.id} item={item} />;
                 })}
                 <WishlistSubTotalComp localWishlist={currentWishlist} />
               </div>
               <div className="aDCartDiv">
-                <h3 className="CurrentCart">Current Cart</h3>
-                //! Creating new div to allow cart title to be visible -------------
+                <div className="CurrentCart">
+                  <h3 className="CurrentCart">Current Cart</h3>
+                </div>
                 <div className="cartListItemsHOlderDiv">
                 {currentCart.map((item) => {
                   return <AccountDetailListItems key={item.id} item={item} />;
@@ -362,7 +365,6 @@ export default function AccountDetails() {
                 <div className="cartSubTotalDiv">
                   <CartSubTotal localCart={currentCart} />
                 </div>
-                //! Fixing Subtotal to bottom-----------------------------------------
               </div>
               <PastPurchasesPreview />
             </div>

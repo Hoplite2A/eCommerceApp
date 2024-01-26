@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 //! Imported Libraries -------------------------
 import { createContext, useState, useEffect } from 'react';
-import { redirect } from 'react-router-dom';
+// import { redirect } from 'react-router-dom';
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
-import { token } from '../Components/UniversalFeatures/Login';
 //! --------------------------------------------
 
 export const CartWishlistContext = createContext();
