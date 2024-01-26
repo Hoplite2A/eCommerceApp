@@ -1,15 +1,19 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
-
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
 export default function AccountDetailListItems(item) {
+
+    const { tempCart, setTempCart, setLocalCart } = useContext(CartWishlistContext);
+    
     const subItem = item.item;
     const { title, image, price, quantity } = subItem;
-    
+    console.log(subItem);
+
     const [itemPrice, setItemPrice] = useState(0); 
     useEffect(() => {
         let itemPricePH = price * quantity;
@@ -17,7 +21,19 @@ export default function AccountDetailListItems(item) {
         setItemPrice(roundedPrice);
     },[item])
   
-    console.log(subItem);
+    // const [testingQuant, setTestingQuant] = useState(0)
+    // const handleChange = (e) => {
+    //     subItem.quantity = e.target.value * 1;
+    //     setTestingQuant(subItem.quantity);
+    // }
+    // console.log(`subItem.quantity = ${testingQuant}`);
+    
+    const updateQuantity = (subItem) => {
+        const otherItems = tempCart.filter(cartItem => cartItem.id !== subItem.id);
+        setTempCart([...otherItems, subItem]);
+        setLocalCart([...otherItems, subItem]);
+        localStorage.setItem('cart', JSON.stringify([...otherItems, subItem]));
+    }
 
     return (<>
         <div className="miniTileDiv">
@@ -34,8 +50,17 @@ export default function AccountDetailListItems(item) {
                         <button className="removeFromWishlistButton">Remove</button>
                     </div>
                     <div className="miniQuantityupdate">
-                        <p className="wishlistQuantity">{quantity}</p>
-                        <button className="updateWishlistQuantity">Update</button>
+                        <label className="cartListItemQuantity">Qty:
+                            <input className="cartListItemQuantity"
+                                id="quantity" type="number"
+                                placeholder={quantity}
+                                min={1} max={1000000}
+                                // onChange={handleChange} 
+                            />
+                            {/* //TODO -----------------------------Add Event Listener for input/change to quantity and then update CartListItem.quantity &&
+                            //TODO ---------------------------------then update TempCart */}
+                            </label>
+                        <button className="updateWishlistQuantity" onClick={updateQuantity}>Update</button>
                     </div>
                 </div>
             </div>
