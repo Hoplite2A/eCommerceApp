@@ -32,7 +32,7 @@ export default function CartWishlistContextProvider({ children }) {
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
-  }, [localCart]);
+  }, []);
 
   useEffect(() => {
     const launchWishlist = localStorage.getItem("wishlist");

@@ -17,8 +17,13 @@ import { initializePastPurchases } from "../../LoggedInFeatures/PastPurchases/Pa
 
 export default function Cart() {
   const [successfulPurchase, setSuccessfulPurchase] = useState("");
-  const { localCart, setLocalCart, checkoutCart, setCheckoutCart } =
-    useContext(CartWishlistContext);
+  const {
+    localCart,
+    setLocalCart,
+    checkoutCart,
+    setCheckoutCart,
+    setTempCart,
+  } = useContext(CartWishlistContext);
   // const userInfo = userDetails.value;
   // const userId = userInfo.id;
 
@@ -145,6 +150,7 @@ export default function Cart() {
             const json = await res.json();
             setCheckoutCart([]);
             setLocalCart([]);
+            setTempCart([]);
             LSCart = [];
             localStorage.setItem("cart", JSON.stringify([]));
           } catch (err) {
