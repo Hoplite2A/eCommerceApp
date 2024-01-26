@@ -9,7 +9,6 @@ import { token } from "../../UniversalFeatures/Login";
 //! ---------------------------------------------
 
 export default function ViewUsersRow({ user }) {
-  console.log(userDetails.value.id);
   let {
     id,
     username,
@@ -47,9 +46,7 @@ export default function ViewUsersRow({ user }) {
         }),
       });
       const json = await res.json();
-      console.log(json);
       const info = await json;
-      console.log(info);
       setSubmitVisible(false);
     } catch (error) {
       console.log(
