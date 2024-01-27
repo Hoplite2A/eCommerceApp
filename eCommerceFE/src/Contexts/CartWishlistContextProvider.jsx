@@ -7,6 +7,8 @@ import { createContext, useState, useEffect } from "react";
 //! Imported Components/Variables---------------
 import { fetchUserCart } from "../Components/UniversalFeatures/Cart/Cart";
 import { userDetails } from "../Components/UniversalFeatures/Login";
+import { token } from "../Components/UniversalFeatures/Login";
+
 //! --------------------------------------------
 
 export const CartWishlistContext = createContext();
@@ -78,7 +80,6 @@ export default function CartWishlistContextProvider({ children }) {
     //   localStorage.setItem("cart", JSON.stringify([]));
     // }
   }, [loggedIn]);
-
 
   useEffect(() => {
     const launchWishlist = localStorage.getItem("wishlist");

@@ -85,15 +85,6 @@ export default function Cart() {
   // } = useContext(CartWishlistContext);
   // const userInfo = userDetails.value;
   // const userId = userInfo.id;
-=======
-// export default function Cart() {
-//   const [successfulPurchase, setSuccessfulPurchase] = useState("");
-//   const { localCart, setLocalCart, checkoutCart, setCheckoutCart } =
-//   useContext(CartWishlistContext);
-  
-//   useEffect(() => {
-    
-//   }, [localCart]);
 
   const navigate = useNavigate();
   // let LSCart = JSON.parse(localStorage.getItem("cart"));
@@ -227,7 +218,14 @@ export default function Cart() {
         );
       }
     }
-    return () => CheckoutCart();
+    CheckoutCart();
+  };
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
 
   return (
@@ -236,7 +234,7 @@ export default function Cart() {
         <Header />
         <div className="cartPageDiv">
           <div className="cartPageDivLeft">
-            {/* {successfulPurchase ? (
+            {successfulPurchase ? (
               <>{successfulPurchase} </>
             ) : cart.length > 0 ? (
               cart.map((cartListItem, index) => {
@@ -249,12 +247,6 @@ export default function Cart() {
                 );
               })
             ) : (
-//             ) : checkoutCart.length > 1 ? ( */}
-//             {localCart ? localCart.map((cartListItem, index) => {
-//               return (
-//                 <CartItemsList key={index} cartListItem={cartListItem} />
-//               );
-//             })  : (
               <h4>Nothing in Cart</h4>
             )}
           </div>
@@ -264,10 +256,7 @@ export default function Cart() {
               {/* <p>Cart Subtotal: {(for const item of checkoutCart)}</p> */}
               <p className="cartSubTotalText">Cart Total: ${cartSubTotal}</p>
             </div>
-
             {cart && token.value ? (
-//             {localCart ? (
-
               <div className="cartbuttons">
                 <button className="checkout" onClick={() => checkout()}>
                   Checkout
