@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -8,17 +8,18 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetailWishlistItems(item) {
 
-    const { tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
+    const { tempCart, setTempCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
 
-    const [itemPrice, setItemPrice] = useState(0); 
-    useEffect(() => {
-        let itemPricePH = price * quantity;
-        const roundedPrice = Math.round(itemPricePH * 10 ** 2) / 10 ** 2;
-        setItemPrice(roundedPrice);
-    },[item])
+    //*If we wanted to display that items total cost.
+    // const [itemPrice, setItemPrice] = useState(0); 
+    // useEffect(() => {
+    //     let itemPricePH = price * quantity;
+    //     const roundedPrice = Math.round(itemPricePH * 10 ** 2) / 10 ** 2;
+    //     setItemPrice(roundedPrice);
+    // },[item])
     
     const [newQuantity, setNewQuantity] = useState(0);
     const updateQuantity = () => {
@@ -31,12 +32,29 @@ export default function AccountDetailWishlistItems(item) {
    }
 
     const remove = () => {
-        const editableCart = localWishlist.filter((item) => item.id !== id);
-        setTempWishlist(editableCart);
-        setLocalWishlist(editableCart);
-        localStorage.setItem('wishlist', JSON.stringify(editableCart));
+        const editableWishlist = localWishlist.filter((item) => item.id !== id);
+        setTempWishlist(editableWishlist);
+        setLocalWishlist(editableWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(editableWishlist));
     }
 
+    const addToCart = () => {
+        const result = tempCart.find(cartItem => cartItem.id == id);
+            if (result) {
+                result.quantity += quantity;
+                const otherItems = tempCart.filter(cartItem => cartItem.id !== id);
+                setTempCart([...otherItems, result]);
+                localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
+            } else {
+                setTempCart([...tempCart, subItem]);
+                localStorage.setItem('cart', JSON.stringify([...tempCart, subItem]));
+            }
+            const editableWishlist = localWishlist.filter((item) => item.id !== id);
+            setTempWishlist(editableWishlist);
+            setLocalWishlist(editableWishlist);
+            localStorage.setItem('wishlist', JSON.stringify(editableWishlist));
+        }
+            
     return (<>
         <div className="miniTileDiv">
             <div className="miniTop">
@@ -64,6 +82,7 @@ export default function AccountDetailWishlistItems(item) {
                     </div>
                 </div>
             </div>
+            <div className="addToCart" onClick={()=> addToCart()}>Add to Cart</div>
         </div>
     </>)
 }

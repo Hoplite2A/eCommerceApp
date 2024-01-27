@@ -358,10 +358,12 @@ export default function AccountDetails() {
                 <div className="CurrentCart">
                   <h3 className="CurrentCart">Current Cart</h3>
                 </div>
-                <div className="cartListItemsHOlderDiv">
-                {currentCart.map((item) => {
-                  return <AccountDetailListItems key={item.id} item={item} />;
-                })}
+                <div className="scrollbarEraserDiv">
+                  <div className="cartListItemsHOlderDiv">
+                    {currentCart.map((item) => {
+                      return <AccountDetailListItems key={item.id} item={item} />;
+                    })}
+                  </div>
                 </div>
                 <div className="cartSubTotalDiv">
                   <CartSubTotal localCart={currentCart} />
