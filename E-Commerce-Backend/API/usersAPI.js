@@ -14,7 +14,8 @@ const {
   deleteUser,
 } = require("../db/usersDB");
 
-// Get /api/users
+// Get All users
+// http://localhost:3000/api/users
 usersRouter.get("/", requireAdmin, async (req, res, next) => {
   try {
     const users = await getAllUsers();
@@ -24,7 +25,8 @@ usersRouter.get("/", requireAdmin, async (req, res, next) => {
   }
 });
 
-// POST /api/users/register
+// Register new user
+// http://localhost:3000/api/users/register
 usersRouter.post("/register", async (req, res, next) => {
   const {
     username,
@@ -90,7 +92,8 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
-// POST /api/users/login
+// Login user
+// http://localhost:3000/api/users/login
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   try {
@@ -122,10 +125,7 @@ usersRouter.post("/login", async (req, res, next) => {
 });
 
 // update user
-// Admin can edit all users
-// Logged in users can edit only their own information
-// Should add password confirmation to change password?
-// Only admin can give other user admin
+// http://localhost:3000/api/users/:userId
 usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
   const { userId } = req.params;
   const updateData = req.body;
@@ -166,10 +166,8 @@ usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
   }
 });
 
-// Delete user
-// Can delete your own account,
-// TODO: should have to enter password to confirm?
-// Admin can delete accounts
+// Delete User
+// http://localhost:3000/api/users/:userId
 usersRouter.delete("/:userId", requireUser, async (req, res, next) => {
   try {
     const { userId } = req.params;

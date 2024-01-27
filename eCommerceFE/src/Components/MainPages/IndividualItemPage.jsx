@@ -7,13 +7,15 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 //! Imported Components/Variables---------------
 import Header from "../UniversalFeatures/Navigation/Header";
 import Footer from "../UniversalFeatures/Footer";
+import { userDetails } from "../UniversalFeatures/Login";
 import { token } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
 // import { tempCart, setTempCart, tempWishlist, setTempWishlist } from './AllItems';
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
-  const { tempCart, setTempCart, tempWishlist, setTempWishlist } = useContext(CartWishlistContext);
+  const { cart, setCart, tempWishlist, setTempWishlist } =
+    useContext(CartWishlistContext);
 
   const navigate = useNavigate();
   const allItemsPage = () => {
@@ -51,10 +53,14 @@ export default function IndividualItemPage() {
   }, [id]);
   //! ------------------------------------Adding to Wishlist------------------------------------
   const addToWishlist = (item) => {
-    const result = tempWishlist.find((wishlistItem) => wishlistItem.id == item.id);
+    const result = tempWishlist.find(
+      (wishlistItem) => wishlistItem.id == item.id
+    );
     if (result) {
       result.quantity += 1;
-      const otherItems = tempWishlist.filter((wishlistItem) => wishlistItem.id !== item.id);
+      const otherItems = tempWishlist.filter(
+        (wishlistItem) => wishlistItem.id !== item.id
+      );
       setTempWishlist([...otherItems, result]);
       localStorage.setItem("wishlist", JSON.stringify([...otherItems, result]));
     } else {
@@ -65,19 +71,41 @@ export default function IndividualItemPage() {
   };
   //! ------------------------------------Adding to Wishlist------------------------------------
   //! --------------------------------------Adding to Cart--------------------------------------
-  const addToCart = (item) => {
-    const result = tempCart.find((cartItem) => cartItem.id == item.id);
-    if (result) {
-      result.quantity += 1;
-      const otherItems = tempCart.filter((cartItem) => cartItem.id !== item.id);
-      setTempCart([...otherItems, result]);
-      localStorage.setItem("cart", JSON.stringify([...otherItems, result]));
-    } else {
-      item.quantity = 1;
-      setTempCart([...tempCart, item]);
-      localStorage.setItem("cart", JSON.stringify([...tempCart, item]));
-    }
-  };
+  function addToCart(item) {
+    console.log("ADDING TO CART");
+    const userId =
+      userDetails.value && userDetails.value.id ? userDetails.value.id : -1;
+    let newItem = {
+      user_id: userId,
+      product_id: item.id,
+      title: item.title,
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image,
+      available: item.available,
+    };
+    cart.forEach((cartItem) => {
+      if (cartItem.product_id === newItem.product_id) {
+        cartItem.quantity += newItem.quantity;
+        console.log(cart);
+      } else {
+        setCart(...cart, newItem);
+      }
+    });
+  }
+
+  // const result = tempCart.find((cartItem) => cartItem.id == item.id);
+  // if (result) {
+  //   result.quantity += 1;
+  //   const otherItems = tempCart.filter((cartItem) => cartItem.id !== item.id);
+  //   setTempCart([...otherItems, result]);
+  //   localStorage.setItem("cart", JSON.stringify([...otherItems, result]));
+  // } else {
+  //   item.quantity = 1;
+  //   setTempCart([...tempCart, item]);
+  //   localStorage.setItem("cart", JSON.stringify([...tempCart, item]));
+  // }
+
   //! --------------------------------------Adding to Cart--------------------------------------
 
   return (
@@ -108,7 +136,8 @@ export default function IndividualItemPage() {
                 <>
                   <button
                     className="wishlistButton individualItemPageButton"
-                    onClick={()=> addToWishlist(item)}>
+                    onClick={() => addToWishlist(item)}
+                  >
                     Add to Wishlist
                   </button>
                   <button

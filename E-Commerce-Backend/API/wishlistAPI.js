@@ -12,6 +12,7 @@ const {
 
 // TODO Delete single item?
 // Get user wishlist by userId
+// http://localhost:3000/api/wishlist/
 wishlistsRouter.get("/", requireUser, async (req, res, next) => {
   try {
     const wishlist = await getUserWishlist(req.user.id);
@@ -22,6 +23,7 @@ wishlistsRouter.get("/", requireUser, async (req, res, next) => {
 });
 
 // Add item to wishlist
+// http://localhost:3000/api/wishlist/
 wishlistsRouter.post("/", requireUser, async (req, res, next) => {
   const { productId } = req.body;
   try {
@@ -33,6 +35,7 @@ wishlistsRouter.post("/", requireUser, async (req, res, next) => {
 });
 
 // Deletes entire users wishlist by userId
+// http://localhost:3000/api/wishlist/
 wishlistsRouter.delete("/", requireUser, async (req, res, next) => {
   // Try/Catch to await deleteUserCart
   try {

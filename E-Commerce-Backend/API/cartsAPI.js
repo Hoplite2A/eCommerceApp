@@ -7,6 +7,7 @@ const { requireUser, requireAdmin } = require("./utils");
 const { getCart, addToCart, deleteUserCart } = require("../db/cartDB");
 
 // Get user cart by userId
+// http://localhost:3000/api/cart/
 cartsRouter.get("/", requireUser, async (req, res, next) => {
   try {
     console.log(req.user);
@@ -18,7 +19,9 @@ cartsRouter.get("/", requireUser, async (req, res, next) => {
 });
 
 // Add item to cart
+// http://localhost:3000/api/cart/
 cartsRouter.post("/", requireUser, async (req, res, next) => {
+  console.log("IN POST CARTS API");
   const { productId } = req.body;
   let { quantity } = req.body;
   const userId = req.user.id;
@@ -31,10 +34,8 @@ cartsRouter.post("/", requireUser, async (req, res, next) => {
   }
 });
 
-// Add to cart
-cartsRouter.patch("/", requireUser, async (req, res, next) => {});
-
 // Deletes entire users cart by userId
+// http://localhost:3000/api/cart/
 cartsRouter.delete("/", requireUser, async (req, res, next) => {
   // Try/Catch to await deleteUserCart
   try {

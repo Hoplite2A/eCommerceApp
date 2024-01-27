@@ -2,7 +2,7 @@
 //! Imported Libraries --------------------------
 import { useNavigate } from "react-router-dom";
 import { signal } from "@preact/signals-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -10,13 +10,16 @@ import Header from "./Navigation/Header";
 import { companyName } from "./Logo";
 import Footer from "./Footer";
 import { BASE_URL } from "../../App";
+import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
+
 //! ---------------------------------------------
 
 export const userDetails = signal(null);
 export const token = signal(null);
 
 export default function Login() {
-  
+  const { loggedIn, setLoggedIn, setDbCartLoaded } =
+    useContext(CartWishlistContext);
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,12 +43,12 @@ export default function Login() {
       //! ---------------- Add response if no user found button - reattempt and go to login or
       //! ---------------- button link to registration form
       const json = await res.json();
-      console.log(json);
       setErrorMessage(json.message);
       const acctDetails = await json.user;
       userDetails.value = await acctDetails;
       const tempToken = await json.token;
       token.value = tempToken;
+      setLoggedIn(true);
     } catch (err) {
       console.log(`Login function error durring handleSubmit, ${err}`);
     }

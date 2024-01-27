@@ -8,11 +8,22 @@ import { useEffect, useState, useContext } from "react";
 //! Imported Components/Variables---------------
 import { token } from "../Login";
 import { userDetails } from "../Login";
+import { postCart } from "../Cart/Cart";
 import { BASE_URL } from "../../../App";
 //! --------------------------------------------
 
 export default function Navigation() {
-  const { tempCart, setTempCart, setLocalCart, setTempWishlist, setLocalWishlist } = useContext(CartWishlistContext);
+  const {
+    cart,
+    setCart,
+    tempCart,
+    setTempCart,
+    setLocalCart,
+    setTempWishlist,
+    setLocalWishlist,
+    setDbCartLoaded,
+    setLoggedIn,
+  } = useContext(CartWishlistContext);
   const [adminPrivileges, setAdminPrivileges] = useState(false);
   const navigate = useNavigate();
   // const [logout, setLogout] = useState(false);
@@ -20,40 +31,47 @@ export default function Navigation() {
   useEffect(() => {
     const details = userDetails.value;
     if (details && details.admin === true) {
-      console.log(details.admin);
       setAdminPrivileges(true);
     }
   }, [userDetails.value]);
 
-
-  const handleLogout = () => {
+  async function handleLogout() {
     token.value = null;
     userDetails.value = null;
     navigate("/");
-    // setLogout(!logout);
-    const cartToDB = JSON.parse(localStorage.getItem('cart'));
-    async function sendCartToDB() {
-      try {
-        const res = await fetch(`${BASE_URL}/cart`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ cartToDB }),
-        });
-        const json = res.json();
-        console.log(`Logout Send to DB Cart, ${json}`);
-      } catch (err) {
-        console.log(`Error occurred within sendCartToDB API in Navigation Comp, ${err}`);
-      }
-    }
-    setTempCart([]);
-    setLocalCart([]);
+    const res = await postCart(cart);
+
+    setCart([]);
+    setLoggedIn(false);
     setTempWishlist([]);
     setLocalWishlist([]);
     localStorage.clear();
-    return () => sendCartToDB();
-  };
+    // return () => sendCartToDB();
+  }
+
+  // setLogout(!logout);
+  // const cartToDB = JSON.parse(localStorage.getItem("cart"));
+
+  // async function sendCartToDB() {
+  //   try {
+  //     const res = await fetch(`${BASE_URL}/cart`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ cartToDB }),
+  //     });
+  //     const json = res.json();
+  //     console.log(`Logout Send to DB Cart, ${json}`);
+  //   } catch (err) {
+  //     console.log(
+  //       `Error occurred within sendCartToDB API in Navigation Comp, ${err}`
+  //     );
+  //   }
+  // }
+
+  // setTempCart([]);
+  // setLocalCart([]);
 
   // useEffect(() => {
   //   const cartToDB = JSON.parse(localStorage.getItem('cart'));
@@ -94,9 +112,7 @@ export default function Navigation() {
             <Link to="/accountDetails">
               <p className="navBarLabels">Account Details</p>
             </Link>
-            {tempCart.length === 0 ? (
-              <></>
-            ) : (
+            {cart.length > 0 && (
               <Link to="/Cart">
                 <p className="navBarLabels">Cart</p>
               </Link>
@@ -115,7 +131,7 @@ export default function Navigation() {
             <Link to="/login">
               <p className="navBarLabels">Login</p>
             </Link>
-            {tempCart.length === 0 ? (
+            {cart.length === 0 ? (
               <></>
             ) : (
               <Link to="/Cart">

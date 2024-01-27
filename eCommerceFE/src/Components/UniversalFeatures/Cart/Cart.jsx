@@ -15,115 +15,149 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 import { initializePastPurchases } from "../../LoggedInFeatures/PastPurchases/PastPurchasesSignal";
 //! ---------------------------------------------
 
-export default function Cart() {
-  const [successfulPurchase, setSuccessfulPurchase] = useState("");
-  const {
-    localCart,
-    setLocalCart,
-    checkoutCart,
-    setCheckoutCart,
-    setTempCart,
-  } = useContext(CartWishlistContext);
-  // const userInfo = userDetails.value;
-  // const userId = userInfo.id;
-
-  // Why set LSCart if we already have a localCart????
-  const navigate = useNavigate();
-  let LSCart = JSON.parse(localStorage.getItem("cart"));
-
-  useEffect(() => {
-    fixCarts();
-  }, []);
-
-  async function fetchUserCart() {
+export async function postCart(cart) {
+  deleteCart();
+  for (const item of cart) {
     try {
       const res = await fetch(`${BASE_URL}/cart`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token.value}`,
         },
+        body: JSON.stringify({
+          productId: item.product_id,
+          quantity: item.quantity,
+        }),
       });
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
       const json = await res.json();
-      return json;
     } catch (error) {
-      console.log(`Error occurred in PastPurchasesSignal: ${error}`);
+      console.log(`An error occurred while post cart date. Error:${error}`);
     }
   }
+}
 
-  async function fixCarts() {
-    console.log("IN FIX CARTS");
-    let dbCart = await fetchUserCart();
-    if (dbCart.name === "JsonWebTokenError") {
-      dbCart = [];
-    }
-    console.log({ dbCart });
-
-    const userId =
-      userDetails.value && userDetails.value.id ? userDetails.value.id : -1;
-    const updateCartItems = [];
-    const currentStorageCart = LSCart;
-    console.log({ currentStorageCart });
-    let newItem = [];
-    currentStorageCart.forEach((item) => {
-      let newItem = {
-        user_id: userId,
-        product_id: item.id,
-        title: item.title,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image,
-        available: item.available,
-      };
-      dbCart.forEach((dbItem) => {
-        console.log("IN FUCKING FOR EACH LOOP OF CART");
-        console.log({ dbItem });
-        console.log(dbItem.product_id);
-        console.log({ item });
-        console.log(item.id);
-        if (dbItem.product_id === newItem.product_id) {
-          newItem.quantity += dbItem.quantity;
-        }
-      });
-      updateCartItems.push(newItem);
+export async function deleteCart() {
+  try {
+    const res = await fetch(`${BASE_URL}/cart`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
+      },
     });
-
-    const userCart = [...dbCart, ...updateCartItems];
-    console.log({ userCart });
-    setCheckoutCart(userCart);
+    const json = await res.json();
+  } catch (error) {
+    console.log(`An error occurred in deleteCart on cart component: ${error}`);
   }
+}
 
-  async function postCart(cart) {
-    console.log(cart);
-    for (const item of cart) {
-      console.log(item);
-      console.log(item.id);
-      console.log(item.product_id);
-      console.log(typeof item.product_id);
-
-      try {
-        const res = await fetch(`${BASE_URL}/cart`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token.value}`,
-          },
-          body: JSON.stringify({
-            productId: item.product_id,
-            quantity: item.quantity,
-          }),
-        });
-      } catch (error) {
-        console.log(`An error occurred while post cart date. Error:${error}`);
-      }
+export async function fetchUserCart() {
+  try {
+    const res = await fetch(`${BASE_URL}/cart`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
     }
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    console.log(`Error occurred in PastPurchasesSignal: ${error}`);
   }
+}
+
+export default function Cart() {
+  const [successfulPurchase, setSuccessfulPurchase] = useState("");
+  const [cartSubTotal, setCartSubTotal] = useState(0);
+  // const [dbCartLoaded, setDbCartLoaded] = useState(false);
+  const { cart, setCart, dbCartLoaded, setDbCartLoaded, loggedIn } =
+    useContext(CartWishlistContext);
+  // const {
+  //   localCart,
+  //   setLocalCart,
+  //   checkoutCart,
+  //   setCheckoutCart,
+  //   setTempCart,
+  // } = useContext(CartWishlistContext);
+  // const userInfo = userDetails.value;
+  // const userId = userInfo.id;
+
+  const navigate = useNavigate();
+  // let LSCart = JSON.parse(localStorage.getItem("cart"));
+
+  // useEffect(() => {
+  //   console.log("IUN USE EFFECT");
+  //   console.log(dbCartLoaded);
+  //   if (dbCartLoaded === false && loggedIn === true) {
+  //     fixCarts();
+  //     setDbCartLoaded(true);
+  //   }
+  //   fixCarts();
+  // }, [loggedIn]);
+
+  useEffect(() => {
+    totalCart(cart);
+  }, [cart]);
+
+  function totalCart(cart) {
+    let total = 0;
+    for (const item of Object.values(cart)) {
+      total += Number(item.quantity) * Number(item.price);
+    }
+    setCartSubTotal(total.toFixed(2));
+  }
+
+  // async function fixCarts() {
+  //   console.log("FIX CARTS");
+  //   let dbCart = await fetchUserCart();
+  //   console.log({ dbCart });
+  //   if (dbCart.name === "JsonWebTokenError") {
+  //     console.log("IT WAS FALSE");
+  //     dbCart = [];
+  //   }
+  //   const userId =
+  //     userDetails.value && userDetails.value.id ? userDetails.value.id : -1;
+  //   const updateCartItems = [...dbCart];
+  //   // const currentStorageCart = LSCart;
+  //   // let newItem = [];
+  //   console.log({ cart });
+  //   if (cart.length > 0) {
+  //     cart.forEach((item) => {
+  //       console.log("IN CART.FOREACH OF FIXCARTS");
+  //       console.log({ item });
+  //       let newItem = {
+  //         user_id: userId,
+  //         product_id: item.product_id,
+  //         title: item.title,
+  //         price: item.price,
+  //         quantity: item.quantity,
+  //         image: item.image,
+  //         available: item.available,
+  //       };
+  //       updateCartItems.forEach((dbItem) => {
+  //         console.log(dbItem.product_id);
+  //         if (dbItem.product_id === newItem.product_id) {
+  //           dbItem.quantity += newItem.quantity;
+  //         } else {
+  //           updateCartItems.push(newItem);
+  //         }
+  //       });
+  //     });
+  //   }
+  //   // const userCart = [...dbCart, ...updateCartItems];
+  //   // setCart(userCart);
+  //   console.log("END OF FIX CARTS");
+  //   console.log({ updateCartItems });
+  //   setCart([...updateCartItems]);
+  //   console.log({ cart });
+  // }
 
   const checkout = () => {
     async function CheckoutCart() {
-      console.log("IN CHECKOUT CART");
       try {
         const res = await fetch(`${BASE_URL}/pastPurchases`, {
           method: "POST",
@@ -132,14 +166,13 @@ export default function Cart() {
             Authorization: `Bearer ${token.value}`,
           },
           body: JSON.stringify({
-            cart: checkoutCart,
+            cart: cart,
           }),
         });
         const json = await res.json();
         const checkoutMessage = json;
         if (checkoutMessage.purchase.id) {
           try {
-            console.log("DELETING");
             const res = await fetch(`${BASE_URL}/cart`, {
               method: "DELETE",
               headers: {
@@ -148,11 +181,12 @@ export default function Cart() {
               },
             });
             const json = await res.json();
-            setCheckoutCart([]);
-            setLocalCart([]);
-            setTempCart([]);
-            LSCart = [];
-            localStorage.setItem("cart", JSON.stringify([]));
+            setCart([]);
+            // setCheckoutCart([]);
+            // setLocalCart([]);
+            // setTempCart([]);
+            // LSCart = [];
+            // localStorage.setItem("cart", JSON.stringify([]));
           } catch (err) {
             console.log(
               `Error Occurred in CheckoutCart Function within the Cart Component, ${err}`
@@ -202,12 +236,14 @@ export default function Cart() {
           <div className="cartPageDivLeft">
             {successfulPurchase ? (
               <>{successfulPurchase} </>
-            ) : checkoutCart.length > 1 ? (
-              checkoutCart.map((cartListItem, index) => {
-                console.log({ checkoutCart });
-                console.log("MAPPING HERE");
+            ) : cart.length > 0 ? (
+              cart.map((cartListItem, index) => {
                 return (
-                  <CartItemsList key={index} cartListItem={cartListItem} />
+                  <CartItemsList
+                    key={index}
+                    cartListItem={cartListItem}
+                    itemId={cartListItem.product_id}
+                  />
                 );
               })
             ) : (
@@ -216,23 +252,21 @@ export default function Cart() {
           </div>
           <div className="cartPageDivRight">
             <div className="cartSubTotal">
-              <p>Cart Subtotal: {checkoutCart.id}</p>
-              {/* <p className="cartSubTotalText">Cart Total: ${checkoutCart}</p> */}
+              {/* <CartSubTotal localCart={cart} /> */}
+              {/* <p>Cart Subtotal: {(for const item of checkoutCart)}</p> */}
+              <p className="cartSubTotalText">Cart Total: ${cartSubTotal}</p>
             </div>
-            {checkoutCart ? (
+            {cart && token.value ? (
               <div className="cartbuttons">
                 <button className="checkout" onClick={() => checkout()}>
                   Checkout
                 </button>
-                <button
-                  className="checkout"
-                  onClick={() => postCart(checkoutCart)}
-                >
+                <button className="checkout" onClick={() => postCart(cart)}>
                   SAVE CART
                 </button>
               </div>
             ) : (
-              <></>
+              <Link to="/login">Log in or Sign up to checkout your cart!</Link>
             )}
           </div>
         </div>
