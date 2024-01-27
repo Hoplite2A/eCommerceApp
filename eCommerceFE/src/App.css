@@ -54,6 +54,12 @@ p.navBarLabels:hover {
   margin: 0px;
   padding: 0px;
 }
+/* html{
+  overflow: hidden;
+} */
+html::-webkit-scrollbar{
+  display: none;
+  }
 .header {
   width: 100%;
   height: 50px;
@@ -63,9 +69,8 @@ p.navBarLabels:hover {
   background-color: #2f3438;
   margin: 0px;
   padding-bottom: 7.5px;
-  /* position: fixed;
-  top: 0%;
-  left: 0%; */
+  position: sticky; 
+  top: 0px;
 }
 .logo {
   padding: 5px;
@@ -117,8 +122,8 @@ p.navBarLabels {
   background-color: #2f3438a8;
   width: 100%;
   margin: 0px;
-  /* margin-top: 57.6px; */
-  /* position: fixed; */
+  position: sticky;
+  top:57px;
 }
 .regBannerText {
   color: white;
@@ -161,7 +166,7 @@ button.regCloseButton {
 .allItemsDiv {
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom: 65px;
+  margin-bottom: 70px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -717,9 +722,12 @@ p.body {
   overflow: auto;
   position: relative;
 }
-.aDCartDiv::-webkit-scrollbar {
+/* .scrollbarEraserDiv{
+} */
+.aDCartDiv::-webkit-scrollbar  {
   display: none;
 }
+
 .wishlistHeader {
   justify-content: center;
   text-align: center;
@@ -842,7 +850,7 @@ p.body {
 }
 .cartPageDivRight {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   margin-top: 25px;
   margin-left: 40px;
@@ -886,10 +894,11 @@ p.body {
 }
 .miniBottomLeft > img {
   max-width: 50px;
+  border-radius: 25px;
 }
 .miniBottomRight {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 75px;
 }
 .wishlistQuantity,
@@ -904,9 +913,8 @@ p.body {
 }
 button.removeFromWishlistButton,
 button.updateWishlistQuantity {
-  margin-left: 7px;
   height: 25px;
-  align-self: center;
+  justify-content: space-between;
 }
 
 /*! -------- ADMIN PAGE START */
