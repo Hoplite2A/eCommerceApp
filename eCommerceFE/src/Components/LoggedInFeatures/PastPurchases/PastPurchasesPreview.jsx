@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { token } from "../../UniversalFeatures/Login";
 import { userDetails } from "../../UniversalFeatures/Login";
 import { pastPurchases, initializePastPurchases } from "./PastPurchasesSignal";
+import { Link } from "react-router-dom";
 //! ---------------------------------------------
 
 export default function PastPurchasesPreview() {
@@ -45,17 +46,19 @@ export default function PastPurchasesPreview() {
             );
             return (
               <div key={item.id} className="pppIndividualTile">
-                <h3>Puchase made on {date}</h3>
-                <div className="pppImageDiv">
-                  <img
-                    className="pppImage"
-                    src={item.items[0].image}
-                    alt={item.items[0].title}
-                  />
-                </div>
-                <p>{item.items[0].title}</p>
-                <p>Number of items: {item.items.length}</p>
-                <p>Total: {item.purchase_total}</p>
+                <Link to="/pastpurchases">
+                  <h3>Puchase made on {date}</h3>
+                  <div className="pppImageDiv">
+                    <img
+                      className="pppImage"
+                      src={item.items[0].image}
+                      alt={item.items[0].title}
+                    />
+                  </div>
+                  <p>{item.items[0].title}</p>
+                  <p>Number of items: {item.items.length}</p>
+                  <p>Total: {item.purchase_total}</p>
+                </Link>
               </div>
             );
           })}

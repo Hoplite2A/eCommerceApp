@@ -57,8 +57,13 @@ export default function AllItems() {
       try {
         const res = await fetch(`${BASE_URL}/products/`);
         const json = await res.json();
-        const allItemsPH = await json.allProducts;
-        setAllItems(allItemsPH);
+        if (json.allProducts && Array.isArray(json.allProducts)) {
+          const sortedProducts = json.allProducts.sort((a, b) => a.id - b.id);
+
+          setAllItems(sortedProducts);
+        } else {
+          console.log("Invalid response format. Expected 'allProducts' array.");
+        }
       } catch (err) {
         console.log(
           `Error occured in fetchAllItems within the AllItems component, ${err}`

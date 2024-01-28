@@ -1,5 +1,5 @@
 //! Imported Libraries --------------------------
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -9,8 +9,7 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 //! ---------------------------------------------
 
 export default function ViewAllProductsAdmin() {
-  const { allItems, setAllItems, allItemsAdmin, setAllItemsAdmin } =
-    useContext(CartWishlistContext);
+  const { allItems } = useContext(CartWishlistContext);
   return (
     <>
       <table className="styled-table">
