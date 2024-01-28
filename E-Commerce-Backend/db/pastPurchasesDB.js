@@ -10,7 +10,8 @@
 
 const client = require("./client");
 
-async function createPastPurchase(userID, cart) {
+async function createPastPurchase(userID, { cart }) {
+  console.log(cart);
   try {
     let cartTotal = 0;
     for (const product of cart) {
@@ -27,6 +28,7 @@ async function createPastPurchase(userID, cart) {
       [userID, cartTotal]
     );
     const { id } = purchase;
+    console.log({ purchase });
     let purchaseItems = [];
     for (const product of cart) {
       console.log({ product });
@@ -37,6 +39,7 @@ async function createPastPurchase(userID, cart) {
       }
     }
     const purchaseInfo = { purchase, purchaseItems };
+    console.log({ purchaseInfo });
     return purchaseInfo;
   } catch (error) {
     throw error;
