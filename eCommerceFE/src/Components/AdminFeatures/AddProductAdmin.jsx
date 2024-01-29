@@ -47,7 +47,7 @@ export default function AddProductAdmin() {
 
   return (
     <>
-      <form>
+      <form className="add-product-form">
         <label htmlFor={title}>Title: </label>
         <input
           id="title"
@@ -89,7 +89,7 @@ export default function AddProductAdmin() {
         Add Product
       </button>
       {response && (
-        <div>
+        <div className="response-div">
           <h3>{response.name}</h3>
           <p>{response.message}</p>
         </div>

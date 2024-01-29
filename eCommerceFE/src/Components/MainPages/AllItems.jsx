@@ -56,16 +56,16 @@ export default function AllItems() {
 
   const [testMappedArray, setTestMappedArray] = useState([]);
   useEffect(() => {
-    const filteringAvail = allItems.sort((a,b) => {
+    const filteringAvail = allItems.sort((a, b) => {
       a.available > b.available ? 1 : -1;
-  })
+    });
     setTestMappedArray(filteringAvail);
   }, [allItems, changeFilter]);
 
   useEffect(() => {
-    const filteringAvail = searchFilteredArray.sort((a,b) => {
+    const filteringAvail = searchFilteredArray.sort((a, b) => {
       a.available > b.available ? 1 : -1;
-  })
+    });
     setTestMappedArray(filteringAvail);
   }, [searchFilteredArray, changeFilter]);
 
@@ -79,8 +79,7 @@ export default function AllItems() {
         <div className="allItemsDiv">
           {testMappedArray.map((item) => {
             return <IndividualItem key={item.id} item={item} />;
-            })
-            }
+          })}
         </div>
       </div>
     </>

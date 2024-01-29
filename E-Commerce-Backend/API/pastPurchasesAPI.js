@@ -30,7 +30,6 @@ pastPurchasesRouter.get("/:purchaseId", requireUser, async (req, res, next) => {
     const purchaseInfo = pastPurchases.filter(
       (purchase) => purchase.id === Number(purchaseId)
     );
-    purchaseInfo.length > 1 ? console.log("TRUE") : console.log("FALSE");
     if (purchaseInfo.length < 1) {
       console.log("No purchase found");
       res.send(
@@ -38,7 +37,6 @@ pastPurchasesRouter.get("/:purchaseId", requireUser, async (req, res, next) => {
       );
       return;
     }
-    console.log({ purchaseInfo });
     res.send(purchaseInfo);
   } catch (error) {
     next(error);

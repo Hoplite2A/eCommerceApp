@@ -1,22 +1,10 @@
-// Create a table for each users past purchases
-// id, user_id, but basically I'm just making this, to make a unique key, to pass into the past_purchases items database, which will then have to go through and retrive all that information based on that unique id anyway? Plust wont it still have to go through the same amount of objects in the database anyway? Only it will have to get data from another table to do it?
-// For EACH past_purchase, create a row with unique id, the user_id, order total and date
-// This will link the user to the specific purchase
-// In past_purchases items
-// "purchase_id" REFERENCES past_purchases, product_id, title, quantity, image, price, PRIMARY KEY(pruchase_id, product_id)
-// Functions, ill only need a create past_purchase, get past_purchase, do we need an edit?
-// For create:
-// Create unique past_purchase row,
-
 const client = require("./client");
 
 async function createPastPurchase(userID, { cart }) {
-  console.log(cart);
   try {
     let cartTotal = 0;
     for (const product of cart) {
       cartTotal += product.price * product.quantity;
-      // console.log(product);
     }
     const {
       rows: [purchase],
@@ -28,18 +16,15 @@ async function createPastPurchase(userID, { cart }) {
       [userID, cartTotal]
     );
     const { id } = purchase;
-    console.log({ purchase });
+
     let purchaseItems = [];
     for (const product of cart) {
-      console.log({ product });
-      console.log(product.available);
       if (product.available !== false) {
         const itemEntry = await createPastItems(id, product);
         purchaseItems.push(itemEntry);
       }
     }
     const purchaseInfo = { purchase, purchaseItems };
-    console.log({ purchaseInfo });
     return purchaseInfo;
   } catch (error) {
     throw error;
@@ -65,7 +50,6 @@ async function createPastItems(id, cartItem) {
 }
 
 async function getPastPurchases(userId) {
-  console.log("Recived user:", userId);
   try {
     const result = await client.query(
       `
@@ -80,8 +64,6 @@ async function getPastPurchases(userId) {
       `,
       [userId]
     );
-    console.log(result.rows);
-
     const organizedResults = {};
 
     result.rows.forEach((row) => {

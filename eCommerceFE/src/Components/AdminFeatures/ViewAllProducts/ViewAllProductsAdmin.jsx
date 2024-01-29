@@ -13,12 +13,10 @@ export default function ViewAllProductsAdmin() {
   return (
     <>
       <table className="styled-table">
-        <thead>
+        <thead className="table-head">
           <tr>
             <th colSpan="11">All Products</th>
           </tr>
-        </thead>
-        <tbody>
           <tr>
             <td>Product ID</td>
             <td>Title</td>
@@ -32,6 +30,8 @@ export default function ViewAllProductsAdmin() {
             <td>Submit</td>
             <td>Delete</td>
           </tr>
+        </thead>
+        <tbody>
           {allItems ? (
             allItems.map((productObject) => {
               return (

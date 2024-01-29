@@ -57,9 +57,9 @@ p.navBarLabels:hover {
 /* html{
   overflow: hidden;
 } */
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
   display: none;
-  }
+}
 .header {
   width: 100%;
   height: 60px;
@@ -69,7 +69,7 @@ html::-webkit-scrollbar{
   background-color: #2f3438;
   margin: 0px;
   padding-bottom: 7.5px;
-  position: sticky; 
+  position: sticky;
   top: 0px;
 }
 .logo {
@@ -84,67 +84,67 @@ p.siteNameText {
   font-size: 25px;
   font-weight: 700;
 }
-.searchBarParent{
+.searchBarParent {
   display: flex;
   flex-direction: column;
 }
-.searchBarParentLoggedIn{
+.searchBarParentLoggedIn {
   margin-left: 35px;
   display: flex;
   flex-direction: column;
 }
-.textSearchLabel{
+.textSearchLabel {
   color: #fcee09;
   font-weight: bold;
 }
-.textSearch{
+.textSearch {
   width: 420px;
   margin-left: 5px;
   color: #fcee09;
   background-color: #2f3438;
 }
-.filterPresetButtons{
+.filterPresetButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.filterButtons{
+.filterButtons {
   color: #fcee09;
   border-radius: 15px;
   margin-top: 5px;
 }
-.AZFiltering:hover{
+.AZFiltering:hover {
   color: #e610c2;
   border-radius: 15px;
   filter: drop-shadow(0 0 1em #e610c2);
 }
-.ZAFiltering:hover{
+.ZAFiltering:hover {
   color: #0ec0c0;
   border-radius: 15px;
   filter: drop-shadow(0 0 1em #0ec0c0);
 }
-.LHFiltering:hover{
+.LHFiltering:hover {
   color: #5dbd26;
   border-radius: 15px;
   filter: drop-shadow(0 0 1em #5dbd26);
 }
-.HLFiltering:hover{
+.HLFiltering:hover {
   color: #b216f0;
   border-radius: 15px;
   filter: drop-shadow(0 0 1em #b216f0);
 }
-.categoryFiltering:hover{
+.categoryFiltering:hover {
   color: #c57907;
   border-radius: 15px;
   filter: drop-shadow(0 0 1em #c57907);
 }
 .ZAFiltering,
-.HLFiltering{
-margin-left: 15px;
+.HLFiltering {
+  margin-left: 15px;
 }
 .alphabeticalButtons,
-.pricingButtons{
-display: flex;
+.pricingButtons {
+  display: flex;
 }
 .navBarMaster {
   display: flex;
@@ -185,7 +185,7 @@ p.navBarLabels {
   width: 100%;
   margin: 0px;
   position: sticky;
-  top:67px;
+  top: 67px;
 }
 .regBannerText {
   color: white;
@@ -801,13 +801,13 @@ h3.wishlistHeader {
   text-align: center;
   margin-bottom: 0px;
   margin-top: 0px !important;
-  padding: 18.720px;
+  padding: 18.72px;
   top: 0px;
   background-color: #25292c;
   border-radius: 25px 25px 0px 0px;
 }
 div.CurrentCart,
-div.wishlistHeader{
+div.wishlistHeader {
   top: 0px;
   margin: 0px;
   position: sticky;
@@ -976,6 +976,12 @@ div.wishlistHeader{
   max-height: 710px;
   overflow: auto;
 }
+.cartPageDivLeft h4 {
+  color: #a1a1a1;
+}
+.cartPageDivLeft a {
+  color: yellow;
+}
 .cartPageDivLeft::-webkit-scrollbar {
   display: none;
 }
@@ -1000,19 +1006,22 @@ div.wishlistHeader{
   bottom: 70px;
   justify-content: center;
 }
-.wishlistHeader{
+.wishlistHeader {
   border-radius: 25px;
-  position: sticky;   
-  top: 18.720px;
+  position: sticky;
+  top: 18.72px;
+}
+.cartPageDivRight a {
+  color: yellow;
 }
 .cartSubTotalDiv,
-.cartSubTotal{
+.cartSubTotal {
   bottom: 0px;
   margin: 0px;
-  position: sticky;   
+  position: sticky;
   padding: 0px;
   background-color: #25292c;
-  border-radius:  0px 0px 25px 25px;  
+  border-radius: 0px 0px 25px 25px;
 }
 .cartSubTotalText,
 .cartSubTotalText {
@@ -1022,49 +1031,48 @@ div.wishlistHeader{
   justify-content: center;
   margin: 0px;
 }
-.formFieldsSection{
+.formFieldsSection {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.accountDetailsInputs{
+.accountDetailsInputs {
   margin-left: 4px;
 }
 .ADNameFields,
-.ADStreetAddress1 ,
+.ADStreetAddress1,
 .ADStreetAddress2,
-.ADContactInfo{
+.ADContactInfo {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 .ADNFLabels,
-.ADSA2Labels{
+.ADSA2Labels {
   margin: 10px;
   font-size: large;
   font-weight: bold;
 }
 .ADSA1Labels,
-.ADCILabels{
+.ADCILabels {
   margin: 15px;
   font-size: large;
   font-weight: bold;
 }
 .firstName,
-.preferredName, 
+.preferredName,
 .lastName,
 .cityAddress,
 .stateAddress,
-.zipAddress{
+.zipAddress {
   max-width: 75px;
 }
-.streetAddress{
+.streetAddress {
   max-width: 250px;
 }
-.APTAddress{
+.APTAddress {
   max-width: 40px;
 }
-
 
 /*! ------ ACCOUNT DETAILS STYLING START ------ */
 /**----------------CURRENT CART ----------------*/
@@ -1116,10 +1124,15 @@ td img {
 .deleteButton {
   background-color: red;
 }
-
+.response-div {
+  color: #a1a1a1;
+}
+.add-product-form {
+  color: #a1a1a1;
+}
 .styled-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 0px 15px 70px 15px;
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
@@ -1132,6 +1145,11 @@ td img {
   text-align: left;
 }
 
+.table-head tr {
+  position: sticky;
+  top: 0;
+}
+
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
@@ -1142,7 +1160,15 @@ td img {
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  /* background-color: #f3f3f3; */
+  background-color: #2f3438;
+  color: #a1a1a1 !important;
+}
+
+.styled-table tbody tr:nth-of-type(odd) {
+  /* background-color: #f3f3f3; */
+  background-color: #a1a1a1;
+  color: #2f3438;
 }
 
 .styled-table tbody tr:last-of-type {
