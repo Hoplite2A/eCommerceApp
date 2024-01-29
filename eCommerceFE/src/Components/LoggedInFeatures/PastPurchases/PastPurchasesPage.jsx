@@ -2,7 +2,7 @@
 // Look at amazon
 
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -23,12 +23,15 @@ export default function PastPurchasesPage() {
       console.log(`Error during initialization: ${error}`);
     }
   }
-
+  
+  // const navigate = useNavigate();
   useEffect(() => {
     initialize();
+    // if (!token.value) {
+    //   navigate('/login');
+    // }
   }, []);
 
-  const navigate = useNavigate();
 
   return (
     <>

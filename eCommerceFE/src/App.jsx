@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 //! Imported Libraries --------------------------
 // import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 //! ---------------------------------------------
 
 //! Imported Components/Variables----------------
@@ -32,7 +32,7 @@ import AdminFeaturesPage from "./Components/AdminFeatures/AdminFeaturesPage";
 export const BASE_URL = "http://localhost:3000/api";
 //*Final signal Cart for sending to localStorage & for use in Cart Rendering
 import CartWishlistContextProvider from "./Contexts/CartWishlistContextProvider";
-// import { token } from "./Components/UniversalFeatures/Login";
+import { token } from "./Components/UniversalFeatures/Login";
 //! ---------------------------------------------
 
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
@@ -54,16 +54,13 @@ export default function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/registerBanner" element={<RegistrationBanner />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/accountDetails" element={<AccountDetails />} />
+        <Route path="/accountDetails" element={!token.value ? <Navigate to='/login' /> : <AccountDetails /> } />
         <Route path="/AdminFeatures" element={<AdminFeaturesPage />} />
         {/* <Route path='/orderHistory' element={<OrderHistory />} /> */}
-        <Route path="/pastPurchases" element={<PastPurchasesPage />} />
+        <Route path="/pastPurchases" element={!token.value ? <Navigate to='/login' /> : <PastPurchasesPage />} />
         <Route path="/AllItems" element={<AllItems />} />
         <Route path="/IndividualItemTiles" element={<IndividualItem />} />
-        <Route
-          path="/IndividualItemPage/:id"
-          element={<IndividualItemPage />}
-        />
+        <Route path="/IndividualItemPage/:id" element={<IndividualItemPage />} />
         <Route path="/Cart" element={<Cart />} />
         <Route path="/CartSubTotal" element={<CartSubTotal />} />
         {/* <Route path="/Checkout" element={<Checkout  />} /> */}
@@ -77,10 +74,7 @@ export default function App() {
         {/* <Route path='/careers' element={<Careers />} /> */}
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/csrStatement" element={<CSRStatement />} />
-        <Route
-          path="/greenInitiativeStatement"
-          element={<GreenInitiativeStatement />}
-        />
+        <Route path="/greenInitiativeStatement" element={<GreenInitiativeStatement />} />
         <Route path="/returns" element={<ReturnPolicy />} />
         <Route path="/warranty" element={<WarrantyPolicy />} />
       </Routes>
