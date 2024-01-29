@@ -28,6 +28,7 @@ async function getCart(userId) {
 }
 
 async function addToCart(productId, userId, quantity) {
+  console.log("IN ADD TO CART DB");
   const product = await getSingleProduct(productId);
   try {
     const { price, title, image } = product;

@@ -1,7 +1,7 @@
 import { userDetails } from "../../UniversalFeatures/Login";
 
 export default function PastPurchasesTile({ purchase }) {
-  const { items, purchase_date, purchase_total } = purchase;
+  const { items, purchase_date, purchase_total, quantity } = purchase;
   return (
     <div className="pastPurchaseTile">
       <div className="pastPurchaseTileInfo">
@@ -14,14 +14,15 @@ export default function PastPurchasesTile({ purchase }) {
       </div>
       <div className="ppPageImageDiv">
         {items.map((item) => {
-          console.log(typeof item);
           return (
-            <img
-              key={item.product_id}
-              className="ppPageImage"
-              src={item.image}
-              alt={item.title}
-            />
+            <div className="pppImageContainer" key={item.product_id}>
+              <div className="titleText">{item.title}</div>
+              <img className="ppPageImage" src={item.image} alt={item.title} />
+              <div className="quantityText">
+                <p>Quantity Ordered: {item.quantity}</p>
+                <p>Total Price: ${(item.price * item.quantity).toFixed(2)}</p>
+              </div>
+            </div>
           );
         })}
       </div>

@@ -38,7 +38,6 @@ import CartWishlistContextProvider from "./Contexts/CartWishlistContextProvider"
 //! UPDATED Signal based JWT token to reduce prop drilling requirement.
 
 export default function App() {
-  
   // const notLoggedIn = () => {
   //   redirect('/');
   // }
@@ -47,7 +46,7 @@ export default function App() {
   //     notLoggedIn();
   //   }
   // }, [])
-  
+
   return (
     <CartWishlistContextProvider>
       <Routes>
