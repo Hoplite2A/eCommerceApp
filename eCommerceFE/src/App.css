@@ -62,7 +62,7 @@ html::-webkit-scrollbar{
   }
 .header {
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -83,6 +83,17 @@ p.siteNameText {
   margin: 10px;
   font-size: 25px;
   font-weight: 700;
+}
+.searchBarParent{
+  display: flex;
+  flex-direction: column;
+}
+.textSearch{
+  width: 325px;
+}
+.filterPresetButtons{
+  display: flex;
+  flex-direction: row;
 }
 .navBarMaster {
   display: flex;
@@ -123,7 +134,7 @@ p.navBarLabels {
   width: 100%;
   margin: 0px;
   position: sticky;
-  top:57px;
+  top:67px;
 }
 .regBannerText {
   color: white;
@@ -579,6 +590,7 @@ input.cartListItemQuantity {
   background-color: #2f3438;
   flex-direction: column;
   color: #a1a1a1;
+  margin-bottom: 0px;
 }
 .collapseFooterButton {
   font-size: 20px;

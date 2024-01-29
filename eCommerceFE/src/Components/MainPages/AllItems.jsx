@@ -15,11 +15,12 @@ export default function AllItems() {
     setAllItems,
     searchFilteredArray,
     allItemsAdmin,
-    tempCart,
-    cartItemId,
-    tempCountCart,
-    localCart,
-    setLocalCart,
+    changeFilter,
+    // tempCart,
+    // cartItemId,
+    // tempCountCart,
+    // localCart,
+    // setLocalCart,
   } = useContext(CartWishlistContext);
 
   useEffect(() => {
@@ -53,25 +54,23 @@ export default function AllItems() {
     return () => fetchAllItems();
   }, [allItemsAdmin]);
 
-  useEffect(() => {
-  }, [allItems, searchFilteredArray])
+  useEffect(() => {}, [allItems, changeFilter]);
 
   return (
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
-          {!searchFilteredArray ?
-            searchFilteredArray.map((item) => {
-              if (item.available) {
-                return <IndividualItem key={item.id} item={item} />;
-              }
-            }): 
-            allItems.map((item) => {
-              if (item.available) {
-                return <IndividualItem key={item.id} item={item} />;
-              }
-            })
-          }
+          {!searchFilteredArray
+            ? searchFilteredArray.map((item) => {
+                if (item.available) {
+                  return <IndividualItem key={item.id} item={item} />;
+                }
+              })
+            : allItems.map((item) => {
+                if (item.available) {
+                  return <IndividualItem key={item.id} item={item} />;
+                }
+              })}
         </div>
 
         {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>

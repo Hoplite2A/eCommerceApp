@@ -1,5 +1,5 @@
 //! Imported Libraries -------------------------
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
@@ -7,80 +7,128 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 //! --------------------------------------------
 
 export default function SearchBar() {
+  const {
+    allItems,
+    searchFilteredArray,
+    setSearchFilteredArray,
+    changeFilter,
+    setChangeFilter,
+  } = useContext(CartWishlistContext);
 
-    const { allItems, setSearchFilteredArray } = useContext(CartWishlistContext);
-    // const [searchedValue, setSearchedValue] = useState("");
+  const [searchedValue, setSearchedValue] = useState("");
 
-    // const handleTextSearch = (e) => {
-    //     e.preventDefault();
-    //     setSearchedValue(e.targe.tvalue);
-    // }    
+    useEffect(() => {
+        const textFilteredItems = allItems.filter((cartItem) => {
+            if (searchedValue === '') {
+                return cartItem;
+            } else if (cartItem.title.toLowerCase().includes(searchedValue.toLowerCase())) {
+                return cartItem;
+            } else if (cartItem.description.toLowerCase().includes(searchedValue.toLowerCase())) {
+                return cartItem;
+            } else if (cartItem.price.toLowerCase().includes(searchedValue.toLowerCase())) {
+                return cartItem;
+            }
+        })
+        setChangeFilter(!changeFilter);
+        setSearchFilteredArray(textFilteredItems);
+    }, [searchedValue]);
 
-    // if (searchedValue.length > 0) {
-    //     allItems.filter((cartItem) => {
-    //         return allItems.title.match(searchedValue)
-    //             || allItems.description.match(searchedValue)
-    //             || allItems.price.match(searchedValue)
-    //             || allItems.category.match(searchedValue);
-    //     });
+    console.log(searchFilteredArray);
 
-    // }
-    //*Alphabetical Order - Ascending Order 
-    const AZFiltering = () => {
-        const sortByAZAllItems = allItems.sort((a, b) => {
-            return a.title.localeCompare(b.title);
-        });
-        setSearchFilteredArray(sortByAZAllItems);
-    }
-    //*Alphabetical Order - Descending Order 
-    const ZAFiltering = () => {
-        const sortByZAAllItems = allItems.sort((a, b) => {
-            return b.title.localeCompare(a.title);
-        });
-        setSearchFilteredArray(sortByZAAllItems);
-    }
-    //* Lowest to Highest Price
-    const LHPriceFiltering = () => {
-        const sortByLHAllItems = allItems.sort((a, b) => {
-            return Number(a.price) > Number(b.price) ? 1 : -1;
-        });
-        setSearchFilteredArray(sortByLHAllItems);
-    }
-    //*Highest to Lowest Price
-    const HLPriceFiltering = () => {
-        const sortByHLAllItems = allItems.sort((a, b) => {
-            return Number(a.price) > Number(b.price) ? -1 : 1;
-        });
-        setSearchFilteredArray(sortByHLAllItems);
-    }
-    //*Category Filtering
-    const CategoryFiltering = () => {
-        const sortByAvailabilityAllItems = allItems.sort((a,b) => {
-            return a.category > b.category ? 1 : -1;
-        });
-        setSearchFilteredArray(sortByAvailabilityAllItems);
-    }
+  //*Alphabetical Order - Ascending Order
+  const AZFiltering = () => {
+    const sortByAZAllItems = allItems.sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
+    setChangeFilter(!changeFilter);
+    setSearchFilteredArray(sortByAZAllItems);
+  };
+  //*Alphabetical Order - Descending Order
+  const ZAFiltering = () => {
+    const sortByZAAllItems = allItems.sort((a, b) => {
+      return b.title.localeCompare(a.title);
+    });
+    setChangeFilter(!changeFilter);
+    setSearchFilteredArray(sortByZAAllItems);
+  };
+  //* Lowest to Highest Price
+  const LHPriceFiltering = () => {
+    const sortByLHAllItems = allItems.sort((a, b) => {
+      return Number(a.price) > Number(b.price) ? 1 : -1;
+    });
+    setChangeFilter(!changeFilter);
+    setSearchFilteredArray(sortByLHAllItems);
+  };
+  //*Highest to Lowest Price
+  const HLPriceFiltering = () => {
+    const sortByHLAllItems = allItems.sort((a, b) => {
+      return Number(a.price) > Number(b.price) ? -1 : 1;
+    });
+    setChangeFilter(!changeFilter);
+    setSearchFilteredArray(sortByHLAllItems);
+  };
+  //*Category Filtering
+  const CategoryFiltering = () => {
+    const sortByAvailabilityAllItems = allItems.sort((a, b) => {
+      return a.category > b.category ? 1 : -1;
+    });
+    setChangeFilter(!changeFilter);
+    setSearchFilteredArray(sortByAvailabilityAllItems);
+  };
 
-    return (<>
-        <div className="searchBarParent">
-            <div className="searchBarTextEntryField">
-                <label> Search Bar: 
-                    <input type="text" placeholder="Enter search parameters"/>
-                </label>
-            </div>
-            <div className="filterPresetButtons">
-                <div className="alphabeticalButtons">
-                    <button className="AZFiltering filterButtons" onClick={() => AZFiltering()}>A-Z</button>
-                    <button className="ZAFiltering filterButtons" onClick={() => ZAFiltering()}>Z-A</button>
-                </div>
-                <div className="pricingButtons">
-                    <button className="LHFiltering filterButtons" onClick={() => HLPriceFiltering()}>Price: High-Low</button>
-                    <button className="HLFiltering filterButtons" onClick={() => LHPriceFiltering()}>Price: Low-High </button>
-                </div>
-                <div className="categoryyButtons">
-                    <button className="categoryFiltering filterButtons" onClick={() => CategoryFiltering()}>Category </button>
-                </div>
-            </div>
+  return (
+    <>
+      <div className="searchBarParent">
+        <div className="searchBarTextEntryField">
+          <label>
+            Search Bar:
+            <input
+              className="textSearch"
+              type="text"
+              placeholder="Enter search parameters"
+              onChange={(e) => setSearchedValue(e.target.value)}
+            />
+          </label>
         </div>
-    </>)
+        <div className="filterPresetButtons">
+          <div className="alphabeticalButtons">
+            <button
+              className="AZFiltering filterButtons"
+              onClick={() => AZFiltering()}
+            >
+              A-Z
+            </button>
+            <button
+              className="ZAFiltering filterButtons"
+              onClick={() => ZAFiltering()}
+            >
+              Z-A
+            </button>
+          </div>
+          <div className="pricingButtons">
+            <button
+              className="LHFiltering filterButtons"
+              onClick={() => HLPriceFiltering()}
+            >
+              Price: High-Low
+            </button>
+            <button
+              className="HLFiltering filterButtons"
+              onClick={() => LHPriceFiltering()}
+            >
+              Price: Low-High{" "}
+            </button>
+          </div>
+          <div className="categoryyButtons">
+            <button
+              className="categoryFiltering filterButtons"
+              onClick={() => CategoryFiltering()}
+            >
+              Category{" "}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
