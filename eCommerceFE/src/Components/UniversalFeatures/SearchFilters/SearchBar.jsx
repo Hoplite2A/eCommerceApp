@@ -10,9 +10,7 @@ import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvid
 export default function SearchBar() {
   const {
     allItems,
-    searchFilteredArray,
     setSearchFilteredArray,
-    setSearchTextFilteredArray,
     changeFilter,
     setChangeFilter,
   } = useContext(CartWishlistContext);
@@ -32,7 +30,7 @@ export default function SearchBar() {
             }
         })
         setChangeFilter(!changeFilter);
-        setSearchTextFilteredArray(textFilteredItems);
+        setSearchFilteredArray(textFilteredItems);
     }, [searchedValue]);
 
     // console.log(searchFilteredArray);
@@ -83,11 +81,10 @@ export default function SearchBar() {
           <div className={token.value ? "searchBarParentLoggedIn" : "searchBarParent"}>
         <div className="searchBarTextEntryField">
           <label className="textSearchLabel">
-            Search Bar:
             <input
               className="textSearch"
               type="text"
-              placeholder="Enter search parameters"
+              placeholder="Search Items Here"
               onChange={(e) => setSearchedValue(e.target.value)}
             />
           </label>
