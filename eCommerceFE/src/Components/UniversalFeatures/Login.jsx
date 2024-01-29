@@ -40,7 +40,6 @@ export default function Login() {
       //! ---------------- Add response if no user found button - reattempt and go to login or
       //! ---------------- button link to registration form
       const json = await res.json();
-      console.log(json);
       setErrorMessage(json.message);
       const acctDetails = await json.user;
       userDetails.value = await acctDetails;

@@ -88,12 +88,63 @@ p.siteNameText {
   display: flex;
   flex-direction: column;
 }
+.searchBarParentLoggedIn{
+  margin-left: 35px;
+  display: flex;
+  flex-direction: column;
+}
+.textSearchLabel{
+  color: #fcee09;
+  font-weight: bold;
+}
 .textSearch{
   width: 325px;
+  margin-left: 5px;
+  color: #fcee09;
+  background-color: #2f3438;
 }
 .filterPresetButtons{
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+}
+.filterButtons{
+  color: #fcee09;
+  border-radius: 15px;
+  margin-top: 5px;
+}
+.AZFiltering:hover{
+  color: #e610c2;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 1em #e610c2);
+}
+.ZAFiltering:hover{
+  color: #0ec0c0;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 1em #0ec0c0);
+}
+.LHFiltering:hover{
+  color: #5dbd26;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 1em #5dbd26);
+}
+.HLFiltering:hover{
+  color: #b216f0;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 1em #b216f0);
+}
+.categoryFiltering:hover{
+  color: #c57907;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 1em #c57907);
+}
+.ZAFiltering,
+.HLFiltering{
+margin-left: 15px;
+}
+.alphabeticalButtons,
+.pricingButtons{
+display: flex;
 }
 .navBarMaster {
   display: flex;
