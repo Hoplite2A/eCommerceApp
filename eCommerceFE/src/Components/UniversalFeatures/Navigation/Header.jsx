@@ -4,7 +4,7 @@
 //! Imported Components/Variables---------------
 import Logo from "../Logo";
 import Navigation from "./Navigation";
-// import SearchBar from '../SearchFilters/SearchBar';
+import SearchBar from '../SearchFilters/SearchBar';
 //! --------------------------------------------
 
 export default function Header() {
@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <div className="header">
         <Logo />
-        {/* <SearchBar /> */}
+        <SearchBar />
       <Navigation />
     </div>
   );

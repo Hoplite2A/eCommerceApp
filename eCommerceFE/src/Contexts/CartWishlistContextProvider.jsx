@@ -23,7 +23,8 @@ export default function CartWishlistContextProvider({ children }) {
   const [subTotal, setSubTotal] = useState(0);
   const [wishlistSubTotal, setWishlistSubTotal] = useState(0);
   const [checkoutCart, setCheckoutCart] = useState([]);
-
+  const [searchFilteredArray, setSearchFilteredArray] = useState([]);
+  
   useEffect(() => {
     const launchCart = localStorage.getItem("cart");
     if (launchCart) {
@@ -51,6 +52,8 @@ export default function CartWishlistContextProvider({ children }) {
         setPastPurchases,
         allItems,
         setAllItems,
+        searchFilteredArray,
+        setSearchFilteredArray,
         allItemsAdmin,
         setAllItemAdmin,
         tempCart,

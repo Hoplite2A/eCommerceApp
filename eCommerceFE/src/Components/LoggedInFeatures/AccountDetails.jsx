@@ -20,8 +20,8 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetails() {
 
-  const { localCart, localWishlist } = useContext(CartWishlistContext);
-  const [passwordResetVisible, setPasswordResetVisible] = useState(true);
+  const { localCart, localWishlist, tempWishlist } = useContext(CartWishlistContext);
+  const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
   //*Rendering the Current Cart -----------------
   const currentCart = JSON.parse(localStorage.getItem("cart"));
@@ -42,19 +42,7 @@ export default function AccountDetails() {
 
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
-  const {
-    username,
-    first_name,
-    preferred_name,
-    last_name,
-    address,
-    apartment,
-    city,
-    state,
-    zip,
-    phone,
-    email,
-  } = userDetails.value;
+  const { username, first_name, preferred_name, last_name, address, apartment, city, state, zip, phone, email } = userDetails.value;
 
   //Used for pulling changed values from
   const [userName, setUserName] = useState(username);
@@ -69,48 +57,8 @@ export default function AccountDetails() {
   const [aZip, setAZip] = useState(zip);
   const [cNumber, setCNumber] = useState(phone);
   const [emailAddress, setEmailAddress] = useState(email);
-
-  const [updateInfo, setUpdateInfo] = useState(false);
-  const [updatedPassword, setUpdatedPassword] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(`${BASE_URL}/users/updateprofile`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer: ${token.value}`,
-        },
-        body: JSON.stringify({
-          firstName: fName,
-          preferred_name: pName,
-          lastName: lName,
-          street: streetAddress,
-          apartment: aApt,
-          city: aCity,
-          state: aState,
-          zip: aZip,
-          phone: cNumber,
-          emailAddress: email,
-          user: userName,
-        }),
-      });
-      const json = await res.json();
-
-      if (json.message === "Profile has been updated Successfully") {
-        //TODO --------------------- Update alert to acknowledgement
-        alert(`${fName}, your profile has been successfully updated.`);
-      } else {
-        console.log("An error occurred when performing update.");
-      }
-    } catch (err) {
-      console.log(
-        `An Error occurred within the handleSubmit function for the Profile Patch, ${err}.`
-      );
-    }
-  };
+  const [updateInfo, setUpdateInfo] = useState(true);
+  const [updatedPassword, setUpdatedPassword] = useState(false);
 
   //TODO ---------- Need to add path in BE for password update POST
   const handlePasswordResetRequest = async (e) => {
@@ -170,6 +118,48 @@ export default function AccountDetails() {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${BASE_URL}/users/updateprofile`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer: ${token.value}`,
+        },
+        body: JSON.stringify({
+          firstName: fName,
+          preferred_name: pName,
+          lastName: lName,
+          street: streetAddress,
+          apartment: aApt,
+          city: aCity,
+          state: aState,
+          zip: aZip,
+          phone: cNumber,
+          emailAddress: email,
+          user: userName,
+        }),
+      });
+      const json = await res.json();
+
+      if (json.message === "Profile has been updated Successfully") {
+        //TODO --------------------- Update alert to acknowledgement
+        alert(`${fName}, your profile has been successfully updated.`);
+      } else {
+        console.log("An error occurred when performing update.");
+      }
+    } catch (err) {
+      console.log(
+        `An Error occurred within the handleSubmit function for the Profile Patch, ${err}.`
+      );
+    }
+  };
+
+  // useEffect(() => {
+  // }, [tempWishlist])
+
+
   return (
     <>
       <Header />
@@ -180,137 +170,141 @@ export default function AccountDetails() {
               <form className="accountDetails" onSubmit={handleSubmit}>
                 <div className="userAccountDetails">
                   {/* Profile Image */}
-                  <h2 className="accountDetailsTitle">Hi, {first_name}</h2>
+                  <h2 className="accountDetailsTitle">Hi, {preferred_name}</h2>
                 </div>
                 <div className="ADNameFields">
-                  <label htmlFor="fistName">First Name:</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={first_name}
-                    onChange={(e) => setFName(e.target.value)}
-                  />
-                  <label htmlFor="preferredName">Nick Name:</label>
-                  <input
-                    type="text"
-                    id="preferredName"
-                    name="preferredName"
-                    value={preferred_name}
-                    onChange={(e) => setPName(e.target.value)}
-                  />
-                  <label htmlFor="lastName">LastName:</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={last_name}
-                    onChange={(e) => setLName(e.target.value)}
-                  />
+                  <label>First Name:
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder={first_name}
+                      onChange={(e) => setFName(e.target.value)}
+                    />
+                  </label>
+                  <label>Nick Name:
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="preferredName"
+                      name="preferredName"
+                      value={preferred_name}
+                      onChange={(e) => setPName(e.target.value)}
+                    />
+                  </label>
+                  <label>LastName:
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={last_name}
+                      onChange={(e) => setLName(e.target.value)}
+                    />
+                  </label>
                 </div>
                 <div className="ADStreetAddress1">
-                  <label htmlFor="street1">Street</label>
-                  <input
-                    type="text"
-                    id="street"
-                    name="street"
-                    value={address}
-                    onChange={(e) => setStreetAddress(e.target.value)}
-                  />
-                  <label htmlFor="">APT/Unit</label>
-                  <input
-                    type="text"
-                    id="Apt"
-                    name="Apt"
-                    value={apartment}
-                    onChange={(e) => setAApt(e.target.value)}
-                  />
+                  <label>Street
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="street"
+                      name="street"
+                      value={address}
+                      onChange={(e) => setStreetAddress(e.target.value)}
+                    />
+                  </label>
+                  <label >APT/Unit
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="Apt"
+                      name="Apt"
+                      value={apartment}
+                      onChange={(e) => setAApt(e.target.value)}
+                    />
+                  </label>
                 </div>
                 <div className="ADStreetAddress2">
-                  <label htmlFor="city">City</label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={city}
-                    onChange={(e) => setACity(e.target.value)}
-                  />
-                  <label htmlFor="state">State:</label>
-                  <input
-                    type="text"
-                    id="state"
-                    name="state"
-                    value={state}
-                    onChange={(e) => setAState(e.target.value)}
-                  />
-                  <label htmlFor="zip">ZIP:</label>
-                  <input
-                    type="text"
-                    id="zip"
-                    name="zip"
-                    value={zip}
-                    onChange={(e) => setAZip(e.target.value)}
-                  />
+                  <label>City
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="city"
+                      name="city"
+                      value={city}
+                      onChange={(e) => setACity(e.target.value)}
+                    />
+                  </label>
+                  <label>State:
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="state"
+                      name="state"
+                      value={state}
+                      onChange={(e) => setAState(e.target.value)}
+                    />
+                  </label>
+                  <label>ZIP:
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="zip"
+                      name="zip"
+                      value={zip}
+                      onChange={(e) => setAZip(e.target.value)}
+                    />
+                  </label>
                 </div>
                 <div className="ADContactInfo">
-                  <label htmlFor="phone"></label>
-                  <input
-                    type="text"
-                    id="phone"
-                    name="phone"
-                    value={phone}
-                    onChange={(e) => setCNumber(e.target.value)}
-                  />
-                  <label htmlFor="emailAddress"></label>
-                  <input
-                    type="text"
-                    id="emailAddress"
-                    name="emailAddress"
-                    value={emailAddress}
-                    onChange={(e) => setEmailAddress(e.target.value)}
-                  />
+                  <label>Phone
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      value={phone}
+                      onChange={(e) => setCNumber(e.target.value)}
+                    />
+                  </label>
+                  <label>Email Address
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="emailAddress"
+                      name="emailAddress"
+                      value={emailAddress}
+                      onChange={(e) => setEmailAddress(e.target.value)}
+                    />
+                  </label>
                 </div>
                 <div className="ADCredententials">
-                  <label htmlFor="user">Username</label>
-                  <input
-                    type="text"
-                    id="user"
-                    name="user"
-                    value={username}
-                    onChange={(e) => setUserName(e.target.value)}
-                    disabled={updateInfo}
-                  />
+                  <label>Username
+                    <input
+                      className="accountDetailsInputs"
+                      type="text"
+                      id="user"
+                      name="user"
+                      value={username}
+                      onChange={(e) => setUserName(e.target.value)}
+                      disabled={updateInfo}
+                    />
+                  </label>
                   {!passwordResetVisible ? (
                     <>
-                      <label htmlFor="pass">Enter Current Password</label>
-                      <input
-                        type="text"
-                        id="pass"
-                        name="pass"
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
+                      <label>Enter Current Password
+                        <input
+                          className="accountDetailsInputs"
+                          type="password"
+                          id="pass"
+                          name="pass"
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </label>
                       <button
                         className="resetPassword"
-                        onClick={handlePasswordReset}
-                      >
-                        Reset
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <label htmlFor="pass">Enter New Password</label>
-                      <input
-                        type="text"
-                        id="pass"
-                        name="pass"
-                        onChange={(e) => setUpdatedPassword(e.target.value)}
-                      />
-                    </>
-                  )}
-                  {passwordResetVisible ? (
-                    <>
-                      <button
-                        className="resetPasswordRequest"
                         onClick={handlePasswordResetRequest}
                       >
                         Reset
@@ -318,16 +312,26 @@ export default function AccountDetails() {
                     </>
                   ) : (
                     <>
+                      <label>Enter New Password
+                        <input
+                          className="accountDetailsInputs"
+                          type="password"
+                          id="pass"
+                          name="pass"
+                          onChange={(e) => setUpdatedPassword(e.target.value)}
+                        />
+                      </label>
                       <button
-                        className="resetPassword"
-                        onClick={handlePasswordReset}
+                          className="resetPassword"
+                          onClick={handlePasswordReset}
                       >
-                        Reset
+                      Reset
                       </button>
                     </>
                   )}
                 </div>
-                {!updateInfo ? (
+                 {/* ---------------------------Check the UDPATE INFO STATE VAR---------------------------------------------- */}
+                {updateInfo ? (
                   <>
                     <button
                       type="button"
@@ -361,8 +365,9 @@ export default function AccountDetails() {
                 <div className="scrollbarEraserDiv">
                   <div className="cartListItemsHOlderDiv">
                     {currentCart.map((item) => {
-                      return <AccountDetailListItems key={item.id} item={item} />;
-                    })}
+                        return <AccountDetailListItems key={item.id} item={item} />;
+                      })
+                    }
                   </div>
                 </div>
                 <div className="cartSubTotalDiv">
