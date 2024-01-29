@@ -20,7 +20,7 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetails() {
 
-  const { localCart, localWishlist, tempWishlist } = useContext(CartWishlistContext);
+  const { localCart, localWishlist } = useContext(CartWishlistContext);
   const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
   //*Rendering the Current Cart -----------------

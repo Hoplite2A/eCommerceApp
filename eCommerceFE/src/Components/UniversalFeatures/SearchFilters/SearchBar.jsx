@@ -74,8 +74,8 @@ export default function SearchBar() {
                     <button className="ZAFiltering filterButtons" onClick={() => ZAFiltering()}>Z-A</button>
                 </div>
                 <div className="pricingButtons">
-                    <button className="HLFiltering filterButtons" onClick={() => LHPriceFiltering()}>Price: Low-High </button>
                     <button className="LHFiltering filterButtons" onClick={() => HLPriceFiltering()}>Price: High-Low</button>
+                    <button className="HLFiltering filterButtons" onClick={() => LHPriceFiltering()}>Price: Low-High </button>
                 </div>
                 <div className="categoryyButtons">
                     <button className="categoryFiltering filterButtons" onClick={() => CategoryFiltering()}>Category </button>

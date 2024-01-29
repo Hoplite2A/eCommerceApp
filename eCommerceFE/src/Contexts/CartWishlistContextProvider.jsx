@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 //! Imported Libraries -------------------------
 import { createContext, useState, useEffect } from "react";
-import { token } from "../Components/UniversalFeatures/Login";
 // import { redirect } from 'react-router-dom';
 //! --------------------------------------------
 
@@ -33,7 +32,7 @@ export default function CartWishlistContextProvider({ children }) {
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
-  }, [localCart]);
+  }, []);
 
   useEffect(() => {
     const launchWishlist = localStorage.getItem("wishlist");
@@ -50,6 +49,8 @@ export default function CartWishlistContextProvider({ children }) {
       value={{
         pastPurchases,
         setPastPurchases,
+        updatePastPurchases,
+        setUpdatePastPurchases,
         allItems,
         setAllItems,
         searchFilteredArray,

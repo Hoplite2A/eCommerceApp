@@ -75,7 +75,7 @@ export default function AllItems() {
         </div>
 
         {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>
-        {tempCart.map((cartListItem, index) => {
+        {localCart.map((cartListItem, index) => {
           return <CartItemsList key={index} cartListItem={cartListItem} />
         })}
         </div> */}
