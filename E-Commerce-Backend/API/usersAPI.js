@@ -12,6 +12,7 @@ const {
   getUserById,
   updateUser,
   deleteUser,
+  checkPassword,
 } = require("../db/usersDB");
 
 // Get All users
@@ -119,6 +120,24 @@ usersRouter.post("/login", async (req, res, next) => {
       );
       res.send({ user, message: "you're logged in!", token });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Check password
+// http://localhost:3000/api/users/confirmPassword
+usersRouter.get("/confirmPassword", requireUser, async (req, res, next) => {
+  const { password } = req.body;
+  console.log("IN API CONFIRM PASSWORD");
+  console.log(req.user);
+  console.log(req.user.username);
+  console.log(password);
+  const username = req.user.username;
+
+  try {
+    const passwordCheck = await checkPassword(username, password);
+    res.send({ passwordCheck });
   } catch (error) {
     next(error);
   }

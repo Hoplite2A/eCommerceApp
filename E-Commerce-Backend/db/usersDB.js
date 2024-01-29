@@ -101,6 +101,48 @@ async function getUserByUsername(userName) {
   }
 }
 
+async function checkPassword(username, password) {
+  let response = {};
+  console.log("IN CHECKPASSWORD");
+  console.log(username);
+  console.log(password);
+
+  if (!username) {
+    response = { status: false, message: "No username received" };
+    console.log(`Error in checkPassword`);
+    console.log("No username or password");
+    return response;
+  }
+  if (!password) {
+    response = { status: false, message: "No password received" };
+    console.log(`Error in checkPassword`);
+    console.log("No username or password");
+    return response;
+  }
+  try {
+    const user = await getUserByUsername(username);
+    if (!user) {
+      response = { status: false, message: "No user found" };
+      console.log(`Error in checkPassword`);
+
+      console.log("No user found");
+      return response;
+    }
+    const hashedPassword = user.password;
+    const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+    if (!passwordsMatch) {
+      response = { status: false, message: "Incorrect Password" };
+      console.log(`Error in checkPassword`);
+      console.log("Passwords did not match");
+      return response;
+    }
+    response = { status: true, message: "Password confirmed" };
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getAllUsers() {
   try {
     const { rows } = await client.query(`
@@ -116,7 +158,7 @@ async function getAllUsers() {
 
 async function getUser({ username, password }) {
   if (!username || !password) {
-    console.log(`Error ln117, ${err}`);
+    console.log(`Error in getUser, ${err}`);
     console.log("No username or password");
     return;
   }
@@ -206,4 +248,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  checkPassword,
 };

@@ -175,12 +175,6 @@ async function updateProduct(id, fields = {}) {
 
     const setStringCarts = generateSetString(fields, cartColumns);
     const setValueCarts = generateValueString(fields, cartColumns);
-    // console.log({ setString });
-    console.log({ setStringCarts });
-    // console.log({ fields });
-    // console.log(Object.values(fields));
-    console.log({ setValueCarts });
-    // console.log(Object.values(setValueCarts));
     await client.query(
       `
     UPDATE carts
