@@ -19,7 +19,8 @@ export default function CartWishlistContextProvider({children}) {
     const [visible, setVisible] = useState(false);
     const [subTotal, setSubTotal] = useState(0);
     const [wishlistSubTotal, setWishlistSubTotal] = useState(0);
-    
+    const [searchFilteredArray, setSearchFilteredArray] = useState([]);
+
     useEffect(() => {
         const launchCart = localStorage.getItem('cart');
         if (launchCart) {
@@ -45,6 +46,8 @@ export default function CartWishlistContextProvider({children}) {
             value={{
                 allItems, 
                 setAllItems,
+                searchFilteredArray,
+                setSearchFilteredArray,
                 allItemsAdmin,
                 setAllItemAdmin,
                 tempCart,

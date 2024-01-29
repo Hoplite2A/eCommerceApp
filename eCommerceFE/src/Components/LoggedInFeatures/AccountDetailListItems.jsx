@@ -40,12 +40,12 @@ export default function AccountDetailListItems(item) {
     }
 
     const addToWishlist = () => {
-        const result = tempWishlist.find(cartItem => cartItem.id == id);
-            if (result) {
-                result.quantity += quantity;
+        const newWishlistItem = tempWishlist.find(cartItem => cartItem.id == id);
+            if (newWishlistItem) {
+                newWishlistItem.quantity += quantity;
                 const otherItems = tempWishlist.filter(cartItem => cartItem.id !== id);
-                setTempWishlist([...otherItems, result]);
-                localStorage.setItem('wishlist', JSON.stringify([...otherItems, result]));
+                setTempWishlist([...otherItems, newWishlistItem]);
+                localStorage.setItem('wishlist', JSON.stringify([...otherItems, newWishlistItem]));
             } else {
                 setTempWishlist([...tempWishlist, subItem]);
                 localStorage.setItem('wishlist', JSON.stringify([...tempWishlist, subItem]));
@@ -57,33 +57,36 @@ export default function AccountDetailListItems(item) {
         }
 
     return (<>
-        <div className="miniTileDiv">
-            <div className="miniTop">
-                <p className="miniTitle">{title}</p>
-            </div>
-            <div className="miniBottom">
-                <div className="miniBottomLeft">
-                    <img src={image} alt={title} className="miniImgae" />
+        {localCart ?
+            <div className="miniTileDiv">
+                <div className="miniTop">
+                    <p className="miniTitle">{title}</p>
                 </div>
-                <div className="miniBottomRight">
-                    <div className="miniPriceDiv">
-                        <p className="miniPrice">${price}</p>
-                        <label className="cartListItemQuantity">Qty:
-                            <input className="cartListItemQuantity"
-                                id="quantity" type="number"
-                                placeholder={quantity}
-                                min={1} max={1000000}
-                                onChange={(e) => setNewQuantity(e.target.value)} 
-                            />
-                        </label>
+                <div className="miniBottom">
+                    <div className="miniBottomLeft">
+                        <img src={image} alt={title} className="miniImgae" />
                     </div>
-                    <div className="miniQuantityupdate">
-                        <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
-                        <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
+                    <div className="miniBottomRight">
+                        <div className="miniPriceDiv">
+                            <p className="miniPrice">${price}</p>
+                            <label className="cartListItemQuantity">Qty:
+                                <input className="cartListItemQuantity"
+                                    id="quantity" type="number"
+                                    placeholder={quantity}
+                                    min={1} max={1000000}
+                                    onChange={(e) => setNewQuantity(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <div className="miniQuantityupdate">
+                            <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
+                            <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="addToWishlistButton" onClick={() => addToWishlist()}>Add to Wishlist</div>
-        </div>
+                <div className="addToWishlistButton" onClick={() => addToWishlist()}>Add to Wishlist</div>
+            </div> :
+            <></>
+        }
     </>)
 }
