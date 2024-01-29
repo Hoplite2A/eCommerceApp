@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
+import { token } from "../Login";
 import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
 
@@ -15,7 +16,7 @@ export default function SearchBar() {
     setChangeFilter,
   } = useContext(CartWishlistContext);
 
-  const [searchedValue, setSearchedValue] = useState("");
+  const [searchedValue, setSearchedValue] = useState('');
 
     useEffect(() => {
         const textFilteredItems = allItems.filter((cartItem) => {
@@ -33,7 +34,7 @@ export default function SearchBar() {
         setSearchFilteredArray(textFilteredItems);
     }, [searchedValue]);
 
-    console.log(searchFilteredArray);
+    // console.log(searchFilteredArray);
 
   //*Alphabetical Order - Ascending Order
   const AZFiltering = () => {
@@ -78,9 +79,9 @@ export default function SearchBar() {
 
   return (
     <>
-      <div className="searchBarParent">
+          <div className={token.value ? "searchBarParentLoggedIn" : "searchBarParent"}>
         <div className="searchBarTextEntryField">
-          <label>
+          <label className="textSearchLabel">
             Search Bar:
             <input
               className="textSearch"
@@ -92,40 +93,40 @@ export default function SearchBar() {
         </div>
         <div className="filterPresetButtons">
           <div className="alphabeticalButtons">
-            <button
+            <p
               className="AZFiltering filterButtons"
               onClick={() => AZFiltering()}
             >
               A-Z
-            </button>
-            <button
+            </p>
+            <p
               className="ZAFiltering filterButtons"
               onClick={() => ZAFiltering()}
             >
               Z-A
-            </button>
+            </p>
           </div>
           <div className="pricingButtons">
-            <button
-              className="LHFiltering filterButtons"
-              onClick={() => HLPriceFiltering()}
-            >
-              Price: High-Low
-            </button>
-            <button
-              className="HLFiltering filterButtons"
-              onClick={() => LHPriceFiltering()}
-            >
-              Price: Low-High{" "}
-            </button>
+                <p
+                    className="LHFiltering filterButtons"
+                    onClick={() => HLPriceFiltering()}
+                    >
+                    Price: High-Low
+                </p>
+                <p
+                    className="HLFiltering filterButtons"
+                    onClick={() => LHPriceFiltering()}
+                    >
+                    Price: Low-High{" "}
+                </p>
           </div>
           <div className="categoryyButtons">
-            <button
+            <p
               className="categoryFiltering filterButtons"
               onClick={() => CategoryFiltering()}
             >
               Category{" "}
-            </button>
+            </p>
           </div>
         </div>
       </div>

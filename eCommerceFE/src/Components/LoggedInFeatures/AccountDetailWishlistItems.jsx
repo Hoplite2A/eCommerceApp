@@ -9,7 +9,7 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 export default function AccountDetailWishlistItems(item) {
 
     const { tempCart, setTempCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
-     
+    
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
 
@@ -37,61 +37,52 @@ export default function AccountDetailWishlistItems(item) {
         setLocalWishlist(editableWishlist);
         localStorage.setItem('wishlist', JSON.stringify(editableWishlist));
     }
-    console.log(tempWishlist);
-    console.log(localWishlist);
 
     const addToCart = () => {
-        const newCartItem = tempCart.find(cartItem => cartItem.id == id);
-        if (newCartItem) {
-            newCartItem.quantity += quantity;
-            const otherItems = tempCart.filter(cartItem => cartItem.id !== id);
-            setTempCart([...otherItems, newCartItem]);
-            localStorage.setItem('cart', JSON.stringify([...otherItems, newCartItem]));
-        } else {
-            setTempCart([...tempCart, subItem]);
-            localStorage.setItem('cart', JSON.stringify([...tempCart, subItem]));
+        const result = tempCart.find(cartItem => cartItem.id == id);
+            if (result) {
+                result.quantity += quantity;
+                const otherItems = tempCart.filter(cartItem => cartItem.id !== id);
+                setTempCart([...otherItems, result]);
+                localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
+            } else {
+                setTempCart([...tempCart, subItem]);
+                localStorage.setItem('cart', JSON.stringify([...tempCart, subItem]));
+            }
+            const editableWishlist = localWishlist.filter((item) => item.id !== id);
+            setTempWishlist(editableWishlist);
+            setLocalWishlist(editableWishlist);
+            localStorage.setItem('wishlist', JSON.stringify(editableWishlist));
         }
-        const editableWishlist = localWishlist.filter((item) => item.id !== id);
-        setTempWishlist(editableWishlist);
-        setLocalWishlist(editableWishlist);
-        localStorage.setItem('wishlist', JSON.stringify(editableWishlist));
-    }
-    
-    console.log(tempWishlist);
-    console.log(localWishlist);
-
             
     return (<>
-        {localWishlist ?
-            <div className="miniTileDiv">
-                <div className="miniTop">
-                    <p className="miniTitle">{title}</p>
+        <div className="miniTileDiv">
+            <div className="miniTop">
+                <p className="miniTitle">{title}</p>
+            </div>
+            <div className="miniBottom">
+                <div className="miniBottomLeft">
+                    <img src={image} alt={title} className="miniImgae" />
                 </div>
-                <div className="miniBottom">
-                    <div className="miniBottomLeft">
-                        <img src={image} alt={title} className="miniImgae" />
+                <div className="miniBottomRight">
+                    <div className="miniPriceDiv">
+                        <p className="miniPrice">${price}</p>
+                        <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
                     </div>
-                    <div className="miniBottomRight">
-                        <div className="miniPriceDiv">
-                            <p className="miniPrice">${price}</p>
-                            <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
-                        </div>
-                        <div className="miniQuantityupdate">
-                            <label className="cartListItemQuantity">Qty:
-                                <input className="cartListItemQuantity"
-                                    id="quantity" type="number"
-                                    placeholder={quantity}
-                                    min={1} max={1000000}
-                                    onChange={(e) => setNewQuantity(e.target.value)}
-                                />
+                    <div className="miniQuantityupdate">
+                        <label className="cartListItemQuantity">Qty:
+                            <input className="cartListItemQuantity"
+                                id="quantity" type="number"
+                                placeholder={quantity}
+                                min={1} max={1000000}
+                                onChange={(e) => setNewQuantity(e.target.value)} 
+                            />
                             </label>
-                            <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
-                        </div>
+                        <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
                     </div>
                 </div>
-                <div className="addToCart" onClick={() => addToCart()}>Add to Cart</div>
-            </div> : 
-            <> </>
-        }
+            </div>
+            <div className="addToCart" onClick={()=> addToCart()}>Add to Cart</div>
+        </div>
     </>)
 }

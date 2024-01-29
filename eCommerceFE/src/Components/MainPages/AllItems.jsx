@@ -56,6 +56,8 @@ export default function AllItems() {
 
   useEffect(() => {}, [allItems, changeFilter]);
 
+  // console.log(allItems);
+  
   return (
     <>
       <div className="AllItemsParentDiv">
