@@ -1,5 +1,5 @@
 //! Imported Libraries -------------------------
-import { useEffect, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider";
 //! --------------------------------------------
 
@@ -54,32 +54,25 @@ export default function AllItems() {
     return () => fetchAllItems();
   }, [allItemsAdmin]);
 
-  useEffect(() => {}, [allItems, changeFilter]);
+  const [testMappedArray, setTestMappedArray] = useState([]);
+  useEffect(() => {
+    setTestMappedArray(allItems);
+  }, [allItems, changeFilter]);
+  useEffect(() => {
+    setTestMappedArray(searchFilteredArray);
+  }, [searchFilteredArray, changeFilter]);
 
-  // console.log(allItems);
-  
   return (
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
-          { ? : !searchFilteredArray
-            ? searchFilteredArray.map((item) => {
+          {testMappedArray.map((item) => {
                 if (item.available) {
                   return <IndividualItem key={item.id} item={item} />;
                 }
               })
-            : allItems.map((item) => {
-                if (item.available) {
-                  return <IndividualItem key={item.id} item={item} />;
-                }
-              })}
+            }
         </div>
-
-        {/* <div className={localCart ? "nothingToDisplay" : "cartListDisplay"}>
-        {localCart.map((cartListItem, index) => {
-          return <CartItemsList key={index} cartListItem={cartListItem} />
-        })}
-        </div> */}
       </div>
     </>
   );
