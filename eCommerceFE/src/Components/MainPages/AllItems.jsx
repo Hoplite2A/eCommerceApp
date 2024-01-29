@@ -56,21 +56,30 @@ export default function AllItems() {
 
   const [testMappedArray, setTestMappedArray] = useState([]);
   useEffect(() => {
-    setTestMappedArray(allItems);
+    const filteringAvail = allItems.sort((a,b) => {
+      a.available > b.available ? 1 : -1;
+  })
+    setTestMappedArray(filteringAvail);
   }, [allItems, changeFilter]);
+
   useEffect(() => {
-    setTestMappedArray(searchFilteredArray);
+    const filteringAvail = searchFilteredArray.sort((a,b) => {
+      a.available > b.available ? 1 : -1;
+  })
+    setTestMappedArray(filteringAvail);
   }, [searchFilteredArray, changeFilter]);
+
+  // console.log(allItems);
+  // console.log(searchFilteredArray);
+  // console.log(testMappedArray);
 
   return (
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
           {testMappedArray.map((item) => {
-                if (item.available) {
-                  return <IndividualItem key={item.id} item={item} />;
-                }
-              })
+            return <IndividualItem key={item.id} item={item} />;
+            })
             }
         </div>
       </div>
