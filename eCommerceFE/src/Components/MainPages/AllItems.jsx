@@ -62,7 +62,7 @@ export default function AllItems() {
     <>
       <div className="AllItemsParentDiv">
         <div className="allItemsDiv">
-          {!searchFilteredArray
+          { ? : !searchFilteredArray
             ? searchFilteredArray.map((item) => {
                 if (item.available) {
                   return <IndividualItem key={item.id} item={item} />;

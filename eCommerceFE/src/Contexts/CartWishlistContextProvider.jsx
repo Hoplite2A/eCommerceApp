@@ -24,6 +24,7 @@ export default function CartWishlistContextProvider({ children }) {
   const [checkoutCart, setCheckoutCart] = useState([]);
   const [searchFilteredArray, setSearchFilteredArray] = useState([]);
   const [changeFilter, setChangeFilter] = useState(true);
+  const [searchTextFilteredArray, setSearchTextFilteredArray] = useState([]);
 
   useEffect(() => {
     const launchCart = localStorage.getItem("cart");
@@ -48,8 +49,6 @@ export default function CartWishlistContextProvider({ children }) {
   return (
     <CartWishlistContext.Provider
       value={{
-        changeFilter,
-        setChangeFilter,
         pastPurchases,
         setPastPurchases,
         updatePastPurchases,
@@ -58,6 +57,10 @@ export default function CartWishlistContextProvider({ children }) {
         setAllItems,
         searchFilteredArray,
         setSearchFilteredArray,
+        changeFilter,
+        setChangeFilter,
+        searchTextFilteredArray,
+        setSearchTextFilteredArray,
         allItemsAdmin,
         setAllItemAdmin,
         tempCart,

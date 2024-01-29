@@ -12,6 +12,7 @@ export default function SearchBar() {
     allItems,
     searchFilteredArray,
     setSearchFilteredArray,
+    setSearchTextFilteredArray,
     changeFilter,
     setChangeFilter,
   } = useContext(CartWishlistContext);
@@ -31,7 +32,7 @@ export default function SearchBar() {
             }
         })
         setChangeFilter(!changeFilter);
-        setSearchFilteredArray(textFilteredItems);
+        setSearchTextFilteredArray(textFilteredItems);
     }, [searchedValue]);
 
     // console.log(searchFilteredArray);
