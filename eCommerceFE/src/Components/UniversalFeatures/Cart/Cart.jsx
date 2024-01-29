@@ -24,7 +24,7 @@ export default function Cart() {
 
   // Why set LSCart if we already have a localCart????
   const navigate = useNavigate();
-  const LSCart = JSON.parse(localStorage.getItem("cart"));
+  let LSCart = JSON.parse(localStorage.getItem("cart"));
 
   useEffect(() => {
     fixCarts();
@@ -145,6 +145,7 @@ export default function Cart() {
             const json = await res.json();
             setCheckoutCart([]);
             setLocalCart([]);
+            LSCart = [];
             localStorage.setItem("cart", JSON.stringify([]));
           } catch (err) {
             console.log(
