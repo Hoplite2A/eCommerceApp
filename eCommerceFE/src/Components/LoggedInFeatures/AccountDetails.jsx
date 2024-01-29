@@ -33,13 +33,6 @@ export default function AccountDetails() {
   useEffect(() => {}, [localWishlist]);
   //*--------------------------------------------
 
-  //*Configuring Redirect button utilizing useNavigate
-  const navigate = useNavigate();
-  const nothing = () => {
-    navigate("/");
-  };
-  //*-------------------------------------------------
-
   //Deconstructed Signal Variable pulled from login.jsx &&|| Registration.jsx and utilized for current (non-edit) data view:
   //? pass was left out for the time being until method of toggling visibility of data is created.
   const { username, first_name, preferred_name, last_name, address, apartment, city, state, zip, phone, email } = userDetails.value;
@@ -155,10 +148,6 @@ export default function AccountDetails() {
       );
     }
   };
-
-  // useEffect(() => {
-  // }, [tempWishlist])
-
 
   return (
     <>
