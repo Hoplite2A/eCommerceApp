@@ -8,7 +8,7 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetailWishlistItems(item) {
 
-    const { tempCart, setTempCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
+    const { tempCart, setTempCart, setLocalCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
@@ -44,6 +44,7 @@ export default function AccountDetailWishlistItems(item) {
                 result.quantity += quantity;
                 const otherItems = tempCart.filter(cartItem => cartItem.id !== id);
                 setTempCart([...otherItems, result]);
+                setLocalCart([...otherItems, result]);
                 localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
             } else {
                 setTempCart([...tempCart, subItem]);

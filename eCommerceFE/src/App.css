@@ -758,55 +758,74 @@ p.body {
 }
 
 .accountDetails {
-  background-color: red;
   grid-row: 1 / span 2;
   grid-column: 1 / span 3;
+  border-radius: 25px;
+  color: #b216f0;
+  border: #b216f0;
+  border-style: solid;
+  border-width: 1px;
 }
 .aDWishlistDiv {
   grid-row: 1 / span 2;
   grid-column: 4 / span 1;
   overflow: auto;
   border-radius: 25px;
-  color: white;
-  border: white;
+  color: #0ec0c0;
+  border: #0ec0c0;
   border-style: solid;
-  border-radius: 25px;
   border-width: 1px;
 }
-.aDWishlistDiv::-webkit-scrollbar {
-  display: none;
-}
 .aDCartDiv {
-  background-color: blue;
   grid-row: 1 / span 2;
   grid-column: 5 / span 1;
-  border-radius: 25px;
   overflow: auto;
   position: relative;
+  border-radius: 25px;
+  color: #5dbd26;
+  border: #5dbd26;
+  border-style: solid;
+  border-width: 1px;
 }
-.aDCartDiv::-webkit-scrollbar  {
+.aDCartDiv::-webkit-scrollbar,
+.aDWishlistDiv::-webkit-scrollbar,
+.pppContainer::-webkit-scrollbar {
   display: none;
 }
-
-.wishlistHeader {
+/* .aDCartDiv::-webkit-scrollbar  {
+  display: none;
+} */
+h3.CurrentCart,
+h3.wishlistHeader {
   justify-content: center;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
+  margin-top: 0px !important;
+  padding: 18.720px;
+  top: 0px;
+  background-color: #25292c;
+  border-radius: 25px 25px 0px 0px;
 }
-.CurrentCart {
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 15px;
-  background-color: blue;
+div.CurrentCart,
+div.wishlistHeader{
+  top: 0px;
+  margin: 0px;
+  position: sticky;
+  background-color: #25292c;
+  border-radius: 25px 25px 0px 0px;
 }
 .pppContainer {
-  background-color: green;
   grid-row: 3 / span 1;
   grid-column: 1 / span 5;
+  overflow: auto;
+  position: relative;
+  border-radius: 25px;
+  color: #c57907;
+  border: #c57907;
+  border-style: solid;
+  border-width: 1px;
 }
-
 /* Past Purchases Preview Start */
-
 .pastPurchasePreviewDiv {
   display: flex;
   flex-direction: row;
@@ -986,20 +1005,67 @@ p.body {
   position: sticky;   
   top: 18.720px;
 }
+.cartSubTotalDiv,
 .cartSubTotal{
-  padding-bottom: 7.5px;
+  bottom: 0px;
+  margin: 0px;
   position: sticky;   
-  bottom: 5px;
+  padding: 0px;
   background-color: #25292c;
-  margin-bottom: 0px;
+  border-radius:  0px 0px 25px 25px;  
 }
+.cartSubTotalText,
 .cartSubTotalText {
   color: white;
   background-color: transparent;
   border-radius: 25px;
   justify-content: center;
-  
+  margin: 0px;
 }
+.formFieldsSection{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.accountDetailsInputs{
+  margin-left: 4px;
+}
+.ADNameFields,
+.ADStreetAddress1 ,
+.ADStreetAddress2,
+.ADContactInfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.ADNFLabels,
+.ADSA2Labels{
+  margin: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+.ADSA1Labels,
+.ADCILabels{
+  margin: 15px;
+  font-size: large;
+  font-weight: bold;
+}
+.firstName,
+.preferredName, 
+.lastName,
+.cityAddress,
+.stateAddress,
+.zipAddress{
+  max-width: 75px;
+}
+.streetAddress{
+  max-width: 250px;
+}
+.APTAddress{
+  max-width: 40px;
+}
+
+
 /*! ------ ACCOUNT DETAILS STYLING START ------ */
 /**----------------CURRENT CART ----------------*/
 .miniTileDiv {

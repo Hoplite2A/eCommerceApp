@@ -39,7 +39,6 @@ export default function IndividualItem({ item }) {
       localStorage.setItem("wishlist", JSON.stringify([...tempWishlist, item]));
     }
   };
-  //! ------------------------------------Adding to Wishlist------------------------------------
   //! --------------------------------------Adding to Cart--------------------------------------
   const addToCart = (item) => {
     const result = tempCart.find((cartItem) => cartItem.id == item.id);
@@ -54,7 +53,6 @@ export default function IndividualItem({ item }) {
       localStorage.setItem("cart", JSON.stringify([...tempCart, item]));
     }
   };
-  //! --------------------------------------Adding to Cart--------------------------------------
 
   return (
     <>
