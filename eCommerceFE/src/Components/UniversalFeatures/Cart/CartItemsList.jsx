@@ -1,22 +1,14 @@
 //! Imported Libraries --------------------------
 import { useContext, useState } from "react";
 //! ---------------------------------------------
-
 //! Imported Components/Variables----------------
 import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
 
-export default function CartItemsList({ cartListItem }) {
-  console.log({ cartListItem });
+export default function CartItemsList({cartListItem}) {
 
   const { image, title, price, quantity, id } = cartListItem;
-  const { tempCart, setTempCart, localCart, setLocalCart } =
-    useContext(CartWishlistContext);
-
-  // //*Setting cart count for cart logo in Header to show RealTime Cart Count value.
-  //TODO -------------- UPDATE QUANTITY
-
-  //TODO -------------- REMOVE BUTTON
+  const { tempCart, setTempCart, localCart, setLocalCart } = useContext(CartWishlistContext);
 
   const [newQuantity, setNewQuantity] = useState(0);
   const updateQuantity = () => {
