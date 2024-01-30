@@ -12,14 +12,6 @@ export default function AccountDetailWishlistItems(item) {
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
-
-    //*If we wanted to display that items total cost.
-    // const [itemPrice, setItemPrice] = useState(0); 
-    // useEffect(() => {
-    //     let itemPricePH = price * quantity;
-    //     const roundedPrice = Math.round(itemPricePH * 10 ** 2) / 10 ** 2;
-    //     setItemPrice(roundedPrice);
-    // },[item])
     
     const [newQuantity, setNewQuantity] = useState(0);
     const updateQuantity = () => {
