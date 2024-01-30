@@ -12,7 +12,6 @@ export default function AccountDetailListItems(item) {
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
-    console.log(subItem);
 
     //*If we wanted to display that items total cost.
     // const [itemPrice, setItemPrice] = useState(0); 
@@ -69,6 +68,9 @@ export default function AccountDetailListItems(item) {
                     <div className="miniBottomRight">
                         <div className="miniPriceDiv">
                             <p className="miniPrice">${price}</p>
+                            <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
+                        </div>
+                        <div className="miniQuantityupdate">
                             <label className="cartListItemQuantity">Qty:
                                 <input className="cartListItemQuantity"
                                     id="quantity" type="number"
@@ -77,9 +79,6 @@ export default function AccountDetailListItems(item) {
                                     onChange={(e) => setNewQuantity(e.target.value)}
                                 />
                             </label>
-                        </div>
-                        <div className="miniQuantityupdate">
-                            <button className="removeFromWishlistButton" onClick={() => remove()}>Remove</button>
                             <button className="updateWishlistQuantity" onClick={() => updateQuantity()}>Update</button>
                         </div>
                     </div>
