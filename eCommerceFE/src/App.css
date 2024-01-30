@@ -762,7 +762,6 @@ p.body {
   grid-row: 1 / span 2;
   grid-column: 1 / span 3;
 }
-
 .aDWishlistDiv {
   grid-row: 1 / span 2;
   grid-column: 4 / span 1;
@@ -785,8 +784,6 @@ p.body {
   overflow: auto;
   position: relative;
 }
-/* .scrollbarEraserDiv{
-} */
 .aDCartDiv::-webkit-scrollbar  {
   display: none;
 }
@@ -984,11 +981,24 @@ p.body {
   bottom: 70px;
   justify-content: center;
 }
+.wishlistHeader{
+  border-radius: 25px;
+  position: sticky;   
+  top: 18.720px;
+}
+.cartSubTotal{
+  padding-bottom: 7.5px;
+  position: sticky;   
+  bottom: 5px;
+  background-color: #25292c;
+  margin-bottom: 0px;
+}
 .cartSubTotalText {
   color: white;
-  background-color: #2f3438;
+  background-color: transparent;
   border-radius: 25px;
   justify-content: center;
+  
 }
 /*! ------ ACCOUNT DETAILS STYLING START ------ */
 /**----------------CURRENT CART ----------------*/
@@ -1009,7 +1019,7 @@ p.body {
 }
 .miniBottomLeft > img {
   max-width: 50px;
-  border-radius: 25px;
+  border-radius: 8px;
 }
 .miniBottomRight {
   display: flex;
@@ -1024,11 +1034,11 @@ p.body {
 .miniQuantityupdate {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 button.removeFromWishlistButton,
 button.updateWishlistQuantity {
-  height: 25px;
+  height: 21px;
   justify-content: space-between;
 }
 

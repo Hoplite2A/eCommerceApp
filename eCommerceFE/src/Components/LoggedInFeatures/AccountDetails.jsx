@@ -149,6 +149,9 @@ export default function AccountDetails() {
     }
   };
 
+  // useEffect(() => {
+  // }, [currentCart, currentWishlist]);
+
   return (
     <>
       <Header />
