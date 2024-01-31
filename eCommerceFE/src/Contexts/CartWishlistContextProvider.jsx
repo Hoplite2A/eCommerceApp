@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 //! Imported Libraries -------------------------
 import { createContext, useState, useEffect } from "react";
-import { token } from "../Components/UniversalFeatures/Login";
 // import { redirect } from 'react-router-dom';
 //! --------------------------------------------
 
@@ -28,6 +27,7 @@ export default function CartWishlistContextProvider({ children }) {
   const [searchFilteredArray, setSearchFilteredArray] = useState([]);
   const [changeFilter, setChangeFilter] = useState(true);
   const [searchTextFilteredArray, setSearchTextFilteredArray] = useState([]);
+
   const [cart, setCart] = useState([]);
   // const [dbCartLoaded, setDbCartLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -78,6 +78,7 @@ export default function CartWishlistContextProvider({ children }) {
     //   localStorage.setItem("cart", JSON.stringify([]));
     // }
   }, [loggedIn]);
+
 
   useEffect(() => {
     const launchWishlist = localStorage.getItem("wishlist");

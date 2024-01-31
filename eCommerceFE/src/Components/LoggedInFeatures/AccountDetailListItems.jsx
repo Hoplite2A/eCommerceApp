@@ -16,11 +16,13 @@ export default function AccountDetailListItems(item, itemId) {
     setLocalCart,
     tempWishlist,
     setTempWishlist,
+    setLocalWishlist
   } = useContext(CartWishlistContext);
 
   const subItem = item.item;
   const { title, image, price, quantity, product_id } = subItem;
   console.log(subItem);
+
 
   //*If we wanted to display that items total cost.
   // const [itemPrice, setItemPrice] = useState(0);
@@ -63,28 +65,23 @@ export default function AccountDetailListItems(item, itemId) {
     // localStorage.setItem('cart', JSON.stringify(editableCart));
   };
 
-  const addToWishlist = () => {
-    const newWishlistItem = tempWishlist.find((cartItem) => cartItem.id == id);
-    if (newWishlistItem) {
-      newWishlistItem.quantity += quantity;
-      const otherItems = tempWishlist.filter((cartItem) => cartItem.id !== id);
-      setTempWishlist([...otherItems, newWishlistItem]);
-      localStorage.setItem(
-        "wishlist",
-        JSON.stringify([...otherItems, newWishlistItem])
-      );
-    } else {
-      setTempWishlist([...tempWishlist, subItem]);
-      localStorage.setItem(
-        "wishlist",
-        JSON.stringify([...tempWishlist, subItem])
-      );
-    }
-    const editableCart = localCart.filter((item) => item.id !== id);
-    setTempCart(editableCart);
-    setLocalCart(editableCart);
-    localStorage.setItem("cart", JSON.stringify(editableCart));
-  };
+    const addToWishlist = () => {
+        const newWishlistItem = tempWishlist.find(cartItem => cartItem.id == id);
+            if (newWishlistItem) {
+                newWishlistItem.quantity += quantity;
+                const otherItems = tempWishlist.filter(cartItem => cartItem.id !== id);
+                setTempWishlist([...otherItems, newWishlistItem]);
+                setLocalWishlist([...otherItems, newWishlistItem]);
+                localStorage.setItem('wishlist', JSON.stringify([...otherItems, newWishlistItem]));
+            } else {
+                setTempWishlist([...tempWishlist, subItem]);
+                localStorage.setItem('wishlist', JSON.stringify([...tempWishlist, subItem]));
+            }
+            const editableCart = localCart.filter((item) => item.id !== id);
+            setTempCart(editableCart);
+            setLocalCart(editableCart);
+            localStorage.setItem('cart', JSON.stringify(editableCart));
+        }
 
   return (
     <>

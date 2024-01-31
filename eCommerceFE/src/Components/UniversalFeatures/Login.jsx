@@ -57,7 +57,6 @@ export default function Login() {
       alert(`${errorMessage}`);
       navigate("/login");
     } else {
-      alert(`You have successfully logged in.`);
       navigate("/");
     }
   };

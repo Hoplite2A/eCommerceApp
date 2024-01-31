@@ -8,18 +8,10 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 
 export default function AccountDetailWishlistItems(item) {
 
-    const { tempCart, setTempCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
+    const { tempCart, setTempCart, setLocalCart, tempWishlist, setTempWishlist, localWishlist, setLocalWishlist } = useContext(CartWishlistContext);
     
     const subItem = item.item;
     const { title, image, price, quantity, id } = subItem;
-
-    //*If we wanted to display that items total cost.
-    // const [itemPrice, setItemPrice] = useState(0); 
-    // useEffect(() => {
-    //     let itemPricePH = price * quantity;
-    //     const roundedPrice = Math.round(itemPricePH * 10 ** 2) / 10 ** 2;
-    //     setItemPrice(roundedPrice);
-    // },[item])
     
     const [newQuantity, setNewQuantity] = useState(0);
     const updateQuantity = () => {
@@ -44,6 +36,7 @@ export default function AccountDetailWishlistItems(item) {
                 result.quantity += quantity;
                 const otherItems = tempCart.filter(cartItem => cartItem.id !== id);
                 setTempCart([...otherItems, result]);
+                setLocalCart([...otherItems, result]);
                 localStorage.setItem('cart', JSON.stringify([...otherItems, result]));
             } else {
                 setTempCart([...tempCart, subItem]);

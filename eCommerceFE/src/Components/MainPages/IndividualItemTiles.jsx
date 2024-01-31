@@ -40,8 +40,8 @@ export default function IndividualItem({ item }) {
       localStorage.setItem("wishlist", JSON.stringify([...tempWishlist, item]));
     }
   };
-  //! ------------------------------------Adding to Wishlist------------------------------------
   //! --------------------------------------Adding to Cart--------------------------------------
+
   function addToCart(item) {
     const userId =
       userDetails.value && userDetails.value.id ? userDetails.value.id : -1;
@@ -108,6 +108,21 @@ export default function IndividualItem({ item }) {
   //   }
   // };
   //! --------------------------------------Adding to Cart--------------------------------------
+
+//   const addToCart = (item) => {
+//     const result = tempCart.find((cartItem) => cartItem.id == item.id);
+//     if (result) {
+//       result.quantity += 1;
+//       const otherItems = tempCart.filter((cartItem) => cartItem.id !== item.id);
+//       setTempCart([...otherItems, result]);
+//       localStorage.setItem("cart", JSON.stringify([...otherItems, result]));
+//     } else {
+//       item.quantity = 1;
+//       setTempCart([...tempCart, item]);
+//       localStorage.setItem("cart", JSON.stringify([...tempCart, item]));
+//     }
+//   };
+
 
   return (
     <>

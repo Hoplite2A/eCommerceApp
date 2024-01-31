@@ -1,7 +1,6 @@
 //! Imported Libraries --------------------------
 import { useContext, useState } from "react";
 //! ---------------------------------------------
-
 //! Imported Components/Variables----------------
 import { CartWishlistContext } from "../../../Contexts/CartWishlistContextProvider";
 //! ---------------------------------------------
@@ -27,6 +26,11 @@ export default function CartItemsList({ cartListItem, itemId }) {
     } else {
       console.log("Error in updateCart");
     }
+// export default function CartItemsList({cartListItem}) {
+
+//   const { image, title, price, quantity, id } = cartListItem;
+//   const { tempCart, setTempCart, localCart, setLocalCart } = useContext(CartWishlistContext);
+
 
     // const requiredItem = cart.find((item) => item.id == id);
     // requiredItem.quantity = newQuantity;
