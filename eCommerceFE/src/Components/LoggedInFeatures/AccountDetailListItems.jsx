@@ -111,7 +111,7 @@ export default function AccountDetailListItems(item, itemId) {
                 </label>
               </div>
               <div className="miniQuantityupdate">
-                <button
+                {/* <button
                   className="removeFromWishlistButton"
                   onClick={() => remove()}
                 >
@@ -122,7 +122,7 @@ export default function AccountDetailListItems(item, itemId) {
                   onClick={() => updateQuantity()}
                 >
                   Update
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
