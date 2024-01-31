@@ -19,6 +19,8 @@ const { requireUser, requireAdmin } = require("./utils");
 //! ---------------------------------------------
 
 //* -----------------GET ALL API-----------------
+// Get All Products
+// http://localhost:3000/api/products/
 productsRouter.get("/", async (req, res, next) => {
   console.log("IN GET PRODUCTS API");
   try {
@@ -40,6 +42,8 @@ productsRouter.get("/", async (req, res, next) => {
 //* -----------------GET ALL API-----------------
 
 //* ---------------GET SINGLE API----------------
+// Get Product by ID
+// http://localhost:3000/api/products/:productId
 productsRouter.get("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -58,7 +62,8 @@ productsRouter.get("/:id", async (req, res, next) => {
 //* ---------------GET SINGLE API----------------
 
 //* -------------CREATE PRODUCT API--------------
-// Need to add require user back here once I get it running
+// Create new product
+// http://localhost:3000/api/products
 productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
   const { title, price, description, category, image } = req.body;
   const sellerId = req.user.id;
@@ -112,9 +117,8 @@ productsRouter.post("/", requireUser, requireAdmin, async (req, res, next) => {
 //* -------------CREATE PRODUCT API--------------
 
 //* -------------UPDATE PRODUCT API--------------
-// Add back requireUser
-// ONly need double veryify on log in
-
+// Edit product by id
+// http://localhost:3000/api/products/:productId
 productsRouter.patch("/:id", requireUser, async (req, res, next) => {
   //! -------- To update the product the req will have to include the following:
   const { id } = req.params;
@@ -181,6 +185,8 @@ productsRouter.patch("/:id", requireUser, async (req, res, next) => {
 //* -------------UPDATE PRODUCT API--------------
 
 //* -------------DELETE PRODUCT API--------------
+// Delete Product
+// http://localhost:3000/api/products/:productId
 productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
   const { productId } = req.params;
 

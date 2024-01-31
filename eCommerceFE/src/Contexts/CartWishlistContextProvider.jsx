@@ -5,6 +5,8 @@ import { createContext, useState, useEffect } from "react";
 //! --------------------------------------------
 
 //! Imported Components/Variables---------------
+import { fetchUserCart } from "../Components/UniversalFeatures/Cart/Cart";
+import { userDetails } from "../Components/UniversalFeatures/Login";
 //! --------------------------------------------
 
 export const CartWishlistContext = createContext();
@@ -26,15 +28,57 @@ export default function CartWishlistContextProvider({ children }) {
   const [changeFilter, setChangeFilter] = useState(true);
   const [searchTextFilteredArray, setSearchTextFilteredArray] = useState([]);
 
+  const [cart, setCart] = useState([]);
+  // const [dbCartLoaded, setDbCartLoaded] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
   useEffect(() => {
-    const launchCart = localStorage.getItem("cart");
-    if (launchCart) {
-      setTempCart(JSON.parse(launchCart));
-      setLocalCart(JSON.parse(launchCart));
-    } else {
-      localStorage.setItem("cart", JSON.stringify([]));
+    async function updateCart() {
+      if (loggedIn && token.value) {
+        const dbCart = await fetchUserCart();
+        setCart((prevCart) => {
+          if (prevCart.length === 0) {
+            return dbCart;
+          } else {
+            const updateCart = [...prevCart];
+            dbCart.forEach((dbItem) => {
+              const existingItemIndex = updateCart.findIndex(
+                (prevItem) => prevItem.product_id === dbItem.product_id
+              );
+              if (existingItemIndex !== -1) {
+                updateCart[existingItemIndex].quantity += dbItem.quantity;
+              } else {
+                updateCart.push(dbItem);
+              }
+            });
+            return updateCart;
+          }
+        });
+        //     const updateCart = prevCart.map((prevItem) =>  {
+        //       const exisitingItem = dbCart.find(dbItem => prevItem.product_id === dbItem.product_id)
+        //       if (exisitingItem) {
+        //         prevItem.quantity += exisitingItem.quantity;
+        //         return dbItem;
+        //       } else {
+        //         return dbItem;
+        //       }
+        //     });
+        //     }
+        //   return updateCart});
+        //   }
+        // };
+      }
     }
-  }, []);
+    updateCart();
+    // const launchCart = localStorage.getItem("cart");
+    // if (launchCart) {
+    //   setTempCart(JSON.parse(launchCart));
+    //   setLocalCart(JSON.parse(launchCart));
+    // } else {
+    //   localStorage.setItem("cart", JSON.stringify([]));
+    // }
+  }, [loggedIn]);
+
 
   useEffect(() => {
     const launchWishlist = localStorage.getItem("wishlist");
@@ -79,6 +123,12 @@ export default function CartWishlistContextProvider({ children }) {
         setWishlistSubTotal,
         checkoutCart,
         setCheckoutCart,
+        cart,
+        setCart,
+        // dbCartLoaded,
+        // setDbCartLoaded,
+        loggedIn,
+        setLoggedIn,
       }}
     >
       {children}

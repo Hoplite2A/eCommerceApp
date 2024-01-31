@@ -18,8 +18,9 @@ import { CartWishlistContext } from "../../Contexts/CartWishlistContextProvider"
 //! ---------------------------------------------
 
 export default function AccountDetails() {
+
   const userId = userDetails.value.id;
-  const { tempCart, tempWishlist } = useContext(CartWishlistContext);
+  const { tempCart, tempWishlist, cart } = useContext(CartWishlistContext);
   const [passwordResetVisible, setPasswordResetVisible] = useState(false);
 
   //*Rendering the Current Cart -----------------
@@ -113,6 +114,7 @@ export default function AccountDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
       const res = await fetch(`${BASE_URL}/users/${userId}`, {
         method: "PATCH",
         headers: {
@@ -165,6 +167,7 @@ export default function AccountDetails() {
                 </div>
                 <div className="formFieldsSection">
                 <div className="ADNameFields">
+
                   <label className="ADNFLabels">First Name 
                     <input
                       className="accountDetailsInputs firstName"
@@ -175,6 +178,7 @@ export default function AccountDetails() {
                       onChange={(e) => setFName(e.target.value)}
                     />
                   </label>
+
                   <label className="ADNFLabels">Nick Name 
                     <input
                       className="accountDetailsInputs preferredName"
@@ -197,6 +201,7 @@ export default function AccountDetails() {
                   </label>
                 </div>
                 <div className="ADStreetAddress1">
+
                   <label className="ADSA1Labels">Street 
                     <input
                       className="accountDetailsInputs streetAddress"
@@ -251,6 +256,7 @@ export default function AccountDetails() {
                   </label>
                 </div>
                 <div className="ADContactInfo">
+
                   <label className="ADCILabels">Phone 
                     <input
                       className="accountDetailsInputs"
@@ -321,6 +327,7 @@ export default function AccountDetails() {
                       </button>
                     </>
                   )}
+
                   </div>
                   </div>
                  {/* ---------------------------Check the UDPATE INFO STATE VAR---------------------------------------------- */}
@@ -347,7 +354,9 @@ export default function AccountDetails() {
                   <h3 className="wishlistHeader">Wishlist</h3>
                 </div>
                 {currentWishlist.map((item) => {
-                  return <AccountDetailWishlistItems key={item.id} item={item} />;
+                  return (
+                    <AccountDetailWishlistItems key={item.id} item={item} />
+                  );
                 })}
                 <WishlistSubTotalComp localWishlist={currentWishlist} />
               </div>
@@ -364,7 +373,7 @@ export default function AccountDetails() {
                   </div>
                 </div>
                 <div className="cartSubTotalDiv">
-                  <CartSubTotal localCart={currentCart} />
+                  <CartSubTotal localCart={cart} />
                 </div>
               </div>
               <PastPurchasesPreview />

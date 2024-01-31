@@ -11,6 +11,7 @@ const {
 } = require("../db/pastPurchasesDB");
 
 // Get all past purchases by user
+// http://localhost:3000/api/pastPurchases/
 pastPurchasesRouter.get("/", requireUser, async (req, res, next) => {
   try {
     const pastPurchases = await getPastPurchases(req.user.id);
@@ -21,6 +22,7 @@ pastPurchasesRouter.get("/", requireUser, async (req, res, next) => {
 });
 
 // Get individual past purchase by purchase Id
+// http://localhost:3000/api/pastPurchases/:purchaseId
 pastPurchasesRouter.get("/:purchaseId", requireUser, async (req, res, next) => {
   const { purchaseId } = req.params;
   try {
@@ -44,6 +46,7 @@ pastPurchasesRouter.get("/:purchaseId", requireUser, async (req, res, next) => {
 });
 
 // Add past purchase
+// http://localhost:3000/api/pastPurchases
 pastPurchasesRouter.post("/", requireUser, async (req, res, next) => {
   const cart = req.body;
   try {
