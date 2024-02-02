@@ -28,7 +28,10 @@ export default function AccountDetails() {
   //*--------------------------------------------
 
   //*Rendering the Current Wishlist -------------
-  const currentWishlist = JSON.parse(localStorage.getItem("wishlist"));
+  let currentWishlist = JSON.parse(localStorage.getItem("wishlist"));
+  if (!currentWishlist) {
+    currentWishlist = [];
+  }
   useEffect(() => {}, [localWishlist]);
   //*--------------------------------------------
 

@@ -10,11 +10,12 @@ import Footer from "../UniversalFeatures/Footer";
 import { userDetails } from "../UniversalFeatures/Login";
 import { token } from "../UniversalFeatures/Login";
 import { BASE_URL } from "../../App";
+import { postCart } from "../UniversalFeatures/Cart/Cart";
 // import { tempCart, setTempCart, tempWishlist, setTempWishlist } from './AllItems';
 //! --------------------------------------------
 
 export default function IndividualItemPage() {
-  const { cart, setCart, tempWishlist, setTempWishlist } =
+  const { cart, setCart, tempWishlist, setTempWishlist, loggedIn } =
     useContext(CartWishlistContext);
 
   const navigate = useNavigate();

@@ -171,6 +171,7 @@ export default function Cart() {
         });
         const json = await res.json();
         const checkoutMessage = json;
+
         if (checkoutMessage.purchase.id) {
           try {
             const res = await fetch(`${BASE_URL}/cart`, {
@@ -192,7 +193,6 @@ export default function Cart() {
               `Error Occurred in CheckoutCart Function within the Cart Component, ${err}`
             );
           }
-          console.log(checkoutMessage);
           const date = new Date(
             checkoutMessage.purchase.purchase_date
           ).toLocaleDateString(undefined, options);

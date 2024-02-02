@@ -63,7 +63,7 @@ async function createTables() {
 
     await client.query(`
     CREATE TABLE carts(
-      "user_id" INTEGER REFERENCES users(id),
+      "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE,
       "product_id" INTEGER REFERENCES products(id),
       title VARCHAR(255) NOT NULL,
       price DECIMAL(8, 2) NOT NULL,
@@ -84,14 +84,14 @@ async function createTables() {
     await client.query(`
     CREATE TABLE past_purchases(
       id SERIAL PRIMARY KEY,
-      "user_id" INTEGER REFERENCES users(id),
+      "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE,
       purchase_total DECIMAL(10, 2),
       purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 
     await client.query(`
     CREATE TABLE past_purchases_items(
-      "purchase_id" INTEGER REFERENCES past_purchases(id),
+      "purchase_id" INTEGER REFERENCES past_purchases(id) ON DELETE CASCADE,
       product_id INTEGER NOT NULL,
       title VARCHAR(255) NOT NULL,
       price DECIMAL(8, 2) NOT NULL,
@@ -526,10 +526,13 @@ async function createInitialUsers() {
         admin: true,
       },
     ];
-    const users = await Promise.all(usersToCreate.map(createUser));
 
-    console.log("Users created:");
-    console.log(users);
+    for (const userData of usersToCreate) {
+      const user = await createUser(userData);
+      console.log("User created:");
+      console.log(user);
+    }
+    // const users = await Promise.all(usersToCreate.map(createUser));
     console.log("Finished creating users!");
   } catch (error) {
     console.error("Error creating users!");
@@ -579,8 +582,8 @@ async function createInitialCarts() {
 async function createInitialPurchases() {
   try {
     console.log("Starting to create purchases");
-    const cart = await getCart(2);
-    const initialPurchase = await createPastPurchase(2, cart);
+    const cart = await getCart(1);
+    const initialPurchase = await createPastPurchase(1, { cart });
     console.log("Created Initial Purchase");
     console.log("Initial purchase info: ");
     console.log(initialPurchase.purchase);
@@ -628,6 +631,7 @@ async function createInitialWishlists() {
 }
 
 async function rebuildDB() {
+  console.log("Starting rebuildDB...");
   try {
     client.connect();
     await dropTables();
@@ -638,8 +642,9 @@ async function rebuildDB() {
     await createInitialPurchases();
     await getPastPurchases(2);
     await createInitialWishlists();
+    console.log("Finished rebuildDB!");
   } catch (error) {
-    console.log("Error during rebuildDB");
+    console.log(`Error during rebuildDB: ${error}`);
     throw error;
   }
 }
